@@ -92,15 +92,15 @@ KPngPlugin::KPngPlugin(QObject *parent, const char *name,
     addVariableInfo(group, QVariant::String, 0);
 
     // technical group
-    group = addGroupInfo(info, "Technical", i18n("Technical details"));
+    group = addGroupInfo(info, "Technical", i18n("Technical Details"));
 
-    item = addItemInfo(group, "Resolution", i18n("Resolution"), QVariant::Size);
-    setSuffix(item, i18n(" Pixels"));
+    item = addItemInfo(group, "Dimensions", i18n("Dimensions"), QVariant::Size);
+    setSuffix(item, i18n(" pixels"));
 
-    item = addItemInfo(group, "Bitdepth", i18n("Bitdepth"), QVariant::Int);
+    item = addItemInfo(group, "BitDepth", i18n("Bit depth"), QVariant::Int);
     setSuffix(item, i18n("bpp"));
 
-    addItemInfo(group, "Color mode", i18n("Color mode"), QVariant::String);
+    addItemInfo(group, "ColorMode", i18n("Color mode"), QVariant::String);
     addItemInfo(group, "Compression", i18n("Compression"), QVariant::String);
 }
 
@@ -150,9 +150,9 @@ bool KPngPlugin::readInfo( KFileMetaInfo& info, uint what)
 
             KFileMetaInfoGroup techgroup = appendGroup(info, "Technical");
 
-            appendItem(techgroup, "Resolution", QSize(x, y));
-            appendItem(techgroup, "Bitdepth", bpp);
-            appendItem(techgroup, "Color mode",
+            appendItem(techgroup, "Dimensions", QSize(x, y));
+            appendItem(techgroup, "BitDepth", bpp);
+            appendItem(techgroup, "ColorMode",
                             (type < sizeof(colors)/sizeof(colors[0])) ? colors[data[25]] : i18n("Unknown"));
             appendItem(techgroup, "Compression",
                             (data[26] < sizeof(compressions)/sizeof(compressions[0])) ? compressions[data[26]] : i18n("Unknown"));
