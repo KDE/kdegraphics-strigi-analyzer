@@ -80,11 +80,6 @@
 /* If document is DOS EPS and we haven't read 30 bytes, ask for more. */
 #define CDSC_NEEDMORE 11
 
-/* Since min() is used, make sure it exists */
-#ifndef min
-#define min(x,y) x > y ? y : x
-#endif
-
 /* local prototypes */
 dsc_private void * dsc_memalloc(P2(CDSC *dsc, size_t size));
 dsc_private void dsc_memfree(P2(CDSC*dsc, void *ptr));
@@ -152,17 +147,17 @@ dsc_private const int dsc_severity[] = {
 
 const CDSCMEDIA dsc_known_media[CDSC_KNOWN_MEDIA] = {
     /* These sizes taken from Ghostscript gs_statd.ps */
-    {"11x17", 792, 1224, 0, NULL, NULL},
-    {"A3", 842, 1190, 0, NULL, NULL},
-    {"A4", 595, 842, 0, NULL, NULL},
-    {"A5", 421, 595, 0, NULL, NULL},
-    {"B4", 709, 1002, 0, NULL, NULL}, /* ISO, but not Adobe standard */
-    {"B5", 501, 709, 0, NULL, NULL},  /* ISO, but not Adobe standard */
-    {"Ledger", 1224, 792, 0, NULL, NULL},
-    {"Legal", 612, 1008, 0, NULL, NULL},
-    {"Letter", 612, 792, 0, NULL, NULL},
-    {"Note", 612, 792, 0, NULL, NULL},
-    {NULL, 0, 0, 0, NULL, NULL}
+    {"11x17", 792, 1224, 0, NULL, NULL, NULL},
+    {"A3", 842, 1190, 0, NULL, NULL, NULL},
+    {"A4", 595, 842, 0, NULL, NULL, NULL},
+    {"A5", 421, 595, 0, NULL, NULL, NULL},
+    {"B4", 709, 1002, 0, NULL, NULL, NULL}, /* ISO, but not Adobe standard */
+    {"B5", 501, 709, 0, NULL, NULL, NULL},  /* ISO, but not Adobe standard */
+    {"Ledger", 1224, 792, 0, NULL, NULL, NULL},
+    {"Legal", 612, 1008, 0, NULL, NULL, NULL},
+    {"Letter", 612, 792, 0, NULL, NULL, NULL},
+    {"Note", 612, 792, 0, NULL, NULL, NULL},
+    {NULL, 0, 0, 0, NULL, NULL, NULL}
 };
 
 /* parser state */
@@ -1062,7 +1057,7 @@ dsc_unknown(CDSC *dsc)
 {
     if (dsc->debug_print_fn) {
 	char line[DSC_LINE_LENGTH];
-	unsigned int length = min(DSC_LINE_LENGTH-1u, dsc->line_length);
+	unsigned int length = min(DSC_LINE_LENGTH-1, dsc->line_length);
 	sprintf(line, "Unknown in %s section at line %d:\n  ", 
 	    dsc_scan_section_name[dsc->scan_section], dsc->line_count);
 	dsc_debug_print(dsc, line);

@@ -37,11 +37,10 @@ KDSCBBOX::KDSCBBOX( int llx, int lly, int urx, int ury ) :
     _urx( urx ), _ury( ury ) 
 {}
 
-KDSCBBOX::KDSCBBOX( const CDSCBBOX& bbox ) 
-{ 
-    _llx = bbox.llx; _lly = bbox.lly; 
-    _urx = bbox.urx; _ury = bbox.ury; 
-}
+KDSCBBOX::KDSCBBOX( const CDSCBBOX& bbox ) :
+    _llx( bbox.llx ), _lly( bbox.lly ), 
+    _urx( bbox.urx ), _ury( bbox.ury ) 
+{}
 
 KDSCBBOX& KDSCBBOX::operator = ( const KDSCBBOX& b ) 
 { 
