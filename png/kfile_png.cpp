@@ -119,8 +119,11 @@ KPngPlugin::KPngPlugin(QObject *parent, const char *name,
 
 bool KPngPlugin::readInfo( KFileMetaInfo& info, uint what)
 {
+    if ( info.path().isEmpty() ) // remote file
+        return false;
     QFile f(info.path());
-    f.open(IO_ReadOnly);
+    if ( !f.open(IO_ReadOnly) )
+        return false;
 
     if (f.size() < 26) return false;
     // the technical group will be read from the first 26 bytes. If the file

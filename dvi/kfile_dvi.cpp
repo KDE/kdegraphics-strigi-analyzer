@@ -57,6 +57,8 @@ KDviPlugin::KDviPlugin (QObject * parent, const char * name, const QStringList &
 
 bool KDviPlugin::readInfo (KFileMetaInfo & info, uint /* what (unused in this plugin) */)
 {
+  if ( info.path().isEmpty() )
+    return false;
   KFileMetaInfoGroup GeneralGroup = appendGroup(info, "General");
   QFile f(info.path());
   QFileInfo f_info;

@@ -190,6 +190,10 @@ bool KJpegPlugin::writeInfo( const KFileMetaInfo& info ) const
 
 bool KJpegPlugin::readInfo( KFileMetaInfo& info, uint what )
 {
+    const QString path( info.path() );
+    if ( path.isEmpty() ) // remote file
+        return false;
+
     QString tag;
     ExifData ImageInfo;
 

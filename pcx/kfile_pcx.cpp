@@ -82,10 +82,14 @@ KPcxPlugin::KPcxPlugin( QObject *parent, const char *name,
 
 bool KPcxPlugin::readInfo( KFileMetaInfo& info, uint )
 {
+  if ( info.path().isEmpty() )
+    return false;
+
   struct PCXHEADER header;
 
   QFile f( info.path() );
-  f.open( IO_ReadOnly );
+  if ( !f.open( IO_ReadOnly ) )
+    return false;
 
   QDataStream s( &f );
   s.setByteOrder(  QDataStream::LittleEndian );

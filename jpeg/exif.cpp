@@ -882,8 +882,9 @@ bool ExifData::scan(const QString & path)
     int ret;
 
     QFile f(path);
-    f.open(IO_ReadOnly);
- 
+    if ( !f.open(IO_ReadOnly) )
+        return false;
+
     try {
         // Scan the JPEG headers.
         ret = ReadJpegSections(f, READ_EXIF);
@@ -893,7 +894,7 @@ bool ExifData::scan(const QString & path)
         f.close();
         return false;
     }
- 
+
     if (ret == false){
         kdDebug(7034) << "Not JPEG file!\n";
         DiscardData();
