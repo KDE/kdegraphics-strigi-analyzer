@@ -6,6 +6,9 @@ if include_TIFF
 KFILE_TIFF_SUBDIR=tiff
 endif
 
+if include_PDF
+KFILE_PDF_SUBDIR=pdf
+endif
 
-SUBDIRS=dvi pdf png ps jpeg xbm xpm bmp tga rgb ico pcx $(KFILE_TIFF_SUBDIR) pnm \
-	$(KFILE_EXR_SUBDIR) dds gif
+SUBDIRS=dvi png ps jpeg xbm xpm bmp tga rgb ico pcx $(KFILE_TIFF_SUBDIR) pnm \
+	$(KFILE_EXR_SUBDIR) $(KFILE_PDF_SUBDIR) dds gif
