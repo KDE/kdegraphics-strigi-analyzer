@@ -125,18 +125,22 @@ bool KPngPlugin::readInfo( KFileMetaInfo& info, uint what)
     if ( !f.open(IO_ReadOnly) )
         return false;
 
-    if (f.size() < 26) return false;
-    // the technical group will be read from the first 26 bytes. If the file
+    QIODevice::Offset fileSize = f.size();
+
+    if (fileSize < 29) return false;
+    // the technical group will be read from the first 29 bytes. If the file
     // is smaller, we can't even read this.
 
     bool readComments = false;
     if (what & (KFileMetaInfo::Fastest |
                 KFileMetaInfo::DontCare |
                 KFileMetaInfo::ContentInfo)) readComments = true;
+    else
+	fileSize = 29; // No need to read more
 
-    uchar *data = new uchar[f.size()+1];
-    f.readBlock(reinterpret_cast<char*>(data), f.size());
-    data[f.size()]='\n';
+    uchar *data = new uchar[fileSize+1];
+    f.readBlock(reinterpret_cast<char*>(data), fileSize);
+    data[fileSize]='\n';
 
     // find the start
     if (data[0] == 137 && data[1] == 80 && data[2] == 78 && data[3] == 71 &&
@@ -193,9 +197,9 @@ bool KPngPlugin::readInfo( KFileMetaInfo& info, uint what)
             index += CHUNK_SIZE(data, index) + CHUNK_HEADER_SIZE;
             KFileMetaInfoGroup commentGroup = appendGroup(info, "Comment");
 
-            while(index<f.size()-12)
+            while(index<fileSize-12)
             {
-                while (index < f.size() - 12 &&
+                while (index < fileSize - 12 &&
                        strncmp((char*)CHUNK_TYPE(data,index), "tEXt", 4))
                 {
                     if (!strncmp((char*)CHUNK_TYPE(data,index), "IEND", 4))
@@ -204,7 +208,7 @@ bool KPngPlugin::readInfo( KFileMetaInfo& info, uint what)
                     index += CHUNK_SIZE(data, index) + CHUNK_HEADER_SIZE;
                 }
 
-                if (index < f.size() - 12)
+                if (index < fileSize - 12)
                 {
                     // we found a tEXt field
                     kdDebug(7034) << "We found a tEXt field\n";
@@ -217,7 +221,7 @@ bool KPngPlugin::readInfo( KFileMetaInfo& info, uint what)
                     for (;key[keysize]!=0; keysize++)
                         // look if we reached the end of the file
                         // (it might be corrupted)
-                        if (8+index+keysize>=f.size())
+                        if (8+index+keysize>=fileSize)
                             goto end;
 
                     // the text comes after the key, but isn't null terminated
@@ -229,7 +233,7 @@ bool KPngPlugin::readInfo( KFileMetaInfo& info, uint what)
                     uint firstIndex       = (uint)(text - data);
                     uint onePastLastIndex = firstIndex + textsize;
 
-                    if ( onePastLastIndex > f.size() || onePastLastIndex <= firstIndex)
+                    if ( onePastLastIndex > fileSize || onePastLastIndex <= firstIndex)
                         goto end;
 
                     QByteArray arr(textsize);
