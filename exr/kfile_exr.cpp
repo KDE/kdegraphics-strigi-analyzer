@@ -31,6 +31,7 @@
 #include <ImfStringAttribute.h>
 #include <ImfVecAttribute.h>
 #include <ImfPreviewImage.h>
+#include <ImfVersion.h>
 
 #include <iostream>
 
@@ -71,6 +72,7 @@ KExrPlugin::KExrPlugin(QObject *parent, const char *name,
 	// info group
     group = addGroupInfo( info, "Info", i18n("Information") );
     addItemInfo( group, "Version", i18n("Format Version"), QVariant::Int );
+    addItemInfo( group, "Tiled image", i18n("Tiled image"), QVariant::String );
 	item = addItemInfo( group, "Dimensions", i18n("Dimensions"), QVariant::Size );
 	setHint( item, KFileMimeTypeInfo::Size );
 	setUnit( item, KFileMimeTypeInfo::Pixels );
@@ -172,7 +174,12 @@ bool KExrPlugin::readInfo( KFileMetaInfo& info, uint what)
 		KFileMetaInfoGroup techgroup = appendGroup(info, "Technical");
 		KFileMetaInfoGroup threedsmaxgroup = appendGroup(info, "3dsMax");
 
-		appendItem( infogroup, "Version", in.version() );
+		appendItem( infogroup, "Version", getVersion(in.version()) );
+		if (isTiled(in.version())) {
+			appendItem( infogroup, "Tiled image", "yes" );
+		} else {
+			appendItem( infogroup, "Tiled image", "no" );
+		}
 
 		Imath::Box2i dw = h.dataWindow();
 		appendItem( infogroup, "Dimensions", QSize( (dw.max.x - dw.min.x + 1 ),
