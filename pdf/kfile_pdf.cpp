@@ -105,7 +105,7 @@ KPdfMetaInfo::KPdfMetaInfo( const QString& path )
     }
     
     m_items.insert("Version", new KFileMetaInfoItem("Version",
-                   i18n("PDF Verison"),
+                   i18n("PDF Version"),
                    QVariant(QString(s.right(3))), false, "V"));
     
     
