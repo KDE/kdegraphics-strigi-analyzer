@@ -21,13 +21,13 @@
 
 #include <iostream>
 #include <map>
+#include <memory>
 
 #include <qsize.h>
 #include <qstring.h>
 
 #include "dscparse.h"
 #undef min
-#include "kmaybe.h"
 
 
 class KDSCBBOX
@@ -58,8 +58,6 @@ private:
 };
 
 std::ostream& operator << ( std::ostream&, const KDSCBBOX& );
-
-typedef KMaybe< KDSCBBOX > KDSCBBOX_M;
 
 
 class KDSCError
@@ -261,8 +259,8 @@ public:
     CDSCMEDIA** media()           const;
     const CDSCMEDIA* page_media() const;
 
-    KDSCBBOX_M bbox()      const;
-    KDSCBBOX_M page_bbox() const;
+    std::auto_ptr<KDSCBBOX> bbox()      const;
+    std::auto_ptr<KDSCBBOX> page_bbox() const;
 
     // CDSCDOSEPS *doseps;
 
@@ -293,9 +291,8 @@ public:
     CDSC* cdsc() const;
 
 protected:
-    // static KDSC* findKDSCByCDSC( CDSC* );
-
-    static int errorFunction( void*, CDSC* dsc, unsigned int explanation, 
+    static int errorFunction( void* caller_data, CDSC* dsc, 
+                              unsigned int explanation, 
                               const char* line, unsigned int line_len );
     
 private:
@@ -303,14 +300,6 @@ private:
     KDSCErrorHandler*   _errorHandler;
     KDSCCommentHandler* _commentHandler;
     KDSCScanHandler*    _scanHandler;
-   
-    /**
-     * The CDSC structure passed to errorFunction allows us to resolve the
-     * KDSC object, assuming every KDSC object contains a unique CDSC
-     * structure. To implement this we map CDSC structures and KDSC objects
-     * using _objectMap.
-     */
-    // static std::map<CDSC*, KDSC*> _objectMap;
 };
 
 class KDSCScanHandler

@@ -16,27 +16,26 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#include <iostream.h>
-#include <string>
-
 #include "dscparse_adapter.h"
+
+using namespace std;
 
 /*-- KDSCBBOX implementation -----------------------------------------------*/
 
-KDSCBBOX::KDSCBBOX() 
-{ 
-    _llx = 0; _lly = 0; _urx = 0; _ury = 0; 
-}
+KDSCBBOX::KDSCBBOX() :
+    _llx( 0 ), _lly( 0 ),
+    _urx( 0 ), _ury( 0 )
+{}
 
-KDSCBBOX::KDSCBBOX( const KDSCBBOX& b ) 
-{ 
-    _llx = b._llx; _lly = b._lly; _urx = b._urx; _ury = b._ury; 
-}
+KDSCBBOX::KDSCBBOX( const KDSCBBOX& b ) :
+    _llx( b._llx ), _lly( b._lly ),
+    _urx( b._urx ), _ury( b._ury )
+{}
 
-KDSCBBOX::KDSCBBOX( int llx, int lly, int urx, int ury ) 
-{ 
-    _llx = llx; _lly = lly; _urx = urx; _ury = ury; 
-}
+KDSCBBOX::KDSCBBOX( int llx, int lly, int urx, int ury ) :
+    _llx( llx ), _lly( lly ), 
+    _urx( urx ), _ury( ury ) 
+{}
 
 KDSCBBOX::KDSCBBOX( const CDSCBBOX& bbox ) 
 { 
@@ -131,7 +130,7 @@ KDSC::KDSC() :
 KDSC::~KDSC()
 {
     dsc_free( _cdsc );
-    _cdsc = 0;
+    delete _scanHandler;
 }
 
 QString KDSC::dsc_version() const
@@ -284,20 +283,20 @@ const CDSCMEDIA* KDSC::page_media() const
     return _cdsc->page_media;
 }
 
-KDSCBBOX_M KDSC::bbox() const
+auto_ptr<KDSCBBOX> KDSC::bbox() const
 {
-    if( _cdsc->bbox != 0 )
-	return KDSCBBOX_M( *_cdsc->bbox );
+    if( _cdsc->bbox == 0 )
+	return auto_ptr<KDSCBBOX>( 0 );
     else
-	return KDSCBBOX_M();
+	return auto_ptr<KDSCBBOX>( new KDSCBBOX( *_cdsc->bbox ) );
 }
 
-KDSCBBOX_M KDSC::page_bbox() const
+auto_ptr<KDSCBBOX> KDSC::page_bbox() const
 {
-    if( _cdsc->page_bbox != 0 )
-	return KDSCBBOX_M( *_cdsc->page_bbox );
+    if( _cdsc->page_bbox == 0 )
+	return auto_ptr<KDSCBBOX>( 0 );
     else
-	return KDSCBBOX_M();
+	return auto_ptr<KDSCBBOX>( new KDSCBBOX( *_cdsc->page_bbox ) );
 }
 
 QString KDSC::dsc_title() const

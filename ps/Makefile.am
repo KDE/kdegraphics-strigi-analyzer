@@ -4,7 +4,7 @@
 INCLUDES         = $(all_includes)
 
 # these are the headers for your project
-noinst_HEADERS   = kfile_ps.h kmaybe.h dscparse.h dscparse_adapter.h
+noinst_HEADERS   = kfile_ps.h dscparse.h dscparse_adapter.h
 
 kde_module_LTLIBRARIES = kfile_ps.la
 
