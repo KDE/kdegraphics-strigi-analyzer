@@ -9,12 +9,15 @@ showimg (http://ric.jalix.org/)
 Bryce Nesbitt for setcomment
 based on wrjpgcom.c, Copyright (C) 1994-1997, Thomas G. Lane.
 
+Frank Pieczynski <pieczy@knuut.de>
+
 EXIF spec: 
 http://www.pima.net/standards/it10/PIMA15740/exif.htm
 http://www.ba.wakwak.com/~tsuruzoh/Computer/Digicams/exif-e.html
 
 -------------------------------------------------------------------------------
 Bugs:
+    0) Unless there is already a comment, you can't set a comment!
     1) utf-8 paths must be tested and supported.
     2) Display of EXIF comments need to be tested.
        Both Unicode & ASCII need testing.
