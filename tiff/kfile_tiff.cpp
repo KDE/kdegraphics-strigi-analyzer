@@ -175,8 +175,11 @@ QDateTime KTiffPlugin::tiffDate(const QString& s) const
         QDate d = QDate(year, month, day);
         QTime t = QTime(hour, min, sec);
 
-        dt.setDate(d);
-        dt.setTime(t);
+        if (d.isValid() && t.isValid())
+        {
+            dt.setDate(d);
+            dt.setTime(t);
+        }
     }
 
     return dt;
