@@ -34,11 +34,12 @@ public:
                 const QStringList& preferredItems );
     
     virtual bool readInfo( KFileMetaInfo::Internal& info, int );
-    
+
 private slots:
     void slotReceivedStdout(KProcess* p, char* buffer, int buflen);
 
 private:
+    QDateTime pdfDate(const QString& s) const;
     KFileMetaInfo::Internal m_info;
 };
 
