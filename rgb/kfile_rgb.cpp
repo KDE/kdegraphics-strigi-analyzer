@@ -148,7 +148,7 @@ bool KRgbPlugin::readInfo(KFileMetaInfo& info, uint /*what*/)
 			else
 				map[offs] = 0;
 		}
-		for (k = 0, it = map.begin(); it != end; it++)
+		for (k = 0, it = map.begin(); it != end; ++it)
 			k += it.data();
 
 		if (k)
