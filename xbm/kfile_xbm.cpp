@@ -108,11 +108,11 @@ bool KXbmPlugin::readInfo( KFileMetaInfo& info, uint what)
     char linebuf[1000];
 
     // read the first line
-    file.readLine(linebuf, 1000);
+    file.readLine(linebuf, sizeof( linebuf ));
     uint32_t width = xbm_processLine(linebuf);
 
     // read the 2nd line
-    file.readLine(linebuf, 1000);
+    file.readLine(linebuf, sizeof( linebuf ));
     uint32_t height = xbm_processLine(linebuf);
 
     if ((width > 0) && (height > 0)) {
