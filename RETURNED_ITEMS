@@ -199,3 +199,14 @@ Int        Number          -/-        Number of icons in file
 QSize      Dimensions      -/-        Dimensions
 QSize      DimensionsM     -/-        Dimensions [of 1st icon]
 Int        Colors          -/-        Number of colors [in 1st icon]
+
+pcx plugin:
+===========
+
+type       key             W/A        details
+------------------------------------------------------------------------
+QSize      Dimensions      -/-        Dimensions in pixels
+Int        BitDepth        -/-        Bits per pixel
+QSize      Resolution      -/-        Resolution in DPI
+String     Compression     -/-        Compression type, if any
+
