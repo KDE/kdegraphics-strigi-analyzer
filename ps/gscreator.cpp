@@ -574,7 +574,7 @@ bool GSCreator::getEPSIPreview(const QString &path, long start, long
   unsigned int bytes_per_scan_line = bits_per_scan_line / 8;
   if (bits_per_scan_line % 8) bytes_per_scan_line++;
   const unsigned int bindatabytes = height * bytes_per_scan_line;
-  unsigned char bindata[bindatabytes];
+  QMemArray<unsigned char> bindata(bindatabytes);
 
   for (unsigned int i = 0; i < bindatabytes; i++) {
     if (offset >= previewsize)
