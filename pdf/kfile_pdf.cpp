@@ -152,9 +152,18 @@ void KPdfPlugin::slotReceivedStdout(KProcess*, char* buffer, int buflen)
             QString key( (*it).left( (*it).find(":") ) );
             QString value( (*it).mid((*it).find(":")+1).stripWhiteSpace() );
 
-            appendItem(generalGroup, key, QVariant(value));
+            appendItem(generalGroup, i18n(key.utf8()), QVariant(value));
         }
     }
 }
+
+//this allows for translations from pdfinfo, do not remove or change!
+#if 0
+I18N_NOOP("Title")
+I18N_NOOP("Creator")
+I18N_NOOP("Producer")
+I18N_NOOP("Linearized")
+I18N_NOOP("Page size")
+#endif
 
 #include "kfile_pdf.moc"
