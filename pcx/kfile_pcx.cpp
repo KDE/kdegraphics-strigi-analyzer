@@ -22,39 +22,11 @@
 #include <kgenericfactory.h>
 #include <kdebug.h>
 
-#include <qdatastream.h>
 #include <qfile.h>
 
 typedef KGenericFactory<KPcxPlugin> PcxFactory;
 
 K_EXPORT_COMPONENT_FACTORY(kfile_pcx, PcxFactory("kfile_pcx"));
-
-QDataStream &operator>>( QDataStream &s, PALETTE &pal )
-{
-  for (  int i=0; i<16; ++i )
-    s >> pal.p[ i ].r >> pal.p[  i ].g >> pal.p[  i ].b;
-
-  return s;
-}
-
-QDataStream &operator>>( QDataStream &s, PCXHEADER &ph )
-{
-  s >> ph.Manufacturer;
-  s >> ph.Version;
-  s >> ph.Encoding;
-  s >> ph.Bpp;
-  s >> ph.XMin >> ph.YMin >> ph.XMax >> ph.YMax;
-  s >> ph.HDpi >> ph.YDpi;
-  s >> ph.Palette;
-  s >> ph.Reserved;
-  s >> ph.NPlanes;
-  s >> ph.BytesPerLine;
-  s >> ph.PaletteInfo;
-  s >> ph.HScreenSize;
-  s >> ph.VScreenSize;
-
-  return s;
-}
 
 KPcxPlugin::KPcxPlugin( QObject *parent, const char *name,
         const QStringList &args ) : KFilePlugin( parent, name, args )
@@ -88,10 +60,7 @@ bool KPcxPlugin::readInfo( KFileMetaInfo& info, uint )
   QFile f( info.path() );
   f.open( IO_ReadOnly );
 
-  QDataStream s( &f );
-  s.setByteOrder(  QDataStream::LittleEndian );
-
-  s >> header;
+  f.readBlock( ( char * ) &header, sizeof( header ) );
 
   int w = (  header.XMax-header.XMin ) + 1;
   int h = (  header.YMax-header.YMin ) + 1;
