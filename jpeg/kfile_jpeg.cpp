@@ -71,7 +71,8 @@ KJpegPlugin::KJpegPlugin(QObject *parent, const char *name,
   item = addItemInfo( exifGroup, "Date/Time", i18n("Date/Time"), 
                       QVariant::DateTime );
   
-  item = addItemInfo( exifGroup, "Size", i18n("Size"), QVariant::Size );
+  item = addItemInfo( exifGroup, "Resolution", i18n("Resolution"), 
+                      QVariant::Size );
   setHint( item, KFileMimeTypeInfo::Size );
   setUnit( item, KFileMimeTypeInfo::Pixels );
   setSuffix( item, i18n(" Pixels") ); // no unit supported for QSize atm.
@@ -214,8 +215,8 @@ bool KJpegPlugin::readInfo( KFileMetaInfo& info, uint what )
             appendItem( exifGroup, "Date/Time", dt );
     }
 
-    appendItem( exifGroup,"Size", QSize( ImageInfo.getWidth(), 
-                                         ImageInfo.getHeight() ) );
+    appendItem( exifGroup,"Resolution", QSize( ImageInfo.getWidth(), 
+                                               ImageInfo.getHeight() ) );
 
     if ( ImageInfo.getOrientation() )
         appendItem( exifGroup, "Orientation", ImageInfo.getOrientation() );

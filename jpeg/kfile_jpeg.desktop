@@ -7,5 +7,5 @@ Name[xx]=xx
 ServiceTypes=KFilePlugin
 X-KDE-Library=kfile_jpeg
 MimeType=image/jpeg
-PreferredItems=UserComment,Date/Time,Size,Exposure time,JPEG Quality,Comment
+PreferredItems=UserComment,Date/Time,Resolution,Exposure time,JPEG Quality,Comment
 SupportsThumbnail=true
