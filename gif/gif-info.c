@@ -199,7 +199,8 @@ FILE    *src;
                 dump(pos+1,buffer,(size_t)size);
         for (i=0; i<(size_t)size; i++)
         {
-                if (isprint(buffer[i]) || buffer[i]=='\r' || buffer[i]=='\n')
+                if ( buffer[i] >= 0x20 || buffer[i] == '\t' ||
+                     buffer[i] =='\r'  || buffer[i] == '\n')
                         (void)putc(buffer[i],stderr);
                 else
                         (void)fprintf(stderr,"\\%03o",buffer[i]);
