@@ -59,83 +59,85 @@ KJpegPlugin::KJpegPlugin(QObject *parent, const char *name,
   KFileMimeTypeInfo::ItemInfo* item;
 
   item = addItemInfo( exifGroup, "Comment", i18n("Comment"), QVariant::String);
-  setAttributes( item, KFileMimeTypeInfo::Modifiable );
-  setAttributes( item, KFileMimeTypeInfo::Addable );
-    
+  setAttributes( item, 
+                 KFileMimeTypeInfo::Modifiable |
+                 KFileMimeTypeInfo::Addable |
+                 KFileMimeTypeInfo::MultiLine );
+
   item = addItemInfo( exifGroup, "Manufacturer", i18n("Camera Manufacturer"),
                       QVariant::String );
 
-  item = addItemInfo( exifGroup, "Model", i18n("Camera Model"), 
+  item = addItemInfo( exifGroup, "Model", i18n("Camera Model"),
                       QVariant::String );
 
-  item = addItemInfo( exifGroup, "Date/Time", i18n("Date/Time"), 
+  item = addItemInfo( exifGroup, "Date/Time", i18n("Date/Time"),
                       QVariant::DateTime );
-  
-  item = addItemInfo( exifGroup, "Resolution", i18n("Resolution"), 
+
+  item = addItemInfo( exifGroup, "Resolution", i18n("Resolution"),
                       QVariant::Size );
   setHint( item, KFileMimeTypeInfo::Size );
   setUnit( item, KFileMimeTypeInfo::Pixels );
   setSuffix( item, i18n(" Pixels") ); // no unit supported for QSize atm.
 
-  item = addItemInfo( exifGroup, "Orientation", i18n("Orientation"), 
+  item = addItemInfo( exifGroup, "Orientation", i18n("Orientation"),
                       QVariant::Int );
-  
+
   item = addItemInfo( exifGroup, "Color/bw", i18n("Color/Grayscale"),
                       QVariant::String );
-  
-  item = addItemInfo( exifGroup, "Flash used", i18n("Flash used"), 
+
+  item = addItemInfo( exifGroup, "Flash used", i18n("Flash used"),
                       QVariant::Bool );
-  item = addItemInfo( exifGroup, "Focal length", i18n("Focal length"), 
+  item = addItemInfo( exifGroup, "Focal length", i18n("Focal length"),
                       QVariant::String );
   setSuffix( item, i18n("Millimeters", " mm") );
-  
-  item = addItemInfo( exifGroup, "35mm equivalent", i18n("35mm equivalent"), 
+
+  item = addItemInfo( exifGroup, "35mm equivalent", i18n("35mm equivalent"),
                       QVariant::Int );
   setSuffix( item, i18n("Millimeters", " mm") );
 
-  item = addItemInfo( exifGroup, "CCD Width", i18n("CCD Width"), 
+  item = addItemInfo( exifGroup, "CCD Width", i18n("CCD Width"),
                       QVariant::String );
   setSuffix( item, i18n("Millimeters", " mm") );
-  
-  item = addItemInfo( exifGroup, "Exposure Time", i18n("Exposure Time"), 
+
+  item = addItemInfo( exifGroup, "Exposure Time", i18n("Exposure Time"),
                       QVariant::String );
   setHint( item, KFileMimeTypeInfo::Seconds );
-  
-  item = addItemInfo( exifGroup, "Aperture", i18n("Aperture"), 
-                      QVariant::String );
-  
-  item = addItemInfo( exifGroup, "Focus Dist.", i18n("Focus Dist."), 
-                      QVariant::String );
-  
-  item = addItemInfo( exifGroup, "Exposure bias", i18n("Exposure bias"), 
-                      QVariant::String );
-  
-  item = addItemInfo( exifGroup, "Whitebalance", i18n("Whitebalance"), 
-                      QVariant::String );
-  
-  item = addItemInfo( exifGroup, "Metering Mode", i18n("Metering Mode"), 
-                      QVariant::String );
-  
-  item = addItemInfo( exifGroup, "Exposure", i18n("Exposure"), 
-                      QVariant::String );
-  
-  item = addItemInfo( exifGroup, "ISO equiv.", i18n("ISO equiv."), 
-                      QVariant::String );
-  
-  item = addItemInfo( exifGroup, "JPEG Quality", i18n("JPEG Quality"), 
-                      QVariant::String );
-  
-  item = addItemInfo( exifGroup, "UserComment", i18n("User Comment"), 
-                      QVariant::String );
-  setHint(item,  KFileMimeTypeInfo::Description);
-  
-  item = addItemInfo( exifGroup, "JPEG Process", i18n("JPEG Process"), 
+
+  item = addItemInfo( exifGroup, "Aperture", i18n("Aperture"),
                       QVariant::String );
 
-  item = addItemInfo( exifGroup, "Thumbnail", i18n("Thumbnail"), 
+  item = addItemInfo( exifGroup, "Focus Dist.", i18n("Focus Dist."),
+                      QVariant::String );
+
+  item = addItemInfo( exifGroup, "Exposure bias", i18n("Exposure bias"),
+                      QVariant::String );
+
+  item = addItemInfo( exifGroup, "Whitebalance", i18n("Whitebalance"),
+                      QVariant::String );
+
+  item = addItemInfo( exifGroup, "Metering Mode", i18n("Metering Mode"),
+                      QVariant::String );
+
+  item = addItemInfo( exifGroup, "Exposure", i18n("Exposure"),
+                      QVariant::String );
+
+  item = addItemInfo( exifGroup, "ISO equiv.", i18n("ISO equiv."),
+                      QVariant::String );
+
+  item = addItemInfo( exifGroup, "JPEG Quality", i18n("JPEG Quality"),
+                      QVariant::String );
+
+  item = addItemInfo( exifGroup, "UserComment", i18n("User Comment"),
+                      QVariant::String );
+  setHint(item,  KFileMimeTypeInfo::Description);
+
+  item = addItemInfo( exifGroup, "JPEG Process", i18n("JPEG Process"),
+                      QVariant::String );
+
+  item = addItemInfo( exifGroup, "Thumbnail", i18n("Thumbnail"),
                       QVariant::Image );
   setHint( item, KFileMimeTypeInfo::Thumbnail );
-  
+
 //  ###
 //   exifGroup.setSupportsVariableKeys(true);
 }
@@ -185,13 +187,13 @@ bool KJpegPlugin::readInfo( KFileMetaInfo& info, uint what )
 {
     QString tag;
     ExifData ImageInfo;
-    
+
     // parse the jpeg file now
     if (ImageInfo.scan(info.path()) == false) {
         kdDebug(7034) << "Not a JPEG file!\n";
         return false;
     }
-    
+
     KFileMetaInfoGroup exifGroup = appendGroup( info, EXIFGROUP );
 
     tag = ImageInfo.getComment();
@@ -215,7 +217,7 @@ bool KJpegPlugin::readInfo( KFileMetaInfo& info, uint what )
             appendItem( exifGroup, "Date/Time", dt );
     }
 
-    appendItem( exifGroup,"Resolution", QSize( ImageInfo.getWidth(), 
+    appendItem( exifGroup,"Resolution", QSize( ImageInfo.getWidth(),
                                                ImageInfo.getHeight() ) );
 
     if ( ImageInfo.getOrientation() )
@@ -223,15 +225,15 @@ bool KJpegPlugin::readInfo( KFileMetaInfo& info, uint what )
 
     appendItem( exifGroup, "Color/bw", ImageInfo.getIsColor() ?
                 i18n("Color") : i18n("Black and white") );
-    appendItem( exifGroup, "Flash used", 
+    appendItem( exifGroup, "Flash used",
                 QVariant((ImageInfo.getFlashUsed() >= 0), 42 ) );
 
     if (ImageInfo.getFocalLength()){
-    	appendItem( exifGroup, "Focal length", 
+    	appendItem( exifGroup, "Focal length",
                     QString().sprintf("%4.1f", ImageInfo.getFocalLength()) );
-        
+
         if (ImageInfo.getCCDWidth()){
-            appendItem( exifGroup, "35mm equivalent", 
+            appendItem( exifGroup, "35mm equivalent",
                         (int)(ImageInfo.getFocalLength()/ImageInfo.getCCDWidth()*35 + 0.5) );
 	}
     }
@@ -251,8 +253,8 @@ bool KJpegPlugin::readInfo( KFileMetaInfo& info, uint what )
     }
 
     if (ImageInfo.getApertureFNumber()){
-	appendItem( exifGroup, "Aperture", 
-                    QString().sprintf("f/%3.1f", 
+	appendItem( exifGroup, "Aperture",
+                    QString().sprintf("f/%3.1f",
                                       (double)ImageInfo.getApertureFNumber()));
     }
 
@@ -266,8 +268,8 @@ bool KJpegPlugin::readInfo( KFileMetaInfo& info, uint what )
     }
 
     if (ImageInfo.getExposureBias()){
-	appendItem( exifGroup, "Exposure bias", 
-                    QString().sprintf("%4.2f", 
+	appendItem( exifGroup, "Exposure bias",
+                    QString().sprintf("%4.2f",
                                       (double)ImageInfo.getExposureBias()) );
     }
 
@@ -387,8 +389,8 @@ bool KJpegPlugin::readInfo( KFileMetaInfo& info, uint what )
     }
 
     if (ImageInfo.getISOequivalent()){
-	appendItem( exifGroup, "ISO equiv.", 
-                    QString().sprintf("%2d", 
+	appendItem( exifGroup, "ISO equiv.",
+                    QString().sprintf("%2d",
                                       (int)ImageInfo.getISOequivalent()) );
     }
 
@@ -437,19 +439,19 @@ QDateTime KJpegPlugin::parseDateTime( const QString& string )
     QDateTime dt;
     if ( string.length() != 19 )
         return dt;
-    
+
     QString year    = string.left( 4 );
     QString month   = string.mid( 5, 2 );
     QString day     = string.mid( 8, 2 );
     QString hour    = string.mid( 11, 2 );
     QString minute  = string.mid( 14, 2 );
     QString seconds = string.mid( 18, 2 );
-    
+
     bool ok;
     bool allOk = true;
     int y  = year.toInt( &ok );
     allOk &= ok;
-    
+
     int mo = month.toInt( &ok );
     allOk &= ok;
 
@@ -464,7 +466,7 @@ QDateTime KJpegPlugin::parseDateTime( const QString& string )
 
     int s  = seconds.toInt( &ok );
     allOk &= ok;
-    
+
     if ( allOk ) {
         dt.setDate( QDate( y, mo, d ) );
         dt.setTime( QTime( h, mi, s ) );
