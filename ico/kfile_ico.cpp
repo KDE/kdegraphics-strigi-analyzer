@@ -53,7 +53,7 @@ KIcoPlugin::KIcoPlugin(QObject *parent, const char *name,
 
     KFileMimeTypeInfo::GroupInfo* group = 0L;
 
-    group = addGroupInfo(info, "Technical", "Technical Details");
+    group = addGroupInfo(info, "Technical", i18n("Technical Details"));
 
     KFileMimeTypeInfo::ItemInfo* item;
 

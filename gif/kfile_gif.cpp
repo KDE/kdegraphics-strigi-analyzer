@@ -52,7 +52,7 @@ KGifPlugin::KGifPlugin(QObject *parent, const char *name,
 
     KFileMimeTypeInfo::GroupInfo* group = 0L;
 
-    group = addGroupInfo(info, "General", "General");
+    group = addGroupInfo(info, "General", i18n("General"));
 
     KFileMimeTypeInfo::ItemInfo* item;
 
