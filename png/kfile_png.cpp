@@ -192,8 +192,8 @@ bool KPngPlugin::readInfo( KFileMetaInfo& info, uint what)
 
             while(index<f.size()-12)
             {
-                while (strncmp((char*)CHUNK_TYPE(data,index), "tEXt", 4) &&
-                       index < f.size() - 12)
+                while (index < f.size() - 12 &&
+                       strncmp((char*)CHUNK_TYPE(data,index), "tEXt", 4))
                 {
                     if (!strncmp((char*)CHUNK_TYPE(data,index), "IEND", 4))
                         goto end;
@@ -201,7 +201,7 @@ bool KPngPlugin::readInfo( KFileMetaInfo& info, uint what)
                     index += CHUNK_SIZE(data, index) + CHUNK_HEADER_SIZE;
                 }
 
-                if (index<f.size())
+                if (index < f.size() - 12)
                 {
                     // we found a tEXt field
                     kdDebug(7034) << "We found a tEXt field\n";
