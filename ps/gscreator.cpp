@@ -67,6 +67,7 @@
 #include <sys/wait.h>
 #include <fcntl.h>
 #include <errno.h>
+#include <kdemacros.h>
 
 #include <qcolor.h>
 #include <qfile.h>
@@ -80,7 +81,7 @@
 
 extern "C"
 {
-    ThumbCreator *new_creator()
+    KDE_EXPORT ThumbCreator *new_creator()
     {
         return new GSCreator;
     }
