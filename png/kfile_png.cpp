@@ -53,7 +53,7 @@ static const char* knownTranslations[] = {
   I18N_NOOP("Warning"),
   I18N_NOOP("Source"),
   I18N_NOOP("Comment")
-};    
+};
 
 // and for the colors
 static const char* colors[] = {
@@ -65,8 +65,8 @@ static const char* colors[] = {
   I18N_NOOP("RGB/Alpha")
 };
 
-  // and compressions  
-char* compressions[] = 
+  // and compressions
+char* compressions[] =
 {
   I18N_NOOP("Deflate")
 };
@@ -95,7 +95,7 @@ KPngPlugin::KPngPlugin(QObject *parent, const char *name,
     group = addGroupInfo(info, "Technical", i18n("Technical details"));
 
     item = addItemInfo(group, "Resolution", i18n("Resolution"), QVariant::Size);
-    setSuffix(item, i18n(" pixels"));
+    setSuffix(item, i18n(" Pixels"));
 
     item = addItemInfo(group, "Bitdepth", i18n("Bitdepth"), QVariant::Int);
     setSuffix(item, i18n("bpp"));
@@ -117,7 +117,7 @@ bool KPngPlugin::readInfo( KFileMetaInfo& info, uint what)
     unsigned char *data = (unsigned char*) malloc(f.size()+1);
     f.readBlock((char*)data, f.size());
     data[f.size()]='\n';
-  
+
     // find the start
     if ((data[0] == 137) && (data[1] == 80) && (data[2] == 78) && (data[3] == 71)
         && (data[4] ==  13) && (data[5] == 10) && (data[6] == 26) && (data[7] == 10))
@@ -167,7 +167,7 @@ bool KPngPlugin::readInfo( KFileMetaInfo& info, uint what)
 
             while(index<f.size()-12)
             {
-                while (strncmp((char*)CHUNK_TYPE(data,index), "tEXt", 4)) 
+                while (strncmp((char*)CHUNK_TYPE(data,index), "tEXt", 4))
                 {
                     if (!strncmp((char*)CHUNK_TYPE(data,index), "IEND", 4))
                     {
