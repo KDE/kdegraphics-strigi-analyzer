@@ -231,6 +231,7 @@ type       key                        details
 QSize      Dimensions                 Dimensions in pixels
 Int        Depth                      Depth in pixels
 Int        BitDepth                   Bits per pixel
+String     ColorMode                  Color Mode (RGB, RGBA)
 String     Type                       2D, volume or cube map
 String     Compression                Compression type
 
