@@ -167,6 +167,14 @@ type       key             W/A        details
 ------------------------------------------------------------------------
 QSize      Dimensions      -/-        Dimensions in pixels
 
+xpm plugin:
+===========
+
+type       key             W/A        details
+------------------------------------------------------------------------
+QSize      Dimensions      -/-        Dimensions in pixels
+Int        BitDepth        -/-        Bits per pixel
+
 
 bmp plugin:
 ===========

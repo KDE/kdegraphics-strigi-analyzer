@@ -7,6 +7,6 @@ KFILE_TIFF_SUBDIR=tiff
 endif
 
 
-SUBDIRS=dvi pdf png ps jpeg xbm bmp tga rgb ico pcx $(KFILE_TIFF_SUBDIR) pnm \
+SUBDIRS=dvi pdf png ps jpeg xbm xpm bmp tga rgb ico pcx $(KFILE_TIFF_SUBDIR) pnm \
 	$(KFILE_EXR_SUBDIR) dds
 # gif
