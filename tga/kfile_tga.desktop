@@ -2,6 +2,7 @@
 Encoding=UTF-8
 Type=Service
 Name=Truevision Targa Info
+Name[bg]=Информация за Truevision Targa
 Name[ca]=Informació de Targa Truevision
 Name[cs]=Truevision Targa info
 Name[da]=Truevision Targa-info
