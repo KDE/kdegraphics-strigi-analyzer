@@ -48,7 +48,7 @@ type	key		Comment
 -----------------------------------------------------------------------------
 String	Camera make
 String  Camera model
-String	Date/Time
+String	Date/time
 String	Resolution	Width x Height in pixels
 int	Orientation 	1 - "The 0th row is at the visual top of the image,
 			     and the 0th column is the visual left-hand side."
@@ -66,13 +66,13 @@ int	Orientation 	1 - "The 0th row is at the visual top of the image,
 			    and the 0th column is the visual bottom."
 			8 - "The 0th row is the visual left-hand side of of the image,
 			    and the 0th column is the visual bottom."
-String	Color/bw	"Black and white" "Color"
+String	Color mode	"Grayscale" "Color"
 String	Flash used	"Yes" "No"
 String	Focal length 	4.1 mm, 35mm equivalent
 String	Exposure time   6.3 (if < 0.5 also in 1/xx) sec
 String	Aperture 	"f/3.1"
-String	Focus Dist. 	"Infinite" or 5.2 m
-String	CCD Width 	4.2 Postfix mm
+String	Focus dist. 	"Infinite" or 5.2 m
+String	CCD width 	4.2 Postfix mm
 String	Exposure bias 	4.2
 String	Whitebalance 	0 = unknown
 			1 = Daylight
@@ -86,7 +86,7 @@ String	Whitebalance 	0 = unknown
 			22 = D75
 			23 to 254 = reserved
 			255 = other
-String	Metering Mode 	0 = unknown
+String	Metering mode 	0 = unknown
 			1 = Average
 			2 = CenterWeightedAverage
 			3 = Spot
@@ -109,11 +109,11 @@ String	Exposure 	0 = Not defined
 			    (for landscape photos with the background in focus)
 			9 to 255 = reserved
 String	ISO equiv. 	2digits ???
-String	JPG Quality 	1 - "basic"
+String	JPG quality 	1 - "basic"
 			2 - "normal"
 			4 - "fine"
 			default: unknown
-String	User Comment
+String	User comment
 String	Comment
 QImage	Thumbnail
 

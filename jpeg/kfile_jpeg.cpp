@@ -64,13 +64,13 @@ KJpegPlugin::KJpegPlugin(QObject *parent, const char *name,
                  KFileMimeTypeInfo::Addable |
                  KFileMimeTypeInfo::MultiLine );
 
-  item = addItemInfo( exifGroup, "Manufacturer", i18n("Camera Manufacturer"),
+  item = addItemInfo( exifGroup, "Manufacturer", i18n("Camera manufacturer"),
                       QVariant::String );
 
-  item = addItemInfo( exifGroup, "Model", i18n("Camera Model"),
+  item = addItemInfo( exifGroup, "Model", i18n("Camera model"),
                       QVariant::String );
 
-  item = addItemInfo( exifGroup, "Date/Time", i18n("Date/Time"),
+  item = addItemInfo( exifGroup, "Date/time", i18n("Date/time"),
                       QVariant::DateTime );
 
   item = addItemInfo( exifGroup, "Resolution", i18n("Resolution"),
@@ -82,7 +82,7 @@ KJpegPlugin::KJpegPlugin(QObject *parent, const char *name,
   item = addItemInfo( exifGroup, "Orientation", i18n("Orientation"),
                       QVariant::Int );
 
-  item = addItemInfo( exifGroup, "Color/bw", i18n("Color/Grayscale"),
+  item = addItemInfo( exifGroup, "Color mode", i18n("Color mode"),
                       QVariant::String );
 
   item = addItemInfo( exifGroup, "Flash used", i18n("Flash used"),
@@ -95,18 +95,18 @@ KJpegPlugin::KJpegPlugin(QObject *parent, const char *name,
                       QVariant::Int );
   setSuffix( item, i18n("Millimeters", " mm") );
 
-  item = addItemInfo( exifGroup, "CCD Width", i18n("CCD Width"),
+  item = addItemInfo( exifGroup, "CCD width", i18n("CCD width"),
                       QVariant::String );
   setSuffix( item, i18n("Millimeters", " mm") );
 
-  item = addItemInfo( exifGroup, "Exposure Time", i18n("Exposure Time"),
+  item = addItemInfo( exifGroup, "Exposure time", i18n("Exposure time"),
                       QVariant::String );
   setHint( item, KFileMimeTypeInfo::Seconds );
 
   item = addItemInfo( exifGroup, "Aperture", i18n("Aperture"),
                       QVariant::String );
 
-  item = addItemInfo( exifGroup, "Focus Dist.", i18n("Focus Dist."),
+  item = addItemInfo( exifGroup, "Focus dist.", i18n("Focus dist."),
                       QVariant::String );
 
   item = addItemInfo( exifGroup, "Exposure bias", i18n("Exposure bias"),
@@ -115,7 +115,7 @@ KJpegPlugin::KJpegPlugin(QObject *parent, const char *name,
   item = addItemInfo( exifGroup, "Whitebalance", i18n("Whitebalance"),
                       QVariant::String );
 
-  item = addItemInfo( exifGroup, "Metering Mode", i18n("Metering Mode"),
+  item = addItemInfo( exifGroup, "Metering mode", i18n("Metering mode"),
                       QVariant::String );
 
   item = addItemInfo( exifGroup, "Exposure", i18n("Exposure"),
@@ -124,14 +124,14 @@ KJpegPlugin::KJpegPlugin(QObject *parent, const char *name,
   item = addItemInfo( exifGroup, "ISO equiv.", i18n("ISO equiv."),
                       QVariant::String );
 
-  item = addItemInfo( exifGroup, "JPEG Quality", i18n("JPEG Quality"),
+  item = addItemInfo( exifGroup, "JPEG quality", i18n("JPEG quality"),
                       QVariant::String );
 
-  item = addItemInfo( exifGroup, "UserComment", i18n("User Comment"),
+  item = addItemInfo( exifGroup, "User comment", i18n("User comment"),
                       QVariant::String );
   setHint(item,  KFileMimeTypeInfo::Description);
 
-  item = addItemInfo( exifGroup, "JPEG Process", i18n("JPEG Process"),
+  item = addItemInfo( exifGroup, "JPEG process", i18n("JPEG process"),
                       QVariant::String );
 
   item = addItemInfo( exifGroup, "Thumbnail", i18n("Thumbnail"),
@@ -214,7 +214,7 @@ bool KJpegPlugin::readInfo( KFileMetaInfo& info, uint what )
     if (tag.length()){
         QDateTime dt = parseDateTime( tag.stripWhiteSpace() );
         if ( dt.isValid() )
-            appendItem( exifGroup, "Date/Time", dt );
+            appendItem( exifGroup, "Date/time", dt );
     }
 
     appendItem( exifGroup,"Resolution", QSize( ImageInfo.getWidth(),
@@ -223,7 +223,7 @@ bool KJpegPlugin::readInfo( KFileMetaInfo& info, uint what )
     if ( ImageInfo.getOrientation() )
         appendItem( exifGroup, "Orientation", ImageInfo.getOrientation() );
 
-    appendItem( exifGroup, "Color/bw", ImageInfo.getIsColor() ?
+    appendItem( exifGroup, "Color mode", ImageInfo.getIsColor() ?
                 i18n("Color") : i18n("Black and white") );
     appendItem( exifGroup, "Flash used",
                 QVariant((ImageInfo.getFlashUsed() >= 0), 42 ) );
@@ -239,7 +239,7 @@ bool KJpegPlugin::readInfo( KFileMetaInfo& info, uint what )
     }
 
     if (ImageInfo.getCCDWidth()){
-	appendItem( exifGroup, "CCD Width",
+	appendItem( exifGroup, "CCD width",
                     QString().sprintf("%4.2f", ImageInfo.getCCDWidth()) );
     }
 
@@ -249,7 +249,7 @@ bool KJpegPlugin::readInfo( KFileMetaInfo& info, uint what )
 	if (exposureTime > 0 && exposureTime <= 0.5){
             tag+=QString().sprintf(" (1/%d)", (int)(0.5 + 1/exposureTime) );
 	}
-	appendItem( exifGroup, "Exposure Time", tag );
+	appendItem( exifGroup, "Exposure time", tag );
     }
 
     if (ImageInfo.getApertureFNumber()){
@@ -264,7 +264,7 @@ bool KJpegPlugin::readInfo( KFileMetaInfo& info, uint what )
         }else{
 	    tag=QString().sprintf("%5.2fm",(double)ImageInfo.getDistance());
         }
-    	appendItem( exifGroup, "Focus Dist.", tag );
+    	appendItem( exifGroup, "Focus dist.", tag );
     }
 
     if (ImageInfo.getExposureBias()){
@@ -276,7 +276,7 @@ bool KJpegPlugin::readInfo( KFileMetaInfo& info, uint what )
     if (ImageInfo.getWhitebalance() != -1){
         switch(ImageInfo.getWhitebalance()) {
 	case 0:
-	    tag=i18n("unknown");
+	    tag=i18n("Unknown");
 	    break;
 	case 1:
 	    tag=i18n("Daylight");
@@ -307,11 +307,11 @@ bool KJpegPlugin::readInfo( KFileMetaInfo& info, uint what )
 	    tag=i18n("D75");
 	    break;
 	case 255:
-	    tag=i18n("other");
+	    tag=i18n("Other");
 	    break;
 	default:
             //23 to 254 = reserved
-	    tag=i18n("reserved");
+	    tag=i18n("Unknown");
 	}
   	appendItem( exifGroup, "Whitebalance", tag );
     }
@@ -319,13 +319,13 @@ bool KJpegPlugin::readInfo( KFileMetaInfo& info, uint what )
     if (ImageInfo.getMeteringMode() != -1){
         switch(ImageInfo.getMeteringMode()) {
 	case 0:
-	    tag=i18n("unknown");
+	    tag=i18n("Unknown");
 	    break;
 	case 1:
 	    tag=i18n("Average");
 	    break;
 	case 2:
-	    tag=i18n("CenterWeightedAverage");
+	    tag=i18n("Center weighted average");
 	    break;
 	case 3:
 	    tag=i18n("Spot");
@@ -339,17 +339,14 @@ bool KJpegPlugin::readInfo( KFileMetaInfo& info, uint what )
 	case 6:
 	    tag=i18n("Partial");
 	    break;
-	case 7:
-	    tag=i18n("reserved");
-	    break;
 	case 255:
-	    tag=i18n("other");
+	    tag=i18n("Other");
 	    break;
 	default:
 	    // 7 to 254 = reserved
-	    tag=i18n("reserved");
+	    tag=i18n("Unknown");
 	}
-	appendItem( exifGroup, "Metering Mode", tag );
+	appendItem( exifGroup, "Metering mode", tag );
     }
 
     if (ImageInfo.getExposureProgram()){
@@ -383,7 +380,7 @@ bool KJpegPlugin::readInfo( KFileMetaInfo& info, uint what )
 	    break;
 	default:
 	    // 9 to 255 = reserved
-	    tag=i18n("reserved");
+	    tag=i18n("Unknown");
 	}
 	appendItem( exifGroup, "Exposure", tag );
     }
@@ -397,29 +394,29 @@ bool KJpegPlugin::readInfo( KFileMetaInfo& info, uint what )
     if (ImageInfo.getCompressionLevel()){
 	switch(ImageInfo.getCompressionLevel()) {
 	case 1:
-	    tag=i18n("basic");
+	    tag=i18n("Basic");
             break;
 	case 2:
-	    tag=i18n("normal");
+	    tag=i18n("Normal");
 	    break;
         case 4:
-	    tag=i18n("fine");
+	    tag=i18n("Fine");
 	    break;
 	default:
-	    tag=i18n("unknown");
+	    tag=i18n("Unknown");
 	}
-	appendItem( exifGroup, "JPEG Quality", tag );
+	appendItem( exifGroup, "JPEG quality", tag );
     }
 
     tag = ImageInfo.getUserComment();
     if (tag.length()){
-	appendItem( exifGroup, "UserComment", tag );
+	appendItem( exifGroup, "User comment", tag );
     }
 
     int a;
     for (a=0;;a++){
         if (ProcessTable[a].Tag == ImageInfo.getProcess() || ProcessTable[a].Tag == 0){
-    	    appendItem( exifGroup, "JPEG Process",
+    	    appendItem( exifGroup, "JPEG process",
                         QString::fromUtf8( ProcessTable[a].Desc) );
             break;
         }
