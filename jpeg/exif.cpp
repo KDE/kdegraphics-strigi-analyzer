@@ -689,7 +689,10 @@ void ExifData::ProcessExifDir(unsigned char * DirStart, unsigned char * OffsetBa
 
         if (DIR_ENTRY_ADDR(DirStart, NumDirEntries) + 4 <= OffsetBase+ExifLength){
             Offset = Get32u(DIR_ENTRY_ADDR(DirStart, NumDirEntries));
-            if (Offset){
+	    // There is at least one jpeg from an HP camera having an Offset of almost MAXUINT.
+	    // Adding OffsetBase to it produces an overflow, so compare with ExifLength here.
+	    // See http://bugs.kde.org/show_bug.cgi?id=54542
+	    if (Offset && Offset < ExifLength){
                 SubdirStart = OffsetBase + Offset;
                 if (SubdirStart > OffsetBase+ExifLength){
                     if (SubdirStart < OffsetBase+ExifLength+20){
