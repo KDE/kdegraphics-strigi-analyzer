@@ -44,7 +44,8 @@ KPdfPlugin::KPdfPlugin(QObject *parent, const char *name, const QStringList &pre
     KFileMimeTypeInfo* info = addMimeTypeInfo( "application/pdf" );
 
     // general group
-    KFileMimeTypeInfo::GroupInfo* group = addGroupInfo(info, "General", i18n("General"));
+//    KFileMimeTypeInfo::GroupInfo* group = addGroupInfo(info, "General", i18n("General"));
+    KFileMimeTypeInfo::GroupInfo* group = addGroupInfo(info, "General", "General");
 
     addItemInfo(group, "CreationDate", i18n("Created"), QVariant::DateTime);
     addItemInfo(group, "ModDate", i18n("Modified"), QVariant::DateTime);

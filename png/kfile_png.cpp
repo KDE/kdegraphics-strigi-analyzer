@@ -88,11 +88,13 @@ KPngPlugin::KPngPlugin(QObject *parent, const char *name,
     KFileMimeTypeInfo::ItemInfo* item = 0;
 
     // comment group
-    group = addGroupInfo(info, "Comment", i18n("Comment"));
+//    group = addGroupInfo(info, "Comment", i18n("Comment"));
+    group = addGroupInfo(info, "Comment", "Comment");
     addVariableInfo(group, QVariant::String, 0);
 
     // technical group
-    group = addGroupInfo(info, "Technical", i18n("Technical details"));
+//    group = addGroupInfo(info, "Technical", i18n("Technical details"));
+    group = addGroupInfo(info, "Technical", "Technical details");
 
     item = addItemInfo(group, "Resolution", i18n("Resolution"), QVariant::Size);
     setSuffix(item, i18n("pixels"));
