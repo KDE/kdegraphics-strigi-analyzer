@@ -128,7 +128,7 @@ bool KPngPlugin::readInfo( KFileMetaInfo::Internal& info, int )
           }
     
           info.insert(KFileMetaInfoItem("Resolution", i18n("Resolution"),
-                         QVariant(QString("%1 x %2").arg(x).arg(y)), false,
+                         QSize(x, y), false,
                          QString::null, i18n("pixels")));
       
           info.insert(KFileMetaInfoItem("Bitdepth", i18n("Bitdepth"),
