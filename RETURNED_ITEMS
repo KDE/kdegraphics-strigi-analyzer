@@ -156,3 +156,15 @@ type    key             Comment
 String  Make            Make of the scanner used
 String  Model           Model of the scanner used
 
+
+
+
+
+xbm plugin:
+===========
+
+type       key             W/A        details
+------------------------------------------------------------------------
+QSize      Resolution      -/-        Resolution in pixels
+
+
