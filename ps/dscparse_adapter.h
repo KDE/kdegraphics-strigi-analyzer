@@ -212,7 +212,7 @@ public:
 	Eof                    = CDSC_EOF
     };
 	
-    virtual void comment( Name name ) { std::cout << name << endl; }
+    virtual void comment( Name name ) { std::cout << name << std::endl; }
 };
 
 class KDSCScanHandler;
