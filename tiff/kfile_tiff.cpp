@@ -221,7 +221,7 @@ bool KTiffPlugin::readInfo(KFileMetaInfo& info, uint)
     kdDebug(7034) << "Width: " << imageWidth << endl;
     kdDebug(7034) << "Height: " << imageLength << endl;
     kdDebug(7034) << "BitDepth: " << bitsPerSample << endl;
-    kdDebug(7034) << "ImageType: " << colorMode << endl;
+    kdDebug(7034) << "ColorMode: " << colorMode << endl;
     kdDebug(7034) << "Compression: " << imageCompression << endl;
     kdDebug(7034) << "SamplesPerPixel: " << samplesPerPixel << endl;
     kdDebug(7034) << "ImageAlpha: " << imageAlpha << endl;
