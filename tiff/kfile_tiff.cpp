@@ -58,7 +58,6 @@ KTiffPlugin::KTiffPlugin(QObject *parent, const char *name,
     item = addItemInfo(group, "Resolution", i18n("Resolution"),
             QVariant::Size);
     setUnit(item, KFileMimeTypeInfo::DotsPerInch);
-    setSuffix(item, i18n(" dpi"));
     item = addItemInfo(group, "BitDepth", i18n("Bit depth"),
             QVariant::Int);
     setUnit(item, KFileMimeTypeInfo::BitsPerPixel);

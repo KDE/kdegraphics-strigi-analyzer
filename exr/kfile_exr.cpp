@@ -74,12 +74,10 @@ KExrPlugin::KExrPlugin(QObject *parent, const char *name,
 	item = addItemInfo( group, "Dimensions", i18n("Dimensions"), QVariant::Size );
 	setHint( item, KFileMimeTypeInfo::Size );
 	setUnit( item, KFileMimeTypeInfo::Pixels );
-	setSuffix( item, i18n(" Pixels") );
 	item = addItemInfo( group, "ThumbnailDimensions",
 						i18n("Thumbnail dimensions"), QVariant::Size );
 	setHint( item, KFileMimeTypeInfo::Size );
 	setUnit( item, KFileMimeTypeInfo::Pixels );
-	setSuffix( item, i18n(" Pixels") );
 	addItemInfo( group, "Comment", i18n("Comment"), QVariant::String );
 	item = addItemInfo( group, "Thumbnail", i18n("Thumbnail"), QVariant::Image );
 	setHint( item, KFileMimeTypeInfo::Thumbnail );
@@ -91,7 +89,7 @@ KExrPlugin::KExrPlugin(QObject *parent, const char *name,
 	addItemInfo( group, "Capture Date", i18n("Capture Date"), QVariant::String );
 	item = addItemInfo( group, "UTC Offset", i18n("UTC Offset"), QVariant::String );
 	item = addItemInfo( group, "Exposure time", i18n("Exposure time"), QVariant::Double);
-	setSuffix( item, i18n("seconds", "s") );
+	setUnit( item, KFileMimeTypeInfo::Seconds );
 	item = addItemInfo( group, "Focus", i18n("Focus"), QVariant::Double);
 	setSuffix( item, i18n("Metres", "m") );
 	item = addItemInfo( group, "X Density", i18n("X Density"), QVariant::Double);

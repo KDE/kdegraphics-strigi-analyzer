@@ -76,7 +76,6 @@ KPcxPlugin::KPcxPlugin( QObject *parent, const char *name,
   item = addItemInfo( group, "Resolution", i18n( "Resolution" ),
       QVariant::Size );
   setUnit( item, KFileMimeTypeInfo::DotsPerInch );
-  setSuffix( item, i18n( " dpi" ) );
   item = addItemInfo( group, "Compression", i18n( "Compression" ),
       QVariant::String );
 }

@@ -83,7 +83,6 @@ KJpegPlugin::KJpegPlugin(QObject *parent, const char *name,
                       QVariant::Size );
   setHint( item, KFileMimeTypeInfo::Size );
   setUnit( item, KFileMimeTypeInfo::Pixels );
-  setSuffix( item, i18n(" Pixels") ); // no unit supported for QSize atm.
 
   item = addItemInfo( exifGroup, "Orientation", i18n("Orientation"),
                       QVariant::Int );
@@ -95,15 +94,15 @@ KJpegPlugin::KJpegPlugin(QObject *parent, const char *name,
                       QVariant::Bool );
   item = addItemInfo( exifGroup, "Focal length", i18n("Focal length"),
                       QVariant::String );
-  setSuffix( item, i18n("Millimeters", " mm") );
+  setUnit( item, KFileMimeTypeInfo::Millimeters );
 
   item = addItemInfo( exifGroup, "35mm equivalent", i18n("35mm equivalent"),
                       QVariant::Int );
-  setSuffix( item, i18n("Millimeters", " mm") );
+  setUnit( item, KFileMimeTypeInfo::Millimeters );
 
   item = addItemInfo( exifGroup, "CCD width", i18n("CCD width"),
                       QVariant::String );
-  setSuffix( item, i18n("Millimeters", " mm") );
+  setUnit( item, KFileMimeTypeInfo::Millimeters );
 
   item = addItemInfo( exifGroup, "Exposure time", i18n("Exposure time"),
                       QVariant::String );
