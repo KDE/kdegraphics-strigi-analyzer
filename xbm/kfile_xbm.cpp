@@ -44,7 +44,7 @@ K_EXPORT_COMPONENT_FACTORY(kfile_xbm, XbmFactory( "kfile_xbm" ));
 
 KXbmPlugin::KXbmPlugin(QObject *parent, const char *name,
                        const QStringList &args)
-    
+
     : KFilePlugin(parent, name, args)
 {
     KFileMimeTypeInfo* info = addMimeTypeInfo( "image/x-xbm" );
@@ -55,8 +55,9 @@ KXbmPlugin::KXbmPlugin(QObject *parent, const char *name,
 
     KFileMimeTypeInfo::ItemInfo* item;
 
-    item = addItemInfo(group, "Resolution", i18n("Resolution"), QVariant::Size);
-
+    item = addItemInfo(group, "Dimensions", i18n("Dimensions"), QVariant::Size);
+    setHint( item, KFileMimeTypeInfo::Size );
+    setUnit(item, KFileMimeTypeInfo::Pixels);
 }
 
 
@@ -117,7 +118,7 @@ bool KXbmPlugin::readInfo( KFileMetaInfo& info, uint what)
     if ((width > 0) && (height > 0)) {
         // we have valid looking data
         KFileMetaInfoGroup group = appendGroup(info, "Technical");
-        appendItem(group, "Resolution", QSize(width, height));
+        appendItem(group, "Dimensions", QSize(width, height));
         return true;
     }
 

@@ -1,1 +1,2 @@
+DO_NOT_COMPILE="$DO_NOT_COMPILE gif"
 AC_CHECK_PROG(PDFINFO, pdfinfo, yes, no)

@@ -16,9 +16,9 @@ png plugin:
 
 type       key             W/A        details
 ------------------------------------------------------------------------
-String     Resolution      -/-
-Int        Bitdepth        -/- 
-String     Color mode      -/-  
+Size       Dimensions      -/-
+Int        BitDepth        -/- 
+String     ColorMode       -/-  
 String     Compression     -/-    Compression type. Right now always "deflate"
 
 Other keys corresponding to the png comment keys are returned as non-editable
@@ -165,7 +165,7 @@ xbm plugin:
 
 type       key             W/A        details
 ------------------------------------------------------------------------
-QSize      Resolution      -/-        Resolution in pixels
+QSize      Dimensions      -/-        Dimensions in pixels
 
 
 bmp plugin:
@@ -174,8 +174,8 @@ bmp plugin:
 type       key             W/A        details
 ------------------------------------------------------------------------
 String     Type            -/-        Bitmap type (Windows / OS/2)
-QSize      Resolution      -/-        Resolution in pixels
-Int        Bitdepth        -/-        Bits per pixel
+QSize      Dimensions      -/-        Dimensions in pixels
+Int        BitDepth        -/-        Bits per pixel
 String     Compression     -/-        Compression type
 
 
@@ -184,9 +184,9 @@ tga plugin:
 
 type       key             W/A        details
 ------------------------------------------------------------------------
-QSize      Resolution      -/-        Resolution in pixels
-Int        Bitdepth        -/-        Bits per pixel
-String     Color mode      -/-        Color mode (e.g. RGB)
+QSize      Dimensions      -/-        Dimensions in pixels
+Int        BitDepth        -/-        Bits per pixel
+String     ColorMode      -/-        Color mode (e.g. RGB)
 String     Compression     -/-        Compression type, if any
 
 
@@ -196,5 +196,6 @@ ico plugin:
 type       key             W/A        details
 ------------------------------------------------------------------------
 Int        Number          -/-        Number of icons in file
-QSize      Resolution      -/-        Resolution [of 1st icon]
+QSize      Dimensions      -/-        Dimensions
+QSize      DimensionsM     -/-        Dimensions [of 1st icon]
 Int        Colors          -/-        Number of colors [in 1st icon]

@@ -45,7 +45,7 @@ K_EXPORT_COMPONENT_FACTORY(kfile_bmp, BmpFactory( "kfile_bmp" ));
 
 KBmpPlugin::KBmpPlugin(QObject *parent, const char *name,
                        const QStringList &args)
-    
+
     : KFilePlugin(parent, name, args)
 {
     KFileMimeTypeInfo* info = addMimeTypeInfo( "image/x-bmp" );
@@ -58,10 +58,12 @@ KBmpPlugin::KBmpPlugin(QObject *parent, const char *name,
 
     item = addItemInfo(group, "Type", i18n("Type"), QVariant::String);
 
-    item = addItemInfo(group, "Resolution", i18n("Resolution"), QVariant::Size);
+    item = addItemInfo(group, "Dimensions", i18n("Dimensions"), QVariant::Size);
+    setHint( item, KFileMimeTypeInfo::Size );
+    setUnit(item, KFileMimeTypeInfo::Pixels);
 
-    item = addItemInfo(group, "Bitdepth", i18n("Bit Depth"), QVariant::Int);
-    setSuffix(item, i18n("bpp"));
+    item = addItemInfo(group, "BitDepth", i18n("Bit Depth"), QVariant::Int);
+    setUnit(item, KFileMimeTypeInfo::BitsPerPixel);
 
     item = addItemInfo(group, "Compression", i18n("Compression"), QVariant::String);
 
@@ -128,7 +130,7 @@ bool KBmpPlugin::readInfo( KFileMetaInfo& info, uint what)
     dstream >> bmp_reserved2;
     dstream >> bmp_offbits;
 
-    
+
     // we should now be at the file info structure
     uint32_t bmpi_size;
     uint32_t bmpi_width;
@@ -146,8 +148,8 @@ bool KBmpPlugin::readInfo( KFileMetaInfo& info, uint what)
 
 
     // output the useful bits
-    appendItem(group, "Resolution", QSize(bmpi_width, bmpi_height));
-    appendItem(group, "Bitdepth", bmpi_bitcount);
+    appendItem(group, "Dimensions", QSize(bmpi_width, bmpi_height));
+    appendItem(group, "BitDepth", bmpi_bitcount);
 
     switch (bmpi_compression) {
     case 0 :

@@ -58,7 +58,7 @@ __attribute__((unused))
   I18N_NOOP("Source"),
   I18N_NOOP("Comment")
 };
- 
+
 // and for the colors
 static const char* colors[] = {
   I18N_NOOP("Grayscale"),
@@ -75,7 +75,7 @@ static const char* compressions[] =
 {
   I18N_NOOP("Deflate")
 };
- 
+
   // interlaced modes
 static const char* interlaceModes[] = {
   I18N_NOOP("None"),
@@ -106,11 +106,10 @@ KPngPlugin::KPngPlugin(QObject *parent, const char *name,
     group = addGroupInfo(info, "Technical", i18n("Technical Details"));
 
     item = addItemInfo(group, "Dimensions", i18n("Dimensions"), QVariant::Size);
-//    setSuffix(item, i18n(" pixels"));
+    setHint( item, KFileMimeTypeInfo::Size );
     setUnit(item, KFileMimeTypeInfo::Pixels);
 
     item = addItemInfo(group, "BitDepth", i18n("Bit depth"), QVariant::Int);
-//    setSuffix(item, i18n("bpp"));
     setUnit(item, KFileMimeTypeInfo::BitsPerPixel);
 
     addItemInfo(group, "ColorMode", i18n("Color mode"), QVariant::String);
@@ -210,7 +209,7 @@ bool KPngPlugin::readInfo( KFileMetaInfo& info, uint what)
                     //  chunk start
 
                     uchar* key = &CHUNK_DATA(data,index,0);
-                  
+
                     int keysize=0;
                     for (;key[keysize]!=0; keysize++)
                         // look if we reached the end of the file

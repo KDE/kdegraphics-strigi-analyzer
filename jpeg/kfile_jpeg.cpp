@@ -59,7 +59,7 @@ KJpegPlugin::KJpegPlugin(QObject *parent, const char *name,
   KFileMimeTypeInfo::ItemInfo* item;
 
   item = addItemInfo( exifGroup, "Comment", i18n("Comment"), QVariant::String);
-  setAttributes( item, 
+  setAttributes( item,
                  KFileMimeTypeInfo::Modifiable |
                  KFileMimeTypeInfo::Addable |
                  KFileMimeTypeInfo::MultiLine );
@@ -73,7 +73,7 @@ KJpegPlugin::KJpegPlugin(QObject *parent, const char *name,
   item = addItemInfo( exifGroup, "Date/time", i18n("Date/time"),
                       QVariant::DateTime );
 
-  item = addItemInfo( exifGroup, "Resolution", i18n("Resolution"),
+  item = addItemInfo( exifGroup, "Dimensions", i18n("Dimensions"),
                       QVariant::Size );
   setHint( item, KFileMimeTypeInfo::Size );
   setUnit( item, KFileMimeTypeInfo::Pixels );
@@ -82,7 +82,7 @@ KJpegPlugin::KJpegPlugin(QObject *parent, const char *name,
   item = addItemInfo( exifGroup, "Orientation", i18n("Orientation"),
                       QVariant::Int );
 
-  item = addItemInfo( exifGroup, "Color mode", i18n("Color mode"),
+  item = addItemInfo( exifGroup, "ColorMode", i18n("Color mode"),
                       QVariant::String );
 
   item = addItemInfo( exifGroup, "Flash used", i18n("Flash used"),
@@ -217,13 +217,13 @@ bool KJpegPlugin::readInfo( KFileMetaInfo& info, uint what )
             appendItem( exifGroup, "Date/time", dt );
     }
 
-    appendItem( exifGroup,"Resolution", QSize( ImageInfo.getWidth(),
+    appendItem( exifGroup,"Dimensions", QSize( ImageInfo.getWidth(),
                                                ImageInfo.getHeight() ) );
 
     if ( ImageInfo.getOrientation() )
         appendItem( exifGroup, "Orientation", ImageInfo.getOrientation() );
 
-    appendItem( exifGroup, "Color mode", ImageInfo.getIsColor() ?
+    appendItem( exifGroup, "ColorMode", ImageInfo.getIsColor() ?
                 i18n("Color") : i18n("Black and white") );
     appendItem( exifGroup, "Flash used",
                 QVariant((ImageInfo.getFlashUsed() >= 0), 42 ) );

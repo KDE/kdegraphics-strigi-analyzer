@@ -46,7 +46,7 @@ K_EXPORT_COMPONENT_FACTORY(kfile_tga, TgaFactory( "kfile_tga" ));
 
 KTgaPlugin::KTgaPlugin(QObject *parent, const char *name,
                        const QStringList &args)
-    
+
     : KFilePlugin(parent, name, args)
 {
     KFileMimeTypeInfo* info = addMimeTypeInfo( "image/x-targa" );
@@ -57,12 +57,14 @@ KTgaPlugin::KTgaPlugin(QObject *parent, const char *name,
 
     KFileMimeTypeInfo::ItemInfo* item;
 
-    item = addItemInfo(group, "Resolution", i18n("Resolution"), QVariant::Size);
+    item = addItemInfo(group, "Dimensions", i18n("Dimensions"), QVariant::Size);
+    setHint( item, KFileMimeTypeInfo::Size );
+    setUnit(item, KFileMimeTypeInfo::Pixels);
 
-    item = addItemInfo(group, "Bitdepth", i18n("Bit Depth"), QVariant::Int);
-    setSuffix(item, "bpp");
+    item = addItemInfo(group, "BitDepth", i18n("Bit Depth"), QVariant::Int);
+    setUnit(item, KFileMimeTypeInfo::BitsPerPixel);
 
-    item = addItemInfo(group, "Color mode", i18n("Color mode"), QVariant::String);
+    item = addItemInfo(group, "ColorMode", i18n("Color mode"), QVariant::String);
     item = addItemInfo(group, "Compression", i18n("Compression"), QVariant::String);
 
 }
@@ -84,7 +86,7 @@ bool KTgaPlugin::readInfo( KFileMetaInfo& info, uint what)
     // TGA files are little-endian
     dstream.setByteOrder(QDataStream::LittleEndian);
 
-    // the vars for the image data 
+    // the vars for the image data
     uint8_t  tga_idlength;
     uint8_t  tga_colormaptype;
     uint8_t  tga_imagetype;
@@ -114,26 +116,26 @@ bool KTgaPlugin::readInfo( KFileMetaInfo& info, uint what)
 
     // output the useful bits
     KFileMetaInfoGroup group = appendGroup(info, "Technical");
-    appendItem(group, "Resolution", QSize(tga_imagespec_width, tga_imagespec_height));
-    appendItem(group, "Bitdepth", tga_imagespec_depth);
+    appendItem(group, "Dimensions", QSize(tga_imagespec_width, tga_imagespec_height));
+    appendItem(group, "BitDepth", tga_imagespec_depth);
 
     switch (tga_imagetype) {
-    case 1 : 
+    case 1 :
     case 9 :
     case 32 :
-        appendItem(group, "Color mode", i18n("Color-mapped"));
+        appendItem(group, "ColorMode", i18n("Color-mapped"));
         break;
     case 2 :
     case 10 :
     case 33 :
-        appendItem(group, "Color mode", i18n("RGB"));
+        appendItem(group, "ColorMode", i18n("RGB"));
         break;
     case 3 :
     case 11 :
-        appendItem(group, "Color mode", i18n("Black and white"));
+        appendItem(group, "ColorMode", i18n("Black and white"));
         break;
     default :
-        appendItem(group, "Color mode", i18n("Unknown"));
+        appendItem(group, "ColorMode", i18n("Unknown"));
     }
 
     switch (tga_imagetype) {

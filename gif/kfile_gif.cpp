@@ -47,7 +47,7 @@ KGifPlugin::KGifPlugin(QObject *parent, const char *name,
     : KFilePlugin(parent, name, args)
 {
     kdDebug(7034) << "gif KFileMetaInfo plugin\n";
-    
+
     KFileMimeTypeInfo* info = addMimeTypeInfo( "image/gif" );
 
     KFileMimeTypeInfo::GroupInfo* group = 0L;
@@ -60,7 +60,9 @@ KGifPlugin::KGifPlugin(QObject *parent, const char *name,
     setAttributes(item, KFileMimeTypeInfo::Modifiable);
     setHint(item,  KFileMimeTypeInfo::Description);
 
-    addItemInfo(group, "Resolution", i18n("Resolution"), QVariant::Int);
+    item = addItemInfo(group, "Dimensions", i18n("Dimensions"), QVariant::Size);
+    setHint( item, KFileMimeTypeInfo::Size );
+    setUnit(item, KFileMimeTypeInfo::Pixels);
 }
 
 QValidator* KGifPlugin::createValidator( const QString& mimetype,
@@ -117,7 +119,7 @@ bool KGifPlugin::readInfo( KFileMetaInfo& info, uint what )
 
     tag = "unknown x unknown";
     if (tag.length()) {
-    	appendItem(group, "Resolution", QSize(123,456));
+        KFileMetaInfoItem item = appendItem(group, "Dimensions", QSize(123,456));
     }
 
   //DiscardData();

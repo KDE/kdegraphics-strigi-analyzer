@@ -46,36 +46,34 @@ KTiffPlugin::KTiffPlugin(QObject *parent, const char *name,
             addGroupInfo(info, "General", i18n("General"));
 
     KFileMimeTypeInfo::ItemInfo* item;
-    item = addItemInfo(group, "Description", i18n("Description"), 
+    item = addItemInfo(group, "Description", i18n("Description"),
             QVariant::String);
     setHint(item, KFileMimeTypeInfo::Description);
-    item = addItemInfo(group, "Copyright", i18n("Copyright"), 
+    item = addItemInfo(group, "Copyright", i18n("Copyright"),
             QVariant::String);
-    item = addItemInfo(group, "ColorMode", i18n("Color mode"), 
+    item = addItemInfo(group, "ColorMode", i18n("Color mode"),
             QVariant::String);
-    item = addItemInfo(group, "Dimensions", i18n("Dimensions"), 
+    item = addItemInfo(group, "Dimensions", i18n("Dimensions"),
             QVariant::Size);
     setHint(item, KFileMimeTypeInfo::Size);
     setUnit(item, KFileMimeTypeInfo::Pixels);
-    setSuffix(item, i18n(" pixels"));
-    item = addItemInfo(group, "Resolution", i18n("Resolution"), 
+    item = addItemInfo(group, "Resolution", i18n("Resolution"),
             QVariant::Size);
     setUnit(item, KFileMimeTypeInfo::DotsPerInch);
     setSuffix(item, i18n(" dpi"));
-    item = addItemInfo(group, "BitDepth", i18n("Bit depth"), 
+    item = addItemInfo(group, "BitDepth", i18n("Bit depth"),
             QVariant::Int);
     setUnit(item, KFileMimeTypeInfo::BitsPerPixel);
-    setSuffix(item, i18n(" bpp"));
-    item = addItemInfo(group, "Compression", i18n("Compression"), 
+    item = addItemInfo(group, "Compression", i18n("Compression"),
             QVariant::String);
-    item = addItemInfo(group, "Software", i18n("Software"), 
+    item = addItemInfo(group, "Software", i18n("Software"),
             QVariant::String);
-    item = addItemInfo(group, "DateTime", i18n("Date/time"), 
+    item = addItemInfo(group, "DateTime", i18n("Date/time"),
             QVariant::DateTime);
-    item = addItemInfo(group, "Artist", i18n("Artist"), 
+    item = addItemInfo(group, "Artist", i18n("Artist"),
             QVariant::String);
     setHint(item, KFileMimeTypeInfo::Author);
-    item = addItemInfo(group, "FaxPages", i18n("Fax pages"), 
+    item = addItemInfo(group, "FaxPages", i18n("Fax pages"),
             QVariant::Int);
 
     group = addGroupInfo(info, "Scanner", i18n("Scanner"));
@@ -86,78 +84,78 @@ KTiffPlugin::KTiffPlugin(QObject *parent, const char *name,
     m_colorMode.setAutoDelete(true);
     m_imageCompression.setAutoDelete(true);
 
-    m_colorMode.insert(PHOTOMETRIC_MINISWHITE, 
+    m_colorMode.insert(PHOTOMETRIC_MINISWHITE,
                 new QString(I18N_NOOP("Monochrome")));
-    m_colorMode.insert(PHOTOMETRIC_MINISBLACK, 
+    m_colorMode.insert(PHOTOMETRIC_MINISBLACK,
                 new QString(I18N_NOOP("Monochrome")));
-    m_colorMode.insert(PHOTOMETRIC_RGB, 
+    m_colorMode.insert(PHOTOMETRIC_RGB,
                 new QString(I18N_NOOP("RGB")));
-    m_colorMode.insert(PHOTOMETRIC_PALETTE, 
+    m_colorMode.insert(PHOTOMETRIC_PALETTE,
                 new QString(I18N_NOOP("Palette color")));
-    m_colorMode.insert(PHOTOMETRIC_MASK, 
+    m_colorMode.insert(PHOTOMETRIC_MASK,
                 new QString(I18N_NOOP("Transparency mask")));
-    m_colorMode.insert(PHOTOMETRIC_SEPARATED, 
+    m_colorMode.insert(PHOTOMETRIC_SEPARATED,
                 new QString(I18N_NOOP("Color separations")));
-    m_colorMode.insert(PHOTOMETRIC_YCBCR, 
+    m_colorMode.insert(PHOTOMETRIC_YCBCR,
                 new QString(I18N_NOOP("YCbCr")));
-    m_colorMode.insert(PHOTOMETRIC_CIELAB, 
+    m_colorMode.insert(PHOTOMETRIC_CIELAB,
                 new QString(I18N_NOOP("CIE Lab")));
 #ifdef PHOTOMETRIC_ITULAB
-    m_colorMode.insert(PHOTOMETRIC_ITULAB, 
+    m_colorMode.insert(PHOTOMETRIC_ITULAB,
                 new QString(I18N_NOOP("ITU Lab")));
 #endif
-    m_colorMode.insert(PHOTOMETRIC_LOGL, 
+    m_colorMode.insert(PHOTOMETRIC_LOGL,
                 new QString(I18N_NOOP("LOGL")));
-    m_colorMode.insert(PHOTOMETRIC_LOGLUV, 
+    m_colorMode.insert(PHOTOMETRIC_LOGLUV,
                 new QString(I18N_NOOP("LOGLUV")));
 
-    m_imageCompression.insert(COMPRESSION_NONE, 
+    m_imageCompression.insert(COMPRESSION_NONE,
                 new QString(I18N_NOOP("None")));
-    m_imageCompression.insert(COMPRESSION_CCITTRLE, 
+    m_imageCompression.insert(COMPRESSION_CCITTRLE,
                 new QString(I18N_NOOP("RLE")));
-    m_imageCompression.insert(COMPRESSION_CCITTFAX3, 
+    m_imageCompression.insert(COMPRESSION_CCITTFAX3,
                 new QString(I18N_NOOP("G3 Fax")));
-    m_imageCompression.insert(COMPRESSION_CCITTFAX4, 
+    m_imageCompression.insert(COMPRESSION_CCITTFAX4,
                 new QString(I18N_NOOP("G4 Fax")));
-    m_imageCompression.insert(COMPRESSION_LZW, 
+    m_imageCompression.insert(COMPRESSION_LZW,
                 new QString(I18N_NOOP("LZW")));
-    m_imageCompression.insert(COMPRESSION_OJPEG, 
+    m_imageCompression.insert(COMPRESSION_OJPEG,
                 new QString(I18N_NOOP("JPEG")));
-    m_imageCompression.insert(COMPRESSION_JPEG, 
+    m_imageCompression.insert(COMPRESSION_JPEG,
                 new QString(I18N_NOOP("JPEG DCT")));
 #ifdef COMPRESSION_ADOBE_DEFLATE
-    m_imageCompression.insert(COMPRESSION_ADOBE_DEFLATE, 
+    m_imageCompression.insert(COMPRESSION_ADOBE_DEFLATE,
                 new QString(I18N_NOOP("Adobe Deflate")));
 #endif
-    m_imageCompression.insert(COMPRESSION_NEXT, 
+    m_imageCompression.insert(COMPRESSION_NEXT,
                 new QString(I18N_NOOP("NeXT 2-bit RLE")));
-    m_imageCompression.insert(COMPRESSION_CCITTRLEW, 
+    m_imageCompression.insert(COMPRESSION_CCITTRLEW,
                 new QString(I18N_NOOP("RLE Word")));
-    m_imageCompression.insert(COMPRESSION_PACKBITS, 
+    m_imageCompression.insert(COMPRESSION_PACKBITS,
                 new QString(I18N_NOOP("Packbits")));
-    m_imageCompression.insert(COMPRESSION_THUNDERSCAN, 
+    m_imageCompression.insert(COMPRESSION_THUNDERSCAN,
                 new QString(I18N_NOOP("Thunderscan RLE")));
-    m_imageCompression.insert(COMPRESSION_IT8CTPAD, 
+    m_imageCompression.insert(COMPRESSION_IT8CTPAD,
                 new QString(I18N_NOOP("IT8 CT w/padding")));
-    m_imageCompression.insert(COMPRESSION_IT8LW, 
+    m_imageCompression.insert(COMPRESSION_IT8LW,
                 new QString(I18N_NOOP("IT8 linework RLE")));
-    m_imageCompression.insert(COMPRESSION_IT8MP, 
+    m_imageCompression.insert(COMPRESSION_IT8MP,
                 new QString(I18N_NOOP("IT8 monochrome")));
-    m_imageCompression.insert(COMPRESSION_IT8BL, 
+    m_imageCompression.insert(COMPRESSION_IT8BL,
                 new QString(I18N_NOOP("IT8 binary lineart")));
-    m_imageCompression.insert(COMPRESSION_PIXARFILM, 
+    m_imageCompression.insert(COMPRESSION_PIXARFILM,
                 new QString(I18N_NOOP("Pixar 10-bit LZW")));
-    m_imageCompression.insert(COMPRESSION_PIXARLOG, 
+    m_imageCompression.insert(COMPRESSION_PIXARLOG,
                 new QString(I18N_NOOP("Pixar 11-bit ZIP")));
-    m_imageCompression.insert(COMPRESSION_DEFLATE, 
+    m_imageCompression.insert(COMPRESSION_DEFLATE,
                 new QString(I18N_NOOP("Pixar deflate")));
-    m_imageCompression.insert(COMPRESSION_DCS, 
+    m_imageCompression.insert(COMPRESSION_DCS,
                 new QString(I18N_NOOP("Kodak DCS")));
-    m_imageCompression.insert(COMPRESSION_JBIG, 
+    m_imageCompression.insert(COMPRESSION_JBIG,
                 new QString(I18N_NOOP("ISO JBIG")));
-    m_imageCompression.insert(COMPRESSION_SGILOG, 
+    m_imageCompression.insert(COMPRESSION_SGILOG,
                 new QString(I18N_NOOP("SGI log luminance RLE")));
-    m_imageCompression.insert(COMPRESSION_SGILOG24, 
+    m_imageCompression.insert(COMPRESSION_SGILOG24,
                 new QString(I18N_NOOP("SGI log 24-bit packed")));
 }
 
@@ -197,7 +195,7 @@ bool KTiffPlugin::readInfo(KFileMetaInfo& info, uint)
 
     uint32 imageLength=0, imageWidth=0;
     uint16 bitsPerSample=0, imageCompression=0, colorMode=0, samplesPerPixel=0,
-        imageAlpha=0, imageResUnit=0, dummy=0, faxPages=0; 
+        imageAlpha=0, imageResUnit=0, dummy=0, faxPages=0;
     float imageXResolution=0, imageYResolution=0;
     char *description=0, *copyright=0, *software=0, *datetime=0, *artist=0,
         *scannerMake=0, *scannerModel=0;
@@ -262,7 +260,7 @@ bool KTiffPlugin::readInfo(KFileMetaInfo& info, uint)
     appendItem(group, "BitDepth", imageBpp);
     if (imageXResolution>0 && imageYResolution>0)
         appendItem(group, "Resolution", QSize(
-                static_cast<int>(imageXResolution), 
+                static_cast<int>(imageXResolution),
                 static_cast<int>(imageYResolution)));
     if (m_colorMode[colorMode])
         appendItem(group, "ColorMode", *m_colorMode[colorMode]);

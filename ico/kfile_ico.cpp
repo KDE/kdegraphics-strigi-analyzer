@@ -46,7 +46,7 @@ K_EXPORT_COMPONENT_FACTORY(kfile_ico, IcoFactory( "kfile_ico" ));
 
 KIcoPlugin::KIcoPlugin(QObject *parent, const char *name,
                        const QStringList &args)
-    
+
     : KFilePlugin(parent, name, args)
 {
     KFileMimeTypeInfo* info = addMimeTypeInfo( "image/x-ico" );
@@ -58,13 +58,12 @@ KIcoPlugin::KIcoPlugin(QObject *parent, const char *name,
     KFileMimeTypeInfo::ItemInfo* item;
 
     item = addItemInfo(group, "Number", i18n("Number of Icons"), QVariant::Int);
-    
-    item = addItemInfo(group, "Resolution", i18n("Resolution"), QVariant::Size);
+
+    item = addItemInfo(group, "Dimensions", i18n("Dimensions"), QVariant::Size);
     item = addItemInfo(group, "Colors", i18n("Colors"), QVariant::Int);
 
-    item = addItemInfo(group, "ResolutionM", i18n("Resolution (1st icon)"), QVariant::Size);
+    item = addItemInfo(group, "DimensionsM", i18n("Dimensions (1st icon)"), QVariant::Size);
     item = addItemInfo(group, "ColorsM", i18n("Colors (1st icon)"), QVariant::Int);
-
 }
 
 
@@ -85,7 +84,7 @@ bool KIcoPlugin::readInfo( KFileMetaInfo& info, uint what)
     // ICO files are little-endian
     dstream.setByteOrder(QDataStream::LittleEndian);
 
-    
+
     // read the beginning of the file and make sure it looks ok
     uint16_t ico_reserved;
     uint16_t ico_type;
@@ -98,7 +97,7 @@ bool KIcoPlugin::readInfo( KFileMetaInfo& info, uint what)
     if ((ico_reserved != 0) || (ico_type != 1) || (ico_count < 1))
         return false;
 
-    
+
     // now loop through each of the icon entries
     uint8_t icoe_width;
     uint8_t icoe_height;
@@ -119,13 +118,13 @@ bool KIcoPlugin::readInfo( KFileMetaInfo& info, uint what)
     dstream >> icoe_bytesinres;
     dstream >> icoe_imageoffset;
 
-    
+
     // output the useful bits
     KFileMetaInfoGroup group = appendGroup(info, "Technical");
     appendItem(group, "Number", ico_count);
-    
+
     if (ico_count == 1) {
-        appendItem(group, "Resolution", QSize(icoe_width, icoe_height));
+        appendItem(group, "Dimensions", QSize(icoe_width, icoe_height));
 
         if (icoe_colorcount > 0)
             appendItem(group, "Colors", icoe_colorcount);
@@ -134,7 +133,7 @@ bool KIcoPlugin::readInfo( KFileMetaInfo& info, uint what)
 
     } else {
 
-        appendItem(group, "ResolutionM", QSize(icoe_width, icoe_height));
+        appendItem(group, "DimensionsM", QSize(icoe_width, icoe_height));
 
         if (icoe_colorcount > 0)
             appendItem(group, "ColorsM", icoe_colorcount);
