@@ -67,7 +67,7 @@ KJpegPlugin::KJpegPlugin(QObject *parent, const char *name,
   item = addItemInfo( exifGroup, "Manufacturer", i18n("Camera Manufacturer"),
                       QVariant::String );
 
-  item = addItemInfo( exifGroup, "Model", i18n("Camera model"),
+  item = addItemInfo( exifGroup, "Model", i18n("Camera Model"),
                       QVariant::String );
 
   item = addItemInfo( exifGroup, "Date/time", i18n("Date/Time"),
@@ -242,7 +242,7 @@ bool KJpegPlugin::readInfo( KFileMetaInfo& info, uint what )
 
     appendItem( exifGroup, "ColorMode", ImageInfo.getIsColor() ?
                 i18n("Color") : i18n("Black and white") );
-    
+
     int flashUsed = ImageInfo.getFlashUsed(); // -1, 0, 1
     if ( flashUsed >= 0 ) {
         appendItem( exifGroup, "Flash used",
