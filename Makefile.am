@@ -1,2 +1,2 @@
-SUBDIRS=pdf png ps 
-#jpeg gif
+SUBDIRS=pdf png ps jpeg 
+# gif
