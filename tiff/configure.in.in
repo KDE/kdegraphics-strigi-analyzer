@@ -1,7 +1,3 @@
 # Compile the tiff meta info plugin only if libtiff was detected
-if test -n "$LIBTIFF";
-then
-  KFILE_TIFF_SUBDIR='tiff'
-  AC_SUBST(KFILE_TIFF_SUBDIR)
-fi
+AM_CONDITIONAL(include_TIFF, test -n "$LIBTIFF")
 
