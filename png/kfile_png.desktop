@@ -1,6 +1,23 @@
 [Desktop Entry]
+Encoding=UTF-8
 Type=Service
 Name=PNG Info
+Name[af]=png inligting
+Name[ar]=معلومات PNG
+Name[da]=PNG-info
+Name[de]=PNG-Info
+Name[es]=Info PNG
+Name[fi]=PNG tiedot
+Name[fr]=Informations PNG
+Name[he]=מידע PNG
+Name[hu]=PNG-jellemzők
+Name[lt]=PNG informacija
+Name[nn]=PNG-info
+Name[pt]=Informação do PNG
+Name[pt_BR]=Informação do PNG
+Name[sl]=PNG informacije
+Name[sv]=PNG-information
+Name[xx]=xx
 ServiceTypes=KFilePlugin
 X-KDE-Library=kfile_png
 MimeType=image/png

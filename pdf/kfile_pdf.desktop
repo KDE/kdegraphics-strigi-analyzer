@@ -1,6 +1,23 @@
 [Desktop Entry]
+Encoding=UTF-8
 Type=Service
 Name=PDF Info
+Name[af]=pdf inligting
+Name[ar]=معلومات PDF
+Name[da]=PDF-info
+Name[de]=PDF-Info
+Name[es]=Info PDF
+Name[fi]=PDF tiedot
+Name[fr]=Informations PDF
+Name[he]=מידע PDF
+Name[hu]=PDF-jellemzők
+Name[lt]=PDF informacija
+Name[nn]=PDF-info
+Name[pt]=Informação do PDF
+Name[pt_BR]=Informação do PDF
+Name[sl]=PDF informacije
+Name[sv]=PDF-information
+Name[xx]=xx
 ServiceTypes=KFilePlugin
 X-KDE-Library=kfile_pdf
 MimeType=application/pdf
