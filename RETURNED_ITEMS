@@ -216,9 +216,9 @@ rgb plugin:
 
 type       key                        details
 ------------------------------------------------------------------------
+String     ImageName                  Image name (or comment)
 QSize      Dimensions                 Dimensions in pixels
 Int        BitDepth                   Bits per pixel
 String     ColorMode                  Color Mode (Monochrome, RGB, RGBA etc)
 String     Compression                Compression type
-String     ImageName                  Image name
 

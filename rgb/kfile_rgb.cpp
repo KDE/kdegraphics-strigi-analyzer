@@ -21,9 +21,10 @@
 #include "kfile_rgb.h"
 
 #include <qfile.h>
+#include <qvalidator.h>
 
-#include <kgenericfactory.h>
 #include <kdebug.h>
+#include <kgenericfactory.h>
 
 
 typedef KGenericFactory<KRgbPlugin> RgbFactory;
@@ -37,9 +38,17 @@ KRgbPlugin::KRgbPlugin(QObject *parent, const char *name, const QStringList &arg
 	KFileMimeTypeInfo* info = addMimeTypeInfo("image/x-rgb");
 
 	KFileMimeTypeInfo::GroupInfo* group = 0;
-	group = addGroupInfo(info, "Technical", i18n("Technical Details"));
-
 	KFileMimeTypeInfo::ItemInfo* item;
+
+
+	group = addGroupInfo(info, "Comment", i18n("Comment"));
+
+	item = addItemInfo(group, "ImageName", i18n("Name"), QVariant::String);
+	setAttributes(item, KFileMimeTypeInfo::Modifiable);
+	setHint(item, KFileMimeTypeInfo::Description);
+
+
+	group = addGroupInfo(info, "Technical", i18n("Technical Details"));
 
 	item = addItemInfo(group, "Dimensions", i18n("Dimensions"), QVariant::Size);
 	setHint(item, KFileMimeTypeInfo::Size);
@@ -50,7 +59,7 @@ KRgbPlugin::KRgbPlugin(QObject *parent, const char *name, const QStringList &arg
 
 	item = addItemInfo(group, "ColorMode", i18n("Color mode"), QVariant::String);
 	item = addItemInfo(group, "Compression", i18n("Compression"), QVariant::String);
-	item = addItemInfo(group, "ImageName", i18n("Name"), QVariant::String);
+
 }
 
 
@@ -95,7 +104,9 @@ bool KRgbPlugin::readInfo(KFileMetaInfo& info, uint /*what*/)
 	if (magic != 474)
 		return false;
 
-	KFileMetaInfoGroup group = appendGroup(info, "Technical");
+	KFileMetaInfoGroup group;
+
+	group = appendGroup(info, "Technical");
 
 	if (dimension == 1)
 		ysize = 1;
@@ -120,9 +131,49 @@ bool KRgbPlugin::readInfo(KFileMetaInfo& info, uint /*what*/)
 	else
 		appendItem(group, "Compression", i18n("Unknown"));
 
-	if (imagename[0])
-		appendItem(group, "ImageName", imagename);
+
+	group = appendGroup(info, "Comment");
+	appendItem(group, "ImageName", imagename);
+
+	file.close();
 	return true;
 }
+
+
+bool KRgbPlugin::writeInfo(const KFileMetaInfo& info) const
+{
+	QFile file(info.path());
+
+	if (!file.open(IO_WriteOnly|IO_Raw)) {
+		kdDebug(7034) << "couldn't open " << QFile::encodeName(info.path()) << endl;
+		return false;
+	}
+
+	if (!file.at(24)) {
+		kdDebug(7034) << "couldn't set offset" << endl;
+		return false;
+	}
+
+	QDataStream dstream(&file);
+	QString s = info["Comment"]["ImageName"].value().toString();
+	s.truncate(79);
+
+	unsigned i;
+	for (i = 0; i < s.length(); i++)
+		dstream << Q_UINT8(s.latin1()[i]);
+	for (; i < 80; i++)
+		dstream << Q_UINT8(0);
+
+	file.close();
+	return true;
+}
+
+
+QValidator* KRgbPlugin::createValidator(const QString&, const QString &,
+		const QString &, QObject* parent, const char* name) const
+{
+	return new QRegExpValidator(QRegExp("[\x0020-\x007E]{79}"), parent, name);
+}
+
 
 #include "kfile_rgb.moc"
