@@ -54,7 +54,7 @@ void KPnmPlugin::makeMimeTypeInfo(const QString& mimetype)
 	item = addItemInfo(group, "Dimensions", i18n("Dimensions"), QVariant::Size);
 	setUnit(item, KFileMimeTypeInfo::Pixels);
 
-	item = addItemInfo(group, "BitDepth", i18n("Bit depth"), QVariant::Int);
+	item = addItemInfo(group, "BitDepth", i18n("Bit Depth"), QVariant::Int);
 	setUnit(item, KFileMimeTypeInfo::BitsPerPixel);
 
 	addItemInfo(group, "Comment", i18n("Comment"), QVariant::String);

@@ -43,7 +43,7 @@ KPSPlugin::KPSPlugin(QObject *parent, const char *name,
     KFileMimeTypeInfo::GroupInfo* group = addGroupInfo(info, "General", i18n("General"));
     addItemInfo(group, "Title", i18n("Title"), QVariant::String);
     addItemInfo(group, "Creator", i18n("Creator"), QVariant::String);
-    addItemInfo(group, "CreationDate", i18n("Creation date"), QVariant::String);
+    addItemInfo(group, "CreationDate", i18n("Creation Date"), QVariant::String);
     addItemInfo(group, "For", i18n("For"), QVariant::String);
     addItemInfo(group, "Pages", i18n("Pages"), QVariant::UInt);
 }

@@ -70,7 +70,7 @@ KPcxPlugin::KPcxPlugin( QObject *parent, const char *name,
       QVariant::Size );
   setHint( item, KFileMimeTypeInfo::Size );
   setUnit( item, KFileMimeTypeInfo::Pixels );
-  item = addItemInfo( group, "BitDepth", i18n( "Bit depth" ),
+  item = addItemInfo( group, "BitDepth", i18n( "Bit Depth" ),
       QVariant::Int );
   setUnit( item, KFileMimeTypeInfo::BitsPerPixel );
   item = addItemInfo( group, "Resolution", i18n( "Resolution" ),

@@ -109,12 +109,12 @@ KPngPlugin::KPngPlugin(QObject *parent, const char *name,
     setHint( item, KFileMimeTypeInfo::Size );
     setUnit(item, KFileMimeTypeInfo::Pixels);
 
-    item = addItemInfo(group, "BitDepth", i18n("Bit depth"), QVariant::Int);
+    item = addItemInfo(group, "BitDepth", i18n("Bit Depth"), QVariant::Int);
     setUnit(item, KFileMimeTypeInfo::BitsPerPixel);
 
-    addItemInfo(group, "ColorMode", i18n("Color mode"), QVariant::String);
+    addItemInfo(group, "ColorMode", i18n("Color Mode"), QVariant::String);
     addItemInfo(group, "Compression", i18n("Compression"), QVariant::String);
-    addItemInfo(group, "InterlaceMode", i18n("Interlace mode"),QVariant::String);
+    addItemInfo(group, "InterlaceMode", i18n("Interlace Mode"),QVariant::String);
 }
 
 bool KPngPlugin::readInfo( KFileMetaInfo& info, uint what)

@@ -49,7 +49,7 @@ KTiffPlugin::KTiffPlugin(QObject *parent, const char *name,
     setHint(item, KFileMimeTypeInfo::Description);
     item = addItemInfo(group, "Copyright", i18n("Copyright"),
             QVariant::String);
-    item = addItemInfo(group, "ColorMode", i18n("Color mode"),
+    item = addItemInfo(group, "ColorMode", i18n("Color Mode"),
             QVariant::String);
     item = addItemInfo(group, "Dimensions", i18n("Dimensions"),
             QVariant::Size);
@@ -58,19 +58,19 @@ KTiffPlugin::KTiffPlugin(QObject *parent, const char *name,
     item = addItemInfo(group, "Resolution", i18n("Resolution"),
             QVariant::Size);
     setUnit(item, KFileMimeTypeInfo::DotsPerInch);
-    item = addItemInfo(group, "BitDepth", i18n("Bit depth"),
+    item = addItemInfo(group, "BitDepth", i18n("Bit Depth"),
             QVariant::Int);
     setUnit(item, KFileMimeTypeInfo::BitsPerPixel);
     item = addItemInfo(group, "Compression", i18n("Compression"),
             QVariant::String);
     item = addItemInfo(group, "Software", i18n("Software"),
             QVariant::String);
-    item = addItemInfo(group, "DateTime", i18n("Date/time"),
+    item = addItemInfo(group, "DateTime", i18n("Date/Dime"),
             QVariant::DateTime);
     item = addItemInfo(group, "Artist", i18n("Artist"),
             QVariant::String);
     setHint(item, KFileMimeTypeInfo::Author);
-    item = addItemInfo(group, "FaxPages", i18n("Fax pages"),
+    item = addItemInfo(group, "FaxPages", i18n("Fax Pages"),
             QVariant::Int);
 
     group = addGroupInfo(info, "Scanner", i18n("Scanner"));

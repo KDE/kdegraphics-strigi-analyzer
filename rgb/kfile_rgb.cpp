@@ -57,11 +57,11 @@ KRgbPlugin::KRgbPlugin(QObject *parent, const char *name, const QStringList &arg
 	item = addItemInfo(group, "BitDepth", i18n("Bit Depth"), QVariant::Int);
 	setUnit(item, KFileMimeTypeInfo::BitsPerPixel);
 
-	item = addItemInfo(group, "ColorMode", i18n("Color mode"), QVariant::String);
+	item = addItemInfo(group, "ColorMode", i18n("Color Mode"), QVariant::String);
 	item = addItemInfo(group, "Compression", i18n("Compression"), QVariant::String);
 	item = addItemInfo(group, "SharedRows",
 			i18n("percentage of avoided vertical redundancy (the higher the better)",
-			"Shared rows"), QVariant::String);
+			"Shared Rows"), QVariant::String);
 
 }
 
@@ -133,7 +133,7 @@ bool KRgbPlugin::readInfo(KFileMetaInfo& info, uint /*what*/)
 	else if (storage == 1) {
 		long compressed = file.size() - 512;
 		long verbatim = xsize * ysize * zsize;
-		appendItem(group, "Compression", i18n("Runlength encoded")
+		appendItem(group, "Compression", i18n("Runlength Encoded")
 				+ QString(", %1%").arg(compressed * 100.0 / verbatim, 0, 'f', 1));
 
 		long k;

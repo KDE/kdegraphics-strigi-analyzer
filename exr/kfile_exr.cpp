@@ -72,12 +72,12 @@ KExrPlugin::KExrPlugin(QObject *parent, const char *name,
 	// info group
     group = addGroupInfo( info, "Info", i18n("Information") );
     addItemInfo( group, "Version", i18n("Format Version"), QVariant::Int );
-    addItemInfo( group, "Tiled image", i18n("Tiled image"), QVariant::String );
+    addItemInfo( group, "Tiled image", i18n("Tiled Image"), QVariant::String );
 	item = addItemInfo( group, "Dimensions", i18n("Dimensions"), QVariant::Size );
 	setHint( item, KFileMimeTypeInfo::Size );
 	setUnit( item, KFileMimeTypeInfo::Pixels );
 	item = addItemInfo( group, "ThumbnailDimensions",
-						i18n("Thumbnail dimensions"), QVariant::Size );
+						i18n("Thumbnail Dimensions"), QVariant::Size );
 	setHint( item, KFileMimeTypeInfo::Size );
 	setUnit( item, KFileMimeTypeInfo::Pixels );
 	addItemInfo( group, "Comment", i18n("Comment"), QVariant::String );
@@ -90,19 +90,19 @@ KExrPlugin::KExrPlugin(QObject *parent, const char *name,
 	addItemInfo( group, "Comments", i18n("Comments"), QVariant::String );
 	addItemInfo( group, "Capture Date", i18n("Capture Date"), QVariant::String );
 	item = addItemInfo( group, "UTC Offset", i18n("UTC Offset"), QVariant::String );
-	item = addItemInfo( group, "Exposure time", i18n("Exposure time"), QVariant::Double);
+	item = addItemInfo( group, "Exposure time", i18n("Exposure Time"), QVariant::Double);
 	setUnit( item, KFileMimeTypeInfo::Seconds );
 	item = addItemInfo( group, "Focus", i18n("Focus"), QVariant::Double);
 	setSuffix( item, i18n("Metres", "m") );
 	item = addItemInfo( group, "X Density", i18n("X Density"), QVariant::Double);
 	setSuffix( item, i18n("Pixels Per Inch", " ppi") );
-	item = addItemInfo( group, "White luminance", i18n("White luminance"), QVariant::Double);
+	item = addItemInfo( group, "White luminance", i18n("White Luminance"), QVariant::Double);
 	setSuffix( item, i18n("Candelas per square metre", " Nits") );
 	addItemInfo( group, "Longitude", i18n("Longitude"), QVariant::String );
 	addItemInfo( group, "Latitude", i18n("Latitude"), QVariant::String );
 	item = 	addItemInfo( group, "Altitude", i18n("Altitude"), QVariant::String );
 	setSuffix( item, i18n("Metres", "m") );
-	addItemInfo( group, "ISO speed", i18n("ISO speed"), QVariant::Double );
+	addItemInfo( group, "ISO speed", i18n("ISO Speed"), QVariant::Double );
 	addItemInfo( group, "Aperture", i18n("Aperture"), QVariant::Double );
 
     // channel group
@@ -135,11 +135,11 @@ KExrPlugin::KExrPlugin(QObject *parent, const char *name,
     // 3dsMax group
 	// This supports a special plugin for 3D Studio Max
     group = addGroupInfo( info, "3dsMax", i18n("3dsMax Details") );
-    addItemInfo( group, "Local time", i18n("Local time"), QVariant::String );
-    addItemInfo( group, "System time", i18n("System time"), QVariant::String );
-    addItemInfo( group, "Plugin version", i18n("Plugin version"), QVariant::String );
-    addItemInfo( group, "EXR version", i18n("EXR version"), QVariant::String );
-    addItemInfo( group, "Computer name", i18n("Computer name"), QVariant::String );
+    addItemInfo( group, "Local time", i18n("Local Time"), QVariant::String );
+    addItemInfo( group, "System time", i18n("System Time"), QVariant::String );
+    addItemInfo( group, "Plugin version", i18n("Plugin Version"), QVariant::String );
+    addItemInfo( group, "EXR version", i18n("EXR Version"), QVariant::String );
+    addItemInfo( group, "Computer name", i18n("Computer Name"), QVariant::String );
 }
 
 QCString doType( PixelType pt )

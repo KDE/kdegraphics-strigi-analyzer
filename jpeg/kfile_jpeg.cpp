@@ -64,13 +64,13 @@ KJpegPlugin::KJpegPlugin(QObject *parent, const char *name,
                  KFileMimeTypeInfo::Addable |
                  KFileMimeTypeInfo::MultiLine );
 
-  item = addItemInfo( exifGroup, "Manufacturer", i18n("Camera manufacturer"),
+  item = addItemInfo( exifGroup, "Manufacturer", i18n("Camera Manufacturer"),
                       QVariant::String );
 
   item = addItemInfo( exifGroup, "Model", i18n("Camera model"),
                       QVariant::String );
 
-  item = addItemInfo( exifGroup, "Date/time", i18n("Date/time"),
+  item = addItemInfo( exifGroup, "Date/time", i18n("Date/Time"),
                       QVariant::DateTime );
 
   item = addItemInfo( exifGroup, "CreationDate", i18n("Creation Date"),
@@ -87,56 +87,56 @@ KJpegPlugin::KJpegPlugin(QObject *parent, const char *name,
   item = addItemInfo( exifGroup, "Orientation", i18n("Orientation"),
                       QVariant::Int );
 
-  item = addItemInfo( exifGroup, "ColorMode", i18n("Color mode"),
+  item = addItemInfo( exifGroup, "ColorMode", i18n("Color Mode"),
                       QVariant::String );
 
-  item = addItemInfo( exifGroup, "Flash used", i18n("Flash used"),
+  item = addItemInfo( exifGroup, "Flash used", i18n("Flash Used"),
                       QVariant::Bool );
-  item = addItemInfo( exifGroup, "Focal length", i18n("Focal length"),
+  item = addItemInfo( exifGroup, "Focal length", i18n("Focal Length"),
                       QVariant::String );
   setUnit( item, KFileMimeTypeInfo::Millimeters );
 
-  item = addItemInfo( exifGroup, "35mm equivalent", i18n("35mm equivalent"),
+  item = addItemInfo( exifGroup, "35mm equivalent", i18n("35mm Equivalent"),
                       QVariant::Int );
   setUnit( item, KFileMimeTypeInfo::Millimeters );
 
-  item = addItemInfo( exifGroup, "CCD width", i18n("CCD width"),
+  item = addItemInfo( exifGroup, "CCD width", i18n("CCD Width"),
                       QVariant::String );
   setUnit( item, KFileMimeTypeInfo::Millimeters );
 
-  item = addItemInfo( exifGroup, "Exposure time", i18n("Exposure time"),
+  item = addItemInfo( exifGroup, "Exposure time", i18n("Exposure Time"),
                       QVariant::String );
   setHint( item, KFileMimeTypeInfo::Seconds );
 
   item = addItemInfo( exifGroup, "Aperture", i18n("Aperture"),
                       QVariant::String );
 
-  item = addItemInfo( exifGroup, "Focus dist.", i18n("Focus dist."),
+  item = addItemInfo( exifGroup, "Focus dist.", i18n("Focus Dist."),
                       QVariant::String );
 
-  item = addItemInfo( exifGroup, "Exposure bias", i18n("Exposure bias"),
+  item = addItemInfo( exifGroup, "Exposure bias", i18n("Exposure Bias"),
                       QVariant::String );
 
   item = addItemInfo( exifGroup, "Whitebalance", i18n("Whitebalance"),
                       QVariant::String );
 
-  item = addItemInfo( exifGroup, "Metering mode", i18n("Metering mode"),
+  item = addItemInfo( exifGroup, "Metering mode", i18n("Metering Mode"),
                       QVariant::String );
 
   item = addItemInfo( exifGroup, "Exposure", i18n("Exposure"),
                       QVariant::String );
 
-  item = addItemInfo( exifGroup, "ISO equiv.", i18n("ISO equiv."),
+  item = addItemInfo( exifGroup, "ISO equiv.", i18n("ISO Equiv."),
                       QVariant::String );
 
-  item = addItemInfo( exifGroup, "JPEG quality", i18n("JPEG quality"),
+  item = addItemInfo( exifGroup, "JPEG quality", i18n("JPEG Quality"),
                       QVariant::String );
 
-  item = addItemInfo( exifGroup, "User comment", i18n("User comment"),
+  item = addItemInfo( exifGroup, "User comment", i18n("User Comment"),
                       QVariant::String );
   setHint(item,  KFileMimeTypeInfo::Description);
 
-  item = addItemInfo( exifGroup, "JPEG process", i18n("JPEG process"),
+  item = addItemInfo( exifGroup, "JPEG process", i18n("JPEG Process"),
                       QVariant::String );
 
   item = addItemInfo( exifGroup, "Thumbnail", i18n("Thumbnail"),

@@ -64,7 +64,7 @@ KTgaPlugin::KTgaPlugin(QObject *parent, const char *name,
     item = addItemInfo(group, "BitDepth", i18n("Bit Depth"), QVariant::Int);
     setUnit(item, KFileMimeTypeInfo::BitsPerPixel);
 
-    item = addItemInfo(group, "ColorMode", i18n("Color mode"), QVariant::String);
+    item = addItemInfo(group, "ColorMode", i18n("Color Mode"), QVariant::String);
     item = addItemInfo(group, "Compression", i18n("Compression"), QVariant::String);
 
 }
@@ -123,7 +123,7 @@ bool KTgaPlugin::readInfo( KFileMetaInfo& info, uint what)
     case 1 :
     case 9 :
     case 32 :
-        appendItem(group, "ColorMode", i18n("Color-mapped"));
+        appendItem(group, "ColorMode", i18n("Color-Mapped"));
         break;
     case 2 :
     case 10 :
@@ -132,7 +132,7 @@ bool KTgaPlugin::readInfo( KFileMetaInfo& info, uint what)
         break;
     case 3 :
     case 11 :
-        appendItem(group, "ColorMode", i18n("Black and white"));
+        appendItem(group, "ColorMode", i18n("Black and White"));
         break;
     default :
         appendItem(group, "ColorMode", i18n("Unknown"));
@@ -147,7 +147,7 @@ bool KTgaPlugin::readInfo( KFileMetaInfo& info, uint what)
     case 9 :
     case 10 :
     case 11 :
-        appendItem(group, "Compression", i18n("Runlength encoded"));
+        appendItem(group, "Compression", i18n("Runlength Encoded"));
         break;
     case 32 :
         appendItem(group, "Compression", i18n("Huffman, Delta & RLE"));
