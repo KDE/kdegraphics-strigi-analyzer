@@ -113,16 +113,14 @@ bool KRgbPlugin::readInfo(KFileMetaInfo& info, uint /*what*/)
 	appendItem(group, "Dimensions", QSize(xsize, ysize));
 	appendItem(group, "BitDepth", zsize * 8 * bpc);
 
-	if (dimension == 2 && zsize == 1)
+	if (zsize == 1)
 		appendItem(group, "ColorMode", i18n("Grayscale"));
-	else if (dimension == 3) {
-		if (zsize == 2)
-			appendItem(group, "ColorMode", i18n("Grayscale/Alpha"));
-		else if (zsize == 3)
-			appendItem(group, "ColorMode", i18n("RGB"));
-		else if (zsize == 4)
-			appendItem(group, "ColorMode", i18n("RGB/Alpha"));
-	}
+	else if (zsize == 2)
+		appendItem(group, "ColorMode", i18n("Grayscale/Alpha"));
+	else if (zsize == 3)
+		appendItem(group, "ColorMode", i18n("RGB"));
+	else if (zsize == 4)
+		appendItem(group, "ColorMode", i18n("RGB/Alpha"));
 
 	if (!storage)
 		appendItem(group, "Compression", i18n("Uncompressed"));
