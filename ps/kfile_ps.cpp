@@ -28,7 +28,7 @@
 
 typedef KGenericFactory<KPSPlugin> PSFactory;
 
-K_EXPORT_COMPONENT_FACTORY(kfile_ps, PSFactory("kfile_ps"));
+K_EXPORT_COMPONENT_FACTORY(kfile_ps, PSFactory("kfile_ps"))
 
 KPSPlugin::KPSPlugin(QObject *parent, const char *name,
                        const QStringList &preferredItems) : 

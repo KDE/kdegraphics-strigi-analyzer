@@ -42,7 +42,7 @@ typedef unsigned char uint8_t;
 
 typedef KGenericFactory<KTgaPlugin> TgaFactory;
 
-K_EXPORT_COMPONENT_FACTORY(kfile_tga, TgaFactory( "kfile_tga" ));
+K_EXPORT_COMPONENT_FACTORY(kfile_tga, TgaFactory( "kfile_tga" ))
 
 KTgaPlugin::KTgaPlugin(QObject *parent, const char *name,
                        const QStringList &args)

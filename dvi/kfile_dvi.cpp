@@ -37,7 +37,7 @@
 
 // preprocessormacro K_EXPORT_COMPONENT_FACTORY loads shared library 'kfile_dvi.so' dynamic if necessary
 typedef KGenericFactory<KDviPlugin> DviFactory;
-K_EXPORT_COMPONENT_FACTORY(kfile_dvi, DviFactory("kfile_dvi"));
+K_EXPORT_COMPONENT_FACTORY(kfile_dvi, DviFactory("kfile_dvi"))
 
 KDviPlugin::KDviPlugin (QObject * parent, const char * name, const QStringList & preferredItems)
   : KFilePlugin(parent, name, preferredItems)

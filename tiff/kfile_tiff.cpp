@@ -32,7 +32,7 @@
 
 typedef KGenericFactory<KTiffPlugin> TiffFactory;
 
-K_EXPORT_COMPONENT_FACTORY(kfile_tiff, TiffFactory("kfile_tiff"));
+K_EXPORT_COMPONENT_FACTORY(kfile_tiff, TiffFactory("kfile_tiff"))
 
 KTiffPlugin::KTiffPlugin(QObject *parent, const char *name,
         const QStringList &args) : KFilePlugin(parent, name, args)

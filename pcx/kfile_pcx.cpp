@@ -27,7 +27,7 @@
 
 typedef KGenericFactory<KPcxPlugin> PcxFactory;
 
-K_EXPORT_COMPONENT_FACTORY(kfile_pcx, PcxFactory("kfile_pcx"));
+K_EXPORT_COMPONENT_FACTORY(kfile_pcx, PcxFactory("kfile_pcx"))
 
 QDataStream &operator>>( QDataStream &s, PALETTE &pal )
 {
