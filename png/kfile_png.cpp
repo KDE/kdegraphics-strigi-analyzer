@@ -126,6 +126,7 @@ bool KPngPlugin::readInfo( KFileMetaInfo& info, uint what)
 
     uchar *data = new uchar[f.size()+1];
     f.readBlock(reinterpret_cast<char*>(data), f.size());
+    data[f.size()] = '\n';
 
     if (data[0] == 137 && data[1] == 80 && data[2] == 78 && data[3] == 71 &&
         data[4] ==  13 && data[5] == 10 && data[6] == 26 && data[7] == 10 )
