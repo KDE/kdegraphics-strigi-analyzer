@@ -9,13 +9,13 @@
 
 
 #include "exif.h"
+#include <qwmatrix.h>
 
 
 static unsigned char * LastExifRefd;
 static int ExifSettingsLength;
 static double FocalplaneXRes;
 static double FocalplaneUnits;
-static int ExifImageWidth;
 static int MotorolaOrder = 0;
 static int SectionsRead;
 //static int HaveAll;
@@ -605,11 +605,11 @@ void ExifData::ProcessExifDir(unsigned char * DirStart, unsigned char * OffsetBa
                 break;
 
             case TAG_EXIF_IMAGELENGTH:
+                ExifImageLength = (int)ConvertAnyFormat(ValuePtr, Format);
+                break;
+
             case TAG_EXIF_IMAGEWIDTH:
-                // Use largest of height and width to deal with images that have been
-                // rotated to portrait format.
-                a = (int)ConvertAnyFormat(ValuePtr, Format);
-                if (ExifImageWidth < a) ExifImageWidth = a;
+                ExifImageWidth = (int)ConvertAnyFormat(ValuePtr, Format);
                 break;
 
             case TAG_FOCALPLANEXRES:
@@ -780,6 +780,7 @@ void ExifData::process_EXIF(unsigned char * CharBuf, unsigned int length)
     FocalplaneXRes = 0;
     FocalplaneUnits = 0;
     ExifImageWidth = 0;
+    ExifImageLength = 0;
 
     {   // Check the EXIF header component
         static const uchar ExifHeader[] = "Exif\0\0";
@@ -904,4 +905,48 @@ bool ExifData::scan(const QString & path)
     UserComment = UserComment.stripWhiteSpace();
     Comment = Comment.stripWhiteSpace();
     return true;
+}
+
+//--------------------------------------------------------------------------
+// Does the embedded thumbnail match the jpeg image?
+//--------------------------------------------------------------------------
+#ifndef JPEG_TOL
+#define JPEG_TOL 0.02
+#endif
+bool ExifData::isThumbnailSane() {
+  if (Thumbnail.isNull()) return false;
+
+  // check whether thumbnail dimensions match the image
+  // not foolproof, but catches some altered images (jpegtran -rotate)
+  if (ExifImageLength != 0 && ExifImageLength != Height) return false;
+  if (ExifImageWidth != 0 && ExifImageWidth != Width) return false;
+  if (Thumbnail.width() == 0 || Thumbnail.height() == 0) return false;
+  if (Height == 0 || Width == 0) return false;
+  double d = (double)Height/Width*Thumbnail.width()/Thumbnail.height();
+  return (1-JPEG_TOL < d) && (d < 1+JPEG_TOL);
+}
+
+
+//--------------------------------------------------------------------------
+// return a thumbnail that respects the orientation flag
+// only if it seems sane
+//--------------------------------------------------------------------------
+QImage ExifData::getThumbnail() {
+  if (!isThumbnailSane()) return NULL;
+  if (!Orientation || Orientation == 1) return Thumbnail;
+
+  // now fix orientation
+  QWMatrix M;
+  QWMatrix flip= QWMatrix(-1,0,0,1,0,0);
+  switch (Orientation) {  // notice intentional fallthroughs
+    case 2: M = flip; break;
+    case 4: M = flip;
+    case 3: M.rotate(180); break;
+    case 5: M = flip;
+    case 6: M.rotate(90); break;
+    case 7: M = flip;
+    case 8: M.rotate(270); break;
+    default: break; // should never happen
+  }
+  return Thumbnail.xForm(M);
 }

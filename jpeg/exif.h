@@ -47,6 +47,7 @@ class ExifData {
     QString DateTime;
     int   Orientation;
     int   Height, Width;
+    int   ExifImageLength, ExifImageWidth;
     int   IsColor;
     int   Process;
     int   FlashUsed;
@@ -103,8 +104,9 @@ public:
     int getCompressionLevel() { return CompressionLevel; }
     QString getUserComment() { return UserComment; }
     QString getComment() { return Comment; }
-    QImage getThumbnail() { return Thumbnail; }
-    bool isNullThumbnail() { return Thumbnail.isNull(); }
+    QImage getThumbnail();
+    bool isThumbnailSane();
+    bool isNullThumbnail() { return !isThumbnailSane(); }
 };
 
 class FatalError {
