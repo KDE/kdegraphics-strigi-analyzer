@@ -286,7 +286,7 @@ bool KJpegPlugin::readInfo( KFileMetaInfo& info, uint what )
 	    break;
 	case 3:
 	    //tag=i18n("incandescent");
-	    tag=QString(i18n("Tungsten"));
+	    tag=i18n("Tungsten");
 	    break;
 	case 17:
 	    tag=i18n("Standard light A");
