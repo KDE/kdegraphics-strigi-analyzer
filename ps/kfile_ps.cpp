@@ -66,7 +66,7 @@ bool KPSPlugin::readInfo( KFileMetaInfo& info, uint /* what */)
     while( ( count = fread( buf, sizeof(char), 4096, fp ) ) != 0
         && !_endComments )
     {
-        _dsc->scanData( buf, count );
+        if ( !_dsc->scanData( buf, count ) ) break;
     }
     fclose( fp );
 
