@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef __KFILE_TXT_H_
-#define __KFILE_TXT_H_
+#ifndef __KFILE_TIFF_H_
+#define __KFILE_TIFF_H_
 
 #include <kfilemetainfo.h>
 #include <kurl.h>
