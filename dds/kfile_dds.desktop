@@ -1,0 +1,9 @@
+[Desktop Entry]
+Encoding=UTF-8
+Type=Service
+Name=DirectDraw Surface Info
+ServiceTypes=KFilePlugin
+X-KDE-Library=kfile_dds
+MimeType=image/x-dds
+PreferredGroups=Technical
+PreferredItems=Dimensions,Depth,BitDepth,Type,ColorMode,Compression
