@@ -72,7 +72,7 @@ unsigned long KXbmPlugin::xbm_processLine(char * linebuf)
     uint32_t slen = strlen(linebuf);
     bool done = false;
     uint32_t spos = 0;
-    uint8_t spacecount = 0;
+    unsigned char spacecount = 0;
     do {
 
         if (linebuf[spos] == 0x00)
