@@ -31,7 +31,7 @@ static const char* formats[] = {
 
 typedef KGenericFactory<KPnmPlugin> PnmFactory;
 
-K_EXPORT_COMPONENT_FACTORY(kfile_pnm, PnmFactory("kfile_pnm"));
+K_EXPORT_COMPONENT_FACTORY(kfile_pnm, PnmFactory("kfile_pnm"))
 
 KPnmPlugin::KPnmPlugin(QObject *parent, const char *name, const QStringList &args) : KFilePlugin(parent, name, args) 
 {
