@@ -69,7 +69,7 @@ void KPdfMetaInfo::slotReceivedStdout(KProcess*, char* buffer, int buflen)
             QString value( (*it).mid((*it).find(":")+1).stripWhiteSpace() );
 
             m_items.insert(key, new KFileMetaInfoItem(key,
-                       i18n(key.latin1()),
+                       i18n(key.utf8()),
                        QVariant(value)));
         }
     }
