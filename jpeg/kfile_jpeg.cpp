@@ -1,6 +1,6 @@
 /* This file is part of the KDE project
- * Copyright (C) 2002 Frank Pieczynski,
- *                    Carsten Pfeiffer <pfeiffer@kde.org>
+ * Copyright (C) 2002 Frank Pieczynski <pieczy@knuut.de>,
+ *               2002 Carsten Pfeiffer <pfeiffer@kde.org>
  * based on the jhead tool of Matthias Wandel (see below)
  *
  * This program is free software; you can redistribute it and/or
