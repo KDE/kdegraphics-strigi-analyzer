@@ -1,0 +1,9 @@
+[Desktop Entry]
+Encoding=UTF-8
+Type=Service
+Name=PCX File Meta Info
+ServiceTypes=KFilePlugin
+X-KDE-Library=kfile_pcx
+MimeType=image/x-pcx
+PreferredGroups=General
+PreferredItems=Dimensions,Resolution,BitDepth,Compression
