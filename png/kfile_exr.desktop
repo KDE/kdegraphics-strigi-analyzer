@@ -1,9 +1,0 @@
-[Desktop Entry]
-Encoding=UTF-8
-Type=Service
-Name=EXR Info
-ServiceTypes=KFilePlugin
-X-KDE-Library=kfile_exr
-MimeType=image/x-exr
-PreferredGroups=Info,Standard,Channels,Technical,3dsMax
-PreferredItems=Dimensions,Thumbnail,ThumbnailDimensions,Version,Comments,Owner,Latitude,Longitude,Altitude,Capture Date,UTC Offset
