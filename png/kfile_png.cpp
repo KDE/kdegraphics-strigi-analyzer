@@ -62,6 +62,7 @@ static const char* colors[] = {
   I18N_NOOP("RGB"),
   I18N_NOOP("Palette"),
   I18N_NOOP("Grayscale/Alpha"),
+  I18N_NOOP("Unknown"),
   I18N_NOOP("RGB/Alpha")
 };
 
@@ -142,7 +143,7 @@ bool KPngPlugin::readInfo( KFileMetaInfo& info, uint what)
                 case 2: bpp *= 3; break; // RGB
                 case 3: break;           // palette
                 case 4: bpp *= 2; break; // grayscale w. alpha
-                case 5: bpp *= 4; break; // RGBA
+                case 6: bpp *= 4; break; // RGBA
 
                 default: // we don't get any sensible value here
                     bpp = 0;
