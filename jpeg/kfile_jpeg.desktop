@@ -2,6 +2,7 @@
 Encoding=UTF-8
 Type=Service
 Name=JPEG EXIF Info
+Name[ar]=معلومات JPEG EXIF
 Name[ca]=Informació de JPEG EXIF
 Name[cs]=JPEG EXIF info
 Name[cy]=Gwybodaeth JPEG EXIF

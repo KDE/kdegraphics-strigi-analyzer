@@ -2,6 +2,7 @@
 Encoding=UTF-8
 Type=Service
 Name=PCX File Meta Info
+Name[ar]=معلومات ملف PCX
 Name[bs]=PCX meta-podaci
 Name[ca]=Metainformació de fitxer PCX
 Name[cs]=Metainformace obrázku typu PCX
@@ -14,7 +15,7 @@ Name[et]=PCX faili metainfo
 Name[fi]=PCX-tiedoston metatiedot
 Name[fr]=Meta Informations sur les fichiers PCX
 Name[gl]=Inf. metaficheiro PCX
-Name[hi]=PCX फाइल मेटा इन्फो
+Name[hi]=PCX फ़ाइल मेटा इन्फो
 Name[hu]=PCX-jellemzők
 Name[is]=PCX File Meta upplýsingar
 Name[it]=Meta-informazioni sui file PCX
