@@ -142,9 +142,9 @@ KJpegPlugin::KJpegPlugin(QObject *parent, const char *name,
 //   exifGroup.setSupportsVariableKeys(true);
 }
 
-QValidator* KJpegPlugin::createValidator(const KFileMetaInfoItem& item,
-                                        QObject *parent,
-                                        const char *name ) const
+QValidator* KJpegPlugin::createValidator(const KFileMetaInfoItem& /*item*/,
+                                        QObject */*parent*/,
+                                         const char */*name*/ ) const
 {
     // no need to return a validator that validates everything as OK :)
 //     if (item.isEditable())
@@ -225,8 +225,12 @@ bool KJpegPlugin::readInfo( KFileMetaInfo& info, uint what )
 
     appendItem( exifGroup, "ColorMode", ImageInfo.getIsColor() ?
                 i18n("Color") : i18n("Black and white") );
-    appendItem( exifGroup, "Flash used",
-                QVariant((ImageInfo.getFlashUsed() >= 0), 42 ) );
+    
+    int flashUsed = ImageInfo.getFlashUsed(); // -1, 0, 1
+    if ( flashUsed >= 0 ) {
+        appendItem( exifGroup, "Flash used",
+                    QVariant((flashUsed > 0), 42 ) );
+    }
 
     if (ImageInfo.getFocalLength()){
     	appendItem( exifGroup, "Focal length",
