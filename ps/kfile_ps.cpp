@@ -52,63 +52,67 @@ bool KPSPlugin::readInfo( KFileMetaInfo& info, uint /* what */)
 {
     _info = info;
     _group = appendGroup(info, "General");
-    _dsc = new KDSC;
     _endComments = false;
-    _setData = false;
-    _dsc->setCommentHandler( this );
+    _setData = 0;
 
+    _dsc = new KDSC;
+    _dsc->setCommentHandler( this );
     FILE* fp = fopen( QFile::encodeName( info.path() ), "r" );
     if( fp == 0 )
         return false;
     
     char buf[4096];
     int count;
-    while( ( count = fread( buf, sizeof(char), 4096, fp ) ) != 0
-        && !_endComments )
-    {
-        _dsc->scanData( buf, count );
+    while( ( count = fread( buf, sizeof(char), sizeof( buf ), fp ) ) ) {
+	    if ( !_dsc->scanData( buf, count ) ) break;
+	    if ( _endComments || _setData == 5 ) break; // Change if new item scanned
     }
     fclose( fp );
-
     delete _dsc;
     _dsc = 0;
-    
-    return _setData;
+
+    return _setData > 0;
 }  
 
 void KPSPlugin::comment( Name name )
 {
-    int pages;
-
     switch( name )
     {
     case Title:
         appendItem(_group, "Title", _dsc->dsc_title());
-        _setData = true;
+	++_setData;
     break;
     case Creator:
         appendItem(_group, "Creator", _dsc->dsc_creator());
-        _setData = true;
+	++_setData;
     break;
     case CreationDate:
         appendItem(_group, "CreationDate", _dsc->dsc_date());
-        _setData = true;
+	++_setData;
     break;
     case For:
         appendItem(_group, "For", _dsc->dsc_for());
-        _setData = true;
+	++_setData;
     break;
-    case Pages:
-        pages = _dsc->page_pages();
+    case Pages: {
+        int pages = _dsc->page_pages();
         if (pages)
         {
             appendItem(_group, "Pages", pages);
-            _setData = true;
+	    ++_setData;
         }
+    }
     break;
+    
+    // Right now we watch for 5 elements:
+    //  Title, Creator, CreationDate, For, Pages
+    //
+    // If you add another one(s), please update the 5 in "_setData == 5" above
+    //
     case EndComments: _endComments = true;
     default: ; // Ignore
     }
 }
 
 #include "kfile_ps.moc"
+

@@ -43,7 +43,7 @@ private:
     KFileMetaInfoGroup _group;
     KDSC* _dsc;
     bool _endComments;
-    bool _setData;
+    int _setData;
 };
 
 #endif
