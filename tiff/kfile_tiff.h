@@ -38,7 +38,7 @@ public:
 private:
     QDateTime tiffDate(const QString&) const;
 
-    QIntDict<QString> m_imageType;
+    QIntDict<QString> m_colorMode;
     QIntDict<QString> m_imageCompression;
 };
 

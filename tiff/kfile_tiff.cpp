@@ -51,7 +51,7 @@ KTiffPlugin::KTiffPlugin(QObject *parent, const char *name,
     setHint(item, KFileMimeTypeInfo::Description);
     item = addItemInfo(group, "Copyright", i18n("Copyright"), 
             QVariant::String);
-    item = addItemInfo(group, "ImageType", i18n("Image type"), 
+    item = addItemInfo(group, "ColorMode", i18n("Color mode"), 
             QVariant::String);
     item = addItemInfo(group, "Dimensions", i18n("Dimensions"), 
             QVariant::Size);
@@ -59,6 +59,7 @@ KTiffPlugin::KTiffPlugin(QObject *parent, const char *name,
     setSuffix(item, i18n(" pixels"));
     item = addItemInfo(group, "Resolution", i18n("Resolution"), 
             QVariant::Size);
+    setUnit(item, KFileMimeTypeInfo::DotsPerInch);
     setSuffix(item, i18n(" dpi"));
     item = addItemInfo(group, "BitDepth", i18n("Bit depth"), 
             QVariant::Int);
@@ -80,32 +81,32 @@ KTiffPlugin::KTiffPlugin(QObject *parent, const char *name,
     item = addItemInfo(group, "Make", i18n("Make"), QVariant::String);
     item = addItemInfo(group, "Model", i18n("Model"), QVariant::String);
 
-    m_imageType.setAutoDelete(true);
+    m_colorMode.setAutoDelete(true);
     m_imageCompression.setAutoDelete(true);
 
-    m_imageType.insert(PHOTOMETRIC_MINISWHITE, 
+    m_colorMode.insert(PHOTOMETRIC_MINISWHITE, 
                 new QString(I18N_NOOP("Monochrome")));
-    m_imageType.insert(PHOTOMETRIC_MINISBLACK, 
+    m_colorMode.insert(PHOTOMETRIC_MINISBLACK, 
                 new QString(I18N_NOOP("Monochrome")));
-    m_imageType.insert(PHOTOMETRIC_RGB, 
+    m_colorMode.insert(PHOTOMETRIC_RGB, 
                 new QString(I18N_NOOP("RGB")));
-    m_imageType.insert(PHOTOMETRIC_PALETTE, 
+    m_colorMode.insert(PHOTOMETRIC_PALETTE, 
                 new QString(I18N_NOOP("Palette color")));
-    m_imageType.insert(PHOTOMETRIC_MASK, 
+    m_colorMode.insert(PHOTOMETRIC_MASK, 
                 new QString(I18N_NOOP("Transparency mask")));
-    m_imageType.insert(PHOTOMETRIC_SEPARATED, 
-                new QString(I18N_NOOP("Color separation")));
-    m_imageType.insert(PHOTOMETRIC_YCBCR, 
+    m_colorMode.insert(PHOTOMETRIC_SEPARATED, 
+                new QString(I18N_NOOP("Color separations")));
+    m_colorMode.insert(PHOTOMETRIC_YCBCR, 
                 new QString(I18N_NOOP("YCbCr")));
-    m_imageType.insert(PHOTOMETRIC_CIELAB, 
+    m_colorMode.insert(PHOTOMETRIC_CIELAB, 
                 new QString(I18N_NOOP("CIE Lab")));
 #ifdef PHOTOMETRIC_ITULAB
-    m_imageType.insert(PHOTOMETRIC_ITULAB, 
+    m_colorMode.insert(PHOTOMETRIC_ITULAB, 
                 new QString(I18N_NOOP("ITU Lab")));
 #endif
-    m_imageType.insert(PHOTOMETRIC_LOGL, 
+    m_colorMode.insert(PHOTOMETRIC_LOGL, 
                 new QString(I18N_NOOP("LOGL")));
-    m_imageType.insert(PHOTOMETRIC_LOGLUV, 
+    m_colorMode.insert(PHOTOMETRIC_LOGLUV, 
                 new QString(I18N_NOOP("LOGLUV")));
 
     m_imageCompression.insert(COMPRESSION_NONE, 
@@ -188,7 +189,7 @@ bool KTiffPlugin::readInfo(KFileMetaInfo& info, uint)
         return false;
 
     uint32 imageLength=0, imageWidth=0;
-    uint16 bitsPerSample=0, imageCompression=0, imageType=0, samplesPerPixel=0,
+    uint16 bitsPerSample=0, imageCompression=0, colorMode=0, samplesPerPixel=0,
         imageAlpha=0, imageResUnit=0, dummy=0, faxPages=0; 
     float imageXResolution=0, imageYResolution=0;
     char *description=0, *copyright=0, *software=0, *datetime=0, *artist=0,
@@ -198,7 +199,7 @@ bool KTiffPlugin::readInfo(KFileMetaInfo& info, uint)
     TIFFGetField(tiff, TIFFTAG_IMAGEWIDTH, &imageWidth);
     TIFFGetFieldDefaulted(tiff, TIFFTAG_BITSPERSAMPLE, &bitsPerSample);
     TIFFGetFieldDefaulted(tiff, TIFFTAG_SAMPLESPERPIXEL, &samplesPerPixel);
-    TIFFGetField(tiff, TIFFTAG_PHOTOMETRIC, &imageType);
+    TIFFGetField(tiff, TIFFTAG_PHOTOMETRIC, &colorMode);
     TIFFGetFieldDefaulted(tiff, TIFFTAG_COMPRESSION, &imageCompression);
     TIFFGetField(tiff, TIFFTAG_MATTEING, &imageAlpha);
     TIFFGetField(tiff, TIFFTAG_XRESOLUTION, &imageXResolution);
@@ -217,7 +218,7 @@ bool KTiffPlugin::readInfo(KFileMetaInfo& info, uint)
     kdDebug(7034) << "Width: " << imageWidth << endl;
     kdDebug(7034) << "Height: " << imageLength << endl;
     kdDebug(7034) << "BitDepth: " << bitsPerSample << endl;
-    kdDebug(7034) << "ImageType: " << imageType << endl;
+    kdDebug(7034) << "ImageType: " << colorMode << endl;
     kdDebug(7034) << "Compression: " << imageCompression << endl;
     kdDebug(7034) << "SamplesPerPixel: " << samplesPerPixel << endl;
     kdDebug(7034) << "ImageAlpha: " << imageAlpha << endl;
@@ -244,8 +245,8 @@ bool KTiffPlugin::readInfo(KFileMetaInfo& info, uint)
     }
 
     int imageBpp = bitsPerSample*samplesPerPixel;
-    if (imageAlpha && imageType==PHOTOMETRIC_RGB)
-        m_imageType.replace(PHOTOMETRIC_RGB, new QString(I18N_NOOP("RGBA")));
+    if (imageAlpha && colorMode==PHOTOMETRIC_RGB)
+        m_colorMode.replace(PHOTOMETRIC_RGB, new QString(I18N_NOOP("RGBA")));
 
     KFileMetaInfoGroup group = appendGroup(info, "General");
     if (description)
@@ -256,8 +257,8 @@ bool KTiffPlugin::readInfo(KFileMetaInfo& info, uint)
         appendItem(group, "Resolution", QSize(
                 static_cast<int>(imageXResolution), 
                 static_cast<int>(imageYResolution)));
-    if (m_imageType[imageType])
-        appendItem(group, "ImageType", *m_imageType[imageType]);
+    if (m_colorMode[colorMode])
+        appendItem(group, "ColorMode", *m_colorMode[colorMode]);
     if (m_imageCompression[imageCompression])
         appendItem(group, "Compression", *m_imageCompression[imageCompression]);
     if (datetime)
