@@ -219,11 +219,11 @@ int ExifData::ReadJpegSections (QFile & infile, ReadMode_t ReadMode)
 
     a = infile.getch();
 
-
-    if (a != 0xff || infile.getch() != M_SOI){
+    if (a != 0xff || infile.getch() != M_SOI) {
+        SectionsRead = 0;
         return false;
     }
-    for(;SectionsRead < MAX_SECTIONS-1;){
+    for(SectionsRead = 0; SectionsRead < MAX_SECTIONS-1; ){
         int itemlen;
         int marker = 0;
         int ll,lh, got;
@@ -261,9 +261,6 @@ int ExifData::ReadJpegSections (QFile & infile, ReadMode_t ReadMode)
         Sections[SectionsRead].Size = itemlen;
 
         Data = (uchar *)malloc(itemlen+1); // Add 1 to allow sticking a 0 at the end.
-        if (Data == NULL){
-            throw FatalError("Could not allocate memory");
-        }
         Sections[SectionsRead].Data = Data;
 
         // Store first two pre-read bytes.
@@ -274,7 +271,7 @@ int ExifData::ReadJpegSections (QFile & infile, ReadMode_t ReadMode)
         if (got != itemlen-2){
             throw FatalError("reading from file");
         }
-        SectionsRead += 1;
+        SectionsRead++;
 
         switch(marker){
 
@@ -347,12 +344,8 @@ int ExifData::ReadJpegSections (QFile & infile, ReadMode_t ReadMode)
             case M_SOF14:
             case M_SOF15:
                 process_SOFn(Data, marker);
-                break;
             default:
-                // Skip any other sections.
-                //if (ShowTags){
-                //    printf("Jpeg section marker 0x%02x size %d\n",marker, itemlen);
-                //}
+                break;
                 break;
         }
     }
@@ -365,13 +358,9 @@ int ExifData::ReadJpegSections (QFile & infile, ReadMode_t ReadMode)
 //--------------------------------------------------------------------------
 void ExifData::DiscardData(void)
 {
-    int a;
-    for (a=0;a<SectionsRead;a++){
+    for (int a=0; a < SectionsRead; a++)
         free(Sections[a].Data);
-    }
-    //memset(&ImageInfo, 0, sizeof(ImageInfo));
     SectionsRead = 0;
-    //HaveAll = 0;
 }
 
 //--------------------------------------------------------------------------
