@@ -21,7 +21,7 @@ Int        Bitdepth        -/-
 String     Color mode      -/-  
 String     Compression     -/-    Compression type. Right now always "deflate"
 
-Other keys correcponding to the pdf comment keys are returned as non-editable
+Other keys corresponding to the png comment keys are returned as non-editable
 String.
 
 Common keys that are recommended in the png spec:
@@ -133,6 +133,8 @@ String	Comment         gif comment blocks, which we permit to be utf-8 encoded
 TIFF plugin:
 ===========
 
+:: Group: General ::
+
 type    key             Comment
 ------  --------------  -----------------------------------------------------
 String  ImageType       Image type (Monochrome, RGB, RGBA etc)
@@ -146,4 +148,11 @@ String  Description     Image description
 String  Copyright       Copyright information
 String  DateTime        Date and time of image creation
 String  Artist          Name of the person who created this image
+
+:: Group: Scanner ::
+
+type    key             Comment
+------  --------------  -----------------------------------------------------
+String  Make            Make of the scanner used
+String  Model           Model of the scanner used
 

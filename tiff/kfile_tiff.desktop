@@ -5,5 +5,5 @@ Name=TIFF File Meta Info
 ServiceTypes=KFilePlugin
 X-KDE-Library=kfile_tiff
 MimeType=image/tiff
-PreferredGroups=General
-PreferredItems=Description,Copyright,Type,Dimensions,Bit depth,Compression,Software,Date/time
+PreferredGroups=General,Scanner
+PreferredItems=Description,Copyright,Type,Dimensions,Resolution,BitDepth,Compression,Software,DateTime,Artist,FaxPages,Make,Model
