@@ -41,7 +41,7 @@ typedef unsigned short uint16_t;
 
 typedef KGenericFactory<KBmpPlugin> BmpFactory;
 
-K_EXPORT_COMPONENT_FACTORY(kfile_bmp, BmpFactory( "kfile_bmp" ));
+K_EXPORT_COMPONENT_FACTORY(kfile_bmp, BmpFactory( "kfile_bmp" ))
 
 KBmpPlugin::KBmpPlugin(QObject *parent, const char *name,
                        const QStringList &args)

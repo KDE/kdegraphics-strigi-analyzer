@@ -42,7 +42,7 @@ typedef unsigned char uint8_t;
 
 typedef KGenericFactory<KIcoPlugin> IcoFactory;
 
-K_EXPORT_COMPONENT_FACTORY(kfile_ico, IcoFactory( "kfile_ico" ));
+K_EXPORT_COMPONENT_FACTORY(kfile_ico, IcoFactory( "kfile_ico" ))
 
 KIcoPlugin::KIcoPlugin(QObject *parent, const char *name,
                        const QStringList &args)

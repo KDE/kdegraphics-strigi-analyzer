@@ -40,7 +40,7 @@ typedef unsigned short uint32_t;
 
 typedef KGenericFactory<KXbmPlugin> XbmFactory;
 
-K_EXPORT_COMPONENT_FACTORY(kfile_xbm, XbmFactory( "kfile_xbm" ));
+K_EXPORT_COMPONENT_FACTORY(kfile_xbm, XbmFactory( "kfile_xbm" ))
 
 KXbmPlugin::KXbmPlugin(QObject *parent, const char *name,
                        const QStringList &args)

@@ -33,7 +33,7 @@
 
 typedef KGenericFactory<KPdfPlugin> PdfFactory;
 
-K_EXPORT_COMPONENT_FACTORY(kfile_pdf, PdfFactory("kfile_pdf"));
+K_EXPORT_COMPONENT_FACTORY(kfile_pdf, PdfFactory("kfile_pdf"))
 
 KPdfPlugin::KPdfPlugin(QObject *parent, const char *name, const QStringList &preferredItems)
     : KFilePlugin(parent, name, preferredItems)

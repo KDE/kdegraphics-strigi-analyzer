@@ -84,7 +84,7 @@ static const char* interlaceModes[] = {
 
 typedef KGenericFactory<KPngPlugin> PngFactory;
 
-K_EXPORT_COMPONENT_FACTORY(kfile_png, PngFactory("kfile_png"));
+K_EXPORT_COMPONENT_FACTORY(kfile_png, PngFactory("kfile_png"))
 
 KPngPlugin::KPngPlugin(QObject *parent, const char *name,
                        const QStringList &args)
