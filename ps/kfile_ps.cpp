@@ -36,8 +36,14 @@ KPSPlugin::KPSPlugin(QObject *parent, const char *name,
 {
     kdDebug(7034) << "ps plugin\n";
     
-    // set up our mimetype
-    KFileMimeTypeInfo* info = addMimeTypeInfo( "application/postscript" );
+    // set up our mimetypes
+    makeMimeTypeInfo( "application/postscript" );
+    makeMimeTypeInfo( "image/x-eps" );
+}
+
+void KPSPlugin::makeMimeTypeInfo( const char* mimeType )
+{
+    KFileMimeTypeInfo* info = addMimeTypeInfo( mimeType );
 
     // general group
     KFileMimeTypeInfo::GroupInfo* group = addGroupInfo(info, "General", i18n("General"));

@@ -37,6 +37,7 @@ public:
     virtual bool readInfo( KFileMetaInfo& info, uint what);
 
     void comment( Name );
+    void makeMimeTypeInfo(  const char* mimeType );
     
 private:
     KFileMetaInfo _info;
