@@ -813,7 +813,7 @@ void ExifData::process_EXIF(unsigned char * CharBuf, unsigned int length)
 
     // Compute the CCD width, in milimeters.
     if (FocalplaneXRes != 0){
-	kdDebug() << "ExifImageWidth " << ExifImageWidth << " FocalplaneUnits " << FocalplaneUnits << " FocalplaneXRes " << FocalplaneXRes << endl;
+	kdDebug(7034) << "ExifImageWidth " << ExifImageWidth << " FocalplaneUnits " << FocalplaneUnits << " FocalplaneXRes " << FocalplaneXRes << endl;
         ExifData::CCDWidth = (float)(ExifImageWidth * FocalplaneUnits / FocalplaneXRes);
     }
 }

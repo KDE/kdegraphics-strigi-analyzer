@@ -119,13 +119,13 @@ void KPdfPlugin::slotReceivedStdout(KProcess*, char* buffer, int buflen)
     // just replace the last \n with a 0
     buffer[buflen-1] = '\0';
     QString s(buffer);
-    kdDebug() << s << endl;
+    kdDebug(7034) << s << endl;
     QStringList l = QStringList::split("\n", s);
     KFileMetaInfoGroup generalGroup = appendGroup(mInfo, "General");
 
     QStringList::Iterator it = l.begin();
     for (; it != l.end(); ++it ) {
-        kdDebug() << *it << endl;
+        kdDebug(7034) << *it << endl;
 
         if ((*it).startsWith("CreationDate"))
         {
