@@ -125,8 +125,10 @@ KTiffPlugin::KTiffPlugin(QObject *parent, const char *name,
                 new QString(I18N_NOOP("JPEG")));
     m_imageCompression.insert(COMPRESSION_JPEG, 
                 new QString(I18N_NOOP("JPEG DCT")));
+#ifdef COMPRESSION_ADOBE_DEFLATE
     m_imageCompression.insert(COMPRESSION_ADOBE_DEFLATE, 
                 new QString(I18N_NOOP("Adobe Deflate")));
+#endif
     m_imageCompression.insert(COMPRESSION_NEXT, 
                 new QString(I18N_NOOP("NeXT 2-bit RLE")));
     m_imageCompression.insert(COMPRESSION_CCITTRLEW, 
