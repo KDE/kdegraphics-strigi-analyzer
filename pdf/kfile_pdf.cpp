@@ -166,6 +166,10 @@ I18N_NOOP("Linearized")
 I18N_NOOP("Page size")
 I18N_NOOP("yes")
 I18N_NOOP("no")
+I18N_NOOP("File size")
+I18N_NOOP("Optimized")
+I18N_NOOP("PDF version")
+I18N_NOOP("Tagged")
 #endif
 
 #include "kfile_pdf.moc"
