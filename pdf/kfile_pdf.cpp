@@ -44,7 +44,7 @@ KPdfPlugin::KPdfPlugin(QObject *parent, const char *name,
     kdDebug(7034) << "pdf plugin\n";
 }
 
-bool KPdfPlugin::readInfo( KFileMetaInfo::Internal& info )
+bool KPdfPlugin::readInfo( KFileMetaInfo::Internal& info, int )
 {
     KProcess p;
     p << "pdfinfo" << info.path();

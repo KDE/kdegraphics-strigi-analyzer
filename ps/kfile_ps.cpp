@@ -37,7 +37,7 @@ KPSPlugin::KPSPlugin(QObject *parent, const char *name,
     kdDebug(7034) << "ps plugin\n";
 }
 
-bool KPSPlugin::readInfo( KFileMetaInfo::Internal& info )
+bool KPSPlugin::readInfo( KFileMetaInfo::Internal& info, int )
 {
     _info = info;
     _keys.clear();

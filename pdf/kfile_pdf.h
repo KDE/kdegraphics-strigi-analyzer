@@ -33,7 +33,7 @@ public:
     KPdfPlugin( QObject *parent, const char *name,
                 const QStringList& preferredItems );
     
-    virtual bool readInfo( KFileMetaInfo::Internal& info );
+    virtual bool readInfo( KFileMetaInfo::Internal& info, int );
     
 private slots:
     void slotReceivedStdout(KProcess* p, char* buffer, int buflen);

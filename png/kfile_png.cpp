@@ -82,7 +82,7 @@ KPngPlugin::KPngPlugin(QObject *parent, const char *name,
     kdDebug(7034) << "png plugin\n";
 }
 
-bool KPngPlugin::readInfo( KFileMetaInfo::Internal& info )
+bool KPngPlugin::readInfo( KFileMetaInfo::Internal& info, int )
 {
     QStringList supported;
     supported << "Resolution" << "Bitdepth" << "Color mode" << "Compression";
