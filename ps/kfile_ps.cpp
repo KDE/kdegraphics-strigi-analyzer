@@ -40,8 +40,7 @@ KPSPlugin::KPSPlugin(QObject *parent, const char *name,
     KFileMimeTypeInfo* info = addMimeTypeInfo( "application/postscript" );
 
     // general group
-//    KFileMimeTypeInfo::GroupInfo* group = addGroupInfo(info, "General", i18n("General"));
-    KFileMimeTypeInfo::GroupInfo* group = addGroupInfo(info, "General", "General");
+    KFileMimeTypeInfo::GroupInfo* group = addGroupInfo(info, "General", i18n("General"));
     addItemInfo(group, "Title", i18n("Title"), QVariant::String);
     addItemInfo(group, "Creator", i18n("Creator"), QVariant::String);
     addItemInfo(group, "Creation Date", i18n("Creation Date"), QVariant::String);

@@ -68,7 +68,7 @@ static const char* colors[] = {
   // and compressions  
 char* compressions[] = 
 {
-  I18N_NOOP("deflate")
+  I18N_NOOP("Deflate")
 };
 
 typedef KGenericFactory<KPngPlugin> PngFactory;
@@ -88,16 +88,14 @@ KPngPlugin::KPngPlugin(QObject *parent, const char *name,
     KFileMimeTypeInfo::ItemInfo* item = 0;
 
     // comment group
-//    group = addGroupInfo(info, "Comment", i18n("Comment"));
-    group = addGroupInfo(info, "Comment", "Comment");
+    group = addGroupInfo(info, "Comment", i18n("Comment"));
     addVariableInfo(group, QVariant::String, 0);
 
     // technical group
-//    group = addGroupInfo(info, "Technical", i18n("Technical details"));
-    group = addGroupInfo(info, "Technical", "Technical details");
+    group = addGroupInfo(info, "Technical", i18n("Technical details"));
 
     item = addItemInfo(group, "Resolution", i18n("Resolution"), QVariant::Size);
-    setSuffix(item, i18n("pixels"));
+    setSuffix(item, i18n(" pixels"));
 
     item = addItemInfo(group, "Bitdepth", i18n("Bitdepth"), QVariant::Int);
     setSuffix(item, i18n("bpp"));
