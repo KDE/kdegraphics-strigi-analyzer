@@ -210,3 +210,15 @@ Int        BitDepth        -/-        Bits per pixel
 QSize      Resolution      -/-        Resolution in DPI
 String     Compression     -/-        Compression type, if any
 
+
+rgb plugin:
+===========
+
+type       key                        details
+------------------------------------------------------------------------
+QSize      Dimensions                 Dimensions in pixels
+Int        BitDepth                   Bits per pixel
+String     ColorMode                  Color Mode (Monochrome, RGB, RGBA etc)
+String     Compression                Compression type
+String     ImageName                  Image name
+

@@ -1,0 +1,9 @@
+[Desktop Entry]
+Encoding=UTF-8
+Type=Service
+Name=SGI Image (RGB)
+ServiceTypes=KFilePlugin
+X-KDE-Library=kfile_rgb
+MimeType=image/x-rgb
+PreferredGrous=Technical
+PreferredItems=Dimensions,BitDepth,ColorMode,Compression,ImageName
