@@ -6,11 +6,11 @@ INCLUDES         = $(all_includes)
 # these are the headers for your project
 noinst_HEADERS   = kfile_pdf.h
 
-lib_LTLIBRARIES = kfile_pdf.la
+kde_module_LTLIBRARIES = kfile_pdf.la
 
 kfile_pdf_la_SOURCES = kfile_pdf.cpp
 kfile_pdf_la_LDFLAGS = $(all_libraries) -module $(KDE_PLUGIN)
-kfile_pdf_la_LIBADD = $(LIB_KSYCOCA)
+kfile_pdf_la_LIBADD = $(LIB_KIO)
 
 # let automoc handle all of the meta source files (moc)
 METASOURCES = AUTO

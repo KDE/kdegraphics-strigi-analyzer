@@ -6,11 +6,11 @@ INCLUDES         = $(all_includes)
 # these are the headers for your project
 noinst_HEADERS   = kfile_ps.h kmaybe.h dscparse.h dscparse_adapter.h
 
-lib_LTLIBRARIES = kfile_ps.la
+kde_module_LTLIBRARIES = kfile_ps.la
 
 kfile_ps_la_SOURCES = dscparse.cpp kfile_ps.cpp dscparse_adapter.cpp
 kfile_ps_la_LDFLAGS = $(all_libraries) -module $(KDE_PLUGIN)
-kfile_ps_la_LIBADD = $(LIB_KSYCOCA)
+kfile_ps_la_LIBADD = $(LIB_KIO)
 
 # let automoc handle all of the meta source files (moc)
 METASOURCES = AUTO

@@ -104,3 +104,4 @@ void KPSPlugin::comment( Name name )
     }
 }
 
+#include "kfile_ps.moc"

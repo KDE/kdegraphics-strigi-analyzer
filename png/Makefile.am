@@ -6,11 +6,11 @@ INCLUDES         = $(all_includes)
 # these are the headers for your project
 noinst_HEADERS   = kfile_png.h
 
-lib_LTLIBRARIES = kfile_png.la
+kde_module_LTLIBRARIES = kfile_png.la
 
 kfile_png_la_SOURCES = kfile_png.cpp
 kfile_png_la_LDFLAGS = $(all_libraries) -module $(KDE_PLUGIN)
-kfile_png_la_LIBADD = $(LIB_KSYCOCA)
+kfile_png_la_LIBADD = $(LIB_KIO)
 
 # let automoc handle all of the meta source files (moc)
 METASOURCES = AUTO
