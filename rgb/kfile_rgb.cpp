@@ -101,9 +101,8 @@ bool KRgbPlugin::readInfo(KFileMetaInfo& info, uint /*what*/)
 	dstream.readRawBytes(imagename, 80);
 	imagename[79] = '\0';
 	dstream >> colormap;
-	uint i;
 	Q_UINT8 u8;
-	for (i = 0; i < 404; i++)
+	for (uint i = 0; i < 404; i++)
 		dstream >> u8;
 
 	if (magic != 474)
@@ -134,28 +133,29 @@ bool KRgbPlugin::readInfo(KFileMetaInfo& info, uint /*what*/)
 		long verbatim = xsize * ysize * zsize;
 		appendItem(group, "Compression", i18n("Runlength encoded")
 				+ QString(", %1%").arg(compressed * 100.0 / verbatim, 0, 'f', 1));
-	} else
-		appendItem(group, "Compression", i18n("Unknown"));
 
-	if (storage) {
+		long k;
 		Q_UINT32 offs;
 		QMap<Q_UINT32, uint> map;
 		QMap<Q_UINT32, uint>::Iterator it;
-		for (i = 0; i < ysize * zsize; i++) {
+		for (k = 0; k < (ysize * zsize); k++) {
 			dstream >> offs;
 			if ((it = map.find(offs)) != map.end())
 				map.replace(offs, it.data() + 1);
 			else
 				map[offs] = 0;
 		}
-		for (i = 0, it = map.begin(); it != map.end(); it++)
-			i += it.data();
+		for (k = 0, it = map.begin(); it != map.end(); it++)
+			k += it.data();
 
-		if (i)
-			appendItem(group, "Row redundancy", QString("%1%").arg(i * 100.0 / (ysize * zsize), 0, 'f', 1));
+		if (k)
+			appendItem(group, "RowRedundancy", QString("%1%").arg(k * 100.0
+					/ (ysize * zsize), 0, 'f', 1));
 		else
-			appendItem(group, "Row redundancy", i18n("None"));
-	}
+			appendItem(group, "RowRedundancy", i18n("None"));
+	} else
+		appendItem(group, "Compression", i18n("Unknown"));
+
 
 	group = appendGroup(info, "Comment");
 	appendItem(group, "ImageName", imagename);
