@@ -2,6 +2,8 @@
 Encoding=UTF-8
 Type=Service
 Name=EXR Info
+Name[ar]=EXR معلومات
+Name[br]=Titouroù EXR
 Name[ca]=Informació EXR
 Name[cs]=EXR info
 Name[cy]=Gwybodaeth EXR
@@ -25,6 +27,7 @@ Name[pt]=Informação do EXR
 Name[pt_BR]=Informação sobre EXR
 Name[ro]=Informaţii EXR
 Name[ru]=Информация о EXR
+Name[se]=EXR-dieđut
 Name[sl]=Informacije o EXR
 Name[sr]=EXR информације
 Name[sr@Latn]=EXR informacije
