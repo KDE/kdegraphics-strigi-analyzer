@@ -243,7 +243,7 @@ bool KPngPlugin::readInfo( KFileMetaInfo& info, uint what)
         }
     }
 end:
-    delete data;
+    delete[] data;
     return true;
 }
 
