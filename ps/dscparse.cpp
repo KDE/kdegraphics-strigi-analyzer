@@ -1062,7 +1062,7 @@ dsc_unknown(CDSC *dsc)
 {
     if (dsc->debug_print_fn) {
 	char line[DSC_LINE_LENGTH];
-	unsigned int length = min(DSC_LINE_LENGTH-1, dsc->line_length);
+	unsigned int length = min(DSC_LINE_LENGTH-1u, dsc->line_length);
 	sprintf(line, "Unknown in %s section at line %d:\n  ", 
 	    dsc_scan_section_name[dsc->scan_section], dsc->line_count);
 	dsc_debug_print(dsc, line);
