@@ -59,7 +59,7 @@ KRgbPlugin::KRgbPlugin(QObject *parent, const char *name, const QStringList &arg
 
 	item = addItemInfo(group, "ColorMode", i18n("Color mode"), QVariant::String);
 	item = addItemInfo(group, "Compression", i18n("Compression"), QVariant::String);
-	item = addItemInfo(group, "SharedRows", i18n("something like vertical redundancy, but sounding positive",
+	item = addItemInfo(group, "SharedRows", i18n("percentage of vertical redundancy, but sounding positive",
 			"Shared rows"), QVariant::String);
 
 }
@@ -139,14 +139,15 @@ bool KRgbPlugin::readInfo(KFileMetaInfo& info, uint /*what*/)
 		Q_UINT32 offs;
 		QMap<Q_UINT32, uint> map;
 		QMap<Q_UINT32, uint>::Iterator it;
+		QMap<Q_UINT32, uint>::Iterator end = map.end();
 		for (k = 0; k < (ysize * zsize); k++) {
 			dstream >> offs;
-			if ((it = map.find(offs)) != map.end())
+			if ((it = map.find(offs)) != end)
 				map.replace(offs, it.data() + 1);
 			else
 				map[offs] = 0;
 		}
-		for (k = 0, it = map.begin(); it != map.end(); it++)
+		for (k = 0, it = map.begin(); it != end; it++)
 			k += it.data();
 
 		if (k)
