@@ -59,6 +59,9 @@ bool KPSPlugin::readInfo( KFileMetaInfo& info, uint /* what */)
     _dsc->setCommentHandler( this );
 
     FILE* fp = fopen( QFile::encodeName( info.path() ), "r" );
+    if( fp == 0 )
+	return false;
+    
     char buf[4096];
     int count;
     while( ( count = fread( buf, sizeof(char), 4096, fp ) ) != 0
