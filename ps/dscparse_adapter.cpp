@@ -119,21 +119,17 @@ KDSCErrorHandler::Response KDSCOkErrorHandler::error( const KDSCError& err )
 
 /*-- KDSC implementation ---------------------------------------------------*/
 
-std::map<CDSC*, KDSC*> KDSC::_objectMap;
-
 KDSC::KDSC() :
     _errorHandler( 0 ),
     _commentHandler( 0 )
 {
-    _cdsc = dsc_init( 0 );
+    _cdsc = dsc_init( this );
     Q_ASSERT( _cdsc != 0 );
-    _objectMap.insert( std::map<CDSC*, KDSC*>::value_type( _cdsc, this ) );
     _scanHandler = new KDSCScanHandler( _cdsc );
 }
 
 KDSC::~KDSC()
 {
-    _objectMap.erase( _cdsc );
     dsc_free( _cdsc );
     _cdsc = 0;
 }
@@ -378,12 +374,7 @@ CDSC* KDSC::cdsc() const
     return _cdsc;
 }
 
-KDSC* KDSC::findKDSCByCDSC( CDSC* dsc )
-{
-    return _objectMap[dsc];
-}
-
-int KDSC::errorFunction( void*, CDSC* dsc,
+int KDSC::errorFunction( void* caller_data, CDSC* dsc,
 	unsigned int explanation, const char* line, unsigned int line_len )
 {
     KDSCError error( 
@@ -393,7 +384,7 @@ int KDSC::errorFunction( void*, CDSC* dsc,
 	    dsc->line_count
     );
     
-    KDSC* kdsc = findKDSCByCDSC( dsc );
+    KDSC* kdsc = static_cast< KDSC* >( caller_data );
     Q_ASSERT( kdsc );
     
     return kdsc->errorHandler()->error( error );

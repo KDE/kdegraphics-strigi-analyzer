@@ -293,7 +293,7 @@ public:
     CDSC* cdsc() const;
 
 protected:
-    static KDSC* findKDSCByCDSC( CDSC* );
+    // static KDSC* findKDSCByCDSC( CDSC* );
 
     static int errorFunction( void*, CDSC* dsc, unsigned int explanation, 
                               const char* line, unsigned int line_len );
@@ -310,7 +310,7 @@ private:
      * structure. To implement this we map CDSC structures and KDSC objects
      * using _objectMap.
      */
-    static std::map<CDSC*, KDSC*> _objectMap;
+    // static std::map<CDSC*, KDSC*> _objectMap;
 };
 
 class KDSCScanHandler
