@@ -189,8 +189,15 @@ bool KJpegPlugin::readInfo( KFileMetaInfo& info, uint what )
     ExifData ImageInfo;
 
     // parse the jpeg file now
-    if (ImageInfo.scan(info.path()) == false) {
-        kdDebug(7034) << "Not a JPEG file!\n";
+    try {
+        if ( !ImageInfo.scan(info.path()) ) {
+            kdDebug(7034) << "Not a JPEG file!\n";
+            return false;
+        }
+    }
+    catch (FatalError& e) { // malformed exif data?
+        kdDebug(7034) << "Exception caught while parsing Exif data of: " << info.path() << endl;
+        e.debug_print();
         return false;
     }
 
