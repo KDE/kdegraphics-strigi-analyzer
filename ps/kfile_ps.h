@@ -34,15 +34,16 @@ public:
     KPSPlugin( QObject *parent, const char *name,
                 const QStringList& preferredItems );
     
-    virtual bool readInfo( KFileMetaInfo::Internal& info, int );
-    
+    virtual bool readInfo( KFileMetaInfo& info, uint what);
+
     void comment( Name );
     
 private:
-    KFileMetaInfo::Internal _info;
-    QStringList _keys;
+    KFileMetaInfo _info;
+    KFileMetaInfoGroup _group;
     KDSC* _dsc;
     bool _endComments;
+    bool _setData;
 };
 
 #endif

@@ -35,34 +35,42 @@ KPSPlugin::KPSPlugin(QObject *parent, const char *name,
     KFilePlugin( parent, name, preferredItems )
 {
     kdDebug(7034) << "ps plugin\n";
+    
+    // set up our mimetype
+    KFileMimeTypeInfo* info = addMimeTypeInfo( "application/postscript" );
+
+    // general group
+    KFileMimeTypeInfo::GroupInfo* group = addGroupInfo(info, "General", i18n("General"));
+    addItemInfo(group, "Title", i18n("Title"), QVariant::String);
+    addItemInfo(group, "Creator", i18n("Creator"), QVariant::String);
+    addItemInfo(group, "Creation Date", i18n("Creation Date"), QVariant::String);
+    addItemInfo(group, "For", i18n("For"), QVariant::String);
+    addItemInfo(group, "Pages", i18n("Pages"), QVariant::UInt);
 }
 
-bool KPSPlugin::readInfo( KFileMetaInfo::Internal& info, int )
+bool KPSPlugin::readInfo( KFileMetaInfo& info, uint /* what */)
 {
     _info = info;
-    _keys.clear();
+    _group = appendGroup(info, "General");
     _dsc = new KDSC;
     _endComments = false;
-    
+    _setData = false;
     _dsc->setCommentHandler( this );
-    
+
     FILE* fp = fopen( QFile::encodeName( info.path() ), "r" );
     char buf[4096];
     int count;
-    while( ( count = fread( buf, sizeof(char), 4096, fp ) ) != 0 
+    while( ( count = fread( buf, sizeof(char), 4096, fp ) ) != 0
         && !_endComments )
     {
-	_dsc->scanData( buf, count );
+        _dsc->scanData( buf, count );
     }
     fclose( fp );
 
     delete _dsc;
     _dsc = 0;
     
-    info.setSupportedKeys( _keys );
-    info.setPreferredKeys( m_preferred );
-    info.setSupportsVariableKeys( false );
-    return true;
+    return _setData;
 }  
 
 void KPSPlugin::comment( Name name )
@@ -70,35 +78,25 @@ void KPSPlugin::comment( Name name )
     switch( name )
     {
     case Title:
-	_keys << "Title";
-        _info.insert( KFileMetaInfoItem( "Title", 
-	                                 i18n( "Title" ),
-                                         QVariant( _dsc->dsc_title() ) ) );
-	break;
-    case Creator: 
-	_keys << "Creator"; 
-        _info.insert( KFileMetaInfoItem( "Creator", 
-	                                 i18n( "Creator" ),
-                                         QVariant( _dsc->dsc_creator() ) ) );
-	break;
-    case CreationDate: 
-	_keys << "CreationDate"; 
-        _info.insert( KFileMetaInfoItem( "CreationDate", 
-	                                 i18n( "Creation date" ), 
-	                                 QVariant( _dsc->dsc_date() ) ) );
-	break;
-    case For: 
-	_keys << "For"; 
-        _info.insert( KFileMetaInfoItem( "For", 
-	                                 i18n( "For" ),
-	                                 QVariant( _dsc->dsc_for() ) ) );
-	break;
-    case Pages: 
-	_keys << "Pages"; 
-        _info.insert( KFileMetaInfoItem( "Pages", 
-	                                 i18n( "Pages" ),
-	                                 QVariant( _dsc->page_pages() ) ) );
-	break;
+        appendItem(_group, "Title", _dsc->dsc_title());
+        _setData = true;
+    break;
+    case Creator:
+        appendItem(_group, "Creator", _dsc->dsc_creator());
+        _setData = true;
+    break;
+    case CreationDate:
+        appendItem(_group, "Creation Date", _dsc->dsc_date());
+        _setData = true;
+    break;
+    case For:
+        appendItem(_group, "For", _dsc->dsc_for());
+        _setData = true;
+    break;
+    case Pages:
+        appendItem(_group, "Pages", _dsc->page_pages());
+        _setData = true;
+    break;
     case EndComments: _endComments = true;
     default: ; // Ignore
     }

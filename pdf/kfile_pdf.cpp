@@ -35,20 +35,31 @@ typedef KGenericFactory<KPdfPlugin> PdfFactory;
 
 K_EXPORT_COMPONENT_FACTORY(kfile_pdf, PdfFactory("kfile_pdf"));
 
-KPdfPlugin::KPdfPlugin(QObject *parent, const char *name,
-                       const QStringList &preferredItems)
+KPdfPlugin::KPdfPlugin(QObject *parent, const char *name, const QStringList &preferredItems)
     : KFilePlugin(parent, name, preferredItems)
 {
     kdDebug(7034) << "pdf plugin\n";
+
+    // set up our mime type
+    KFileMimeTypeInfo* info = addMimeTypeInfo( "application/pdf" );
+
+    // general group
+    KFileMimeTypeInfo::GroupInfo* group = addGroupInfo(info, "General", i18n("General"));
+
+    addItemInfo(group, "CreationDate", i18n("Created"), QVariant::DateTime);
+    addItemInfo(group, "ModDate", i18n("Modified"), QVariant::DateTime);
+    addItemInfo(group, "Pages", i18n("Pages"), QVariant::Int);
+    addItemInfo(group, "Encrypted", i18n("Encrypted"), QVariant::Bool);
+    addVariableInfo(group, QVariant::String, 0);
 }
 
-bool KPdfPlugin::readInfo( KFileMetaInfo::Internal& info, int )
+bool KPdfPlugin::readInfo( KFileMetaInfo& info, uint /* what */)
 {
     KProcess p;
     p << "pdfinfo" << info.path();
     p.setEnvironment("LC_TIME", "C");
 
-    m_info = info;
+    mInfo = info;
 
     QObject::connect(&p, SIGNAL(receivedStdout(KProcess*, char*, int)),
                      this, SLOT(slotReceivedStdout(KProcess*, char*, int)));
@@ -60,8 +71,6 @@ bool KPdfPlugin::readInfo( KFileMetaInfo::Internal& info, int )
     }
     kdDebug(7034) << "subprocess finished\n";
 
-    info.setPreferredKeys(m_preferred);
-    info.setSupportsVariableKeys(false);
     return true;
 }
 
@@ -105,13 +114,13 @@ QDateTime KPdfPlugin::pdfDate(const QString& s) const
 void KPdfPlugin::slotReceivedStdout(KProcess*, char* buffer, int buflen)
 {
     kdDebug(7034) << "received stdout from child process\n";
+
     // just replace the last \n with a 0
     buffer[buflen-1] = '\0';
     QString s(buffer);
     kdDebug() << s << endl;
     QStringList l = QStringList::split("\n", s);
-
-    QStringList keys;
+    KFileMetaInfoGroup generalGroup = appendGroup(mInfo, "General");
 
     QStringList::Iterator it = l.begin();
     for (; it != l.end(); ++it ) {
@@ -121,39 +130,31 @@ void KPdfPlugin::slotReceivedStdout(KProcess*, char* buffer, int buflen)
         {
             QDateTime dt = pdfDate((*it).mid(13).stripWhiteSpace());
             if (dt.isValid())
-                m_info.insert(KFileMetaInfoItem("Created", i18n("Created"),
-                        QVariant(dt)));
+                appendItem(generalGroup, "CreationDate", QVariant(dt));
         }
         else if ((*it).startsWith("ModDate"))
         {
             QDateTime dt = pdfDate((*it).mid(8).stripWhiteSpace());
             if (dt.isValid())
-                m_info.insert(KFileMetaInfoItem("Modified", i18n("Modified"),
-                        QVariant(dt)));
+                appendItem(generalGroup, "ModDate", QVariant(dt));
         }
         else if ((*it).startsWith("Pages"))
         {
-            m_info.insert(KFileMetaInfoItem("Pages", i18n("Pages"),
-                           QVariant((*it).mid(7).stripWhiteSpace().toInt())));
+            appendItem(generalGroup, "Pages", QVariant((*it).mid(7).stripWhiteSpace().toInt()));
         }
         else if ((*it).startsWith("Encrypted"))
         {
             bool b = ((*it).mid(10).stripWhiteSpace() == "yes") ? true : false;
-            m_info.insert(KFileMetaInfoItem("Encrypted", i18n("Encrypted"),
-                           QVariant(b, 42)));
+            appendItem(generalGroup, "Encrypted", QVariant(b, 42));
         }
         else
         {
             QString key( (*it).left( (*it).find(":") ) );
             QString value( (*it).mid((*it).find(":")+1).stripWhiteSpace() );
 
-            m_info.insert(KFileMetaInfoItem(key, i18n(key.utf8()),
-                                            QVariant(value)));
+            appendItem(generalGroup, key, QVariant(value));
         }
     }
-
-    keys << "Created" << "Modified" << "Pages" << "Encrypted";
-    m_info.setSupportedKeys(keys);
 }
 
 #include "kfile_pdf.moc"

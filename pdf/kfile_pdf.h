@@ -30,17 +30,16 @@ class KPdfPlugin: public KFilePlugin
 {
     Q_OBJECT
 public:
-    KPdfPlugin( QObject *parent, const char *name,
-                const QStringList& preferredItems );
-    
-    virtual bool readInfo( KFileMetaInfo::Internal& info, int );
+    KPdfPlugin( QObject *parent, const char *name, const QStringList& preferredItems );
+
+    virtual bool readInfo(KFileMetaInfo& info, uint what);
 
 private slots:
     void slotReceivedStdout(KProcess* p, char* buffer, int buflen);
 
 private:
     QDateTime pdfDate(const QString& s) const;
-    KFileMetaInfo::Internal m_info;
+    KFileMetaInfo mInfo;
 };
 
 #endif
