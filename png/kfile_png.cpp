@@ -32,6 +32,7 @@
 #include <qdatetime.h>
 #include <qdict.h>
 #include <qvalidator.h>
+#include <zlib.h>
 
 // some defines to make it easier
 // don't tell me anything about preprocessor usage :)
@@ -200,7 +201,9 @@ bool KPngPlugin::readInfo( KFileMetaInfo& info, uint what)
             while(index<fileSize-12)
             {
                 while (index < fileSize - 12 &&
-                       strncmp((char*)CHUNK_TYPE(data,index), "tEXt", 4))
+                       strncmp((char*)CHUNK_TYPE(data,index), "tEXt", 4) &&
+                       strncmp((char*)CHUNK_TYPE(data,index), "zTXt", 4))
+
                 {
                     if (!strncmp((char*)CHUNK_TYPE(data,index), "IEND", 4))
                         goto end;
@@ -210,8 +213,8 @@ bool KPngPlugin::readInfo( KFileMetaInfo& info, uint what)
 
                 if (index < fileSize - 12)
                 {
-                    // we found a tEXt field
-                    kdDebug(7034) << "We found a tEXt field\n";
+                    // we found a tEXt or zTXt field
+
                     // get the key, it's a null terminated string at the
                     //  chunk start
 
@@ -224,29 +227,78 @@ bool KPngPlugin::readInfo( KFileMetaInfo& info, uint what)
                         if (8+index+keysize>=fileSize)
                             goto end;
 
-                    // the text comes after the key, but isn't null terminated
-                    uchar* text = &CHUNK_DATA(data,index, keysize+1);
-                    uint textsize = CHUNK_SIZE(data, index)-keysize-1;
+		    QByteArray arr;
+		    if(!strncmp((char*)CHUNK_TYPE(data,index), "zTXt", 4)) {
+			kdDebug(7034) << "We found a zTXt field\n";
+			// we get the compression method after the key
+			uchar* compressionMethod = &CHUNK_DATA(data,index,keysize+1);
+			if ( *compressionMethod != 0x00 ) {
+			    // then it isn't zlib compressed and we are sunk
+			    kdDebug(7034) << "Non-standard compression method." << endl;
+			    goto end;
+			}
+			// compressed string after the compression technique spec
+			uchar* compressedText = &CHUNK_DATA(data, index, keysize+2);
+			uint compressedTextSize = CHUNK_SIZE(data, index)-keysize-2;
 
-                    // security check, also considering overflow wraparound from the addition --
-                    // we may endup with a /smaller/ index if we wrap all the way around
-                    uint firstIndex       = (uint)(text - data);
-                    uint onePastLastIndex = firstIndex + textsize;
+			// security check, also considering overflow wraparound from the addition --
+			// we may endup with a /smaller/ index if we wrap all the way around
+			uint firstIndex       = (uint)(compressedText - data);
+			uint onePastLastIndex = firstIndex + compressedTextSize;
+			if ( onePastLastIndex > fileSize || onePastLastIndex <= firstIndex)
+			    goto end;
 
-                    if ( onePastLastIndex > fileSize || onePastLastIndex <= firstIndex)
-                        goto end;
+			int uncompressedLen = compressedTextSize * 2; // just a starting point
+			int zlibResult;
+			do {
+			    arr.resize(uncompressedLen);
+			    zlibResult = uncompress((Bytef*)arr.data(), (uLongf*)(&uncompressedLen),
+						    compressedText, compressedTextSize);
+			    if (Z_OK == zlibResult) {
+				// then it is all OK
+				arr.resize(uncompressedLen);
+			    } else if (Z_BUF_ERROR == zlibResult) {
+				// the uncompressedArray needs to be larger
+				// kdDebug(7034) << "doubling size for decompression" << endl;
+				uncompressedLen *= 2;
+			    } else {
+				// something bad happened
+				goto end;
+			    }
+			} while (Z_BUF_ERROR == zlibResult);
 
-                    QByteArray arr(textsize);
-                    arr = QByteArray(textsize).duplicate((const char*)text,
-                                                         textsize);
-                    appendItem(commentGroup,
-                               QString(reinterpret_cast<char*>(key)),
-                               QString(arr));
+			if (Z_OK != zlibResult)
+			    goto end;
+		    } else if (!strncmp((char*)CHUNK_TYPE(data,index), "tEXt", 4)) {
+			kdDebug(7034) << "We found a tEXt field\n";
+			// the text comes after the key, but isn't null terminated
+			uchar* text = &CHUNK_DATA(data,index, keysize+1);
+			uint textsize = CHUNK_SIZE(data, index)-keysize-1;
 
-                    kdDebug(7034) << "adding " << key << " / "
-                                  << QString(arr) << endl;
+			// security check, also considering overflow wraparound from the addition --
+			// we may endup with a /smaller/ index if we wrap all the way around
+			uint firstIndex       = (uint)(text - data);
+			uint onePastLastIndex = firstIndex + textsize;
 
-                    index += CHUNK_SIZE(data, index) + CHUNK_HEADER_SIZE;
+			if ( onePastLastIndex > fileSize || onePastLastIndex <= firstIndex)
+			    goto end;
+
+			arr.resize(textsize);
+			arr = QByteArray(textsize).duplicate((const char*)text,
+							     textsize);
+			
+		    } else {
+			kdDebug(7034) << "We found a field, not expected though\n";
+			goto end;
+		    }
+		    appendItem(commentGroup,
+			       QString(reinterpret_cast<char*>(key)),
+			       QString(arr));
+		    
+		    kdDebug(7034) << "adding " << key << " / "
+				  << QString(arr) << endl;
+
+		    index += CHUNK_SIZE(data, index) + CHUNK_HEADER_SIZE;
                 }
             }
         }
