@@ -9,6 +9,7 @@ fi
 
 if test "${LIBTIFF+set}" = set
 then
+  echo
   echo "libtiff was not found on your system. The meta info plugin for TIFF"
   echo "files won't be compiled."
 fi
