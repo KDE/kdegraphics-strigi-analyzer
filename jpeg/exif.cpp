@@ -730,14 +730,7 @@ void ExifData::ProcessExifDir(unsigned char * DirStart, unsigned char * OffsetBa
 //--------------------------------------------------------------------------
 void ExifData::process_COM (const uchar * Data, int length)
 {
-    QChar ch;
-    int a;
-
-    for (a=2;a<length;a++){
-        ch = Data[a];
-        if (ch == '\000') continue;                     // Remove nulls
-        Comment.append(ch);
-    }
+    Comment = QString::fromUtf8((char *)Data+2, (length-2));
 }
 
 
