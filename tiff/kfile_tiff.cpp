@@ -26,6 +26,8 @@
 #include <qstringlist.h>
 #include <qintdict.h>
 #include <qfile.h>
+#include <qdatetime.h>
+#include <qregexp.h>
 
 #include <tiff.h>
 #include <tiffio.h>
@@ -66,7 +68,7 @@ KTiffPlugin::KTiffPlugin(QObject *parent, const char *name,
     item = addItemInfo(group, "Software", i18n("Software"), 
             QVariant::String);
     item = addItemInfo(group, "DateTime", i18n("Date/time"), 
-            QVariant::String);
+            QVariant::DateTime);
     item = addItemInfo(group, "Artist", i18n("Artist"), 
             QVariant::String);
     setHint(item, KFileMimeTypeInfo::Author);
@@ -154,6 +156,31 @@ KTiffPlugin::KTiffPlugin(QObject *parent, const char *name,
                 new QString(I18N_NOOP("SGI log 24-bit packed")));
 }
 
+QDateTime KTiffPlugin::tiffDate(const QString& s) const
+{
+    QDateTime dt;
+    QRegExp rxDate("^([0-9]{4}):([0-9]{2}):([0-9]{2})\\s"
+                   "([0-9]{2}):([0-9]{2}):([0-9]{2})$");
+
+    if (rxDate.search(s) != -1)
+    {
+        int year = rxDate.cap(1).toInt();
+        int month = rxDate.cap(2).toInt();
+        int day = rxDate.cap(3).toInt();
+        int hour = rxDate.cap(4).toInt();
+        int min = rxDate.cap(5).toInt();
+        int sec = rxDate.cap(6).toInt();
+
+        QDate d = QDate(year, month, day);
+        QTime t = QTime(hour, min, sec);
+
+        dt.setDate(d);
+        dt.setTime(t);
+    }
+
+    return dt;
+}
+
 bool KTiffPlugin::readInfo(KFileMetaInfo& info, uint)
 {
     TIFF *tiff = TIFFOpen(QFile::encodeName(info.path()), "r");
@@ -234,7 +261,11 @@ bool KTiffPlugin::readInfo(KFileMetaInfo& info, uint)
     if (m_imageCompression[imageCompression])
         appendItem(group, "Compression", *m_imageCompression[imageCompression]);
     if (datetime)
-        appendItem(group, "DateTime", QString(datetime));
+    {
+        QDateTime dt = tiffDate(QString(datetime));
+        if (dt.isValid())
+            appendItem(group, "DateTime", dt);
+    }
     if (copyright)
         appendItem(group, "Copyright", QString(copyright));
     if (software)

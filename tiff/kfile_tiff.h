@@ -36,6 +36,8 @@ public:
     virtual bool readInfo(KFileMetaInfo& info, uint what);
 
 private:
+    QDateTime tiffDate(const QString&) const;
+
     QIntDict<QString> m_imageType;
     QIntDict<QString> m_imageCompression;
 };
