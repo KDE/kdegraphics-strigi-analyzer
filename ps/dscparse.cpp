@@ -2313,7 +2313,7 @@ dsc_private int
 dsc_check_match_prompt(CDSC *dsc, const char *str, int count)
 {
     if (count != 0) {
-	char buf[MAXSTR+MAXSTR] = '\0';
+	char buf[MAXSTR+MAXSTR] = "";
 	if (dsc->line_length < (unsigned int)(sizeof(buf)/2-1))  {
 	    strncpy(buf, dsc->line, dsc->line_length);
 	    buf[dsc->line_length] = '\0';
