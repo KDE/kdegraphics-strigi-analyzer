@@ -59,7 +59,7 @@ KRgbPlugin::KRgbPlugin(QObject *parent, const char *name, const QStringList &arg
 
 	item = addItemInfo(group, "ColorMode", i18n("Color mode"), QVariant::String);
 	item = addItemInfo(group, "Compression", i18n("Compression"), QVariant::String);
-	item = addItemInfo(group, "SharedRows", i18n("Shared rows"), QVariant::String);
+	item = addItemInfo(group, "RowRedundancy", i18n("Row redundancy"), QVariant::String);
 
 }
 
@@ -152,9 +152,9 @@ bool KRgbPlugin::readInfo(KFileMetaInfo& info, uint /*what*/)
 			i += it.data();
 
 		if (i)
-			appendItem(group, "SharedRows", QString("%1%").arg(i * 100.0 / (ysize * zsize), 0, 'f', 1));
+			appendItem(group, "Row redundancy", QString("%1%").arg(i * 100.0 / (ysize * zsize), 0, 'f', 1));
 		else
-			appendItem(group, "SharedRows", i18n("None"));
+			appendItem(group, "Row redundancy", i18n("None"));
 	}
 
 	group = appendGroup(info, "Comment");
