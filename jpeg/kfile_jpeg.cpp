@@ -200,6 +200,8 @@ bool KJpegPlugin::readInfo( KFileMetaInfo& info, uint what )
     if ( tag.length() ) {
         kdDebug(7034) << "exif inserting Comment: " << tag << "\n";
         appendItem( exifGroup, "Comment", tag );
+    } else {
+        appendItem( exifGroup, "Comment", tag );    // So user can add new comment
     }
 
     tag = ImageInfo.getCameraMake();
