@@ -153,9 +153,9 @@ bool KPngPlugin::readInfo( KFileMetaInfo& info, uint what)
             appendItem(techgroup, "Dimensions", QSize(x, y));
             appendItem(techgroup, "BitDepth", bpp);
             appendItem(techgroup, "ColorMode",
-                            (type < sizeof(colors)/sizeof(colors[0])) ? colors[data[25]] : i18n("Unknown"));
+                            (type < sizeof(colors)/sizeof(colors[0])) ? i18n(colors[data[25]]) : i18n("Unknown"));
             appendItem(techgroup, "Compression",
-                            (data[26] < sizeof(compressions)/sizeof(compressions[0])) ? compressions[data[26]] : i18n("Unknown"));
+                            (data[26] < sizeof(compressions)/sizeof(compressions[0])) ? i18n(compressions[data[26]]) : i18n("Unknown"));
         }
 
         // look for a tEXt chunk
