@@ -251,8 +251,8 @@ int ExifData::ReadJpegSections (QFile & infile, ReadMode_t ReadMode)
         Sections[SectionsRead].Type = marker;
 
         // Read the length of the section.
-        lh = infile.getch();
-        ll = infile.getch();
+        lh = (uchar) infile.getch();
+        ll = (uchar) infile.getch();
 
         itemlen = (lh << 8) | ll;
 
