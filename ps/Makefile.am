@@ -8,7 +8,7 @@ noinst_HEADERS   = kfile_ps.h kmaybe.h dscparse.h dscparse_adapter.h
 
 lib_LTLIBRARIES = kfile_ps.la
 
-kfile_ps_la_SOURCES = kfile_ps.cpp dscparse.cpp dscparse_adapter.cpp
+kfile_ps_la_SOURCES = dscparse.cpp kfile_ps.cpp dscparse_adapter.cpp
 kfile_ps_la_LDFLAGS = $(all_libraries) -module $(KDE_PLUGIN)
 kfile_ps_la_LIBADD = $(LIB_KSYCOCA)
 
