@@ -6,14 +6,14 @@ gif-info \- reads gif image info or sets comment.
 .SH SYNOPSIS
 .B gif-info
 .RB <filename>
-["Comment"]
+['Comment']
 
 .SH DESCRIPTION
 .LP
 .B gif-info
 displays information about the given gif (Graphic Interchange Format) image.  If a comment is specified, the comment is set instead.
 .PP
-Write a empty comment ("") to delete the comment block.
+Write a empty comment ('') to delete the comment block.
 .PP
 The GIF standard allows any number of 256 byte comment blocks in an image file, but most implementations (including this one) restrict you to just one block.  The GIF standard restricts comment blocks to "7 Bit ASCII", but this is widely ignored.  You are welcome to store text in your own native language, and are especially encouraged to use comments in utf-8 unicode format.
 
