@@ -1,20 +1,38 @@
+<<<<<<< kfile_png.cpp
+/* This file is part of the KDE project
+ * Copyright (C) 2001, 2002 Rolf Magnus <ramagnus@kde.org>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation version 2.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; see the file COPYING.  If not, write to
+ * the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+ * Boston, MA 02111-1307, USA.
+ *
+ *  $Id$
+ */
+
 #include <stdlib.h>
 #include "kfile_png.h"
+
 #include <kurl.h>
 #include <kprocess.h>
 #include <klocale.h>
+#include <kgenericfactory.h>
+#include <kdebug.h>
+
 #include <qcstring.h>
 #include <qfile.h>
 #include <qdatetime.h>
-#include <kgenericfactory.h>
 #include <qdict.h>
 #include <qvalidator.h>
-#include <kdebug.h>
-
-// this is not to stay here. It's just for testing until the real 
-// api is there
-static QStringList preferredItems;
-
 
 // some defines to make it easier
 // don't tell me anything about preprocessor usage :)
@@ -54,26 +72,20 @@ char* compressions[] =
   I18N_NOOP("deflate")
 };
 
+typedef KGenericFactory<KPngPlugin> PngFactory;
 
-K_EXPORT_COMPONENT_FACTORY(kfile_png, KGenericFactory<KPngPlugin>("kfile_png"));
+K_EXPORT_COMPONENT_FACTORY(kfile_png, PngFactory("kfile_png"));
 
 KPngPlugin::KPngPlugin(QObject *parent, const char *name,
                        const QStringList &preferredItems)
     : KFilePlugin(parent, name, preferredItems)
 {
-    ::preferredItems = preferredItems;
+    kdDebug(7034) << "png plugin\n";
 }
 
-KFileMetaInfo* KPngPlugin::createInfo(const QString& path)
+bool KPngPlugin::readInfo( KFileMetaInfo::Internal& info )
 {
-    return new KPngMetaInfo(path);
-}
-
-
-KPngMetaInfo::KPngMetaInfo( const QString& path )
-    : KFileMetaInfo(path)
-{
-    QFile f(path);
+    QFile f(info.path());
     f.open(IO_ReadOnly);
   
     unsigned char *data = (unsigned char*) malloc(f.size()+1);
@@ -96,7 +108,7 @@ KPngMetaInfo::KPngMetaInfo( const QString& path )
           int type = data[25];
           int bpp = data[24];
           
-          qDebug("resolution %dx%d", x, y);
+          kdDebug(7034) << "resolution " << x << "*" << y << endl;
           
           switch (type)
           {
@@ -110,22 +122,21 @@ KPngMetaInfo::KPngMetaInfo( const QString& path )
                   bpp = 0;
           }
     
-          m_items.insert("Resolution", new KFileMetaInfoItem("Resolution",
-                         i18n("Resolution"),
+          info.insert(KFileMetaInfoItem("Resolution", i18n("Resolution"),
                          QVariant(QString("%1 x %2").arg(x).arg(y)), false,
                          QString::null, i18n("pixels")));
       
-          m_items.insert("Bitdepth", new KFileMetaInfoItem("Bitdepth",
-                         i18n("Bitdepth"), QVariant(bpp), false,
+          info.insert(KFileMetaInfoItem("Bitdepth", i18n("Bitdepth"),
+                         QVariant(bpp), false,
                          QString::null, i18n("bpp")));
       
-          m_items.insert("Color mode", new KFileMetaInfoItem("Color mode",
-                         i18n("Color mode"), QVariant(
+          info.insert(KFileMetaInfoItem("Color mode", i18n("Color mode"),
+                        QVariant(
                          i18n((type < sizeof(colors)/sizeof(colors[0])) ? 
                          colors[data[25]] : "Unknown"))));
       
-          m_items.insert("Compression", new KFileMetaInfoItem("Compression",
-                         i18n("Compression"), QVariant(
+          info.insert(KFileMetaInfoItem("Compression", i18n("Compression"),
+                        QVariant(
                          i18n((data[26]<sizeof(compressions)/sizeof(compressions[0]) ?
                               compressions[data[26]] : "Unknown")))));
       }
@@ -138,14 +149,14 @@ KPngMetaInfo::KPngMetaInfo( const QString& path )
       while (strncmp((char*)CHUNK_TYPE(data,index), "tEXt", 4)) {
         if (!strncmp((char*)CHUNK_TYPE(data,index), "IEND", 4)) {
           free(data);
-          return;
+          return false;;
         }
         index += CHUNK_SIZE(data, index) + CHUNK_HEADER_SIZE;
       }
     
       if (index<f.size()) {
         // we found a tEXt field
-        qDebug("We found a tEXt field");
+        kdDebug(7034) << "We found a tEXt field\n";
         // get the key, it's a null terminated string at the chunk start
         unsigned char* key = &CHUNK_DATA(data,index,0);
 
@@ -157,105 +168,22 @@ KPngMetaInfo::KPngMetaInfo( const QString& path )
         QByteArray arr(textsize);
         arr = QByteArray(textsize).duplicate((const char*)text, textsize);
       
-        m_items.insert(QString((char*)key), new KFileMetaInfoItem((char*)key,
-                         i18n((char*)key),
+        info.insert(KFileMetaInfoItem((char*)key, i18n((char*)key),
                          QVariant(QString(arr)), true));
       
-        kdDebug() << "adding " << (char*)key << " / " << QString(arr) << endl;
+        kdDebug(7034) << "adding " << key << " / " << QString(arr) << endl;
         
         index += CHUNK_SIZE(data, index) + CHUNK_HEADER_SIZE;
       } 
     }
   }
+  QStringList supported;
+  supported << "Resolution" << "Bitdepth" << "Color mode" << "Compression";
+  info.setSupportedKeys(supported);
+  info.setPreferredKeys(m_preferred);
+  info.setSupportsVariableKeys(true);
   free(data);
-}
-
-KPngMetaInfo::~KPngMetaInfo()
-{
-}
-
-KFileMetaInfoItem * KPngMetaInfo::item( const QString& key ) const
-{
-    return m_items[key];
-}
-
-QStringList KPngMetaInfo::supportedKeys() const
-{
-    QDictIterator<KFileMetaInfoItem> it(m_items);
-    QStringList list;
-    
-    for (; it.current(); ++it)
-    {
-        list.append(it.current()->key());
-    }
-    return list;
-}
-
-QStringList KPngMetaInfo::preferredKeys() const
-{
-    QDictIterator<KFileMetaInfoItem> it(m_items);
-    QStringList list;
-    
-    for (; it.current(); ++it)
-    {
-        list.append(it.current()->key());
-    }
-    
-    // now move them up
-    QStringList::Iterator all;
-    QStringList::Iterator pref;
-    
-    for (pref=::preferredItems.end(); pref!=::preferredItems.begin(); --pref)
-    {
-        all = list.find(*pref);
-        if (all != list.end())
-        {
-            QString tmp = *all;
-            list.remove(all);
-            list.prepend(tmp);
-        }
-    }
-
-    return list;
-}
-
-void KPngMetaInfo::applyChanges()
-{
-    bool doit = false;
-    
-    // look up if we need to write to the file
-    QDictIterator<KFileMetaInfoItem> it(m_items);
-    for( ; it.current(); ++it )
-    {
-        if (it.current()->isModified())
-        {
-            doit = true;
-            break;
-        }
-    }
-
-    if (!doit) return;
-
-    // todo
-}
-
-bool KPngMetaInfo::supportsVariableKeys() const
-{
-    return true;
-}
-
-QValidator * KPngMetaInfo::createValidator( const QString& key, QObject *parent,
-                                            const char *name ) const
-{
-    if (m_items[key]->isEditable())
-        return new QRegExpValidator(QRegExp(".*"), parent, name);
-    else 
-        return 0L;
-}
-
-QVariant::Type KPngMetaInfo::type( const QString& key ) const
-{
-    return m_items[key]->type();
+  return true;
 }
 
 #include "kfile_png.moc"

@@ -1,32 +1,30 @@
+/* This file is part of the KDE project
+ * Copyright (C) 2001, 2002 Rolf Magnus <ramagnus@kde.org>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation version 2.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; see the file COPYING.  If not, write to
+ * the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+ * Boston, MA 02111-1307, USA.
+ *
+ *  $Id$
+ */
+
 #ifndef __KFILE_PNG_H__
 #define __KFILE_PNG_H__
 
 #include <kfilemetainfo.h>
 #include <kurl.h>
 
-class QString;
-
-class KPngMetaInfo: public KFileMetaInfo
-{
-public:
-    KPngMetaInfo( const QString& path );
-    virtual ~KPngMetaInfo();
-    
-    virtual KFileMetaInfoItem * item( const QString& key ) const;
-    
-    virtual QStringList supportedKeys() const;
-    virtual QStringList preferredKeys() const;
-    virtual bool supportsVariableKeys() const;
-    
-    virtual void applyChanges();
-    virtual QValidator * createValidator( const QString& key, QObject *parent,
-                                          const char *name ) const;
-
-    QVariant::Type type( const QString& key ) const;  
-        
-private:
-    char* m_path;
-};
+class QStringList;
 
 class KPngPlugin: public KFilePlugin
 {
@@ -35,9 +33,8 @@ class KPngPlugin: public KFilePlugin
 public:
     KPngPlugin( QObject *parent, const char *name,
                 const QStringList& preferredItems );
-    
-    virtual KFileMetaInfo* createInfo( const QString& path );
-};
 
+    virtual bool readInfo( KFileMetaInfo::Internal& info );
+};
 
 #endif
