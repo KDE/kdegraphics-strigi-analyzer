@@ -2,6 +2,7 @@
 Encoding=UTF-8
 Type=Service
 Name=PNM Info
+Name[ar]=معلومات PNM
 Name[ca]=Informació de PNM
 Name[cs]=PNM info
 Name[cy]=Gybodaeth PNM
