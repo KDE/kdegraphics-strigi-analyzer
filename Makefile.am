@@ -1,5 +1,5 @@
 if include_EXR_MODULES
-KFILE_EXR_SUBDIR=png
+KFILE_EXR_SUBDIR=exr
 endif
 
 if include_TIFF
