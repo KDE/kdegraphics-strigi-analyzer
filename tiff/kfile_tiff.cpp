@@ -19,12 +19,10 @@
 
 #include "kfile_tiff.h"
 
-#include <kurl.h>
 #include <kgenericfactory.h>
 #include <kdebug.h>
 
 #include <qstringlist.h>
-#include <qintdict.h>
 #include <qfile.h>
 #include <qdatetime.h>
 #include <qregexp.h>
@@ -39,7 +37,7 @@ K_EXPORT_COMPONENT_FACTORY(kfile_tiff, TiffFactory("kfile_tiff"));
 KTiffPlugin::KTiffPlugin(QObject *parent, const char *name,
         const QStringList &args) : KFilePlugin(parent, name, args)
 {
-    kdDebug(7034) << "TIFF file meta info plugin\n";
+    kdDebug(7034) << "TIFF file meta info plugin" << endl;
     KFileMimeTypeInfo* info = addMimeTypeInfo( "image/tiff" );
 
     KFileMimeTypeInfo::GroupInfo* group =

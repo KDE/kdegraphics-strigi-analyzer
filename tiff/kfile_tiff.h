@@ -21,11 +21,8 @@
 #define __KFILE_TIFF_H_
 
 #include <kfilemetainfo.h>
-#include <kurl.h>
 
 #include <qintdict.h>
-
-class QStringList;
 
 class KTiffPlugin: public KFilePlugin
 {
