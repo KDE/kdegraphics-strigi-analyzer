@@ -1,16 +1,16 @@
 ## Makefile.am for the ps file meta info plugin
 
 # set the include path for X, qt and KDE
-INCLUDES         = $(all_includes)
+INCLUDES         = $(all_includes) -I$(top_srcdir)/kghostview
 
 # these are the headers for your project
-noinst_HEADERS   = kfile_ps.h dscparse.h dscparse_adapter.h
+noinst_HEADERS   = kfile_ps.h
 
 kde_module_LTLIBRARIES = kfile_ps.la
 
-kfile_ps_la_SOURCES = dscparse.cpp kfile_ps.cpp dscparse_adapter.cpp
+kfile_ps_la_SOURCES = kfile_ps.cpp
 kfile_ps_la_LDFLAGS = $(all_libraries) -module $(KDE_PLUGIN)
-kfile_ps_la_LIBADD = $(LIB_KIO)
+kfile_ps_la_LIBADD = $(LIB_KIO) ../../kghostview/libdscparse.la
 
 # let automoc handle all of the meta source files (moc)
 METASOURCES = AUTO
