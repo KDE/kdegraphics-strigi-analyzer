@@ -128,3 +128,22 @@ String	Comment         gif comment blocks, which we permit to be utf-8 encoded
                         in clear violation/extension of the specification which
                         calls for 7 bit ASCII. See:
                         http://www.geocities.co.jp/SiliconValley/3453/gif_info/index_en.html
+
+
+TIFF plugin:
+===========
+
+type    key             Comment
+------  --------------  -----------------------------------------------------
+String  ImageType       Image type (Monochrome, RGB, RGBA etc)
+Size    Dimensions      Width & height as a QSize object
+Size    Resolution      x & y resolution in dpi as a QSize object
+Int     BitDepth        No. of bits per pixel (e.g. 24 for 8-bit RGB)
+String  Compression     Compression used (None, Deflate, LZW, JPEG etc.)
+Int     FaxPages        No. of pages if this is fax
+String  Software        Software used to produce this image
+String  Description     Image description
+String  Copyright       Copyright information
+String  DateTime        Date and time of image creation
+String  Artist          Name of the person who created this image
+
