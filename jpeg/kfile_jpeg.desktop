@@ -2,6 +2,7 @@
 Encoding=UTF-8
 Type=Service
 Name=JPEG EXIF Info
+Name[bg]=JPEG EXIF Информация
 Name[ca]=Informació de JPEG EXIF
 Name[cs]=JPEG EXIF info
 Name[da]=JPEG EXIF-info
@@ -39,5 +40,5 @@ Name[zu]=Ulwazi lwe-JPEG EXIF
 ServiceTypes=KFilePlugin
 X-KDE-Library=kfile_jpeg
 MimeType=image/jpeg
-PreferredItems=User comment,Date/time,Resolution,Exposure time,JPEG quality,Comment
+PreferredItems=User comment,Creation Date,Creation Time,Resolution,Exposure time,JPEG quality,Comment
 SupportsThumbnail=true
