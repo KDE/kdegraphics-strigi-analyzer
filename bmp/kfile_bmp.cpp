@@ -60,7 +60,7 @@ KBmpPlugin::KBmpPlugin(QObject *parent, const char *name,
 
     item = addItemInfo(group, "Resolution", i18n("Resolution"), QVariant::Size);
 
-    item = addItemInfo(group, "Bitdepth", i18n("Bitdepth"), QVariant::Int);
+    item = addItemInfo(group, "Bitdepth", i18n("Bit Depth"), QVariant::Int);
     setSuffix(item, i18n("bpp"));
 
     item = addItemInfo(group, "Compression", i18n("Compression"), QVariant::String);

@@ -59,7 +59,7 @@ KTgaPlugin::KTgaPlugin(QObject *parent, const char *name,
 
     item = addItemInfo(group, "Resolution", i18n("Resolution"), QVariant::Size);
 
-    item = addItemInfo(group, "Bitdepth", i18n("Bitdepth"), QVariant::Int);
+    item = addItemInfo(group, "Bitdepth", i18n("Bit Depth"), QVariant::Int);
     setSuffix(item, "bpp");
 
     item = addItemInfo(group, "Color mode", i18n("Color mode"), QVariant::String);
