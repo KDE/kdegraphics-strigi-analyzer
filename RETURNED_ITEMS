@@ -168,3 +168,13 @@ type       key             W/A        details
 QSize      Resolution      -/-        Resolution in pixels
 
 
+bmp plugin:
+===========
+
+type       key             W/A        details
+------------------------------------------------------------------------
+String     Type            -/-        Bitmap type (Windows / OS/2)
+QSize      Resolution      -/-        Resolution in pixels
+Int        Bitdepth        -/-        Bits per pixel
+String     Compression     -/-        Compression type
+
