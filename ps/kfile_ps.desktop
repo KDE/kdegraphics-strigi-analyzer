@@ -36,4 +36,4 @@ Name[zu]=Ulwazi Lwesi PostSikripti
 ServiceTypes=KFilePlugin
 X-KDE-Library=kfile_ps
 MimeType=application/postscript;image/x-eps
-PreferredItems=Title,Creator,Creation Date,For,Pages
+PreferredItems=Title,Creator,CreationDate,For,Pages

@@ -43,7 +43,7 @@ KPSPlugin::KPSPlugin(QObject *parent, const char *name,
     KFileMimeTypeInfo::GroupInfo* group = addGroupInfo(info, "General", i18n("General"));
     addItemInfo(group, "Title", i18n("Title"), QVariant::String);
     addItemInfo(group, "Creator", i18n("Creator"), QVariant::String);
-    addItemInfo(group, "Creation Date", i18n("Creation Date"), QVariant::String);
+    addItemInfo(group, "CreationDate", i18n("Creation date"), QVariant::String);
     addItemInfo(group, "For", i18n("For"), QVariant::String);
     addItemInfo(group, "Pages", i18n("Pages"), QVariant::UInt);
 }
@@ -59,7 +59,7 @@ bool KPSPlugin::readInfo( KFileMetaInfo& info, uint /* what */)
 
     FILE* fp = fopen( QFile::encodeName( info.path() ), "r" );
     if( fp == 0 )
-	return false;
+        return false;
     
     char buf[4096];
     int count;
@@ -78,6 +78,8 @@ bool KPSPlugin::readInfo( KFileMetaInfo& info, uint /* what */)
 
 void KPSPlugin::comment( Name name )
 {
+    int pages;
+
     switch( name )
     {
     case Title:
@@ -89,7 +91,7 @@ void KPSPlugin::comment( Name name )
         _setData = true;
     break;
     case CreationDate:
-        appendItem(_group, "Creation Date", _dsc->dsc_date());
+        appendItem(_group, "CreationDate", _dsc->dsc_date());
         _setData = true;
     break;
     case For:
@@ -97,8 +99,12 @@ void KPSPlugin::comment( Name name )
         _setData = true;
     break;
     case Pages:
-        appendItem(_group, "Pages", _dsc->page_pages());
-        _setData = true;
+        pages = _dsc->page_pages();
+        if (pages)
+        {
+            appendItem(_group, "Pages", pages);
+            _setData = true;
+        }
     break;
     case EndComments: _endComments = true;
     default: ; // Ignore
