@@ -386,7 +386,7 @@ int KDSC::errorFunction( void* caller_data, CDSC* dsc,
     Q_ASSERT( kdsc );
     
     return kdsc->errorHandler()->error( error );
-};
+}
 
 bool KDSCScanHandlerByLine::scanData( char* buf, unsigned int count )
 {
