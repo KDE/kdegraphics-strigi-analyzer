@@ -137,7 +137,7 @@ TIFF plugin:
 
 type    key             Comment
 ------  --------------  -----------------------------------------------------
-String  ImageType       Image type (Monochrome, RGB, RGBA etc)
+String  ColorMode       Color Mode (Monochrome, RGB, RGBA etc)
 Size    Dimensions      Width & height as a QSize object
 Size    Resolution      x & y resolution in dpi as a QSize object
 Int     BitDepth        No. of bits per pixel (e.g. 24 for 8-bit RGB)
