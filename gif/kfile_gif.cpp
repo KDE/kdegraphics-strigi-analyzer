@@ -40,7 +40,7 @@
 
 typedef KGenericFactory<KGifPlugin> GifFactory;
 
-K_EXPORT_COMPONENT_FACTORY(kfile_gif, GifFactory("kfile_gif"));
+K_EXPORT_COMPONENT_FACTORY(kfile_gif, GifFactory("kfile_gif"))
 
 KGifPlugin::KGifPlugin(QObject *parent, const char *name,
                        const QStringList &args)
