@@ -47,5 +47,5 @@ Name[zu]=Ulwazi lwe-ICO
 ServiceTypes=KFilePlugin
 X-KDE-Library=kfile_ico
 MimeType=image/x-ico
-PreferredGrous=Technical
+PreferredGroups=Technical
 PreferredItems=Number,Resolution,Colors,ResolutionM,ColorsM

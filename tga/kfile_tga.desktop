@@ -46,5 +46,5 @@ Name[zu]=Ulwazi lwe-Truevision Targa
 ServiceTypes=KFilePlugin
 X-KDE-Library=kfile_tga
 MimeType=image/x-targa
-PreferredGrous=Technical
+PreferredGroups=Technical
 PreferredItems=Resolution,Bitdepth,Color mode,Compression

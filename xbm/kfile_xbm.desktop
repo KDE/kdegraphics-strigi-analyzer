@@ -47,5 +47,5 @@ Name[zu]=Ulwazi lwe-XBM
 ServiceTypes=KFilePlugin
 X-KDE-Library=kfile_xbm
 MimeType=image/x-xbm
-PreferredGrous=Technical
+PreferredGroups=Technical
 PreferredItems=Resolution
