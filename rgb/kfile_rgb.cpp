@@ -126,9 +126,12 @@ bool KRgbPlugin::readInfo(KFileMetaInfo& info, uint /*what*/)
 
 	if (!storage)
 		appendItem(group, "Compression", i18n("Uncompressed"));
-	else if (storage == 1)
-		appendItem(group, "Compression", i18n("Runlength encoded"));
-	else
+	else if (storage == 1) {
+		long compressed = file.size() - 512 - 2 * (ysize * zsize) * sizeof(Q_UINT32);
+		long verbatim = xsize * ysize * zsize;
+		appendItem(group, "Compression", i18n("Runlength encoded")
+				+ QString(" (%1%)").arg(compressed * 100.0 / verbatim, 0, 'f', 1));
+	} else
 		appendItem(group, "Compression", i18n("Unknown"));
 
 
