@@ -1,1 +1,0 @@
-AC_CHECK_PROG(PDFINFO, pdfinfo, yes, no)

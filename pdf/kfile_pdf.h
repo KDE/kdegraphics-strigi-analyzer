@@ -22,6 +22,7 @@
 #define __KFILE_PDF_H__
 
 #include <kfilemetainfo.h>
+#include <PDFDoc.h>
 
 class QStringList;
 class KProcess;
@@ -34,12 +35,10 @@ public:
 
     virtual bool readInfo(KFileMetaInfo& info, uint what);
 
-private slots:
-    void slotReceivedStdout(KProcess* p, char* buffer, int buflen);
-
 private:
-    QDateTime pdfDate(const QString& s) const;
-    KFileMetaInfo mInfo;
+    QString getDocumentInfo( const QString & data ) const;
+    QDateTime getDocumentDate( const QString & data ) const;
+    PDFDoc* m_doc;
 };
 
 #endif

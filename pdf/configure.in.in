@@ -1,0 +1,6 @@
+# Compile the tiff meta info plugin only if Poppler is available
+PKG_CHECK_MODULES(POPPLER, poppler >= 0.1, have_poppler=yes, have_poppler=no)
+AM_CONDITIONAL(include_PDF_MODULES, test x$have_poppler = xyes)
+
+
+
