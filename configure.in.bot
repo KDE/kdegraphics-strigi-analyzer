@@ -4,7 +4,7 @@ if test $PDFINFO = no; then
   echo "see additional informations about pdf files in konqueror."
   echo "The plugin for it will still be compiled, but won't work until"
   echo "you install pdfinfo."
-  echo "You can download if (inside the xpdf package) from"
+  echo "You can download it (inside the xpdf package) from"
   echo "http://www.foolabs.com/xpdf/"
   echo ""
   all_tests=bad
