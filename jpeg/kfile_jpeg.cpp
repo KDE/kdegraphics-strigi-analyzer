@@ -91,7 +91,7 @@ KJpegPlugin::KJpegPlugin(QObject *parent, const char *name,
                       QVariant::String );
 
   item = addItemInfo( exifGroup, "Flash used", i18n("Flash Used"),
-                      QVariant::Bool );
+                      QVariant::String );
   item = addItemInfo( exifGroup, "Focal length", i18n("Focal Length"),
                       QVariant::String );
   setUnit( item, KFileMimeTypeInfo::Millimeters );
@@ -247,10 +247,41 @@ bool KJpegPlugin::readInfo( KFileMetaInfo& info, uint what )
     appendItem( exifGroup, "ColorMode", ImageInfo.getIsColor() ?
                 i18n("Color") : i18n("Black and white") );
 
-    int flashUsed = ImageInfo.getFlashUsed(); // -1, 0, 1
+    int flashUsed = ImageInfo.getFlashUsed(); // -1, <set>
     if ( flashUsed >= 0 ) {
+	 QString flash = i18n("Flash", "(unknown)");
+         switch ( flashUsed ) {
+         case 0: flash = i18n("Flash", "No");
+             break;
+         case 1:
+         case 5:
+         case 7:
+             flash = i18n("Flash", "Fired");
+             break;
+         case 9:
+         case 13:
+         case 15:
+             flash = i18n( "Flash", "Fill Fired" );
+             break;
+         case 16:
+             flash = i18n( "Flash", "Off" );
+             break;
+         case 24:
+             flash = i18n( "Flash", "Auto Off" );
+             break;
+         case 25:
+         case 29:
+         case 31:
+             flash = i18n( "Flash", "Auto Fired" );
+             break;
+         case 32:
+             flash = i18n( "Flash", "Not Available" );
+             break;
+         default:
+             break;
+        }
         appendItem( exifGroup, "Flash used",
-                    QVariant((flashUsed > 0), 42 ) );
+                    flash );
     }
 
     if (ImageInfo.getFocalLength()){

@@ -575,7 +575,7 @@ void ExifData::ProcessExifDir(unsigned char * DirStart, unsigned char * OffsetBa
 
             case TAG_FOCALLENGTH:
                 // Nice digital cameras actually save the focal length as a function
-                // of how farthey are zoomed in.
+                // of how far they are zoomed in.
                 ExifData::FocalLength = (float)ConvertAnyFormat(ValuePtr, Format);
                 break;
 
@@ -601,9 +601,7 @@ void ExifData::ProcessExifDir(unsigned char * DirStart, unsigned char * OffsetBa
                 break;
 
             case TAG_FLASH:
-                if (ConvertAnyFormat(ValuePtr, Format)){
-                    ExifData::FlashUsed = 1;
-                }
+		ExifData::FlashUsed = (int)ConvertAnyFormat(ValuePtr, Format);
                 break;
 
             case TAG_EXIF_IMAGELENGTH:
@@ -822,6 +820,7 @@ void ExifData::process_EXIF(unsigned char * CharBuf, unsigned int length)
 
     // Compute the CCD width, in milimeters.
     if (FocalplaneXRes != 0){
+	kdDebug() << "ExifImageWidth " << ExifImageWidth << " FocalplaneUnits " << FocalplaneUnits << " FocalplaneXRes " << FocalplaneXRes << endl;
         ExifData::CCDWidth = (float)(ExifImageWidth * FocalplaneUnits / FocalplaneXRes);
     }
 }
@@ -857,7 +856,7 @@ ExifData::ExifData()
 {
     ExifData::Whitebalance = -1;
     ExifData::MeteringMode = -1;
-    ExifData::FlashUsed = -1;
+    ExifData::FlashUsed = 0;
     Orientation = 0;
     Height = 0;
     Width = 0;
