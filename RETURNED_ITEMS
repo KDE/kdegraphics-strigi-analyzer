@@ -1,0 +1,30 @@
+If you make a new plugin, please add the list of returned items to this list.
+
+The returned items are:
+
+pdf plguin:
+===========
+
+Date Created
+Date Modiified
+Int  Pages
+Bool Encrypted
+and everything else pdfinfo returns as string
+
+
+png plugin:
+===========
+
+type       key             W/A        details
+------------------------------------------------------------------------
+String     Resolution      -/-
+Int        Bitdepth        -/- 
+String     Color mode      -/-  
+String     Compression     -/-    Compression type. Right now always "deflate"
+
+Other keys correcponding to the pdf comment keys are returned as non-editable
+String.
+
+Common keys that are recommended in the png spec:
+Title, Author, Description, Copyright, Creation Time, Software, Disclaimer,
+Warning, Source, Comment

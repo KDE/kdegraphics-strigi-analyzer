@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Service
+Name=PNG Info
+ServiceTypes=KFilePlugin
+X-KDE-Library=kfile_png
+MimeType=image/png
+PreferredItems=Title,Author,Resolution,Bitdepth,Color mode,Compr. type
