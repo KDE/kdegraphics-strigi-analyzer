@@ -33,7 +33,7 @@ typedef unsigned char uchar;
 
 typedef struct {
     unsigned short Tag;
-    char * Desc;
+    const char*const Desc;
 }TagTable_t;
 
 #define MAX_SECTIONS 20

@@ -10,6 +10,7 @@
 
 #include "exif.h"
 #include <qwmatrix.h>
+#include <kglobal.h>
 
 
 static unsigned char * LastExifRefd;
@@ -224,9 +225,10 @@ int ExifData::ReadJpegSections (QFile & infile, ReadMode_t ReadMode)
         return false;
     }
     for(SectionsRead = 0; SectionsRead < MAX_SECTIONS-1; ){
-        int itemlen;
         int marker = 0;
-        int ll,lh, got;
+        int got;
+        unsigned int ll,lh;
+        unsigned int itemlen;
         uchar * Data;
 
         for (a=0;a<7;a++){
@@ -254,7 +256,7 @@ int ExifData::ReadJpegSections (QFile & infile, ReadMode_t ReadMode)
 
         itemlen = (lh << 8) | ll;
 
-        if (itemlen < 2){
+        if (itemlen < 2) {
             throw FatalError("invalid marker");
         }
 
@@ -268,7 +270,7 @@ int ExifData::ReadJpegSections (QFile & infile, ReadMode_t ReadMode)
         Data[1] = (uchar)ll;
 
         got = infile.readBlock((char*)Data+2, itemlen-2); // Read the whole section.
-        if (got != itemlen-2){
+        if (( unsigned ) got != itemlen-2){
             throw FatalError("reading from file");
         }
         SectionsRead++;
@@ -278,16 +280,16 @@ int ExifData::ReadJpegSections (QFile & infile, ReadMode_t ReadMode)
             case M_SOS:   // stop before hitting compressed data
                 // If reading entire image is requested, read the rest of the data.
                 if (ReadMode & READ_IMAGE){
-                    int size;
+                    unsigned long size;
 
-                    size = infile.size()-infile.at();
+                    size = kMax( 0ul, infile.size()-infile.at() );
                     Data = (uchar *)malloc(size);
                     if (Data == NULL){
                         throw FatalError("could not allocate data for entire image");
                     }
 
                     got = infile.readBlock((char*)Data,  size);
-                    if (got != size){
+                    if (( unsigned ) got != size){
                         throw FatalError("could not read the rest of the image");
                     }
 
