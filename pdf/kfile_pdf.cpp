@@ -131,8 +131,8 @@ void KPdfPlugin::slotReceivedStdout(KProcess*, char* buffer, int buflen)
         {
             QDateTime dt = pdfDate((*it).mid(13).stripWhiteSpace());
             if (dt.isValid()) {
-                appendItem(generalGroup, "CreationDate", QVariant(dt.date())));
-                appendItem(generalGroup, "CreationTime", QVariant(dt.time())));
+                appendItem(generalGroup, "CreationDate", QVariant(dt.date()));
+                appendItem(generalGroup, "CreationTime", QVariant(dt.time()));
             }
         }
         else if ((*it).startsWith("ModificationDate"))
