@@ -73,6 +73,11 @@ KTiffPlugin::KTiffPlugin(QObject *parent, const char *name,
     item = addItemInfo(group, "FaxPages", i18n("Fax pages"), 
             QVariant::Int);
 
+    group = addGroupInfo(info, "Scanner", i18n("Scanner"));
+
+    item = addItemInfo(group, "Make", i18n("Make"), QVariant::String);
+    item = addItemInfo(group, "Model", i18n("Model"), QVariant::String);
+
     m_imageType.setAutoDelete(true);
     m_imageCompression.setAutoDelete(true);
 
@@ -157,9 +162,10 @@ bool KTiffPlugin::readInfo(KFileMetaInfo& info, uint)
 
     uint32 imageLength=0, imageWidth=0;
     uint16 bitsPerSample=0, imageCompression=0, imageType=0, samplesPerPixel=0,
-           imageAlpha=0, imageResUnit=0, dummy=0, faxPages=0; 
+        imageAlpha=0, imageResUnit=0, dummy=0, faxPages=0; 
     float imageXResolution=0, imageYResolution=0;
-    char *description=0, *copyright=0, *software=0, *datetime=0, *artist=0;
+    char *description=0, *copyright=0, *software=0, *datetime=0, *artist=0,
+        *scannerMake=0, *scannerModel=0;
 
     TIFFGetField(tiff, TIFFTAG_IMAGELENGTH, &imageLength);
     TIFFGetField(tiff, TIFFTAG_IMAGEWIDTH, &imageWidth);
@@ -177,8 +183,10 @@ bool KTiffPlugin::readInfo(KFileMetaInfo& info, uint)
     TIFFGetField(tiff, TIFFTAG_DATETIME, &datetime);
     TIFFGetField(tiff, TIFFTAG_ARTIST, &artist);
     TIFFGetField(tiff, TIFFTAG_PAGENUMBER, &dummy, &faxPages);
+    TIFFGetField(tiff, TIFFTAG_MAKE, &scannerMake);
+    TIFFGetField(tiff, TIFFTAG_MODEL, &scannerModel);
 
-    kdDebug(7034) << "Description: " << (void *)description << " -> " << description << endl;
+    kdDebug(7034) << "Description: " << description << endl;
     kdDebug(7034) << "Width: " << imageWidth << endl;
     kdDebug(7034) << "Height: " << imageLength << endl;
     kdDebug(7034) << "BitDepth: " << bitsPerSample << endl;
@@ -194,6 +202,8 @@ bool KTiffPlugin::readInfo(KFileMetaInfo& info, uint)
     kdDebug(7034) << "Copyright: " << copyright << endl;
     kdDebug(7034) << "Software: " <<  software << endl;
     kdDebug(7034) << "Artist: " << artist << endl;
+    kdDebug(7034) << "Make: " << scannerMake << endl;
+    kdDebug(7034) << "Model: " << scannerModel << endl;
 
     if (imageResUnit == RESUNIT_CENTIMETER)
     {
@@ -216,12 +226,9 @@ bool KTiffPlugin::readInfo(KFileMetaInfo& info, uint)
     appendItem(group, "Dimensions", QSize(imageWidth, imageLength));
     appendItem(group, "BitDepth", imageBpp);
     if (imageXResolution>0 && imageYResolution>0)
-    {
-        kdDebug(7034) << "Adding resolution..." << endl;
         appendItem(group, "Resolution", QSize(
                 static_cast<int>(imageXResolution), 
                 static_cast<int>(imageYResolution)));
-    }
     if (m_imageType[imageType])
         appendItem(group, "ImageType", *m_imageType[imageType]);
     if (m_imageCompression[imageCompression])
@@ -239,6 +246,15 @@ bool KTiffPlugin::readInfo(KFileMetaInfo& info, uint)
             imageCompression==COMPRESSION_CCITTFAX4))
     {
         appendItem(group, "FaxPages", faxPages);
+    }
+
+    if (scannerMake || scannerModel)
+    {
+        group = appendGroup(info, "Scanner");
+        if (scannerMake)
+            appendItem(group, "Make", QString(scannerMake));
+        if (scannerModel)
+            appendItem(group, "Model", QString(scannerModel));
     }
 
     TIFFClose(tiff);
