@@ -463,7 +463,7 @@ QDateTime KJpegPlugin::parseDateTime( const QString& string )
     QString day     = string.mid( 8, 2 );
     QString hour    = string.mid( 11, 2 );
     QString minute  = string.mid( 14, 2 );
-    QString seconds = string.mid( 18, 2 );
+    QString seconds = string.mid( 17, 2 );
 
     bool ok;
     bool allOk = true;
