@@ -219,16 +219,19 @@ bool KPngPlugin::readInfo( KFileMetaInfo& info, uint what)
 
                     // the text comes after the key, but isn't null terminated
                     uchar* text = &CHUNK_DATA(data,index, keysize+1);
-                    int textsize = CHUNK_SIZE(data, index)-keysize-1;
+                    uint textsize = CHUNK_SIZE(data, index)-keysize-1;
 
-                    // security check
-                    if ( (uint)(text - data) + textsize > f.size())
+                    // security check, also considering overflow wraparound from the addition --
+                    // we may endup with a /smaller/ index if we wrap all the way around
+                    uint firstIndex       = (uint)(text - data);
+                    uint onePastLastIndex = firstIndex + textsize;
+
+                    if ( onePastLastIndex > f.size() || onePastLastIndex <= firstIndex)
                         goto end;
 
                     QByteArray arr(textsize);
                     arr = QByteArray(textsize).duplicate((const char*)text,
                                                          textsize);
-
                     appendItem(commentGroup,
                                QString(reinterpret_cast<char*>(key)),
                                QString(arr));
