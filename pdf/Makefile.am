@@ -15,8 +15,8 @@ kfile_pdf_la_LIBADD = $(LIB_KSYCOCA)
 # let automoc handle all of the meta source files (moc)
 METASOURCES = AUTO
 
-messages:
-	$(XGETTEXT) -ki18n -kI18N_NOOP -C $(srcdir)/*.cpp -o kfile_pdf.pot
+messages: 
+	$(XGETTEXT) *.cpp -o $(podir)/kfile_pdf.pot
 
 services_DATA = kfile_pdf.desktop
 servicesdir = $(kde_servicesdir)

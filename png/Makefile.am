@@ -16,7 +16,7 @@ kfile_png_la_LIBADD = $(LIB_KSYCOCA)
 METASOURCES = AUTO
 
 messages:
-	$(XGETTEXT) -ki18n -kI18N_NOOP -C $(srcdir)/*.cpp -o kfile_png.pot
+	$(XGETTEXT) *.cpp -o $(podir)/kfile_png.pot
 
 services_DATA = kfile_png.desktop
 servicesdir = $(kde_servicesdir)
