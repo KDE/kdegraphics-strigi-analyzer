@@ -1,7 +1,7 @@
 ## Makefile.am for the ps file meta info plugin
 
 # set the include path for X, qt and KDE
-INCLUDES         = $(all_includes) -I$(top_srcdir)/kghostview
+INCLUDES         = -I$(top_srcdir)/kghostview $(all_includes)
 
 # these are the headers for your project
 noinst_HEADERS   = kfile_ps.h
