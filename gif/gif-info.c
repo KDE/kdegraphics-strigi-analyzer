@@ -389,7 +389,20 @@ FILE    *dest;
 /****************************************************************************/
 extern int validate_gif_structure( const char * original_filename )
 {
-    return( 0 );
+FILE    * infile;
+int       rc;
+
+    if ((infile = fopen(original_filename, READ_BINARY)) == NULL) {
+        fprintf(stderr, "can't open gif image '%s'\n", original_filename);
+        return( 1 );
+        }
+    output      = FALSE;
+    verbose     = FALSE;
+    debug       = FALSE;
+    skipcomment = FALSE;
+    rc = giftrans( infile, NULL );
+    fclose( infile );
+    return( rc );
 }
 
 
@@ -399,7 +412,7 @@ extern void * get_gif_info( const char * original_filename )
 FILE    * infile;
 
     if ((infile = fopen(original_filename, READ_BINARY)) == NULL) {
-        fprintf(stderr, "can't open gif image %s\n", original_filename);
+        fprintf(stderr, "can't open gif image '%s'\n", original_filename);
         return( NULL );
         }
 
@@ -408,6 +421,7 @@ FILE    * infile;
     debug       = FALSE;
     skipcomment = FALSE;
     giftrans( infile, NULL );
+    return( NULL );
 }
 
 
@@ -426,6 +440,7 @@ FILE    * infile;
 extern int set_gif_comment( const char * original_filename, char * comment )
 {
 int         i;
+int         rc;
 char *      temp_filename;
 int         temp_filename_length;
 struct stat statbuf;
@@ -437,10 +452,9 @@ FILE *      outfile;
    * Make sure we're dealing with a proper input file.  Safety first!
    */
   if( validate_gif_structure( original_filename ) ) {
-    fprintf(stderr, "error validating gif image %s\n", original_filename);
+    fprintf(stderr, "error validating gif image '%s'\n", original_filename);
     return(ERROR_NOT_A_JPEG);
     }
-
 
   /* Get a unique temporary file in the same directory.  Hopefully 
    * if things go wrong, this file will still be left for recovery purposes.
@@ -453,46 +467,42 @@ FILE *      outfile;
   for( i=0; i<10; i++ ) {
     snprintf( temp_filename, temp_filename_length, "%s%d", original_filename, i );
     if( (stat( temp_filename, &statbuf )) && (outfile = fopen(temp_filename, WRITE_BINARY)) ) {
-        //fprintf(stderr, "opened temporary file %s\n", temp_filename);
+        //fprintf(stderr, "opened temporary file '%s'\n", temp_filename);
         break;
         }
     }
   if( !outfile ) {
-    fprintf(stderr, "failed opening temporary file %s\n", temp_filename);
+    fprintf(stderr, "failed opening temporary file '%s'\n", temp_filename);
     return(ERROR_TEMP_FILE);
     }
 
   if ((infile = fopen(original_filename, READ_BINARY)) == NULL) {
-    fprintf(stderr, "can't open gif image %s\n", original_filename);
+    fprintf(stderr, "can't open gif image '%s'\n", original_filename);
     return(ERROR_NOT_A_JPEG);
     }
-
-  /*
-   * Let's rock and roll! 
-   */
+  /* Let's do it */
   output      = TRUE;
   verbose     = FALSE;
   debug       = FALSE;
   skipcomment = TRUE;
   global_comment = comment;
-      giftrans( infile, outfile );
+  rc = giftrans( infile, outfile );
   fclose( infile );
-  fsync( fileno( outfile) );    /* Make sure its really on disk first.  IMPORTANT!!! */
-  if ( fclose( outfile ) ) {
-    fprintf(stderr, "error in temporary file %s\n", temp_filename);
+  fsync( fileno( outfile) );    /* Flush it to disk.  IMPORTANT!! */
+                                /* We really should also flush the directory */
+
+  /* If everything is OK, and if the new file validates, move
+     it over the top of the original */
+  if ( fclose( outfile ) || validate_gif_structure( temp_filename ) ) {
+    fprintf(stderr, "error in temporary file '%s'\n", temp_filename);
     return(ERROR_TEMP_FILE);
     }
-
-  /*
-   * Make sure we did it right.  We've already fsync()'ed the file.  Safety first!
-   */
-  if( validate_gif_structure( temp_filename ) ) {
-    fprintf(stderr, "error in temporary file %s\n", temp_filename);
-    return(ERROR_TEMP_FILE);
-    }
-
+  if( rc ) {
+    unlink( temp_filename );
+    return( rc );
+    } 
   if( rename( temp_filename, original_filename ) ) {
-    fprintf(stderr, "error renaming %s to %s\n", temp_filename, original_filename);
+    fprintf(stderr, "error renaming '%s' to '%s'\n", temp_filename, original_filename);
     return(ERROR_TEMP_FILE);
     }
 
@@ -525,14 +535,14 @@ main (int argc, char **argv)
 
     /* Check if file is readable... */
     if ((fp = fopen(filename, READ_BINARY)) == NULL) {
-      fprintf(stderr, "Error: Can't open file %s\n", filename);
+      fprintf(stderr, "Error: Can't open file '%s'\n", filename);
       return(5);
       }
     fclose(fp);
 
     /* Check if we really have a commentable image file here... */
     if( validate_gif_structure( filename ) ) {
-      fprintf(stderr, "Error: error parsing file %s as a gif image\n", filename);
+      fprintf(stderr, "Error: error parsing file '%s' as a gif image\n", filename);
       return(5);
       }
 
