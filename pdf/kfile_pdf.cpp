@@ -24,7 +24,7 @@ KFileMetaInfo* KPdfPlugin::createInfo(const QString& path)
     return new KPdfMetaInfo(path);
 }
 
-void KPdfMetaInfo::slotReceivedStdout(KProcess* p, char* buffer, int buflen)
+void KPdfMetaInfo::slotReceivedStdout(KProcess*, char* buffer, int buflen)
 {
     qDebug("received stdout from child process");
     // just replace the last \n with a 0
