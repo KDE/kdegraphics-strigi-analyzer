@@ -6,3 +6,9 @@ then
   echo "see meta informationa about pdf files in konqueror. The plugin for it"
   echo "will still be compiled, but won't work until you install pdfinfo"
 fi
+
+if test "${LIBTIFF+set}" = set
+then
+  echo "libtiff was not found on your system. The meta info plugin for TIFF"
+  echo "files won't be compiled."
+fi
