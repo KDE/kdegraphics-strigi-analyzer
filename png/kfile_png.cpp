@@ -172,7 +172,7 @@ bool KPngPlugin::readInfo( KFileMetaInfo& info, uint what)
                     if (!strncmp((char*)CHUNK_TYPE(data,index), "IEND", 4))
                     {
                         free(data);
-                        return false;;
+                        return true;
                     }
 
                     index += CHUNK_SIZE(data, index) + CHUNK_HEADER_SIZE;
