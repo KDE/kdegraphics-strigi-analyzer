@@ -84,6 +84,12 @@ KPngPlugin::KPngPlugin(QObject *parent, const char *name,
 
 bool KPngPlugin::readInfo( KFileMetaInfo::Internal& info )
 {
+    QStringList supported;
+    supported << "Resolution" << "Bitdepth" << "Color mode" << "Compression";
+    info.setSupportedKeys(supported);
+    info.setPreferredKeys(m_preferred);
+    info.setSupportsVariableKeys(true);
+
     QFile f(info.path());
     f.open(IO_ReadOnly);
   
@@ -176,11 +182,6 @@ bool KPngPlugin::readInfo( KFileMetaInfo::Internal& info )
       } 
     }
   }
-  QStringList supported;
-  supported << "Resolution" << "Bitdepth" << "Color mode" << "Compression";
-  info.setSupportedKeys(supported);
-  info.setPreferredKeys(m_preferred);
-  info.setSupportsVariableKeys(true);
   free(data);
   return true;
 }
