@@ -64,7 +64,7 @@ KTiffPlugin::KTiffPlugin(QObject *parent, const char *name,
     setSuffix(item, i18n(" dpi"));
     item = addItemInfo(group, "BitDepth", i18n("Bit depth"), 
             QVariant::Int);
-    setUnit(item, KFileMimeTypeInfo::BitsPerPixels);
+    setUnit(item, KFileMimeTypeInfo::BitsPerPixel);
     setSuffix(item, i18n(" bpp"));
     item = addItemInfo(group, "Compression", i18n("Compression"), 
             QVariant::String);
