@@ -9,6 +9,9 @@ showimg (http://ric.jalix.org/)
 Bryce Nesbitt for setcomment
 based on wrjpgcom.c, Copyright (C) 1994-1997, Thomas G. Lane.
 
+EXIF spec: 
+http://www.pima.net/standards/it10/PIMA15740/exif.htm
+http://www.ba.wakwak.com/~tsuruzoh/Computer/Digicams/exif-e.html
 
 -------------------------------------------------------------------------------
 Bugs:

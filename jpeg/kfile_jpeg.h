@@ -20,10 +20,8 @@
 #ifndef __KFILE_JPEG_H__
 #define __KFILE_JPEG_H__
 
+#include <qdatetime.h>
 #include <kfilemetainfo.h>
-#include <kurl.h>
-
-class QStringList;
 
 class KJpegPlugin: public KFilePlugin
 {
@@ -37,6 +35,9 @@ public:
     virtual bool writeInfo( const KFileMetaInfo& info ) const;
     virtual QValidator* createValidator( const KFileMetaInfoItem& item,
                                          QObject* parent, const char* name) const;
+    
+private:
+    QDateTime parseDateTime( const QString& string ); 
 };
 
 #endif
