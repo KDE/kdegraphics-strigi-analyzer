@@ -2,6 +2,7 @@
 Encoding=UTF-8
 Type=Service
 Name=XPM Info
+Name[br]=Titouroù XPM
 Name[ca]=Informació de XPM
 Name[cs]=XPM info
 Name[de]=XPM-Info
@@ -19,7 +20,7 @@ Name[ro]=Informaţii XPM
 Name[ru]=Информация о XPM
 Name[sl]=Informacije o XPM
 Name[sr]=XPM информације
-Name[sr@Latn]=XPM информације
+Name[sr@Latn]=XPM informacije
 Name[sv]=XPM-information
 Name[ta]=XPM தகவல்
 Name[tr]=XPM Bilgisi
