@@ -1,4 +1,3 @@
-<<<<<<< kfile_png.cpp
 /* This file is part of the KDE project
  * Copyright (C) 2001, 2002 Rolf Magnus <ramagnus@kde.org>
  *
