@@ -8,5 +8,4 @@ endif
 
 
 SUBDIRS=dvi pdf png ps jpeg xbm xpm bmp tga rgb ico pcx $(KFILE_TIFF_SUBDIR) pnm \
-	$(KFILE_EXR_SUBDIR) dds
-# gif
+	$(KFILE_EXR_SUBDIR) dds gif

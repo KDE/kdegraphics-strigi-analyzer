@@ -56,74 +56,67 @@ KGifPlugin::KGifPlugin(QObject *parent, const char *name,
 
     KFileMimeTypeInfo::ItemInfo* item;
 
-    item = addItemInfo(group, "Comment", i18n("Comment"), QVariant::String);
-    setAttributes(item, KFileMimeTypeInfo::Modifiable);
-    setHint(item,  KFileMimeTypeInfo::Description);
+    item = addItemInfo(group, "Version", i18n("Version"), QVariant::String);
 
-    item = addItemInfo(group, "Dimensions", i18n("Dimensions"), QVariant::Size);
+    item = addItemInfo( group, "Dimensions", i18n("Dimensions"), QVariant::Size );
     setHint( item, KFileMimeTypeInfo::Size );
-    setUnit(item, KFileMimeTypeInfo::Pixels);
-}
+    setUnit( item, KFileMimeTypeInfo::Pixels );
 
-QValidator* KGifPlugin::createValidator( const QString& mimetype,
-                                         const QString& group,
-                                         const QString& key,
-                                         QObject* parent, const char* name) const
-{
-    return new QRegExpValidator(QRegExp(".*"), parent, name);
-}
+    item = addItemInfo(group, "BitDepth", i18n("Bit Depth"), QVariant::Int);
+    setUnit(item, KFileMimeTypeInfo::BitsPerPixel);
 
-bool KGifPlugin::writeInfo( const KFileMetaInfo& info ) const
-{
-    QString comment = info["General"]["Comment"].value().toString();
-    QString path    = info.path();
-
-    kdDebug(7034) << "gif KFileMetaInfo writeInfo: " << info.path() << " \"" << comment << "\"\n";
-
-    /*
-        Do a strictly safe insertion of the comment:
-
-        Scan original to verify it's a proper gif
-        Open a unique temporary file in this directory
-        Write temporary, replacing all COM blocks with this one.
-        Scan temporary, to verify it's a proper gif
-        Rename original to another unique name
-        Rename temporary to original
-        Unlink original
-    */
-    /*
-        The gif standard specifies 7 bit ascii for the COM block.
-        Rather than inserting national characters here,
-        I'm assuming it's better to write unicode utf-8,
-        which is fully backwards compatible with readers expecting ascii.
-    */
-    //if( safe_copy_and_modify( path.latin1(), comment.utf8() ) ) {
-    //        return false;
-    //    }
-    return true;
 }
 
 bool KGifPlugin::readInfo( KFileMetaInfo& info, uint what )
 {
-    QString tag;
+    Q_UNUSED( what );
 
     kdDebug(7034) << "gif KFileMetaInfo readInfo\n";
 
-    KFileMetaInfoGroup group = appendGroup(info, "General");
-    // I insert a comment always, so that the user can edit it
-    // items can be made addable, so you don't need to insert them if there
-    // is none
-    tag = "placeholder comment";
-    kdDebug(7034) << "gif plugin inserting Comment: " << tag << "\n";
-    appendItem(group, "Comment",	QString(tag));
+    QFile file(info.path());
 
-    tag = "unknown x unknown";
-    if (tag.length()) {
-        KFileMetaInfoItem item = appendItem(group, "Dimensions", QSize(123,456));
+    if (!file.open(IO_ReadOnly)) {
+	kdDebug(7034) << "Couldn't open " << QFile::encodeName(info.path()) << endl;
+	return false;
     }
 
-  //DiscardData();
-  return true;
+    QDataStream fstream(&file);
+
+    bool isGIF87a = false;
+    char magic[7];
+    Q_UINT16 width = 0;
+    Q_UINT16 height = 0;
+    Q_UINT8 miscInfo = 0;
+
+    fstream.readRawBytes( magic, 6 ); 
+    magic[6] = 0x00; // null terminate
+
+    // I have special requirements...
+    fstream.setByteOrder( QDataStream::LittleEndian );
+    fstream >> width;
+    fstream >> height;
+    fstream >> miscInfo;
+
+    KFileMetaInfoGroup group = appendGroup(info, "General");
+
+    if ( 0 == strncmp( magic, "GIF89a", 6 ) ) {
+	appendItem( group, "Version", i18n("GIF Version 89a") );
+    } else if ( 0 == strncmp( magic, "GIF87a", 6 ) ) {
+	appendItem( group, "Version", i18n("GIF Version 87a") );
+	isGIF87a = true;
+    } else {
+	appendItem( group, "Version", i18n("Unknown") );
+    }
+
+    appendItem( group, "Dimensions", QSize(width, height) );
+
+    if ( isGIF87a ) {
+	appendItem( group, "BitDepth", ( (miscInfo & 0x07) + 1) );
+    }
+
+    file.close();
+
+    return true;
 }
 
 #include "kfile_gif.moc"
