@@ -31,10 +31,10 @@ class KJpegPlugin: public KFilePlugin
 
 public:
     KJpegPlugin( QObject *parent, const char *name,
-                const QStringList& preferredItems );
+                const QStringList& args );
 
-    virtual bool readInfo ( KFileMetaInfo::Internal& info );
-    virtual bool writeInfo( const KFileMetaInfo::Internal& info ) const;
+    virtual bool readInfo ( KFileMetaInfo& info, uint what );
+    virtual bool writeInfo( const KFileMetaInfo& info ) const;
     virtual QValidator* createValidator( const KFileMetaInfoItem& item,
                                          QObject* parent, const char* name) const;
 };
