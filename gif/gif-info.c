@@ -1,4 +1,6 @@
 /*
+** $Id: $
+**
 ** Minimal GIF parser, for use in extracting and setting metadata.
 ** Modified for standalone & KDE calling by Bryce Nesbitt
 ** 
@@ -103,7 +105,7 @@ static long int pos;
 
 static char     true[] = "True";
 static char     false[] = "False";
-
+static char     id[] = "$Id: $";
 
 /*****************************************************************************/
 
