@@ -29,12 +29,13 @@ class KGifPlugin: public KFilePlugin
     Q_OBJECT
 
 public:
-    KGifPlugin( QObject *parent, const char *name,
-                const QStringList& preferredItems );
+    KGifPlugin( QObject *parent, const char *name, const QStringList& args );
 
-    virtual bool readInfo ( KFileMetaInfo::Internal& info );
-    virtual bool writeInfo( const KFileMetaInfo::Internal& info ) const;
-    virtual QValidator* createValidator( const KFileMetaInfoItem& item,
+    virtual bool readInfo ( KFileMetaInfo& info, uint what );
+    virtual bool writeInfo( const KFileMetaInfo& info ) const;
+    virtual QValidator* createValidator( const QString& mimetype,
+                                         const QString& group,
+                                         const QString& key,
                                          QObject* parent, const char* name) const;
 };
 

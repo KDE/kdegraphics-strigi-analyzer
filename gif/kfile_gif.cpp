@@ -43,25 +43,37 @@ typedef KGenericFactory<KGifPlugin> GifFactory;
 K_EXPORT_COMPONENT_FACTORY(kfile_gif, GifFactory("kfile_gif"));
 
 KGifPlugin::KGifPlugin(QObject *parent, const char *name,
-                       const QStringList &preferredItems)
-    : KFilePlugin(parent, name, preferredItems)
+                       const QStringList &args)
+    : KFilePlugin(parent, name, args)
 {
     kdDebug(7034) << "gif KFileMetaInfo plugin\n";
+    
+    KFileMimeTypeInfo* info = addMimeTypeInfo( "image/gif" );
+
+    KFileMimeTypeInfo::GroupInfo* group = 0L;
+
+    group = addGroupInfo(info, "General", "General");
+
+    KFileMimeTypeInfo::ItemInfo* item;
+
+    item = addItemInfo(group, "Comment", i18n("Comment"), QVariant::String);
+    setAttributes(item, KFileMimeTypeInfo::Modifiable);
+    setHint(item,  KFileMimeTypeInfo::Description);
+
+    addItemInfo(group, "Resolution", i18n("Resolution"), QVariant::Int);
 }
 
-QValidator* KGifPlugin::createValidator(const KFileMetaInfoItem& item,
-                                        QObject *parent,
-                                        const char *name ) const
+QValidator* KGifPlugin::createValidator( const QString& mimetype,
+                                         const QString& group,
+                                         const QString& key,
+                                         QObject* parent, const char* name) const
 {
-    if (item.isEditable())
-        return new QRegExpValidator(QRegExp(".*"), parent, name);
-    else
-        return 0L;
+    return new QRegExpValidator(QRegExp(".*"), parent, name);
 }
 
-bool KGifPlugin::writeInfo( const KFileMetaInfo::Internal& info ) const
+bool KGifPlugin::writeInfo( const KFileMetaInfo& info ) const
 {
-    QString comment = info["Comment"].value().toString();
+    QString comment = info["General"]["Comment"].value().toString();
     QString path    = info.path();
 
     kdDebug(7034) << "gif KFileMetaInfo writeInfo: " << info.path() << " \"" << comment << "\"\n";
@@ -89,29 +101,25 @@ bool KGifPlugin::writeInfo( const KFileMetaInfo::Internal& info ) const
     return true;
 }
 
-bool KGifPlugin::readInfo( KFileMetaInfo::Internal& info )
+bool KGifPlugin::readInfo( KFileMetaInfo& info, uint what )
 {
     QString tag;
 
     kdDebug(7034) << "gif KFileMetaInfo readInfo\n";
 
+    KFileMetaInfoGroup group = appendGroup(info, "General");
     // I insert a comment always, so that the user can edit it
+    // items can be made addable, so you don't need to insert them if there
+    // is none
     tag = "placeholder comment";
     kdDebug(7034) << "gif plugin inserting Comment: " << tag << "\n";
-    info.insert(KFileMetaInfoItem("Comment", i18n("Comment"),
-	QVariant(tag), true));
+    appendItem(group, "Comment",	QString(tag));
 
     tag = "unknown x unknown";
     if (tag.length()) {
-    	info.insert(KFileMetaInfoItem("Resolution", i18n("Resolution"),
-	    QVariant(tag), false));
+    	appendItem(group, "Resolution", QSize(123,456));
     }
 
-  QStringList supported;
-  supported << "Resolution" << "Comment";
-  info.setSupportedKeys(supported);
-  info.setPreferredKeys(m_preferred);
-  info.setSupportsVariableKeys(true);
   //DiscardData();
   return true;
 }
