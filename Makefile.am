@@ -1,1 +1,1 @@
-SUBDIRS=pdf png
+SUBDIRS=pdf png ps
