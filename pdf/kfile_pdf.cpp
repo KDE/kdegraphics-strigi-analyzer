@@ -77,7 +77,7 @@ void KPdfMetaInfo::slotReceivedStdout(KProcess*, char* buffer, int buflen)
 }
 
 KPdfMetaInfo::KPdfMetaInfo( const QString& path )
-    : KFileMetaInfo::KFileMetaInfo(path)
+    : KFileMetaInfo(path)
 {
 
     KProcess p;
