@@ -73,6 +73,12 @@ KJpegPlugin::KJpegPlugin(QObject *parent, const char *name,
   item = addItemInfo( exifGroup, "Date/time", i18n("Date/time"),
                       QVariant::DateTime );
 
+  item = addItemInfo( exifGroup, "CreationDate", i18n("Creation Date"),
+                      QVariant::Date );
+
+  item = addItemInfo( exifGroup, "CreationTime", i18n("Creation Time"),
+                      QVariant::Time );
+
   item = addItemInfo( exifGroup, "Dimensions", i18n("Dimensions"),
                       QVariant::Size );
   setHint( item, KFileMimeTypeInfo::Size );
@@ -222,8 +228,11 @@ bool KJpegPlugin::readInfo( KFileMetaInfo& info, uint what )
     tag = ImageInfo.getDateTime();
     if (tag.length()){
         QDateTime dt = parseDateTime( tag.stripWhiteSpace() );
-        if ( dt.isValid() )
+        if ( dt.isValid() ) {
             appendItem( exifGroup, "Date/time", dt );
+            appendItem( exifGroup, "CreationDate", dt.date() );
+            appendItem( exifGroup, "CreationTime", dt.time() );
+        }
     }
 
     appendItem( exifGroup,"Dimensions", QSize( ImageInfo.getWidth(),
