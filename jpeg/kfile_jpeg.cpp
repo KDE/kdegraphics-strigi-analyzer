@@ -38,7 +38,7 @@
 
 #include "exif.h"
 
-#define EXIFGROUP "Jpeg EXIF data"
+#define EXIFGROUP "Jpeg EXIF Data"
 
 typedef KGenericFactory<KJpegPlugin> JpegFactory;
 
