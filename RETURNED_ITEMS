@@ -178,3 +178,23 @@ QSize      Resolution      -/-        Resolution in pixels
 Int        Bitdepth        -/-        Bits per pixel
 String     Compression     -/-        Compression type
 
+
+tga plugin:
+===========
+
+type       key             W/A        details
+------------------------------------------------------------------------
+QSize      Resolution      -/-        Resolution in pixels
+Int        Bitdepth        -/-        Bits per pixel
+String     Color mode      -/-        Color mode (e.g. RGB)
+String     Compression     -/-        Compression type, if any
+
+
+ico plugin:
+===========
+
+type       key             W/A        details
+------------------------------------------------------------------------
+Int        Number          -/-        Number of icons in file
+QSize      Resolution      -/-        Resolution [of 1st icon]
+Int        Colors          -/-        Number of colors [in 1st icon]
