@@ -1,4 +1,10 @@
+The original README for this file read:
+<quote>
 Note: Development of this module has been suspended.
 Please feel free to contact me, and pick it up.  All I ask
 is that you preserve both command line and kfile abilities.  Thanks.
 bryce@obviously.com
+</quote>
+
+I contacted Bryce, but received no response. The command line code
+is unchanged - I just fixed the kfile code to work, read only.
