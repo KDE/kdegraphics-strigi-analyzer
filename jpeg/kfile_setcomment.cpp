@@ -41,6 +41,7 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include <string.h>
+#include "config.h"
 
 extern int safe_copy_and_modify( const char * original_filename, const char * comment );
     
