@@ -80,6 +80,11 @@
 /* If document is DOS EPS and we haven't read 30 bytes, ask for more. */
 #define CDSC_NEEDMORE 11
 
+/* Since min() is used, make sure it exists */
+#ifndef min
+#define min(x,y) x > y ? y : x
+#endif
+
 /* local prototypes */
 dsc_private void * dsc_memalloc(P2(CDSC *dsc, size_t size));
 dsc_private void dsc_memfree(P2(CDSC*dsc, void *ptr));
