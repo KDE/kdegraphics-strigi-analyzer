@@ -2,7 +2,7 @@ If you make a new plugin, please add the list of returned items to this list.
 
 The returned items are:
 
-pdf plguin:
+pdf plugin:
 ===========
 
 Date Created
@@ -28,3 +28,12 @@ String.
 Common keys that are recommended in the png spec:
 Title, Author, Description, Copyright, Creation Time, Software, Disclaimer,
 Warning, Source, Comment
+
+PostScript plugin:
+==================
+
+String  Title
+String  Creator
+String  CreationDate
+String  For
+Int     Pages
