@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include "kfile_png.h"
 #include <kurl.h>
 #include <kprocess.h>
@@ -70,12 +71,12 @@ KFileMetaInfo* KPngPlugin::createInfo(const QString& path)
 
 
 KPngMetaInfo::KPngMetaInfo( const QString& path )
-    : KFileMetaInfo::KFileMetaInfo(path)
+    : KFileMetaInfo(path)
 {
     QFile f(path);
     f.open(IO_ReadOnly);
   
-    unsigned char data[f.size()+1];
+    unsigned char *data = (unsigned char*) malloc(f.size()+1);
     f.readBlock((char*)data, f.size());
     data[f.size()]='\n';
   
@@ -135,7 +136,10 @@ KPngMetaInfo::KPngMetaInfo( const QString& path )
   
     while(index<f.size()-12) {
       while (strncmp((char*)CHUNK_TYPE(data,index), "tEXt", 4)) {
-        if (!strncmp((char*)CHUNK_TYPE(data,index), "IEND", 4)) return;
+        if (!strncmp((char*)CHUNK_TYPE(data,index), "IEND", 4)) {
+          free(data);
+          return;
+        }
         index += CHUNK_SIZE(data, index) + CHUNK_HEADER_SIZE;
       }
     
@@ -163,6 +167,7 @@ KPngMetaInfo::KPngMetaInfo( const QString& path )
       } 
     }
   }
+  free(data);
 }
 
 KPngMetaInfo::~KPngMetaInfo()
