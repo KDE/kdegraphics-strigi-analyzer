@@ -223,4 +223,14 @@ String     ColorMode                  Color Mode (Monochrome, RGB, RGBA etc)
 String     Compression                Compression type
 String     SharedRows                 Percentage of shared rows
                                       (amount of "aggression" -> see GIMP)
+dds plugin:
+===========
+
+type       key                        details
+------------------------------------------------------------------------
+QSize      Dimensions                 Dimensions in pixels
+Int        Depth                      Depth in pixels
+Int        BitDepth                   Bits per pixel
+String     Type                       2D, volume or cube map
+String     Compression                Compression type
 
