@@ -59,7 +59,8 @@ KRgbPlugin::KRgbPlugin(QObject *parent, const char *name, const QStringList &arg
 
 	item = addItemInfo(group, "ColorMode", i18n("Color mode"), QVariant::String);
 	item = addItemInfo(group, "Compression", i18n("Compression"), QVariant::String);
-	item = addItemInfo(group, "SharedRows", i18n("Shared rows"), QVariant::String);
+	item = addItemInfo(group, "SharedRows", i18n("something like vertical redundancy, but sounding positive",
+			"Shared rows"), QVariant::String);
 
 }
 
