@@ -1,8 +1,0 @@
-AC_CHECK_PROG(PDFINFO, pdfinfo, yes, no)
-
-if test $PDFINFO = no
-then
-  echo "The pdfinfo program was not found. That means that you won't be able to"
-  echo "see meta informationa about pdf files in konqueror. The plugin for it"
-  echo "will still be compiled, but won't work until you install pdfinfo"
-fi
