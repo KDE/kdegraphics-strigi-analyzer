@@ -71,6 +71,12 @@ char* compressions[] =
 {
   I18N_NOOP("Deflate")
 };
+ 
+  // interlaced modes
+static const char* interlaceModes[] = {
+  I18N_NOOP("None"),
+  I18N_NOOP("Adam7")
+};
 
 typedef KGenericFactory<KPngPlugin> PngFactory;
 
@@ -103,6 +109,7 @@ KPngPlugin::KPngPlugin(QObject *parent, const char *name,
 
     addItemInfo(group, "ColorMode", i18n("Color mode"), QVariant::String);
     addItemInfo(group, "Compression", i18n("Compression"), QVariant::String);
+    addItemInfo(group, "InterlaceMode", i18n("Interlace mode"),QVariant::String);
 }
 
 bool KPngPlugin::readInfo( KFileMetaInfo& info, uint what)
@@ -157,6 +164,8 @@ bool KPngPlugin::readInfo( KFileMetaInfo& info, uint what)
                             (type < sizeof(colors)/sizeof(colors[0])) ? i18n(colors[data[25]]) : i18n("Unknown"));
             appendItem(techgroup, "Compression",
                             (data[26] < sizeof(compressions)/sizeof(compressions[0])) ? i18n(compressions[data[26]]) : i18n("Unknown"));
+            appendItem(techgroup, "InterlaceMode",
+                            (data[28] < sizeof(interlaceModes)/sizeof(interlaceModes[0])) ? i18n(interlaceModes[data[28]]) : i18n("Unknown"));
         }
 
         // look for a tEXt chunk
