@@ -413,6 +413,7 @@ struct stat  statbuf;
     }
   if( !outfile ) {
     fprintf(stderr, "failed opening temporary file %s\n", temp_filename);
+    free(temp_filename);
     return(ERROR_TEMP_FILE);
     }
 
@@ -422,6 +423,7 @@ struct stat  statbuf;
    */
   if ((infile = fopen(original_filename, READ_BINARY)) == NULL) {
     fprintf(stderr, "can't open input file %s\n", original_filename);
+    free(temp_filename);
     return(ERROR_NOT_A_JPEG);
     }
   /* Copy JPEG headers until SOFn marker;
@@ -454,6 +456,7 @@ struct stat  statbuf;
   fsync( fileno( outfile) );    /* Make sure its really on disk first.  !!!VERY IMPORTANT!!! */
   if ( fclose( outfile ) ) {
     fprintf(stderr, "error in temporary file %s\n", temp_filename);
+    free(temp_filename);
     return(ERROR_TEMP_FILE);
     }
 
@@ -463,18 +466,22 @@ struct stat  statbuf;
    */
   if( validate_image_file( temp_filename ) ) {
     fprintf(stderr, "error in temporary file %s\n", temp_filename);
+    free(temp_filename);
     return(ERROR_TEMP_FILE);
     }
 
   if( global_error >= ERROR_NOT_A_JPEG ) {
     fprintf(stderr, "error %d processing %s\n", global_error, original_filename);
+    free(temp_filename);
     return(ERROR_NOT_A_JPEG);
     }
 
   if( rename( temp_filename, original_filename ) ) {
     fprintf(stderr, "error renaming %s to %s\n", temp_filename, original_filename);
+    free(temp_filename);
     return(ERROR_TEMP_FILE);
     }
+  free(temp_filename);
 
   return(0);
 }
