@@ -65,7 +65,7 @@ KTiffPlugin::KTiffPlugin(QObject *parent, const char *name,
             QVariant::String);
     item = addItemInfo(group, "Software", i18n("Software"),
             QVariant::String);
-    item = addItemInfo(group, "DateTime", i18n("Date/Dime"),
+    item = addItemInfo(group, "DateTime", i18n("Date/Time"),
             QVariant::DateTime);
     item = addItemInfo(group, "Artist", i18n("Artist"),
             QVariant::String);
