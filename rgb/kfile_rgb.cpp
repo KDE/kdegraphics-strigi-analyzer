@@ -127,7 +127,7 @@ bool KRgbPlugin::readInfo(KFileMetaInfo& info, uint /*what*/)
 	if (!storage)
 		appendItem(group, "Compression", i18n("Uncompressed"));
 	else if (storage == 1) {
-		long compressed = file.size() - 512 - 2 * (ysize * zsize) * sizeof(Q_UINT32);
+		long compressed = file.size() - 512;
 		long verbatim = xsize * ysize * zsize;
 		appendItem(group, "Compression", i18n("Runlength encoded")
 				+ QString(" (%1%)").arg(compressed * 100.0 / verbatim, 0, 'f', 1));
@@ -172,6 +172,7 @@ bool KRgbPlugin::writeInfo(const KFileMetaInfo& info) const
 }
 
 
+// restrict to 79 ASCII characters
 QValidator* KRgbPlugin::createValidator(const QString&, const QString &,
 		const QString &, QObject* parent, const char* name) const
 {
