@@ -416,7 +416,7 @@ bool KJpegPlugin::readInfo( KFileMetaInfo& info, uint what )
 
     tag = ImageInfo.getUserComment();
     if (tag.length()){
-	appendItem( exifGroup, "User comment", tag );
+	appendItem( exifGroup, "EXIF comment", tag );
     }
 
     int a;
