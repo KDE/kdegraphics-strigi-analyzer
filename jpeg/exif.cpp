@@ -569,7 +569,7 @@ void ExifData::ProcessExifDir(unsigned char * DirStart, unsigned char * OffsetBa
                 // have appropriate aperture information yet.
                 if (ExifData::ApertureFNumber == 0){
                     ExifData::ApertureFNumber
-                        = (float)exp(ConvertAnyFormat(ValuePtr, Format)*log(2)*0.5);
+                        = (float)exp(ConvertAnyFormat(ValuePtr, Format)*log(2.0)*0.5);
                 }
                 break;
 
@@ -596,7 +596,7 @@ void ExifData::ProcessExifDir(unsigned char * DirStart, unsigned char * OffsetBa
                 // this value if we don't already have it from somewhere else.
                 if (ExifData::ExposureTime == 0){
                     ExifData::ExposureTime
-                        = (float)(1/exp(ConvertAnyFormat(ValuePtr, Format)*log(2)));
+                        = (float)(1/exp(ConvertAnyFormat(ValuePtr, Format)*log(2.0)));
                 }
                 break;
 
