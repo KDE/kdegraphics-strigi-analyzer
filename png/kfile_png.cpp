@@ -42,7 +42,11 @@
 #define CHUNK_DATA(data, index, offset) data[8+index+offset]
 
 // known translations for common png keys
-static const char* knownTranslations[] = {
+static const char* knownTranslations[]
+#ifdef __GNUC__
+__attribute__((unused))
+#endif
+ = {
   I18N_NOOP("Title"),
   I18N_NOOP("Author"),
   I18N_NOOP("Description"),
@@ -53,7 +57,7 @@ static const char* knownTranslations[] = {
   I18N_NOOP("Warning"),
   I18N_NOOP("Source"),
   I18N_NOOP("Comment")
-};    
+};
 
 // and for the colors
 static const char* colors[] = {
@@ -65,8 +69,8 @@ static const char* colors[] = {
   I18N_NOOP("RGB/Alpha")
 };
 
-  // and compressions  
-char* compressions[] = 
+  // and compressions
+const char* compressions[] =
 {
   I18N_NOOP("deflate")
 };
@@ -76,8 +80,8 @@ typedef KGenericFactory<KPngPlugin> PngFactory;
 K_EXPORT_COMPONENT_FACTORY(kfile_png, PngFactory("kfile_png"));
 
 KPngPlugin::KPngPlugin(QObject *parent, const char *name,
-                       const QStringList &preferredItems)
-    : KFilePlugin(parent, name, preferredItems)
+                       const QStringList &args)
+    : KFilePlugin(parent, name, args)
 {
     kdDebug(7034) << "png plugin\n";
 
@@ -111,32 +115,36 @@ bool KPngPlugin::readInfo( KFileMetaInfo& info, uint what)
     QFile f(info.path());
     f.open(IO_ReadOnly);
 
+    if (f.size() < 26) return false;
+    // the technical group will be read from the first 26 bytes. If the file
+    // is smaller, we can't even read this.
+
     bool readComments = false;
     if (what & (KFileMetaInfo::Fastest |
                 KFileMetaInfo::DontCare |
                 KFileMetaInfo::ContentInfo)) readComments = true;
 
-    unsigned char *data = (unsigned char*) malloc(f.size()+1);
-    f.readBlock((char*)data, f.size());
-    data[f.size()]='\n';
-  
-    // find the start
-    if ((data[0] == 137) && (data[1] == 80) && (data[2] == 78) && (data[3] == 71)
-        && (data[4] ==  13) && (data[5] == 10) && (data[6] == 26) && (data[7] == 10))
+    uchar *data = new uchar[f.size()+1];
+    f.readBlock(reinterpret_cast<char*>(data), f.size());
+
+    if (data[0] == 137 && data[1] == 80 && data[2] == 78 && data[3] == 71 &&
+        data[4] ==  13 && data[5] == 10 && data[6] == 26 && data[7] == 10 )
     {
         // ok
             // the IHDR chunk should be the first
         if (!strncmp((char*)&data[12], "IHDR", 4))
         {
-            // we found it
-            unsigned long x,y;
-            x = (data[16] << 24) + (data[17] << 16) + (data[18] << 8) + data[19];
-            y = (data[20] << 24) + (data[21] << 16) + (data[22] << 8) + data[23];
+            // we found it, get the dimensions
+            ulong x,y;
+            x = (data[16]<<24) + (data[17]<<16) + (data[18]<<8) + data[19];
+            y = (data[20]<<24) + (data[21]<<16) + (data[22]<<8) + data[23];
 
-            int type = data[25];
-            int bpp = data[24];
+            uint type = data[25];
+            uint bpp =  data[24];
+            kdDebug(7034) << "dimensions " << x << "*" << y << endl;
 
-            kdDebug(7034) << "resolution " << x << "*" << y << endl;
+            // the bpp are only per channel, so we need to multiply the with
+            // the channel count
 
             switch (type)
             {
@@ -163,19 +171,17 @@ bool KPngPlugin::readInfo( KFileMetaInfo& info, uint what)
         // look for a tEXt chunk
         if (readComments)
         {
-            int index = 8;
+            uint index = 8;
             index += CHUNK_SIZE(data, index) + CHUNK_HEADER_SIZE;
             KFileMetaInfoGroup commentGroup = appendGroup(info, "Comment");
 
             while(index<f.size()-12)
             {
-                while (strncmp((char*)CHUNK_TYPE(data,index), "tEXt", 4)) 
+                while (strncmp((char*)CHUNK_TYPE(data,index), "tEXt", 4) &&
+                       index < f.size() - 12)
                 {
                     if (!strncmp((char*)CHUNK_TYPE(data,index), "IEND", 4))
-                    {
-                        free(data);
-                        return true;
-                    }
+                        goto end;
 
                     index += CHUNK_SIZE(data, index) + CHUNK_HEADER_SIZE;
                 }
@@ -184,27 +190,44 @@ bool KPngPlugin::readInfo( KFileMetaInfo& info, uint what)
                 {
                     // we found a tEXt field
                     kdDebug(7034) << "We found a tEXt field\n";
-                    // get the key, it's a null terminated string at the chunk start
-                    unsigned char* key = &CHUNK_DATA(data,index,0);
+                    // get the key, it's a null terminated string at the
+                    //  chunk start
 
-                    int keysize = strlen((char*)key);
+                    uchar* key = &CHUNK_DATA(data,index,0);
+
+                    int keysize=0;
+                    for (;key[keysize]!=0; keysize++)
+                        // look if we reached the end of the file
+                        // (it might be corrupted)
+                        if (8+index+keysize>=f.size())
+                            goto end;
 
                     // the text comes after the key, but isn't null terminated
-                    unsigned char* text = &CHUNK_DATA(data,index, keysize+1);
+                    uchar* text = &CHUNK_DATA(data,index, keysize+1);
                     int textsize = CHUNK_SIZE(data, index)-keysize-1;
+
+                    // security check
+                    if ( (uint)(text - data) + textsize > f.size())
+                        goto end;
+
                     QByteArray arr(textsize);
-                    arr = QByteArray(textsize).duplicate((const char*)text, textsize);
+                    arr = QByteArray(textsize).duplicate((const char*)text,
+                                                         textsize);
 
-                    appendItem(commentGroup, QString(reinterpret_cast<char*>(key)), QVariant(QString(arr)));
+                    appendItem(commentGroup,
+                               QString(reinterpret_cast<char*>(key)),
+                               QString(arr));
 
-                    kdDebug(7034) << "adding " << key << " / " << QString(arr) << endl;
+                    kdDebug(7034) << "adding " << key << " / "
+                                  << QString(arr) << endl;
 
                     index += CHUNK_SIZE(data, index) + CHUNK_HEADER_SIZE;
                 }
             }
         }
     }
-    free(data);
+end:
+    delete data;
     return true;
 }
 
