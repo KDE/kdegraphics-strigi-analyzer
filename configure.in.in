@@ -7,7 +7,7 @@ then
   echo "will still be compiled, but won't work until you install pdfinfo"
 fi
 
-if test "${LIBTIFF+set}" = set
+if test -z "$LIBTIFF"
 then
   echo
   echo "libtiff was not found on your system. The meta info plugin for TIFF"
