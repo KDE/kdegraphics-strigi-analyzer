@@ -25,6 +25,7 @@
 
 #include <qstringlist.h>
 #include <qintdict.h>
+#include <qfile.h>
 
 #include <tiff.h>
 #include <tiffio.h>
@@ -45,12 +46,14 @@ KTiffPlugin::KTiffPlugin(QObject *parent, const char *name,
     KFileMimeTypeInfo::ItemInfo* item;
     item = addItemInfo(group, "Description", i18n("Description"), 
             QVariant::String);
+    setHint(item, KFileMimeTypeInfo::Description);
     item = addItemInfo(group, "Copyright", i18n("Copyright"), 
             QVariant::String);
     item = addItemInfo(group, "ImageType", i18n("Image type"), 
             QVariant::String);
     item = addItemInfo(group, "Dimensions", i18n("Dimensions"), 
             QVariant::Size);
+    setHint(item, KFileMimeTypeInfo::Size);
     setSuffix(item, i18n(" pixels"));
     item = addItemInfo(group, "Resolution", i18n("Resolution"), 
             QVariant::Size);
@@ -66,6 +69,7 @@ KTiffPlugin::KTiffPlugin(QObject *parent, const char *name,
             QVariant::String);
     item = addItemInfo(group, "Artist", i18n("Artist"), 
             QVariant::String);
+    setHint(item, KFileMimeTypeInfo::Author);
     item = addItemInfo(group, "FaxPages", i18n("Fax pages"), 
             QVariant::Int);
 
@@ -147,7 +151,7 @@ KTiffPlugin::KTiffPlugin(QObject *parent, const char *name,
 
 bool KTiffPlugin::readInfo(KFileMetaInfo& info, uint)
 {
-    TIFF *tiff = TIFFOpen(info.path().local8Bit(), "r");
+    TIFF *tiff = TIFFOpen(QFile::encodeName(info.path()), "r");
     if (!tiff)
         return false;
 
@@ -186,10 +190,10 @@ bool KTiffPlugin::readInfo(KFileMetaInfo& info, uint)
     kdDebug(7034) << "YResolution: " << imageYResolution << endl;
     kdDebug(7034) << "ResolutionUnit: " << imageResUnit << endl;
     kdDebug(7034) << "FaxPages: " << faxPages << endl;
-    kdDebug(7034) << "DateTime: " << (void *)datetime << " -> " << datetime << endl;
-    kdDebug(7034) << "Copyright: " << (void *)copyright << " -> " << copyright << endl;
-    kdDebug(7034) << "Software: " << (void *)software << " -> " << software << endl;
-    kdDebug(7034) << "Artist: " << (void *)artist << " -> " << artist << endl;
+    kdDebug(7034) << "DateTime: " << datetime << endl;
+    kdDebug(7034) << "Copyright: " << copyright << endl;
+    kdDebug(7034) << "Software: " <<  software << endl;
+    kdDebug(7034) << "Artist: " << artist << endl;
 
     if (imageResUnit == RESUNIT_CENTIMETER)
     {
@@ -231,8 +235,8 @@ bool KTiffPlugin::readInfo(KFileMetaInfo& info, uint)
     if (artist)
         appendItem(group, "Artist", QString(artist));
 
-    if ((imageCompression==COMPRESSION_CCITTFAX3 ||
-            imageCompression==COMPRESSION_CCITTFAX4) && faxPages>0)
+    if (faxPages>0 && (imageCompression==COMPRESSION_CCITTFAX3 ||
+            imageCompression==COMPRESSION_CCITTFAX4))
     {
         appendItem(group, "FaxPages", faxPages);
     }
