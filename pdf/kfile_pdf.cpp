@@ -46,8 +46,9 @@ KPdfPlugin::KPdfPlugin(QObject *parent, const char *name, const QStringList &pre
     // general group
     KFileMimeTypeInfo::GroupInfo* group = addGroupInfo(info, "General", i18n("General"));
 
-    addItemInfo(group, "CreationDate", i18n("Created"), QVariant::DateTime);
-    addItemInfo(group, "ModDate", i18n("Modified"), QVariant::DateTime);
+    addItemInfo(group, "CreationDate", i18n("Creation Date"), QVariant::Date);
+    addItemInfo(group, "CreationTime", i18n("Creation Time"), QVariant::Time);
+    addItemInfo(group, "ModificationDate", i18n("Modified"), QVariant::DateTime);
     addItemInfo(group, "Pages", i18n("Pages"), QVariant::Int);
     addItemInfo(group, "Encrypted", i18n("Encrypted"), QVariant::Bool);
     addVariableInfo(group, QVariant::String, 0);
@@ -129,10 +130,12 @@ void KPdfPlugin::slotReceivedStdout(KProcess*, char* buffer, int buflen)
         if ((*it).startsWith("CreationDate"))
         {
             QDateTime dt = pdfDate((*it).mid(13).stripWhiteSpace());
-            if (dt.isValid())
-                appendItem(generalGroup, "CreationDate", QVariant(dt));
+            if (dt.isValid()) {
+                appendItem(generalGroup, "CreationDate", QVariant(dt.date())));
+                appendItem(generalGroup, "CreationTime", QVariant(dt.time())));
+            }
         }
-        else if ((*it).startsWith("ModDate"))
+        else if ((*it).startsWith("ModificationDate"))
         {
             QDateTime dt = pdfDate((*it).mid(8).stripWhiteSpace());
             if (dt.isValid())
