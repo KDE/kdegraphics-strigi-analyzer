@@ -1,0 +1,9 @@
+[Desktop Entry]
+Encoding=UTF-8
+Type=Service
+Name=GIF Info
+Name[xx]=xx
+ServiceTypes=KFilePlugin
+X-KDE-Library=kfile_gif
+MimeType=image/gif
+PreferredItems=Comment,Resolution

@@ -1,0 +1,13 @@
+Note: This version of the module is a placeholder.
+
+
+KFileMetaInfo plugin returned items for gif image format
+========================================================
+
+type	key		Comment
+-----------------------------------------------------------------------------
+String	Resolution	Width x Height in pixels.
+String	Comment         gif comment blocks, which we permit to be utf-8 encoded
+                        in clear violation/extension of the specification which
+                        calls for 7 bit ASCII. See:
+                        http://www.geocities.co.jp/SiliconValley/3453/gif_info/index_en.html
