@@ -92,6 +92,9 @@ bool KRgbPlugin::readInfo(KFileMetaInfo& info, uint /*what*/)
 	imagename[79] = '\0';
 	dstream >> colormap;
 
+	if (magic != 474)
+		return false;
+
 	KFileMetaInfoGroup group = appendGroup(info, "Technical");
 
 	if (dimension == 1)
