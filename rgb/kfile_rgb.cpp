@@ -59,6 +59,7 @@ KRgbPlugin::KRgbPlugin(QObject *parent, const char *name, const QStringList &arg
 
 	item = addItemInfo(group, "ColorMode", i18n("Color mode"), QVariant::String);
 	item = addItemInfo(group, "Compression", i18n("Compression"), QVariant::String);
+	item = addItemInfo(group, "SharedRows", i18n("Shared rows"), QVariant::String);
 
 }
 
@@ -100,6 +101,10 @@ bool KRgbPlugin::readInfo(KFileMetaInfo& info, uint /*what*/)
 	dstream.readRawBytes(imagename, 80);
 	imagename[79] = '\0';
 	dstream >> colormap;
+	uint i;
+	Q_UINT8 u8;
+	for (i = 0; i < 404; i++)
+		dstream >> u8;
 
 	if (magic != 474)
 		return false;
@@ -128,10 +133,29 @@ bool KRgbPlugin::readInfo(KFileMetaInfo& info, uint /*what*/)
 		long compressed = file.size() - 512;
 		long verbatim = xsize * ysize * zsize;
 		appendItem(group, "Compression", i18n("Runlength encoded")
-				+ QString(" (%1%)").arg(compressed * 100.0 / verbatim, 0, 'f', 1));
+				+ QString(", %1%").arg(compressed * 100.0 / verbatim, 0, 'f', 1));
 	} else
 		appendItem(group, "Compression", i18n("Unknown"));
 
+	if (storage) {
+		Q_UINT32 offs;
+		QMap<Q_UINT32, uint> map;
+		QMap<Q_UINT32, uint>::Iterator it;
+		for (i = 0; i < ysize * zsize; i++) {
+			dstream >> offs;
+			if ((it = map.find(offs)) != map.end())
+				map.replace(offs, it.data() + 1);
+			else
+				map[offs] = 0;
+		}
+		for (i = 0, it = map.begin(); it != map.end(); it++)
+			i += it.data();
+
+		if (i)
+			appendItem(group, "SharedRows", QString("%1%").arg(i * 100.0 / (ysize * zsize), 0, 'f', 1));
+		else
+			appendItem(group, "SharedRows", i18n("None"));
+	}
 
 	group = appendGroup(info, "Comment");
 	appendItem(group, "ImageName", imagename);

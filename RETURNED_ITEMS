@@ -221,4 +221,6 @@ QSize      Dimensions                 Dimensions in pixels
 Int        BitDepth                   Bits per pixel
 String     ColorMode                  Color Mode (Monochrome, RGB, RGBA etc)
 String     Compression                Compression type
+String     SharedRows                 Percentage of shared rows
+                                      (amount of "aggression" -> see GIMP)
 
