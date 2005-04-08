@@ -20,20 +20,8 @@
 
 #include "kfile_pdf.h"
 
-#include <kurl.h>
 #include <kgenericfactory.h>
 #include <kdebug.h>
-
-#include <qcstring.h>
-#include <qfile.h>
-#include <qdatetime.h>
-#include <qdict.h>
-#include <qvalidator.h>
-
-#include <goo/gmem.h>
-#include <ErrorCodes.h>
-#include <UnicodeMap.h>
-#include "GlobalParams.h"
 
 typedef KGenericFactory<KPdfPlugin> PdfFactory;
 
@@ -69,133 +57,21 @@ KPdfPlugin::KPdfPlugin(QObject *parent, const char *name, const QStringList &pre
     addItemInfo(group, "Version", i18n("Version"), QVariant::String);
 }
 
-/* borrowed from kpdf */
-static QString unicodeToQString(Unicode* u, int len) {
-    QString ret;
-    ret.setLength(len);
-    QChar* qch = (QChar*) ret.unicode();
-    for (;len;--len)
-      *qch++ = (QChar) *u++;
-    return ret;
-}
-
-/* borrowed from kpdf */
-QString KPdfPlugin::getDocumentInfo( const QString & data ) const
-{
-    // [Albert] Code adapted from pdfinfo.cc on xpdf
-    Object info;
-    if ( !m_doc )
-        return i18n( "Unknown" );
-
-    m_doc->getDocInfo( &info );
-    if ( !info.isDict() )
-        return i18n( "Unknown" );
-
-    QString result;
-    Object obj;
-    GooString *s1;
-    GBool isUnicode;
-    Unicode u;
-    int i;
-    Dict *infoDict = info.getDict();
-
-    if ( infoDict->lookup( (char*)data.latin1(), &obj )->isString() )
-    {
-        s1 = obj.getString();
-        if ( ( s1->getChar(0) & 0xff ) == 0xfe && ( s1->getChar(1) & 0xff ) == 0xff )
-        {
-            isUnicode = gTrue;
-            i = 2;
-        }
-        else
-        {
-            isUnicode = gFalse;
-            i = 0;
-        }
-        while ( i < obj.getString()->getLength() )
-        {
-            if ( isUnicode )
-            {
-                u = ( ( s1->getChar(i) & 0xff ) << 8 ) | ( s1->getChar(i+1) & 0xff );
-                i += 2;
-            }
-            else
-            {
-                u = s1->getChar(i) & 0xff;
-                ++i;
-            }
-            result += unicodeToQString( &u, 1 );
-        }
-        obj.free();
-        info.free();
-        return result;
-    }
-    obj.free();
-    info.free();
-    return i18n( "Unknown" );
-}
-
-/* borrowed from kpdf */
-QDateTime KPdfPlugin::getDocumentDate( const QString & data ) const
-{
-    // [Albert] Code adapted from pdfinfo.cc on xpdf
-    if ( !m_doc )
-        return QDateTime();
-
-    Object info;
-    m_doc->getDocInfo( &info );
-    if ( !info.isDict() ) {
-	info.free();
-        return QDateTime();
-    }
-
-    Object obj;
-    char *s;
-    int year, mon, day, hour, min, sec;
-    Dict *infoDict = info.getDict();
-    QString result;
-
-    if ( infoDict->lookup( (char*)data.latin1(), &obj )->isString() )
-    {
-        s = obj.getString()->getCString();
-        if ( s[0] == 'D' && s[1] == ':' )
-            s += 2;
-
-        if ( sscanf( s, "%4d%2d%2d%2d%2d%2d", &year, &mon, &day, &hour, &min, &sec ) == 6 )
-        {
-            QDate d( year, mon, day );  //CHECK: it was mon-1, Jan->0 (??)
-            QTime t( hour, min, sec );
-            if ( d.isValid() && t.isValid() ) {
-		obj.free();
-		info.free();
-		return QDateTime( d, t );
-	    }
-        }
-    }
-    obj.free();
-    info.free();
-    return QDateTime();
-}
-
 bool KPdfPlugin::readInfo( KFileMetaInfo& info, uint /* what */)
 {
-    GooString *filename_gooified = new GooString( info.path().latin1() );
-    m_doc = new PDFDoc(filename_gooified, 0, 0);
-    delete filename_gooified;
+    m_doc = Poppler::Document::load(info.path().latin1());
 
     KFileMetaInfoGroup generalGroup = appendGroup(info, "General");
-    Object metaData;
-    m_doc->getDocInfo(&metaData);
 
-    appendItem(generalGroup, "Title", getDocumentInfo("Title") );
-    appendItem(generalGroup, "Subject", getDocumentInfo("Subject") );
-    appendItem(generalGroup, "Author", getDocumentInfo("Author") );
-    appendItem(generalGroup, "Keywords", getDocumentInfo("Keywords") );
-    appendItem(generalGroup, "Creator", getDocumentInfo("Creator") );
-    appendItem(generalGroup, "Producer", getDocumentInfo("Producer") );
+    appendItem(generalGroup, "Title", m_doc->getInfo("Title") );
+    appendItem(generalGroup, "Subject", m_doc->getInfo("Subject") );
+    appendItem(generalGroup, "Author", m_doc->getInfo("Author") );
+    appendItem(generalGroup, "Keywords", m_doc->getInfo("Keywords") );
+    appendItem(generalGroup, "Creator", m_doc->getInfo("Creator") );
+    appendItem(generalGroup, "Producer", m_doc->getInfo("Producer") );
 
-    appendItem(generalGroup, "CreationDate", getDocumentDate("CreationDate") );
-    appendItem(generalGroup, "ModificationDate", getDocumentDate("ModDate") );
+    appendItem(generalGroup, "CreationDate", m_doc->getDate("CreationDate") );
+    appendItem(generalGroup, "ModificationDate", m_doc->getDate("ModDate") );
     appendItem(generalGroup, "Pages", m_doc->getNumPages() );
     appendItem(generalGroup, "Encrypted", m_doc->isEncrypted() );
     appendItem(generalGroup, "Linearized", m_doc->isLinearized() );
@@ -204,5 +80,3 @@ bool KPdfPlugin::readInfo( KFileMetaInfo& info, uint /* what */)
 
     return true;
 }
-
-#include "kfile_pdf.moc"

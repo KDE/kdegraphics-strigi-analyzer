@@ -22,14 +22,13 @@
 #define __KFILE_PDF_H__
 
 #include <kfilemetainfo.h>
-#include <PDFDoc.h>
+#include <poppler-qt.h>
 
 class QStringList;
 class KProcess;
 
 class KPdfPlugin: public KFilePlugin
 {
-    Q_OBJECT
 public:
     KPdfPlugin( QObject *parent, const char *name, const QStringList& preferredItems );
 
@@ -38,7 +37,7 @@ public:
 private:
     QString getDocumentInfo( const QString & data ) const;
     QDateTime getDocumentDate( const QString & data ) const;
-    PDFDoc* m_doc;
+    Poppler::Document* m_doc;
 };
 
 #endif
