@@ -8,6 +8,11 @@ noinst_HEADERS   = kfile_pdf.h
 
 kde_module_LTLIBRARIES = kfile_pdf.la
 
+bin_PROGRAMS = test
+test_SOURCES = test.cpp
+test_LDFLAGS = $(all_libraries) -module $(KDE_PLUGIN)
+test_LDADD = $(LIB_KIO) $(POPPLER_LIBS)
+
 kfile_pdf_la_SOURCES = kfile_pdf.cpp
 kfile_pdf_la_LDFLAGS = $(all_libraries) -module $(KDE_PLUGIN)
 kfile_pdf_la_LIBADD = $(LIB_KIO) $(POPPLER_LIBS)
