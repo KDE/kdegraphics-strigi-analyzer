@@ -25,7 +25,6 @@
 #include <poppler-qt.h>
 
 class QStringList;
-class KProcess;
 
 class KPdfPlugin: public KFilePlugin
 {

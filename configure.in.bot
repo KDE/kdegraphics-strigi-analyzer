@@ -9,8 +9,9 @@ fi
 
 if test -z "$POPPLER_LIBS"; then
   echo ""
-  echo "You're missing poppler. The additional info plugin for PDF files"
-  echo "files won't be compiled without poppler."
-  echo "You can download it from http://poppler.freedesktop.org/"
+  echo "You're missing poppler-qt. The additional info plugin for PDF files"
+  echo "files won't be compiled without poppler-qt."
+  echo "You can download poppler-qt from poppler cvs"
+  echo "More info at http://poppler.freedesktop.org/"
   echo ""
 fi

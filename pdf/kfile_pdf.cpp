@@ -82,3 +82,4 @@ bool KPdfPlugin::readInfo( KFileMetaInfo& info, uint /* what */)
 }
 
 #include "kfile_pdf.moc"
+
