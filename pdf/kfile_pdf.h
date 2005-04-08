@@ -29,14 +29,13 @@ class KProcess;
 
 class KPdfPlugin: public KFilePlugin
 {
+Q_OBJECT
 public:
     KPdfPlugin( QObject *parent, const char *name, const QStringList& preferredItems );
 
     virtual bool readInfo(KFileMetaInfo& info, uint what);
 
 private:
-    QString getDocumentInfo( const QString & data ) const;
-    QDateTime getDocumentDate( const QString & data ) const;
     Poppler::Document* m_doc;
 };
 
