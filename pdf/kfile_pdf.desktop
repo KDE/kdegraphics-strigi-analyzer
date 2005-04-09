@@ -55,4 +55,4 @@ Name[zu]=Ulwazi lwe-PDF
 ServiceTypes=KFilePlugin
 X-KDE-Library=kfile_pdf
 MimeType=application/pdf
-PreferredItems=Title,Subject,Author,Keywords,Creator,Producer,CreationDate,ModificationDate,Pages,Encrypted,Linearized,Version
+PreferredItems=Title,Subject,Author,Keywords,Creator,Producer,CreationDate,ModificationDate,Pages,Protected,Linearized,Version

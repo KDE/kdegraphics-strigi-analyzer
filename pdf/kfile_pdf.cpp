@@ -52,7 +52,7 @@ KPdfPlugin::KPdfPlugin(QObject *parent, const char *name, const QStringList &pre
     addItemInfo(group, "CreationDate", i18n("Creation Date"), QVariant::DateTime);
     addItemInfo(group, "ModificationDate", i18n("Modified"), QVariant::DateTime);
     addItemInfo(group, "Pages", i18n("Pages"), QVariant::Int);
-    addItemInfo(group, "Encrypted", i18n("Encrypted"), QVariant::String);
+    addItemInfo(group, "Protected", i18n("Protected"), QVariant::String);
     addItemInfo(group, "Linearized", i18n("Linearized"), QVariant::String);
     addItemInfo(group, "Version", i18n("Version"), QVariant::String);
 }
@@ -73,7 +73,19 @@ bool KPdfPlugin::readInfo( KFileMetaInfo& info, uint /* what */)
     appendItem(generalGroup, "CreationDate", m_doc->getDate("CreationDate") );
     appendItem(generalGroup, "ModificationDate", m_doc->getDate("ModDate") );
     appendItem(generalGroup, "Pages", m_doc->getNumPages() );
-    appendItem(generalGroup, "Encrypted", m_doc->isEncrypted() ? i18n("Yes") : i18n("No") );
+    
+    QString enc;
+    if (m_doc->isEncrypted())
+    {
+    	enc = i18n("Yes (Can Print:%1 Can Copy:%2 Can Change:%3 Can Add notes:%4)")
+    	.arg(m_doc->okToPrint() ? i18n("Yes") : i18n("No"))
+    	.arg(m_doc->okToCopy() ? i18n("Yes") : i18n("No"))
+    	.arg(m_doc->okToChange() ? i18n("Yes") : i18n("No"))
+    	.arg(m_doc->okToAddNotes() ? i18n("Yes") : i18n("No"));
+    }
+    else enc = i18n("No");
+    
+    appendItem(generalGroup, "Protected", enc );
     appendItem(generalGroup, "Linearized", m_doc->isLinearized() ? i18n("Yes") : i18n("No") );
     QString versionString = QString("%1").arg( m_doc->getPDFVersion(), 0, 'f', 1 );
     appendItem(generalGroup, "Version", versionString );
