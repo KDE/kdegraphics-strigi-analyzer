@@ -60,6 +60,11 @@ KPdfPlugin::KPdfPlugin(QObject *parent, const char *name, const QStringList &pre
 bool KPdfPlugin::readInfo( KFileMetaInfo& info, uint /* what */)
 {
     m_doc = Poppler::Document::load(info.path().latin1());
+    if (!m_doc || m_doc->isLocked())
+    {
+        delete m_doc;
+        return false;
+    }
 
     KFileMetaInfoGroup generalGroup = appendGroup(info, "General");
 
