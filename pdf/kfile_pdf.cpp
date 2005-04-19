@@ -59,7 +59,7 @@ KPdfPlugin::KPdfPlugin(QObject *parent, const char *name, const QStringList &pre
 
 bool KPdfPlugin::readInfo( KFileMetaInfo& info, uint /* what */)
 {
-    m_doc = Poppler::Document::load(info.path().latin1());
+    m_doc = Poppler::Document::load(info.path());
     if (!m_doc || m_doc->isLocked())
     {
         delete m_doc;
