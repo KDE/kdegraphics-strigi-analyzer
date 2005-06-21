@@ -11,4 +11,4 @@ KFILE_PDF_SUBDIR=pdf
 endif
 
 SUBDIRS=dvi png ps jpeg xbm xpm bmp tga rgb ico pcx $(KFILE_TIFF_SUBDIR) pnm \
-	$(KFILE_EXR_SUBDIR) $(KFILE_PDF_SUBDIR) dds gif
+	$(KFILE_EXR_SUBDIR) $(KFILE_PDF_SUBDIR) dds gif raw

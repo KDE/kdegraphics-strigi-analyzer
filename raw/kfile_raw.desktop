@@ -1,0 +1,9 @@
+[Desktop Entry]
+Encoding=UTF-8
+Type=Service
+Name=RAW Camera Files
+ServiceTypes=KFilePlugin
+MimeType=image/x-raw
+X-KDE-Library=kfile_raw
+CacheThumbnail=false
+SupportsThumbnail=true
