@@ -137,3 +137,5 @@ bool KCameraRawPlugin::readInfo( KFileMetaInfo& info, uint what )
 
     return true;
 }
+
+#include "kcamerarawplugin.moc"
