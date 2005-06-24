@@ -3,6 +3,7 @@ Encoding=UTF-8
 Type=Service
 Name=RAW Camera Files
 Name[da]=RAW kamera-filer
+Name[ga]=Comhaid Cheamara RAW
 Name[sv]=Obehandlade kamerafiler
 ServiceTypes=KFilePlugin
 MimeType=image/x-raw

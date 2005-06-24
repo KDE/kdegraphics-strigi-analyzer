@@ -6,4 +6,5 @@ Icon=image
 Patterns=*.crw;*.CRW;*.cr2,*.CR2;*.nef;*.NEF;*.mrw;*.MRW;
 Comment=RAW Camera File
 Comment[da]=RAW kamera-fil
+Comment[ga]=Comhad Ceamara RAW
 Comment[sv]=Obehandlad kamerafil
