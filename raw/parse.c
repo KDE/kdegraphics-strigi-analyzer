@@ -20,6 +20,8 @@
 #include <string.h>
 #include <stdlib.h>
 #include <ctype.h>
+#include <time.h>
+#include <sys/types.h>
 
 #ifdef WIN32
 #include <winsock2.h>
