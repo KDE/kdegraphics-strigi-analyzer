@@ -44,10 +44,10 @@
 #include <kgenericfactory.h>
 #include <kdebug.h>
 
-#include <qcstring.h>
+#include <q3cstring.h>
 #include <qfile.h>
 #include <qdatetime.h>
-#include <qdict.h>
+#include <q3dict.h>
 #include <qvalidator.h>
 #include <qimage.h>
 
@@ -142,21 +142,21 @@ KExrPlugin::KExrPlugin(QObject *parent, const char *name,
     addItemInfo( group, "Computer name", i18n("Computer Name"), QVariant::String );
 }
 
-QCString doType( PixelType pt )
+Q3CString doType( PixelType pt )
 {
     switch (pt)
     {
 	case UINT:
-		return QCString("32-bit unsigned integer");
+		return Q3CString("32-bit unsigned integer");
 		break;
 	case HALF:
-		return QCString("16-bit floating-point");
+		return Q3CString("16-bit floating-point");
 		break;
 	case FLOAT:
-		return QCString("32-bit floating-point");
+		return Q3CString("32-bit floating-point");
 		break;
     default:
-		return QCString();
+		return Q3CString();
 		break;
     }
 }

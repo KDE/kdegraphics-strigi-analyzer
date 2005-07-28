@@ -22,7 +22,7 @@
 
 #include <kfilemetainfo.h>
 
-#include <qintdict.h>
+#include <q3intdict.h>
 
 class KTiffPlugin: public KFilePlugin
 {
@@ -35,8 +35,8 @@ public:
 private:
     QDateTime tiffDate(const QString&) const;
 
-    QIntDict<QString> m_colorMode;
-    QIntDict<QString> m_imageCompression;
+    Q3IntDict<QString> m_colorMode;
+    Q3IntDict<QString> m_imageCompression;
 };
 
 #endif

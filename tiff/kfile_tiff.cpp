@@ -26,7 +26,7 @@
 #include <qfile.h>
 #include <qdatetime.h>
 #include <qregexp.h>
-
+#include <QSize>
 #include <tiff.h>
 #include <tiffio.h>
 

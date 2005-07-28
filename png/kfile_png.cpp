@@ -27,13 +27,13 @@
 #include <kgenericfactory.h>
 #include <kdebug.h>
 
-#include <qcstring.h>
+#include <q3cstring.h>
 #include <qfile.h>
 #include <qdatetime.h>
-#include <qdict.h>
+#include <q3dict.h>
 #include <qvalidator.h>
 #include <zlib.h>
-
+#include <QSize>
 // some defines to make it easier
 // don't tell me anything about preprocessor usage :)
 #define CHUNK_SIZE(data, index) ((data[index  ]<<24) + (data[index+1]<<16) + \
@@ -123,7 +123,7 @@ bool KPngPlugin::readInfo( KFileMetaInfo& info, uint what)
     if ( info.path().isEmpty() ) // remote file
         return false;
     QFile f(info.path());
-    if ( !f.open(IO_ReadOnly) )
+    if ( !f.open(QIODevice::ReadOnly) )
         return false;
 
     QIODevice::Offset fileSize = f.size();

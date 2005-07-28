@@ -71,7 +71,7 @@ bool KDviPlugin::readInfo (KFileMetaInfo & info, uint /* what (unused in this pl
   int i; // running index
   
   // open file and try to get the comment
-  f.open(IO_ReadOnly);
+  f.open(QIODevice::ReadOnly);
   
   if ( f.isOpen() == false ){
     kdDebug(7034) << "cannot open file" << endl;
@@ -79,7 +79,7 @@ bool KDviPlugin::readInfo (KFileMetaInfo & info, uint /* what (unused in this pl
   }
   
   f_info.setFile(f); // create fileinfoobject
-  bytes_to_read = QMIN(f_info.size(), 270); // check, if the file size is smaller than 270 bytes
+  bytes_to_read = QMIN((int)f_info.size(), 270); // check, if the file size is smaller than 270 bytes
   // (if the comment is as large as possible, we don't have to
   // read more than 270 bytes)
   

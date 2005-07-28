@@ -835,7 +835,8 @@ void foveon_decode (FILE *tfp)
 void kodak_yuv_decode (FILE *tfp)
 {
   uchar c, blen[384];
-  unsigned row, col, len, bits=0;
+  unsigned col, len, bits=0;
+  int row;
   INT64 bitbuf=0;
   int i, li=0, si, diff, six[6], y[4], cb=0, cr=0, rgb[3];
   ushort *out, *op;
@@ -971,7 +972,8 @@ char *memmem (char *haystack, size_t haystacklen,
 int identify(FILE* tfp)
 {
   char head[32], *thumb, *rgb, *cp;
-  unsigned hlen, fsize, toff, tlen, lsize, i;
+  unsigned hlen, fsize, toff, tlen, lsize;
+  int i;
 
   make[0] = model[0] = model2[0] = is_dng = 0;
   thumb_head[0] = thumb_offset = thumb_length = thumb_layers = 0;

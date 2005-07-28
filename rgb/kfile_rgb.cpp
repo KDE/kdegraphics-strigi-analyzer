@@ -22,7 +22,7 @@
 
 #include <qfile.h>
 #include <qvalidator.h>
-
+#include <QSize>
 #include <kdebug.h>
 #include <kgenericfactory.h>
 
@@ -70,7 +70,7 @@ bool KRgbPlugin::readInfo(KFileMetaInfo& info, uint /*what*/)
 {
 	QFile file(info.path());
 
-	if (!file.open(IO_ReadOnly)) {
+	if (!file.open(QIODevice::ReadOnly)) {
 		kdDebug(7034) << "Couldn't open " << QFile::encodeName(info.path()) << endl;
 		return false;
 	}
@@ -172,7 +172,8 @@ bool KRgbPlugin::writeInfo(const KFileMetaInfo& info) const
 {
 	QFile file(info.path());
 
-	if (!file.open(IO_WriteOnly|IO_Raw)) {
+#warning "QT4 ????? IO_RAW ????"	
+	if (!file.open(QIODevice::WriteOnly/*|IO_Raw*/)) {
 		kdDebug(7034) << "couldn't open " << QFile::encodeName(info.path()) << endl;
 		return false;
 	}
@@ -186,7 +187,7 @@ bool KRgbPlugin::writeInfo(const KFileMetaInfo& info) const
 	QString s = info["Comment"]["ImageName"].value().toString();
 	s.truncate(79);
 
-	unsigned i;
+	int i;
 	for (i = 0; i < s.length(); i++)
 		dstream << Q_UINT8(s.latin1()[i]);
 	for (; i < 80; i++)

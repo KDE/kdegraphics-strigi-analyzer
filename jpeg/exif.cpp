@@ -9,7 +9,7 @@
 
 
 #include "exif.h"
-#include <qwmatrix.h>
+#include <qmatrix.h>
 #include <kglobal.h>
 
 
@@ -282,7 +282,7 @@ int ExifData::ReadJpegSections (QFile & infile, ReadMode_t ReadMode)
                 if (ReadMode & READ_IMAGE){
                     unsigned long size;
 
-                    size = kMax( 0ul, infile.size()-infile.at() );
+                    size = kMax( 0ul, (unsigned long)(infile.size()-infile.at()) );
                     Data = (uchar *)malloc(size);
                     if (Data == NULL){
                         throw FatalError("could not allocate data for entire image");
@@ -878,7 +878,7 @@ bool ExifData::scan(const QString & path)
     int ret;
 
     QFile f(path);
-    if ( !f.open(IO_ReadOnly) )
+    if ( !f.open(QIODevice::ReadOnly) )
         return false;
 
     try {
@@ -934,12 +934,12 @@ bool ExifData::isThumbnailSane() {
 // only if it seems sane
 //--------------------------------------------------------------------------
 QImage ExifData::getThumbnail() {
-  if (!isThumbnailSane()) return NULL;
-  if (!Orientation || Orientation == 1) return Thumbnail;
+  if (!isThumbnailSane()) return QImage();
+  if (!Orientation || Orientation == 1)  return Thumbnail;
 
   // now fix orientation
-  QWMatrix M;
-  QWMatrix flip= QWMatrix(-1,0,0,1,0,0);
+  QMatrix M;
+  QMatrix flip= QMatrix(-1,0,0,1,0,0);
   switch (Orientation) {  // notice intentional fallthroughs
     case 2: M = flip; break;
     case 4: M = flip;

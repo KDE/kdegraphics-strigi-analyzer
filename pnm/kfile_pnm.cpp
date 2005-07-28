@@ -23,7 +23,7 @@
 #include <kgenericfactory.h>
 #include <qfile.h>
 #include <qtextstream.h>
-
+#include <QSize>
 static const char* formats[] = {
 	I18N_NOOP("plain"),
 	I18N_NOOP("raw")

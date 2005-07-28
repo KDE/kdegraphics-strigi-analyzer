@@ -21,7 +21,7 @@
 
 #include <kgenericfactory.h>
 #include <kdebug.h>
-
+#include <QSize>
 #include <qdatastream.h>
 #include <qfile.h>
 

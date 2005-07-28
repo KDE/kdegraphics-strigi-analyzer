@@ -73,6 +73,9 @@
 #include <qfile.h>
 #include <qimage.h>
 #include <qregexp.h>
+//Added by qt3to4:
+#include <Q3CString>
+#include <QVector>
 
 
 #include "gscreator.h"
@@ -317,7 +320,7 @@ bool GSCreator::create(const QString &path, int width, int height, QImage &img)
     }
 
     // find next zero entry and put the filename there    
-    QCString fname = QFile::encodeName( path );
+    Q3CString fname = QFile::encodeName( path );
     while (*arg)
       ++arg;
     if( no_dvi )
@@ -481,7 +484,7 @@ void GSCreator::comment(Name name)
 static bool correctDVI(const QString& filename)
 {
   QFile f(filename);
-  if (!f.open(IO_ReadOnly))
+  if (!f.open(QIODevice::ReadOnly))
     return FALSE;
 
   unsigned char test[4];
@@ -575,7 +578,7 @@ bool GSCreator::getEPSIPreview(const QString &path, long start, long
   unsigned int bytes_per_scan_line = bits_per_scan_line / 8;
   if (bits_per_scan_line % 8) bytes_per_scan_line++;
   const unsigned int bindatabytes = height * bytes_per_scan_line;
-  QMemArray<unsigned char> bindata(bindatabytes);
+  QVector<unsigned char> bindata(bindatabytes);
 
   for (unsigned int i = 0; i < bindatabytes; i++) {
     if (offset >= previewsize)
