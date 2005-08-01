@@ -65,7 +65,7 @@ AC_CACHE_VAL(ac_cv_libexr,
 ])
 
 AC_ARG_WITH([openexr],
-  [AS_HELP_STRING([--with-openexr],
+  [AC_HELP_STRING([--with-openexr],
     [Enable support for OpenEXR @<:@default=check@:>@])],
   [], with_openexr=check)
 

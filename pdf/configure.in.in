@@ -1,5 +1,5 @@
 AC_ARG_WITH([poppler],
-  [AS_HELP_STRING([--with-poppler],
+  [AC_HELP_STRING([--with-poppler],
     [Enable PDF support through poppler  @<:@default=check@:>@])],
   [], with_poppler=check)
 
