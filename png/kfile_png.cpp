@@ -248,11 +248,11 @@ bool KPngPlugin::readInfo( KFileMetaInfo& info, uint what)
 			if ( onePastLastIndex > fileSize || onePastLastIndex <= firstIndex)
 			    goto end;
 
-			int uncompressedLen = compressedTextSize * 2; // just a starting point
+			uLongf uncompressedLen = compressedTextSize * 2; // just a starting point
 			int zlibResult;
 			do {
 			    arr.resize(uncompressedLen);
-			    zlibResult = uncompress((Bytef*)arr.data(), (uLongf*)(&uncompressedLen),
+			    zlibResult = uncompress((Bytef*)arr.data(), &uncompressedLen,
 						    compressedText, compressedTextSize);
 			    if (Z_OK == zlibResult) {
 				// then it is all OK
