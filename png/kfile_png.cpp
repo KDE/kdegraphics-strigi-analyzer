@@ -261,6 +261,10 @@ bool KPngPlugin::readInfo( KFileMetaInfo& info, uint what)
 				// the uncompressedArray needs to be larger
 				// kdDebug(7034) << "doubling size for decompression" << endl;
 				uncompressedLen *= 2;
+
+                                // DoS protection. can't be bigger than 64k
+                                if ( uncompressedLen > 131072 )
+                                    break;
 			    } else {
 				// something bad happened
 				goto end;
