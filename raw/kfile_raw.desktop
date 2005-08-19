@@ -2,6 +2,7 @@
 Encoding=UTF-8
 Type=Service
 Name=RAW Camera Files
+Name[br]=Restroù kamera kriz
 Name[da]=RAW kamera-filer
 Name[et]=Toored kaamerafailid
 Name[ga]=Comhaid Cheamara RAW
