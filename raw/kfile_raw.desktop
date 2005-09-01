@@ -11,6 +11,7 @@ Name[sr]=RAW фајлови слика
 Name[sr@Latn]=RAW fajlovi slika
 Name[sv]=Obehandlade kamerafiler
 Name[tr]=RAW Kamera Dosyaları
+Name[xx]=xxRAW Camera Filesxx
 Name[zh_CN]=RAW 相机文件
 ServiceTypes=KFilePlugin
 MimeType=image/x-raw
