@@ -182,7 +182,7 @@ bool KJpegPlugin::writeInfo( const KFileMetaInfo& info ) const
         which is fully backwards compatible with readers expecting ascii.
         Readers expecting a national character set are out of luck...
     */
-    if( safe_copy_and_modify( QFile::encodeName( path ), comment.utf8() ) ) {
+    if( safe_copy_and_modify( QFile::encodeName( path ), comment.toUtf8() ) ) {
             return false;
         }
     return true;
@@ -230,7 +230,7 @@ bool KJpegPlugin::readInfo( KFileMetaInfo& info, uint what )
 
     tag = ImageInfo.getDateTime();
     if (tag.length()){
-        QDateTime dt = parseDateTime( tag.stripWhiteSpace() );
+        QDateTime dt = parseDateTime( tag.trimmed() );
         if ( dt.isValid() ) {
             appendItem( exifGroup, "Date/time", dt );
             appendItem( exifGroup, "CreationDate", dt.date() );

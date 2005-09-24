@@ -89,7 +89,7 @@ bool KPnmPlugin::readInfo( KFileMetaInfo& info, uint /*what*/)
 		// comment
 		if( c == '#') {
 			buffer = stream.readLine();
-			comments += buffer.stripWhiteSpace();
+			comments += buffer.trimmed();
 			comments += '\n';
 		}
 		// image size
@@ -127,7 +127,7 @@ bool KPnmPlugin::readInfo( KFileMetaInfo& info, uint /*what*/)
 	appendItem(group, "Format", formats[format]);
 	appendItem(group, "Dimensions", QSize(x, y));
 	if(!comments.isEmpty())
-		appendItem(group, "Comment", comments.stripWhiteSpace());
+		appendItem(group, "Comment", comments.trimmed());
 	appendItem(group, "BitDepth", bpp);
 
 	f.close();

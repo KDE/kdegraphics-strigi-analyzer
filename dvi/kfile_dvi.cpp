@@ -100,7 +100,7 @@ bool KDviPlugin::readInfo (KFileMetaInfo & info, uint /* what (unused in this pl
   for ( i = 15; i <= 14+comment_length; ++i ) // extract comment from buffer
     comment[i-15] = (char)buffer[i];
 
-  appendItem(GeneralGroup, "6_Comment", comment.simplifyWhiteSpace() );
+  appendItem(GeneralGroup, "6_Comment", comment.simplified() );
   
   // comment is ok, now get total number of pages
   f.at( f.size() - 13);
