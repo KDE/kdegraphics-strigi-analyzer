@@ -6,6 +6,7 @@ Icon=image
 Patterns=*.crw;*.CRW;*.cr2,*.CR2;*.nef;*.NEF;*.mrw;*.MRW;
 Comment=RAW Camera File
 Comment[br]=Restr kamera kriz
+Comment[ca]=Fitxers RAW de càmera de fotografia
 Comment[cs]=RAW soubor
 Comment[da]=RAW kamera-fil
 Comment[de]=RAW Kamera-Datei
