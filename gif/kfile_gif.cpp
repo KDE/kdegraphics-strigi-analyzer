@@ -44,8 +44,9 @@ K_EXPORT_COMPONENT_FACTORY(kfile_gif, GifFactory("kfile_gif"))
 
 KGifPlugin::KGifPlugin(QObject *parent, const char *name,
                        const QStringList &args)
-    : KFilePlugin(parent, name, args)
+    : KFilePlugin(parent, args)
 {
+	setObjectName(name);
     kdDebug(7034) << "gif KFileMetaInfo plugin\n";
 
     KFileMimeTypeInfo* info = addMimeTypeInfo( "image/gif" );

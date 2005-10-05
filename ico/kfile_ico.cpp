@@ -47,8 +47,9 @@ K_EXPORT_COMPONENT_FACTORY(kfile_ico, IcoFactory( "kfile_ico" ))
 KIcoPlugin::KIcoPlugin(QObject *parent, const char *name,
                        const QStringList &args)
 
-    : KFilePlugin(parent, name, args)
+    : KFilePlugin(parent, args)
 {
+	setObjectName(name);
     KFileMimeTypeInfo* info = addMimeTypeInfo( "image/x-ico" );
 
     KFileMimeTypeInfo::GroupInfo* group = 0L;

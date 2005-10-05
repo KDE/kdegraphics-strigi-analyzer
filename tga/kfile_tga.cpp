@@ -47,8 +47,9 @@ K_EXPORT_COMPONENT_FACTORY(kfile_tga, TgaFactory( "kfile_tga" ))
 KTgaPlugin::KTgaPlugin(QObject *parent, const char *name,
                        const QStringList &args)
 
-    : KFilePlugin(parent, name, args)
+    : KFilePlugin(parent, args)
 {
+	setObjectName(name);
     KFileMimeTypeInfo* info = addMimeTypeInfo( "image/x-targa" );
 
     KFileMimeTypeInfo::GroupInfo* group = 0L;

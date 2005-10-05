@@ -46,8 +46,9 @@ K_EXPORT_COMPONENT_FACTORY(kfile_bmp, BmpFactory( "kfile_bmp" ))
 KBmpPlugin::KBmpPlugin(QObject *parent, const char *name,
                        const QStringList &args)
 
-    : KFilePlugin(parent, name, args)
+    : KFilePlugin(parent, args)
 {
+	setObjectName(name);
     KFileMimeTypeInfo* info = addMimeTypeInfo( "image/x-bmp" );
 
     KFileMimeTypeInfo::GroupInfo* group = 0L;

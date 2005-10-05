@@ -32,8 +32,9 @@ K_EXPORT_COMPONENT_FACTORY(kfile_ps, PSFactory("kfile_ps"))
 
 KPSPlugin::KPSPlugin(QObject *parent, const char *name,
                        const QStringList &preferredItems) : 
-    KFilePlugin( parent, name, preferredItems )
+    KFilePlugin( parent, preferredItems )
 {
+	setObjectName(name);
     kdDebug(7034) << "ps plugin\n";
     
     // set up our mimetypes

@@ -61,8 +61,9 @@ K_EXPORT_COMPONENT_FACTORY(kfile_exr, ExrFactory("kfile_exr"))
 
 KExrPlugin::KExrPlugin(QObject *parent, const char *name,
                        const QStringList &args)
-    : KFilePlugin(parent, name, args)
+    : KFilePlugin(parent, args)
 {
+	setObjectName(name);
     // set up our mime type
     KFileMimeTypeInfo* info = addMimeTypeInfo( "image/x-exr" );
 

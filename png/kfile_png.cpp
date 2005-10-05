@@ -89,8 +89,9 @@ K_EXPORT_COMPONENT_FACTORY(kfile_png, PngFactory("kfile_png"))
 
 KPngPlugin::KPngPlugin(QObject *parent, const char *name,
                        const QStringList &args)
-    : KFilePlugin(parent, name, args)
+    : KFilePlugin(parent, args)
 {
+	setObjectName(name);
     kdDebug(7034) << "png plugin\n";
 
     // set up our mime type

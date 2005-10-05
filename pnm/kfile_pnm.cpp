@@ -33,8 +33,9 @@ typedef KGenericFactory<KPnmPlugin> PnmFactory;
 
 K_EXPORT_COMPONENT_FACTORY(kfile_pnm, PnmFactory("kfile_pnm"))
 
-KPnmPlugin::KPnmPlugin(QObject *parent, const char *name, const QStringList &args) : KFilePlugin(parent, name, args) 
+KPnmPlugin::KPnmPlugin(QObject *parent, const char *name, const QStringList &args) : KFilePlugin(parent, args) 
 {
+	setObjectName(name);
 	makeMimeTypeInfo( "image/x-portable-bitmap" );
 	makeMimeTypeInfo( "image/x-portable-greymap" );
 	makeMimeTypeInfo( "image/x-portable-pixmap" );

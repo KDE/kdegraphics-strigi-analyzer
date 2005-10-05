@@ -57,8 +57,9 @@ QDataStream &operator>>( QDataStream &s, PCXHEADER &ph )
 }
 
 KPcxPlugin::KPcxPlugin( QObject *parent, const char *name,
-        const QStringList &args ) : KFilePlugin( parent, name, args )
+        const QStringList &args ) : KFilePlugin( parent, args )
 {
+  setObjectName(name);
   kdDebug(7034) << "PCX file meta info plugin" << endl;
   KFileMimeTypeInfo* info = addMimeTypeInfo( "image/x-pcx" );
 

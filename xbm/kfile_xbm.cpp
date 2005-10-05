@@ -45,8 +45,9 @@ K_EXPORT_COMPONENT_FACTORY(kfile_xbm, XbmFactory( "kfile_xbm" ))
 KXbmPlugin::KXbmPlugin(QObject *parent, const char *name,
                        const QStringList &args)
 
-    : KFilePlugin(parent, name, args)
+    : KFilePlugin(parent, args)
 {
+	setObjectName(name);
     KFileMimeTypeInfo* info = addMimeTypeInfo( "image/x-xbm" );
 
     KFileMimeTypeInfo::GroupInfo* group = 0L;

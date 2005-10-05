@@ -46,8 +46,9 @@ K_EXPORT_COMPONENT_FACTORY(kfile_jpeg, JpegFactory("kfile_jpeg"))
 
 KJpegPlugin::KJpegPlugin(QObject *parent, const char *name,
                        const QStringList &args )
-    : KFilePlugin(parent, name, args)
+    : KFilePlugin(parent, args)
 {
+	setObjectName(name);
   kdDebug(7034) << "jpeg plugin\n";
 
   //

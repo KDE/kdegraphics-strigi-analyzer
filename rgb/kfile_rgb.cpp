@@ -33,8 +33,9 @@ K_EXPORT_COMPONENT_FACTORY(kfile_rgb, RgbFactory("kfile_rgb"))
 
 
 KRgbPlugin::KRgbPlugin(QObject *parent, const char *name, const QStringList &args) :
-	KFilePlugin(parent, name, args)
+	KFilePlugin(parent, args)
 {
+	setObjectName(name);
 	KFileMimeTypeInfo* info = addMimeTypeInfo("image/x-rgb");
 
 	KFileMimeTypeInfo::GroupInfo* group = 0;
