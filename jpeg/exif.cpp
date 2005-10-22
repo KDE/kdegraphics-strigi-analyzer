@@ -282,7 +282,7 @@ int ExifData::ReadJpegSections (QFile & infile, ReadMode_t ReadMode)
                 if (ReadMode & READ_IMAGE){
                     unsigned long size;
 
-                    size = kMax( 0ul, (unsigned long)(infile.size()-infile.at()) );
+                    size = qMax( 0ul, (unsigned long)(infile.size()-infile.at()) );
                     Data = (uchar *)malloc(size);
                     if (Data == NULL){
                         throw FatalError("could not allocate data for entire image");
