@@ -63,12 +63,12 @@ bool KDviPlugin::readInfo (KFileMetaInfo & info, uint /* what (unused in this pl
   KFileMetaInfoGroup GeneralGroup = appendGroup(info, "General");
   QFile f(info.path());
   QFileInfo f_info;
-  Q_UINT16 bytes_to_read;
-  Q_UINT8 comment_length;
+  quint16 bytes_to_read;
+  quint8 comment_length;
   QString comment;
-  Q_UINT16 pages;
-  Q_UINT8 buffer[270]; // buffer for reading data; no data is read with more than 270 bytes
-  Q_UINT32 ptr;
+  quint16 pages;
+  quint8 buffer[270]; // buffer for reading data; no data is read with more than 270 bytes
+  quint32 ptr;
   int i; // running index
   
   // open file and try to get the comment
@@ -80,11 +80,11 @@ bool KDviPlugin::readInfo (KFileMetaInfo & info, uint /* what (unused in this pl
   }
   
   f_info.setFile(f); // create fileinfoobject
-  bytes_to_read = QMIN((int)f_info.size(), 270); // check, if the file size is smaller than 270 bytes
+  bytes_to_read = qMin((int)f_info.size(), 270); // check, if the file size is smaller than 270 bytes
   // (if the comment is as large as possible, we don't have to
   // read more than 270 bytes)
   
-  if ( f.readBlock((char *)buffer, bytes_to_read) != bytes_to_read ){ // cast to (char *) is necessary
+  if ( f.read((char *)buffer, bytes_to_read) != bytes_to_read ){ // cast to (char *) is necessary
     kdDebug(7034) << "read error (1)" << endl;
     return false;
   }
@@ -96,7 +96,7 @@ bool KDviPlugin::readInfo (KFileMetaInfo & info, uint /* what (unused in this pl
   }
   
   comment_length = buffer[14]; // set up length of comment
-  comment.setLength(comment_length); // used to avoid permanent reallocation when extracting the comment from buffer
+  comment.resize(comment_length); // used to avoid permanent reallocation when extracting the comment from buffer
   
   for ( i = 15; i <= 14+comment_length; ++i ) // extract comment from buffer
     comment[i-15] = (char)buffer[i];
@@ -104,8 +104,8 @@ bool KDviPlugin::readInfo (KFileMetaInfo & info, uint /* what (unused in this pl
   appendItem(GeneralGroup, "6_Comment", comment.simplified() );
   
   // comment is ok, now get total number of pages
-  f.at( f.size() - 13);
-  if ( f.readBlock((char *)buffer, 13) != 13 ){
+  f.seek( f.size() - 13);
+  if ( f.read((char *)buffer, 13) != 13 ){
     kdDebug(7034) << "read error (2)" << endl;
     return false;
   }
@@ -125,10 +125,10 @@ bool KDviPlugin::readInfo (KFileMetaInfo & info, uint /* what (unused in this pl
   ptr = (ptr << 8) | buffer[i-1];
   
   // bytes for total number of pages have a offset of 27 to the beginning of the postamble
-  f.at(ptr + 27);
+  f.seek(ptr + 27);
   
   // now read total number of pages from file
-  if ( f.readBlock((char *)buffer, 2) != 2 ){
+  if ( f.read((char *)buffer, 2) != 2 ){
     kdDebug(7034) << "read error (3)" << endl;
     return false;
   }

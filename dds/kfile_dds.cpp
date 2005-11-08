@@ -35,9 +35,9 @@
 
 typedef KGenericFactory<KDdsPlugin> DdsFactory;
 
-typedef Q_UINT32 uint;
-typedef Q_UINT16 ushort;
-typedef Q_UINT8 uchar;
+typedef quint32 uint;
+typedef quint16 ushort;
+typedef quint8 uchar;
 
 namespace {	// Private.
 

@@ -66,8 +66,8 @@ bool KCameraRawPlugin::createPreview(const QString &path, QImage &img)
   if( !img.load( output.name() ) ) return false;
   
   if(orientation) {
-    QWMatrix M;
-    QWMatrix flip= QWMatrix(-1,0,0,1,0,0);
+    QMatrix M;
+    QMatrix flip= QMatrix(-1,0,0,1,0,0);
     switch(orientation+1) {  // notice intentional fallthroughs
     case 2: M = flip; break;
     case 4: M = flip;
@@ -78,7 +78,7 @@ bool KCameraRawPlugin::createPreview(const QString &path, QImage &img)
     case 8: M.rotate(270); break;
     default: break; // should never happen
     }
-    img = img.xForm(M);
+    img = img.transformed(M);
   }
   return true;	
 }

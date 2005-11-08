@@ -78,18 +78,18 @@ bool KRgbPlugin::readInfo(KFileMetaInfo& info, uint /*what*/)
 
 	QDataStream dstream(&file);
 
-	Q_UINT16 magic;
-	Q_UINT8  storage;
-	Q_UINT8  bpc;
-	Q_UINT16 dimension;
-	Q_UINT16 xsize;
-	Q_UINT16 ysize;
-	Q_UINT16 zsize;
-	Q_UINT32 pixmin;
-	Q_UINT32 pixmax;
-	Q_UINT32 dummy;
+	quint16 magic;
+	quint8  storage;
+	quint8  bpc;
+	quint16 dimension;
+	quint16 xsize;
+	quint16 ysize;
+	quint16 zsize;
+	quint32 pixmin;
+	quint32 pixmax;
+	quint32 dummy;
 	char     imagename[80];
-	Q_UINT32 colormap;
+	quint32 colormap;
 
 	dstream >> magic;
 	dstream >> storage;
@@ -104,7 +104,7 @@ bool KRgbPlugin::readInfo(KFileMetaInfo& info, uint /*what*/)
 	dstream.readRawBytes(imagename, 80);
 	imagename[79] = '\0';
 	dstream >> colormap;
-	Q_UINT8 u8;
+	quint8 u8;
 	for (uint i = 0; i < 404; i++)
 		dstream >> u8;
 
@@ -138,10 +138,10 @@ bool KRgbPlugin::readInfo(KFileMetaInfo& info, uint /*what*/)
 				+ QString(", %1%").arg(compressed * 100.0 / verbatim, 0, 'f', 1));
 
 		long k;
-		Q_UINT32 offs;
-		QMap<Q_UINT32, uint> map;
-		QMap<Q_UINT32, uint>::Iterator it;
-		QMap<Q_UINT32, uint>::Iterator end = map.end();
+		quint32 offs;
+		QMap<quint32, uint> map;
+		QMap<quint32, uint>::Iterator it;
+		QMap<quint32, uint>::Iterator end = map.end();
 		for (k = 0; k < (ysize * zsize); k++) {
 			dstream >> offs;
 			if ((it = map.find(offs)) != end)
@@ -190,9 +190,9 @@ bool KRgbPlugin::writeInfo(const KFileMetaInfo& info) const
 
 	int i;
 	for (i = 0; i < s.length(); i++)
-		dstream << Q_UINT8(s.latin1()[i]);
+		dstream << quint8(s.latin1()[i]);
 	for (; i < 80; i++)
-		dstream << Q_UINT8(0);
+		dstream << quint8(0);
 
 	file.close();
 	return true;

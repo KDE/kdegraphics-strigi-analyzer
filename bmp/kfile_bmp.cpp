@@ -99,7 +99,7 @@ bool KBmpPlugin::readInfo( KFileMetaInfo& info, uint what)
 
     // read the beginning of the file and make sure it looks ok
     unsigned char * bmp_id = (unsigned char *) malloc(2);
-    file.readBlock((char *) bmp_id, 2);
+    file.read((char *) bmp_id, 2);
 
     if (memcmp(bmp_id, bmptype_bm, 2) == 0) {
         appendItem(group, "Type", i18n("Windows Bitmap"));

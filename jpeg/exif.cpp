@@ -269,7 +269,7 @@ int ExifData::ReadJpegSections (QFile & infile, ReadMode_t ReadMode)
         Data[0] = (uchar)lh;
         Data[1] = (uchar)ll;
 
-        got = infile.readBlock((char*)Data+2, itemlen-2); // Read the whole section.
+        got = infile.read((char*)Data+2, itemlen-2); // Read the whole section.
         if (( unsigned ) got != itemlen-2){
             throw FatalError("reading from file");
         }
@@ -288,7 +288,7 @@ int ExifData::ReadJpegSections (QFile & infile, ReadMode_t ReadMode)
                         throw FatalError("could not allocate data for entire image");
                     }
 
-                    got = infile.readBlock((char*)Data,  size);
+                    got = infile.read((char*)Data,  size);
                     if (( unsigned ) got != size){
                         throw FatalError("could not read the rest of the image");
                     }

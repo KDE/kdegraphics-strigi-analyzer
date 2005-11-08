@@ -1,6 +1,6 @@
 ## Makefile.am for EXR file meta info plugin
 
-KDE_CXXFLAGS = $(USE_EXCEPTIONS)
+KDE_CXXFLAGS = $(USE_EXCEPTIONS) 
 
 # set the include path for X, qt and KDE
 INCLUDES         = -Drestrict= $(all_includes) $(EXR_FLAGS) 

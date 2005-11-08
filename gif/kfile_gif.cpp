@@ -85,9 +85,9 @@ bool KGifPlugin::readInfo( KFileMetaInfo& info, uint what )
 
     bool isGIF87a = false;
     char magic[7];
-    Q_UINT16 width = 0;
-    Q_UINT16 height = 0;
-    Q_UINT8 miscInfo = 0;
+    quint16 width = 0;
+    quint16 height = 0;
+    quint8 miscInfo = 0;
 
     fstream.readRawBytes( magic, 6 ); 
     magic[6] = 0x00; // null terminate

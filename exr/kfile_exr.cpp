@@ -203,7 +203,7 @@ bool KExrPlugin::readInfo( KFileMetaInfo& info, uint what)
 		if (commentSA) {
 			std::string commentString = commentSA->value();
 			QString qcommentString(commentString.data());
-			qcommentString.setLength(commentString.size());
+			qcommentString.resize(commentString.size());
 			appendItem( infogroup, "Comment", qcommentString );
 		}
 
@@ -212,19 +212,19 @@ bool KExrPlugin::readInfo( KFileMetaInfo& info, uint what)
 		if ( hasComments(h) ) {
 			std::string commentsString = comments(h);
 			QString qcommentsString(commentsString.data());
-			qcommentsString.setLength(commentsString.size());
+			qcommentsString.resize(commentsString.size());
 			appendItem( stdgroup, "Comments", qcommentsString );
 		}
 		if ( hasOwner(h) ) {
 			std::string ownerString = owner(h);
 			QString qownerString(ownerString.data());
-			qownerString.setLength(ownerString.size());
+			qownerString.resize(ownerString.size());
 			appendItem( stdgroup, "Owner", qownerString );
 		}
 		if ( hasCapDate(h) ) {
 			std::string capDateString = capDate(h);
 			QString qcapDateString(capDateString.data());
-			qcapDateString.setLength(capDateString.size());
+			qcapDateString.resize(capDateString.size());
 			appendItem( stdgroup, "Capture Date", qcapDateString );
 		}
 		if ( hasutcOffset(h) ) {
@@ -342,35 +342,35 @@ bool KExrPlugin::readInfo( KFileMetaInfo& info, uint what)
 		if (ver3DSM) {
 			std::string ver3DSMstring = ver3DSM->value();
 			QString qver3DSMstring(ver3DSMstring.data());
-			qver3DSMstring.setLength(ver3DSMstring.size());
+			qver3DSMstring.resize(ver3DSMstring.size());
 			appendItem( threedsmaxgroup, "Plugin version", qver3DSMstring );
 		}
 		const StringAttribute *verEXR = h.findTypedAttribute <StringAttribute> ("versionEXR");
 		if (verEXR) {
 			std::string verEXRstring = verEXR->value();
 			QString qverEXRstring(verEXRstring.data());
-			qverEXRstring.setLength(verEXRstring.size());
+			qverEXRstring.resize(verEXRstring.size());
 			appendItem( threedsmaxgroup, "EXR version", QString( verEXRstring.data() ) );
 		}
 		const StringAttribute *localTime = h.findTypedAttribute <StringAttribute> ("localTime");
 		if (localTime) {
 			std::string localTimeString = localTime->value();
 			QString qlocalTimeString(localTimeString.data());
-			qlocalTimeString.setLength(localTimeString.size());
+			qlocalTimeString.resize(localTimeString.size());
 			appendItem( threedsmaxgroup, "Local time", qlocalTimeString );
 		}
 		const StringAttribute *systemTime = h.findTypedAttribute <StringAttribute> ("systemTime");
 		if (systemTime) {
 			std::string systemTimeString = systemTime->value();
 			QString qsystemTimeString(systemTimeString.data());
-			qsystemTimeString.setLength(systemTimeString.size());
+			qsystemTimeString.resize(systemTimeString.size());
 			appendItem( threedsmaxgroup, "System time", qsystemTimeString );
 		}
 		const StringAttribute *computerName = h.findTypedAttribute <StringAttribute> ("computerName");
 		if (computerName) {
 			std::string computerNameString = computerName->value();
 			QString qcomputerNameString(computerNameString.data());
-			qcomputerNameString.setLength(computerNameString.size());
+			qcomputerNameString.resize(computerNameString.size());
 			appendItem( threedsmaxgroup, "Computer name", qcomputerNameString );
 		}
 
