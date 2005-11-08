@@ -89,7 +89,7 @@ bool KPcxPlugin::readInfo( KFileMetaInfo& info, uint )
   struct PCXHEADER header;
 
   QFile f( info.path() );
-  if ( !f.open( IO_ReadOnly ) )
+  if ( !f.open( QIODevice::ReadOnly ) )
     return false;
 
   QDataStream s( &f );

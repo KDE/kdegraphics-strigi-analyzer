@@ -65,7 +65,7 @@ void KPnmPlugin::makeMimeTypeInfo(const QString& mimetype)
 bool KPnmPlugin::readInfo( KFileMetaInfo& info, uint /*what*/)
 {
 	QFile f(info.path());
-	if(!f.open(IO_ReadOnly))
+	if(!f.open(QIODevice::ReadOnly))
 		return false;
 	if(f.size() <= 2)
 		return false;
