@@ -51,7 +51,7 @@ int thumb_offset, thumb_length, thumb_layers;
 float cam_mul[4], pre_mul[4], coeff[3][4];
 #define camera_red  cam_mul[0]
 #define camera_blue cam_mul[2]
-float flash_used, canon_5814;
+/*float flash_used, canon_5814;*/
 time_t timestamp;
 /*int data_offset, meta_offset*/
 int raw_height, raw_width, top_margin, left_margin;
@@ -485,10 +485,12 @@ common:
     }
     if (type == 0x580e)
       timestamp = len;
+#if 0
     if (type == 0x5813)
       flash_used = *((float *) &len);
     if (type == 0x5814)
       canon_5814 = *((float *) &len);
+#endif
     if (type == 0x1810) {		/* Get the rotation */
       fseek (ifp, aoff+12, SEEK_SET);
       flip = get4();
