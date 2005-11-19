@@ -955,7 +955,7 @@ void parse_jpeg (int offset)
   }
 }
 
-char *memmem (char *haystack, size_t haystacklen,
+char *raw_memmem (char *haystack, size_t haystacklen,
               char *needle, size_t needlelen)
 {
   char *c;
@@ -983,8 +983,8 @@ int identify(FILE* tfp)
   fread (head, 1, 32, ifp);
   fseek (ifp, 0, SEEK_END);
   fsize = ftell(ifp);
-  if ((cp = memmem (head, 32, "MMMMRawT", 8)) ||
-      (cp = memmem (head, 32, "IIIITwaR", 8)))
+  if ((cp = raw_memmem (head, 32, "MMMMRawT", 8)) ||
+      (cp = raw_memmem (head, 32, "IIIITwaR", 8)))
     parse_phase_one (cp - head);
   else if (order == 0x4949 || order == 0x4d4d) {
     if (!memcmp(head+6,"HEAPCCDR",8)) {
