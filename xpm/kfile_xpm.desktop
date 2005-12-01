@@ -33,7 +33,6 @@ Name[ta]=XPM தகவல்
 Name[tr]=XPM Bilgisi
 Name[uk]=Інформація про XPM
 Name[uz]=XPM ҳақида маълумот
-Name[xx]=xxXPM Infoxx
 Name[zh_CN]=XPM 信息
 ServiceTypes=KFilePlugin
 X-KDE-Library=kfile_xpm

@@ -39,7 +39,6 @@ Name[tg]=Иттилоот оиди EXR
 Name[tr]=EXR Bilgisi
 Name[uk]=Інформація по EXR
 Name[uz]=EXR ҳақида маълумот
-Name[xx]=xxEXR Infoxx
 Name[zh_CN]=EXR 信息
 ServiceTypes=KFilePlugin
 X-KDE-Library=kfile_exr

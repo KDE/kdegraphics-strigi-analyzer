@@ -43,7 +43,6 @@ Name[th]=แฟ้ม PDF, DVI และ โพสต์สคริปต์
 Name[tr]=PostScript, PDF ve DVI Dosyaları
 Name[uk]=Файли PostScript, PDF та DVI
 Name[uz]=PostScript, PDF ва DVI файллари
-Name[xx]=xxPostScript, PDF and DVI Filesxx
 Name[zh_CN]=PostScript、PDF 和 DVI 文件
 ServiceTypes=ThumbCreator
 MimeTypes=application/x-dvi,application/postscript,application/pdf,image/x-eps
