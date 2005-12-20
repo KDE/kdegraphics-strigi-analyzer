@@ -713,10 +713,12 @@ void parse_foveon()
 			printf (" %d", sget4(dp));
 			dp += 4;
 			break;
-		      case 3:
-			val = sget4(dp);
-			printf (" %9f", *(float *)(&val));
+		      case 3: {
+                        union { int ival; float fval; } __t;
+			__t.ival = sget4(dp);
+			printf (" %9f", __t.fval);
 			dp += 4;
+                      }
 		    }
 		  printf ("\n");
 		}
