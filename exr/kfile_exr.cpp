@@ -44,7 +44,6 @@
 #include <kgenericfactory.h>
 #include <kdebug.h>
 
-#include <q3cstring.h>
 #include <qfile.h>
 #include <qdatetime.h>
 #include <q3dict.h>
@@ -143,21 +142,21 @@ KExrPlugin::KExrPlugin(QObject *parent, const char *name,
     addItemInfo( group, "Computer name", i18n("Computer Name"), QVariant::String );
 }
 
-Q3CString doType( PixelType pt )
+QString doType( PixelType pt )
 {
     switch (pt)
     {
 	case UINT:
-		return Q3CString("32-bit unsigned integer");
+		return QString("32-bit unsigned integer");
 		break;
 	case HALF:
-		return Q3CString("16-bit floating-point");
+		return QString("16-bit floating-point");
 		break;
 	case FLOAT:
-		return Q3CString("32-bit floating-point");
+		return QString("32-bit floating-point");
 		break;
     default:
-		return Q3CString();
+		return QString();
 		break;
     }
 }
