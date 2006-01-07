@@ -2,13 +2,7 @@
 Encoding=UTF-8
 Type=Service
 Name=RAW Camera Files
-Name[da]=RAW kamera-filer
-Name[et]=Toored kaamerafailid
-Name[ga]=Comhaid Cheamara RAW
-Name[sr]=RAW фајлови слика
-Name[sr@Latn]=RAW fajlovi slika
-Name[sv]=Obehandlade kamerafiler
-Name[tr]=RAW Kamera Dosyaları
+Name[x-test]=xxRAW Camera Filesxx
 ServiceTypes=KFilePlugin
 MimeType=image/x-raw
 X-KDE-Library=kfile_raw
