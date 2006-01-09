@@ -237,7 +237,7 @@ bool GSCreator::create(const QString &path, int width, int height, QImage &img)
   }
 
   const bool is_encapsulated = no_dvi &&
-    (path.find(QRegExp("\\.epsi?$", false, false)) > 0) &&
+    (path.indexOf(QRegExp("\\.epsi?$", false, false)) > 0) &&
     (dsc.bbox()->width() > 0) && (dsc.bbox()->height() > 0) && 
     (dsc.page_count() <= 1);
 
@@ -494,7 +494,7 @@ static bool correctDVI(const QString& filename)
   int n = f.size();
   if ( n < 134 ) // Too short for a dvi file
     return FALSE;
-  f.at( n-4 );
+  f.seek( n-4 );
 
   unsigned char trailer[4] = { 0xdf,0xdf,0xdf,0xdf };
 
