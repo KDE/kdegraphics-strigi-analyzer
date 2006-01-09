@@ -163,7 +163,7 @@ QDateTime KTiffPlugin::tiffDate(const QString& s) const
     QRegExp rxDate("^([0-9]{4}):([0-9]{2}):([0-9]{2})\\s"
                    "([0-9]{2}):([0-9]{2}):([0-9]{2})$");
 
-    if (rxDate.search(s) != -1)
+    if (rxDate.indexIn(s) != -1)
     {
         int year = rxDate.cap(1).toInt();
         int month = rxDate.cap(2).toInt();
