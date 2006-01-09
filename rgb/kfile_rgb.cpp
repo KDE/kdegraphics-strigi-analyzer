@@ -145,12 +145,12 @@ bool KRgbPlugin::readInfo(KFileMetaInfo& info, uint /*what*/)
 		for (k = 0; k < (ysize * zsize); k++) {
 			dstream >> offs;
 			if ((it = map.find(offs)) != end)
-				map.replace(offs, it.data() + 1);
+				map.insert(offs, *it + 1);
 			else
 				map[offs] = 0;
 		}
 		for (k = 0, it = map.begin(); it != end; ++it)
-			k += it.data();
+			k += *it;
 
 		if (k)
 			appendItem(group, "SharedRows", QString("%1%").arg(k * 100.0
@@ -179,7 +179,7 @@ bool KRgbPlugin::writeInfo(const KFileMetaInfo& info) const
 		return false;
 	}
 
-	if (!file.at(24)) {
+	if (!file.seek(24)) {
 		kdDebug(7034) << "couldn't set offset" << endl;
 		return false;
 	}
@@ -190,7 +190,7 @@ bool KRgbPlugin::writeInfo(const KFileMetaInfo& info) const
 
 	int i;
 	for (i = 0; i < s.length(); i++)
-		dstream << quint8(s.latin1()[i]);
+		dstream << quint8(s.toLatin1()[i]);
 	for (; i < 80; i++)
 		dstream << quint8(0);
 
@@ -203,7 +203,9 @@ bool KRgbPlugin::writeInfo(const KFileMetaInfo& info) const
 QValidator* KRgbPlugin::createValidator(const QString&, const QString &,
 		const QString &, QObject* parent, const char* name) const
 {
-	return new QRegExpValidator(QRegExp("[\x0020-\x007E]{79}"), parent, name);
+	QRegExpValidator *val = new QRegExpValidator(QRegExp("[\x0020-\x007E]{79}"), parent);
+	val->setObjectName(name);
+	return val;
 }
 
 
