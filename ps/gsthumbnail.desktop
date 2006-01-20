@@ -45,6 +45,7 @@ Name[tr]=PostScript, PDF ve DVI Dosyaları
 Name[uk]=Файли PostScript, PDF та DVI
 Name[uz]=PostScript, PDF ва DVI файллари
 Name[zh_CN]=PostScript、PDF 和 DVI 文件
+Name[zh_HK]=PostScript 、PDF 及 DVI 檔案
 ServiceTypes=ThumbCreator
 MimeTypes=application/x-dvi,application/postscript,application/pdf,image/x-eps
 X-KDE-Library=gsthumbnail

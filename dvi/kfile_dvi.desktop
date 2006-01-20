@@ -45,6 +45,7 @@ Name[uk]=Інформація по DVI
 Name[uz]=DVI ҳақида маълумот
 Name[wa]=Informåcion sol documint DVI
 Name[zh_CN]=DVI 信息
+Name[zh_HK]=DVI 資訊
 ServiceTypes=KFilePlugin
 Type=Service
 X-KDE-Library=kfile_dvi

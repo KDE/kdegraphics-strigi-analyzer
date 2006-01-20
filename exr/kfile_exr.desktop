@@ -41,6 +41,7 @@ Name[tr]=EXR Bilgisi
 Name[uk]=Інформація по EXR
 Name[uz]=EXR ҳақида маълумот
 Name[zh_CN]=EXR 信息
+Name[zh_HK]=EXR 資訊
 ServiceTypes=KFilePlugin
 X-KDE-Library=kfile_exr
 MimeType=image/x-exr
