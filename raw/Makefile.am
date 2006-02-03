@@ -24,4 +24,4 @@ mimetypeimagedata_DATA = x-image-raw.desktop
 magicdir = $(kde_confdir)/magic
 magic_DATA = x-image-raw.magic 
 
-EXTRA_DIST = $(mimetypeimagedata_DATA) $(magic_DATA) parse.c.orig
+EXTRA_DIST = $(mimetypeimagedata_DATA) $(magic_DATA)
