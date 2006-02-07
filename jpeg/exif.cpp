@@ -237,7 +237,7 @@ int ExifData::ReadJpegSections (QFile & infile, ReadMode_t ReadMode)
 
             if (a >= 6){
 
-                kdDebug(7034) << "too many padding bytes\n";
+                kDebug(7034) << "too many padding bytes\n";
                 return false;
 
             }
@@ -302,7 +302,7 @@ int ExifData::ReadJpegSections (QFile & infile, ReadMode_t ReadMode)
                 return true;
 
             case M_EOI:   // in case it's a tables-only JPEG stream
-                kdDebug(7034) << "No image in jpeg!\n";
+                kDebug(7034) << "No image in jpeg!\n";
                 return false;
 
             case M_COM: // Comment section
@@ -703,7 +703,7 @@ void ExifData::ProcessExifDir(unsigned char * DirStart, unsigned char * OffsetBa
                         // Jhead 1.3 or earlier would crop the whole directory!
                         // As Jhead produces this form of format incorrectness,
                         // I'll just let it pass silently
-                        kdDebug(7034) << "Thumbnail removed with Jhead 1.3 or earlier\n";
+                        kDebug(7034) << "Thumbnail removed with Jhead 1.3 or earlier\n";
                     }else{
                         throw FatalError("Illegal subdirectory link 2");
                     }
@@ -817,7 +817,7 @@ void ExifData::process_EXIF(unsigned char * CharBuf, unsigned int length)
 
     // Compute the CCD width, in milimeters.
     if (FocalplaneXRes != 0){
-	kdDebug(7034) << "ExifImageWidth " << ExifImageWidth << " FocalplaneUnits " << FocalplaneUnits << " FocalplaneXRes " << FocalplaneXRes << endl;
+	kDebug(7034) << "ExifImageWidth " << ExifImageWidth << " FocalplaneUnits " << FocalplaneUnits << " FocalplaneXRes " << FocalplaneXRes << endl;
         ExifData::CCDWidth = (float)(ExifImageWidth * FocalplaneUnits / FocalplaneXRes);
     }
 }
@@ -892,7 +892,7 @@ bool ExifData::scan(const QString & path)
     }
 
     if (ret == false){
-        kdDebug(7034) << "Not JPEG file!\n";
+        kDebug(7034) << "Not JPEG file!\n";
         DiscardData();
         f.close();
         return false;

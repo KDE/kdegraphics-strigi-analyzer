@@ -35,7 +35,7 @@ KPSPlugin::KPSPlugin(QObject *parent, const char *name,
     KFilePlugin( parent, preferredItems )
 {
 	setObjectName(name);
-    kdDebug(7034) << "ps plugin\n";
+    kDebug(7034) << "ps plugin\n";
     
     // set up our mimetypes
     makeMimeTypeInfo( "application/postscript" );

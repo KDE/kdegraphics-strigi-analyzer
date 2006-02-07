@@ -92,7 +92,7 @@ KPngPlugin::KPngPlugin(QObject *parent, const char *name,
     : KFilePlugin(parent, args)
 {
 	setObjectName(name);
-    kdDebug(7034) << "png plugin\n";
+    kDebug(7034) << "png plugin\n";
 
     // set up our mime type
     KFileMimeTypeInfo* info = addMimeTypeInfo( "image/png" );
@@ -159,7 +159,7 @@ bool KPngPlugin::readInfo( KFileMetaInfo& info, uint what)
 
             uint type = data[25];
             uint bpp =  data[24];
-            kdDebug(7034) << "dimensions " << x << "*" << y << endl;
+            kDebug(7034) << "dimensions " << x << "*" << y << endl;
 
             // the bpp are only per channel, so we need to multiply the with
             // the channel count
@@ -230,12 +230,12 @@ bool KPngPlugin::readInfo( KFileMetaInfo& info, uint what)
 
 		    QByteArray arr;
 		    if(!strncmp((char*)CHUNK_TYPE(data,index), "zTXt", 4)) {
-			kdDebug(7034) << "We found a zTXt field\n";
+			kDebug(7034) << "We found a zTXt field\n";
 			// we get the compression method after the key
 			uchar* compressionMethod = &CHUNK_DATA(data,index,keysize+1);
 			if ( *compressionMethod != 0x00 ) {
 			    // then it isn't zlib compressed and we are sunk
-			    kdDebug(7034) << "Non-standard compression method." << endl;
+			    kDebug(7034) << "Non-standard compression method." << endl;
 			    goto end;
 			}
 			// compressed string after the compression technique spec
@@ -260,7 +260,7 @@ bool KPngPlugin::readInfo( KFileMetaInfo& info, uint what)
 				arr.resize(uncompressedLen);
 			    } else if (Z_BUF_ERROR == zlibResult) {
 				// the uncompressedArray needs to be larger
-				// kdDebug(7034) << "doubling size for decompression" << endl;
+				// kDebug(7034) << "doubling size for decompression" << endl;
 				uncompressedLen *= 2;
 
                                 // DoS protection. can't be bigger than 64k
@@ -275,7 +275,7 @@ bool KPngPlugin::readInfo( KFileMetaInfo& info, uint what)
 			if (Z_OK != zlibResult)
 			    goto end;
 		    } else if (!strncmp((char*)CHUNK_TYPE(data,index), "tEXt", 4)) {
-			kdDebug(7034) << "We found a tEXt field\n";
+			kDebug(7034) << "We found a tEXt field\n";
 			// the text comes after the key, but isn't null terminated
 			uchar* text = &CHUNK_DATA(data,index, keysize+1);
 			uint textsize = CHUNK_SIZE(data, index)-keysize-1;
@@ -293,14 +293,14 @@ bool KPngPlugin::readInfo( KFileMetaInfo& info, uint what)
 							     textsize);
 			
 		    } else {
-			kdDebug(7034) << "We found a field, not expected though\n";
+			kDebug(7034) << "We found a field, not expected though\n";
 			goto end;
 		    }
 		    appendItem(commentGroup,
 			       QString(reinterpret_cast<char*>(key)),
 			       QString(arr));
 		    
-		    kdDebug(7034) << "adding " << key << " / "
+		    kDebug(7034) << "adding " << key << " / "
 				  << QString(arr) << endl;
 
 		    index += CHUNK_SIZE(data, index) + CHUNK_HEADER_SIZE;

@@ -49,7 +49,7 @@ KJpegPlugin::KJpegPlugin(QObject *parent, const char *name,
     : KFilePlugin(parent, args)
 {
 	setObjectName(name);
-  kdDebug(7034) << "jpeg plugin\n";
+  kDebug(7034) << "jpeg plugin\n";
 
   //
   // define all possible meta info items
@@ -164,7 +164,7 @@ bool KJpegPlugin::writeInfo( const KFileMetaInfo& info ) const
     QString comment = info[EXIFGROUP].value("Comment").toString();
     QString path    = info.path();
 
-    kdDebug(7034) << "exif writeInfo: " << info.path() << " \"" << comment << "\"\n";
+    kDebug(7034) << "exif writeInfo: " << info.path() << " \"" << comment << "\"\n";
 
     /*
         Do a strictly safe insertion of the comment:
@@ -201,12 +201,12 @@ bool KJpegPlugin::readInfo( KFileMetaInfo& info, uint what )
     // parse the jpeg file now
     try {
         if ( !ImageInfo.scan(info.path()) ) {
-            kdDebug(7034) << "Not a JPEG file!\n";
+            kDebug(7034) << "Not a JPEG file!\n";
             return false;
         }
     }
     catch (FatalError& e) { // malformed exif data?
-        kdDebug(7034) << "Exception caught while parsing Exif data of: " << info.path() << endl;
+        kDebug(7034) << "Exception caught while parsing Exif data of: " << info.path() << endl;
         e.debug_print();
         return false;
     }
@@ -215,7 +215,7 @@ bool KJpegPlugin::readInfo( KFileMetaInfo& info, uint what )
 
     tag = ImageInfo.getComment();
     if ( tag.length() ) {
-        kdDebug(7034) << "exif inserting Comment: " << tag << "\n";
+        kDebug(7034) << "exif inserting Comment: " << tag << "\n";
         appendItem( exifGroup, "Comment", tag );
     } else {
         appendItem( exifGroup, "Comment", tag );    // So user can add new comment

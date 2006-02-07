@@ -30,7 +30,7 @@ K_EXPORT_COMPONENT_FACTORY(kfile_pdf, PdfFactory("kfile_pdf"))
 KPdfPlugin::KPdfPlugin(QObject *parent, const char *name, const QStringList &preferredItems)
     : KFilePlugin(parent, name, preferredItems)
 {
-    kdDebug(7034) << "pdf plugin\n";
+    kDebug(7034) << "pdf plugin\n";
 
     // set up our mime type
     KFileMimeTypeInfo* info = addMimeTypeInfo( "application/pdf" );

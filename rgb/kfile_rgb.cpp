@@ -72,7 +72,7 @@ bool KRgbPlugin::readInfo(KFileMetaInfo& info, uint /*what*/)
 	QFile file(info.path());
 
 	if (!file.open(QIODevice::ReadOnly)) {
-		kdDebug(7034) << "Couldn't open " << QFile::encodeName(info.path()) << endl;
+		kDebug(7034) << "Couldn't open " << QFile::encodeName(info.path()) << endl;
 		return false;
 	}
 
@@ -175,12 +175,12 @@ bool KRgbPlugin::writeInfo(const KFileMetaInfo& info) const
 
 #warning "QT4 ????? IO_RAW ????"	
 	if (!file.open(QIODevice::WriteOnly/*|IO_Raw*/)) {
-		kdDebug(7034) << "couldn't open " << QFile::encodeName(info.path()) << endl;
+		kDebug(7034) << "couldn't open " << QFile::encodeName(info.path()) << endl;
 		return false;
 	}
 
 	if (!file.seek(24)) {
-		kdDebug(7034) << "couldn't set offset" << endl;
+		kDebug(7034) << "couldn't set offset" << endl;
 		return false;
 	}
 

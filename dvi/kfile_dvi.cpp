@@ -43,7 +43,7 @@ KDviPlugin::KDviPlugin (QObject * parent, const char * name, const QStringList &
   : KFilePlugin(parent, preferredItems)
 {
   setObjectName(name);
-  kdDebug(7034) << "dvi plugin" << endl;
+  kDebug(7034) << "dvi plugin" << endl;
   
   // set up our mime type
   KFileMimeTypeInfo * info = this->addMimeTypeInfo("application/x-dvi");
@@ -75,7 +75,7 @@ bool KDviPlugin::readInfo (KFileMetaInfo & info, uint /* what (unused in this pl
   f.open(QIODevice::ReadOnly);
   
   if ( f.isOpen() == false ){
-    kdDebug(7034) << "cannot open file" << endl;
+    kDebug(7034) << "cannot open file" << endl;
     return false;
   }
   
@@ -85,13 +85,13 @@ bool KDviPlugin::readInfo (KFileMetaInfo & info, uint /* what (unused in this pl
   // read more than 270 bytes)
   
   if ( f.read((char *)buffer, bytes_to_read) != bytes_to_read ){ // cast to (char *) is necessary
-    kdDebug(7034) << "read error (1)" << endl;
+    kDebug(7034) << "read error (1)" << endl;
     return false;
   }
   
   if ( (buffer[0] != 247)  ||  (buffer[1] != 2) ){
     // magic numbers are not right
-    kdDebug(7034) << "wrong file format" << endl;;
+    kDebug(7034) << "wrong file format" << endl;;
     return false;
   }
   
@@ -106,7 +106,7 @@ bool KDviPlugin::readInfo (KFileMetaInfo & info, uint /* what (unused in this pl
   // comment is ok, now get total number of pages
   f.seek( f.size() - 13);
   if ( f.read((char *)buffer, 13) != 13 ){
-    kdDebug(7034) << "read error (2)" << endl;
+    kDebug(7034) << "read error (2)" << endl;
     return false;
   }
   
@@ -114,7 +114,7 @@ bool KDviPlugin::readInfo (KFileMetaInfo & info, uint /* what (unused in this pl
   while ( buffer[i] == 223 ){ --i; } // skip all trailing bytes
   
   if ( (buffer[i] != 2) || (i > 8) || (i < 5) ){
-    kdDebug(7034) << "wrong file formatx" << endl;
+    kDebug(7034) << "wrong file formatx" << endl;
     return false;
   }
   
@@ -129,7 +129,7 @@ bool KDviPlugin::readInfo (KFileMetaInfo & info, uint /* what (unused in this pl
   
   // now read total number of pages from file
   if ( f.read((char *)buffer, 2) != 2 ){
-    kdDebug(7034) << "read error (3)" << endl;
+    kDebug(7034) << "read error (3)" << endl;
     return false;
   }
   pages = buffer[0];

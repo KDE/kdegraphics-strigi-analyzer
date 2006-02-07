@@ -113,7 +113,7 @@ class FatalError {
     const char* ex;
 public:
     FatalError(const char* s) { ex = s; }
-    void debug_print() const { kdDebug(7034) << "exception: " << ex << endl; }
+    void debug_print() const { kDebug(7034) << "exception: " << ex << endl; }
 };
 
 extern TagTable_t ProcessTable[];

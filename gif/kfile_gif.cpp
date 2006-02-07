@@ -47,7 +47,7 @@ KGifPlugin::KGifPlugin(QObject *parent, const char *name,
     : KFilePlugin(parent, args)
 {
 	setObjectName(name);
-    kdDebug(7034) << "gif KFileMetaInfo plugin\n";
+    kDebug(7034) << "gif KFileMetaInfo plugin\n";
 
     KFileMimeTypeInfo* info = addMimeTypeInfo( "image/gif" );
 
@@ -72,12 +72,12 @@ bool KGifPlugin::readInfo( KFileMetaInfo& info, uint what )
 {
     Q_UNUSED( what );
 
-    kdDebug(7034) << "gif KFileMetaInfo readInfo\n";
+    kDebug(7034) << "gif KFileMetaInfo readInfo\n";
 
     QFile file(info.path());
 
     if (!file.open(QIODevice::ReadOnly)) {
-	kdDebug(7034) << "Couldn't open " << QFile::encodeName(info.path()) << endl;
+	kDebug(7034) << "Couldn't open " << QFile::encodeName(info.path()) << endl;
 	return false;
     }
 

@@ -377,7 +377,7 @@ bool KExrPlugin::readInfo( KFileMetaInfo& info, uint what)
 	}
 	catch (const std::exception &e)
 	{
-		kdDebug(0) << e.what() << endl;
+		kDebug(0) << e.what() << endl;
 	    return false;
 	}
 }
