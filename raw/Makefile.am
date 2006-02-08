@@ -17,8 +17,3 @@ METASOURCES = AUTO
 
 services_DATA = kfile_raw.desktop
 servicesdir = $(kde_servicesdir)
-
-magicdir = $(kde_confdir)/magic
-magic_DATA = x-image-raw.magic 
-
-EXTRA_DIST = $(magic_DATA)
