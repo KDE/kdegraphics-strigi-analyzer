@@ -2,6 +2,7 @@
 Encoding=UTF-8
 Type=Service
 Name=XPM Info
+Name[fr]=Informations XPM
 Name[x-test]=xxXPM Infoxx
 ServiceTypes=KFilePlugin
 X-KDE-Library=kfile_xpm

@@ -2,6 +2,7 @@
 Encoding=UTF-8
 Type=Service
 Name=EXR Info
+Name[fr]=Informations EXR
 Name[x-test]=xxEXR Infoxx
 ServiceTypes=KFilePlugin
 X-KDE-Library=kfile_exr

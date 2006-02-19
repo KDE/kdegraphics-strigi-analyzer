@@ -2,6 +2,7 @@
 Encoding=UTF-8
 Type=Service
 Name=PostScript, PDF and DVI Files
+Name[fr]=Fichiers PostScript, PDF et DVI
 Name[x-test]=xxPostScript, PDF and DVI Filesxx
 ServiceTypes=ThumbCreator
 MimeTypes=application/x-dvi,application/postscript,application/pdf,image/x-eps

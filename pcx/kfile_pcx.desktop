@@ -2,6 +2,7 @@
 Encoding=UTF-8
 Type=Service
 Name=PCX File Meta Info
+Name[fr]=Méta Informations sur les fichiers PCX
 Name[x-test]=xxPCX File Meta Infoxx
 ServiceTypes=KFilePlugin
 X-KDE-Library=kfile_pcx

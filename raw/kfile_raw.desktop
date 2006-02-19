@@ -2,6 +2,7 @@
 Encoding=UTF-8
 Type=Service
 Name=RAW Camera Files
+Name[fr]=Fichiers RAW d'appareil photo numérique
 Name[x-test]=xxRAW Camera Filesxx
 ServiceTypes=KFilePlugin
 MimeType=image/x-raw

@@ -2,6 +2,7 @@
 Encoding=UTF-8
 Type=Service
 Name=TIFF File Meta Info
+Name[fr]=Méta Informations sur les fichiers TIFF
 Name[x-test]=xxTIFF File Meta Infoxx
 ServiceTypes=KFilePlugin
 X-KDE-Library=kfile_tiff

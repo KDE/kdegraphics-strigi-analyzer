@@ -2,6 +2,7 @@
 Encoding=UTF-8
 Type=Service
 Name=PostScript Info
+Name[fr]=Informations PostScript
 Name[x-test]=xxPostScript Infoxx
 ServiceTypes=KFilePlugin
 X-KDE-Library=kfile_ps

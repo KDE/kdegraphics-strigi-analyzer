@@ -2,6 +2,7 @@
 Encoding=UTF-8
 Type=Service
 Name=SGI Image (RGB)
+Name[fr]=Image SGI (RVB)
 Name[x-test]=xxSGI Image (RGB)xx
 ServiceTypes=KFilePlugin
 X-KDE-Library=kfile_rgb
