@@ -6,10 +6,8 @@ if include_TIFF
 KFILE_TIFF_SUBDIR=tiff
 endif
 
-if include_PDF
-#KFILE_PDF_SUBDIR=pdf
-#WARNING reactivate it when poppler will port to qt4
-
+if include_PDF_kfile_plugin
+KFILE_PDF_SUBDIR=pdf
 endif
 
 SUBDIRS=dvi png ps jpeg xbm xpm bmp tga rgb ico pcx $(KFILE_TIFF_SUBDIR) pnm \

@@ -27,8 +27,8 @@ typedef KGenericFactory<KPdfPlugin> PdfFactory;
 
 K_EXPORT_COMPONENT_FACTORY(kfile_pdf, PdfFactory("kfile_pdf"))
 
-KPdfPlugin::KPdfPlugin(QObject *parent, const char *name, const QStringList &preferredItems)
-    : KFilePlugin(parent, name, preferredItems)
+KPdfPlugin::KPdfPlugin(QObject *parent, const char *, const QStringList &preferredItems)
+    : KFilePlugin(parent, preferredItems)
 {
     kDebug(7034) << "pdf plugin\n";
 
@@ -68,16 +68,16 @@ bool KPdfPlugin::readInfo( KFileMetaInfo& info, uint /* what */)
 
     KFileMetaInfoGroup generalGroup = appendGroup(info, "General");
 
-    appendItem(generalGroup, "Title", m_doc->getInfo("Title") );
-    appendItem(generalGroup, "Subject", m_doc->getInfo("Subject") );
-    appendItem(generalGroup, "Author", m_doc->getInfo("Author") );
-    appendItem(generalGroup, "Keywords", m_doc->getInfo("Keywords") );
-    appendItem(generalGroup, "Creator", m_doc->getInfo("Creator") );
-    appendItem(generalGroup, "Producer", m_doc->getInfo("Producer") );
+    appendItem(generalGroup, "Title", m_doc->info("Title") );
+    appendItem(generalGroup, "Subject", m_doc->info("Subject") );
+    appendItem(generalGroup, "Author", m_doc->info("Author") );
+    appendItem(generalGroup, "Keywords", m_doc->info("Keywords") );
+    appendItem(generalGroup, "Creator", m_doc->info("Creator") );
+    appendItem(generalGroup, "Producer", m_doc->info("Producer") );
 
-    appendItem(generalGroup, "CreationDate", m_doc->getDate("CreationDate") );
-    appendItem(generalGroup, "ModificationDate", m_doc->getDate("ModDate") );
-    appendItem(generalGroup, "Pages", m_doc->getNumPages() );
+    appendItem(generalGroup, "CreationDate", m_doc->date("CreationDate") );
+    appendItem(generalGroup, "ModificationDate", m_doc->date("ModDate") );
+    appendItem(generalGroup, "Pages", m_doc->numPages() );
     
     QString enc;
     if (m_doc->isEncrypted())
@@ -92,7 +92,7 @@ bool KPdfPlugin::readInfo( KFileMetaInfo& info, uint /* what */)
     
     appendItem(generalGroup, "Protected", enc );
     appendItem(generalGroup, "Linearized", m_doc->isLinearized() ? i18n("Yes") : i18n("No") );
-    QString versionString = QString("%1").arg( m_doc->getPDFVersion(), 0, 'f', 1 );
+    QString versionString = QString("%1").arg( m_doc->pdfVersion(), 0, 'f', 1 );
     appendItem(generalGroup, "Version", versionString );
 
     return true;

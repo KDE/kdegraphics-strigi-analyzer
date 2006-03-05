@@ -7,14 +7,6 @@ if test -z "$LIBTIFF"; then
   all_tests=bad
 fi
 
-if test -z "$POPPLER_LIBS"; then
-  echo ""
-  echo "You're missing poppler. The additional info plugin for PDF files"
-  echo "files won't be compiled without poppler >= 0.3.1."
-  echo "You can download poppler from http://poppler.freedesktop.org/"
-  echo ""
-fi
-
 if test "$EXRSTATUS" = "no"; then
   echo ""
   echo "No OpenEXR Libraries were found"

@@ -21,8 +21,10 @@
 #ifndef __KFILE_PDF_H__
 #define __KFILE_PDF_H__
 
+#define UNSTABLE_POPPLER_QT4
+
 #include <kfilemetainfo.h>
-#include <poppler-qt.h>
+#include <poppler-qt4.h>
 
 class QStringList;
 
