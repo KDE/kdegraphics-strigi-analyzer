@@ -1,7 +1,10 @@
 kde4_header()
 
+macro_optional_find_package(PNG)
 add_subdirectory( dvi ) 
-add_subdirectory( png ) 
+if(PNG_FOUND)
+	add_subdirectory( png ) 
+endif(PNG_FOUND)
 add_subdirectory( ps ) 
 add_subdirectory( jpeg ) 
 add_subdirectory( xbm ) 

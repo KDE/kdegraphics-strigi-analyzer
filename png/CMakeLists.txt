@@ -13,7 +13,7 @@ kde4_add_plugin(kfile_png ${kfile_png_PART_SRCS})
 
 kde4_install_libtool_file( ${PLUGIN_INSTALL_DIR} kfile_png )
 
-target_link_libraries(kfile_png  ${QT_AND_KDECORE_LIBS} kio )
+target_link_libraries(kfile_png  ${LIB_KIO} ${PNG_LIBRARIES})
 
 install_targets(${LIB_INSTALL_DIR}/kde4 kfile_png )
 
