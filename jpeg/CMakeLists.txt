@@ -2,7 +2,7 @@ kde4_header()
 
 include_directories( ${KDE4_INCLUDE_DIR} ${QT_INCLUDES} ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}  )
 
-
+set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}  ${KDE4_ENABLE_EXCEPTIONS}")
 ########### next target ###############
 
 set(kfile_jpeg_PART_SRCS kfile_jpeg.cpp exif.cpp kfile_setcomment.cpp )
@@ -13,7 +13,7 @@ kde4_add_plugin(kfile_jpeg ${kfile_jpeg_PART_SRCS})
 
 kde4_install_libtool_file( ${PLUGIN_INSTALL_DIR} kfile_jpeg )
 
-target_link_libraries(kfile_jpeg  ${QT_AND_KDECORE_LIBS} kio )
+target_link_libraries(kfile_jpeg  ${LIB_KIO} )
 
 install_targets(${LIB_INSTALL_DIR}/kde4 kfile_jpeg )
 

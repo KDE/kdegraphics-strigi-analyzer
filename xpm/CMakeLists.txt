@@ -13,7 +13,7 @@ kde4_add_plugin(kfile_xpm ${kfile_xpm_PART_SRCS})
 
 kde4_install_libtool_file( ${PLUGIN_INSTALL_DIR} kfile_xpm )
 
-target_link_libraries(kfile_xpm  ${QT_AND_KDECORE_LIBS} kio )
+target_link_libraries(kfile_xpm  ${LIB_KIO} )
 
 install_targets(${LIB_INSTALL_DIR}/kde4 kfile_xpm )
 
