@@ -1,10 +1,22 @@
 kde4_header()
 
 macro_optional_find_package(PNG)
+macro_optional_find_package(OpenEXR)
+macro_optional_find_package(TIFF)
 add_subdirectory( dvi ) 
+
 if(PNG_FOUND)
 	add_subdirectory( png ) 
 endif(PNG_FOUND)
+
+if(OPENEXR_FOUND)
+	add_subdirectory(exr)
+endif(OPENEXR_FOUND)
+
+if(TIFF_FOUND)
+	add_subdirectory(tiff)
+endif(TIFF_FOUND)
+
 #add_subdirectory( ps ) 
 add_subdirectory( jpeg ) 
 add_subdirectory( xbm ) 
@@ -20,8 +32,6 @@ add_subdirectory( gif )
 add_subdirectory( raw ) 
 
 message(STATUS "${CMAKE_CURRENT_SOURCE_DIR}: read ps ")
-message(STATUS "${CMAKE_CURRENT_SOURCE_DIR}: skipped subdir $(KFILE_TIFF_SUBDIR)")
-message(STATUS "${CMAKE_CURRENT_SOURCE_DIR}: skipped subdir $(KFILE_EXR_SUBDIR)")
 message(STATUS "${CMAKE_CURRENT_SOURCE_DIR}: skipped subdir $(KFILE_PDF_SUBDIR)")
 include_directories( ${KDE4_INCLUDE_DIR} ${QT_INCLUDES} ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}  )
 
