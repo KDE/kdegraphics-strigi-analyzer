@@ -13,7 +13,7 @@ kde4_add_plugin(kfile_tiff ${kfile_tiff_PART_SRCS})
 
 kde4_install_libtool_file( ${PLUGIN_INSTALL_DIR} kfile_tiff )
 
-target_link_libraries(kfile_tiff  ${QT_AND_KDECORE_LIBS} kio )
+target_link_libraries(kfile_tiff  ${LIB_KIO} ${TIFF_LIBRARIES} )
 
 install_targets(${LIB_INSTALL_DIR}/kde4 kfile_tiff )
 

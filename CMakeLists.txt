@@ -29,9 +29,9 @@ add_subdirectory( pcx )
 add_subdirectory( pnm ) 
 add_subdirectory( dds ) 
 add_subdirectory( gif ) 
-add_subdirectory( raw ) 
+#add_subdirectory( raw ) 
 
-message(STATUS "${CMAKE_CURRENT_SOURCE_DIR}: read ps ")
+message(STATUS "${CMAKE_CURRENT_SOURCE_DIR}: readd ps - raw  ")
 message(STATUS "${CMAKE_CURRENT_SOURCE_DIR}: skipped subdir $(KFILE_PDF_SUBDIR)")
 include_directories( ${KDE4_INCLUDE_DIR} ${QT_INCLUDES} ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}  )
 

@@ -1,6 +1,7 @@
 kde4_header()
 
-include_directories( ${KDE4_INCLUDE_DIR} ${QT_INCLUDES} ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}  )
+set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${KDE4_ENABLE_EXCEPTIONS}")
+include_directories( ${OPENEXR_INCLUDE_DIR} ${KDE4_INCLUDE_DIR} ${QT_INCLUDES} ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}  )
 
 
 ########### next target ###############
@@ -13,7 +14,7 @@ kde4_add_plugin(kfile_exr ${kfile_exr_PART_SRCS})
 
 kde4_install_libtool_file( ${PLUGIN_INSTALL_DIR} kfile_exr )
 
-target_link_libraries(kfile_exr  ${QT_AND_KDECORE_LIBS} kio )
+target_link_libraries(kfile_exr  ${LIB_KIO} ${OPENEXR_LIBRARIES} )
 
 install_targets(${LIB_INSTALL_DIR}/kde4 kfile_exr )
 
