@@ -17,7 +17,7 @@ if(TIFF_FOUND)
 	add_subdirectory(tiff)
 endif(TIFF_FOUND)
 
-#add_subdirectory( ps ) 
+add_subdirectory( ps ) 
 add_subdirectory( jpeg ) 
 add_subdirectory( xbm ) 
 add_subdirectory( xpm ) 

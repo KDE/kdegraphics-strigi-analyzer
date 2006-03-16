@@ -5,7 +5,7 @@ include_directories( ${CMAKE_SOURCE_DIR}/kghostview ${KDE4_INCLUDE_DIR} ${QT_INC
 
 ########### next target ###############
 
-set(kfile_ps_PART_SRCS kfile_ps.cpp )
+set(kfile_ps_PART_SRCS kfile_ps.cpp ${libdscparse_SRCS})
 
 kde4_automoc(${kfile_ps_PART_SRCS})
 
@@ -13,14 +13,14 @@ kde4_add_plugin(kfile_ps ${kfile_ps_PART_SRCS})
 
 kde4_install_libtool_file( ${PLUGIN_INSTALL_DIR} kfile_ps )
 
-target_link_libraries(kfile_ps  ${QT_AND_KDECORE_LIBS} kio dscparse )
+target_link_libraries(kfile_ps  ${LIB_KIO} )
 
 install_targets(${LIB_INSTALL_DIR}/kde4 kfile_ps )
 
 
 ########### next target ###############
 
-set(gsthumbnail_PART_SRCS gscreator.cpp )
+set(gsthumbnail_PART_SRCS gscreator.cpp ${libdscparse_SRCS})
 
 kde4_automoc(${gsthumbnail_PART_SRCS})
 
@@ -28,7 +28,7 @@ kde4_add_plugin(gsthumbnail ${gsthumbnail_PART_SRCS})
 
 kde4_install_libtool_file( ${PLUGIN_INSTALL_DIR} gsthumbnail )
 
-target_link_libraries(gsthumbnail  ${QT_AND_KDECORE_LIBS} dscparse )
+target_link_libraries(gsthumbnail  ${QT_AND_KDECORE_LIBS} )
 
 install_targets(${LIB_INSTALL_DIR}/kde4 gsthumbnail )
 
