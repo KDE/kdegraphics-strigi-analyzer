@@ -14,7 +14,7 @@ kde4_add_plugin(kfile_exr ${kfile_exr_PART_SRCS})
 
 kde4_install_libtool_file( ${PLUGIN_INSTALL_DIR} kfile_exr )
 
-target_link_libraries(kfile_exr  ${LIB_KIO} ${OPENEXR_LIBRARIES} )
+target_link_libraries(kfile_exr  ${KDE4_KIO_LIBRARIES} ${OPENEXR_LIBRARIES} )
 
 install_targets(${LIB_INSTALL_DIR}/kde4 kfile_exr )
 

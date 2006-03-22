@@ -13,7 +13,7 @@ kde4_add_plugin(kfile_raw ${kfile_raw_PART_SRCS})
 
 kde4_install_libtool_file( ${PLUGIN_INSTALL_DIR} kfile_raw )
 
-target_link_libraries(kfile_raw  ${LIB_KIO} )
+target_link_libraries(kfile_raw  ${KDE4_KIO_LIBRARIES} )
 
 install_targets(${LIB_INSTALL_DIR}/kde4 kfile_raw )
 

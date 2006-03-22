@@ -13,7 +13,7 @@ kde4_add_plugin(kfile_ps ${kfile_ps_PART_SRCS})
 
 kde4_install_libtool_file( ${PLUGIN_INSTALL_DIR} kfile_ps )
 
-target_link_libraries(kfile_ps  ${LIB_KIO} )
+target_link_libraries(kfile_ps  ${KDE4_KIO_LIBRARIES} )
 
 install_targets(${LIB_INSTALL_DIR}/kde4 kfile_ps )
 
@@ -28,7 +28,7 @@ kde4_add_plugin(gsthumbnail ${gsthumbnail_PART_SRCS})
 
 kde4_install_libtool_file( ${PLUGIN_INSTALL_DIR} gsthumbnail )
 
-target_link_libraries(gsthumbnail  ${QT_AND_KDECORE_LIBS} )
+target_link_libraries(gsthumbnail  ${KDE4_KDECORE_LIBS} )
 
 install_targets(${LIB_INSTALL_DIR}/kde4 gsthumbnail )
 
