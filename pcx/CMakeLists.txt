@@ -13,7 +13,7 @@ kde4_add_plugin(kfile_pcx ${kfile_pcx_PART_SRCS})
 
 kde4_install_libtool_file( ${PLUGIN_INSTALL_DIR} kfile_pcx )
 
-target_link_libraries(kfile_pcx  ${KDE4_KDECORE_LIBS} kio )
+target_link_libraries(kfile_pcx  ${KDE4_KIO_LIBS} )
 
 install_targets(${LIB_INSTALL_DIR}/kde4 kfile_pcx )
 
