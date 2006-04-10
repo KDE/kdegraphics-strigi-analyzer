@@ -93,15 +93,15 @@ KExrPlugin::KExrPlugin(QObject *parent, const char *name,
 	item = addItemInfo( group, "Exposure time", i18n("Exposure Time"), QVariant::Double);
 	setUnit( item, KFileMimeTypeInfo::Seconds );
 	item = addItemInfo( group, "Focus", i18n("Focus"), QVariant::Double);
-	setSuffix( item, i18n("Metres", "m") );
+	setSuffix( item, i18nc("Metres", "m") );
 	item = addItemInfo( group, "X Density", i18n("X Density"), QVariant::Double);
-	setSuffix( item, i18n("Pixels Per Inch", " ppi") );
+	setSuffix( item, i18nc("Pixels Per Inch", " ppi") );
 	item = addItemInfo( group, "White luminance", i18n("White Luminance"), QVariant::Double);
-	setSuffix( item, i18n("Candelas per square metre", " Nits") );
+	setSuffix( item, i18nc("Candelas per square metre", " Nits") );
 	addItemInfo( group, "Longitude", i18n("Longitude"), QVariant::String );
 	addItemInfo( group, "Latitude", i18n("Latitude"), QVariant::String );
 	item = 	addItemInfo( group, "Altitude", i18n("Altitude"), QVariant::String );
-	setSuffix( item, i18n("Metres", "m") );
+	setSuffix( item, i18nc("Metres", "m") );
 	addItemInfo( group, "ISO speed", i18n("ISO Speed"), QVariant::Double );
 	addItemInfo( group, "Aperture", i18n("Aperture"), QVariant::Double );
 

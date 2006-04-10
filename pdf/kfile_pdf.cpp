@@ -82,11 +82,11 @@ bool KPdfPlugin::readInfo( KFileMetaInfo& info, uint /* what */)
     QString enc;
     if (m_doc->isEncrypted())
     {
-    	enc = i18n("Yes (Can Print:%1 Can Copy:%2 Can Change:%3 Can Add notes:%4)")
-    	.arg(m_doc->okToPrint() ? i18n("Yes") : i18n("No"))
-    	.arg(m_doc->okToCopy() ? i18n("Yes") : i18n("No"))
-    	.arg(m_doc->okToChange() ? i18n("Yes") : i18n("No"))
-    	.arg(m_doc->okToAddNotes() ? i18n("Yes") : i18n("No"));
+    	enc = i18n("Yes (Can Print:%1 Can Copy:%2 Can Change:%3 Can Add notes:%4)",
+    	 m_doc->okToPrint() ? i18n("Yes") : i18n("No"),
+    	 m_doc->okToCopy() ? i18n("Yes") : i18n("No"),
+    	 m_doc->okToChange() ? i18n("Yes") : i18n("No"),
+    	 m_doc->okToAddNotes() ? i18n("Yes") : i18n("No"));
     }
     else enc = i18n("No");
     

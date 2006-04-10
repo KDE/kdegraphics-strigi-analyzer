@@ -250,33 +250,33 @@ bool KJpegPlugin::readInfo( KFileMetaInfo& info, uint what )
 
     int flashUsed = ImageInfo.getFlashUsed(); // -1, <set>
     if ( flashUsed >= 0 ) {
-	 QString flash = i18n("Flash", "(unknown)");
+	 QString flash = i18nc("Flash", "(unknown)");
          switch ( flashUsed ) {
-         case 0: flash = i18n("Flash", "No");
+         case 0: flash = i18nc("Flash", "No");
              break;
          case 1:
          case 5:
          case 7:
-             flash = i18n("Flash", "Fired");
+             flash = i18nc("Flash", "Fired");
              break;
          case 9:
          case 13:
          case 15:
-             flash = i18n( "Flash", "Fill Fired" );
+             flash = i18nc( "Flash", "Fill Fired" );
              break;
          case 16:
-             flash = i18n( "Flash", "Off" );
+             flash = i18nc( "Flash", "Off" );
              break;
          case 24:
-             flash = i18n( "Flash", "Auto Off" );
+             flash = i18nc( "Flash", "Auto Off" );
              break;
          case 25:
          case 29:
          case 31:
-             flash = i18n( "Flash", "Auto Fired" );
+             flash = i18nc( "Flash", "Auto Fired" );
              break;
          case 32:
-             flash = i18n( "Flash", "Not Available" );
+             flash = i18nc( "Flash", "Not Available" );
              break;
          default:
              break;
