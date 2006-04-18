@@ -15,7 +15,7 @@ kde4_install_libtool_file( ${PLUGIN_INSTALL_DIR} kfile_pdf )
 
 target_link_libraries(kfile_pdf  ${KDE4_KIO_LIBS} )
 
-install_targets(${LIB_INSTALL_DIR}/kde4 kfile_pdf )
+install_targets(${PLUGIN_INSTALL_DIR} kfile_pdf )
 
 
 ########### install files ###############

@@ -15,7 +15,7 @@ kde4_install_libtool_file( ${PLUGIN_INSTALL_DIR} kfile_jpeg )
 
 target_link_libraries(kfile_jpeg  ${KDE4_KIO_LIBS} )
 
-install_targets(${LIB_INSTALL_DIR}/kde4 kfile_jpeg )
+install_targets(${PLUGIN_INSTALL_DIR} kfile_jpeg )
 
 
 ########### install files ###############

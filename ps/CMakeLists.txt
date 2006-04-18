@@ -15,7 +15,7 @@ kde4_install_libtool_file( ${PLUGIN_INSTALL_DIR} kfile_ps )
 
 target_link_libraries(kfile_ps  ${KDE4_KIO_LIBS} )
 
-install_targets(${LIB_INSTALL_DIR}/kde4 kfile_ps )
+install_targets(${PLUGIN_INSTALL_DIR} kfile_ps )
 
 
 ########### next target ###############
@@ -30,7 +30,7 @@ kde4_install_libtool_file( ${PLUGIN_INSTALL_DIR} gsthumbnail )
 
 target_link_libraries(gsthumbnail  ${KDE4_KDECORE_LIBS} )
 
-install_targets(${LIB_INSTALL_DIR}/kde4 gsthumbnail )
+install_targets(${PLUGIN_INSTALL_DIR} gsthumbnail )
 
 
 ########### install files ###############

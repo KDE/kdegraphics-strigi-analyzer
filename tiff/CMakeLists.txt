@@ -15,7 +15,7 @@ kde4_install_libtool_file( ${PLUGIN_INSTALL_DIR} kfile_tiff )
 
 target_link_libraries(kfile_tiff  ${KDE4_KIO_LIBS} ${TIFF_LIBRARIES} )
 
-install_targets(${LIB_INSTALL_DIR}/kde4 kfile_tiff )
+install_targets(${PLUGIN_INSTALL_DIR} kfile_tiff )
 
 
 ########### install files ###############

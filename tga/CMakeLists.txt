@@ -15,7 +15,7 @@ kde4_install_libtool_file( ${PLUGIN_INSTALL_DIR} kfile_tga )
 
 target_link_libraries(kfile_tga  ${KDE4_KIO_LIBS} )
 
-install_targets(${LIB_INSTALL_DIR}/kde4 kfile_tga )
+install_targets(${PLUGIN_INSTALL_DIR} kfile_tga )
 
 
 ########### install files ###############

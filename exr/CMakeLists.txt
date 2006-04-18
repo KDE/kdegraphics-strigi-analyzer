@@ -16,7 +16,7 @@ kde4_install_libtool_file( ${PLUGIN_INSTALL_DIR} kfile_exr )
 
 target_link_libraries(kfile_exr  ${KDE4_KIO_LIBS} ${OPENEXR_LIBRARIES} )
 
-install_targets(${LIB_INSTALL_DIR}/kde4 kfile_exr )
+install_targets(${PLUGIN_INSTALL_DIR} kfile_exr )
 
 
 ########### install files ###############
