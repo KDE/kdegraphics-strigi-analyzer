@@ -350,8 +350,8 @@ int ExifData::ReadJpegSections (QFile & infile, ReadMode_t ReadMode)
                 process_SOFn(Data, marker); //FIXME: This call requires Data to
 		// be array of at least 8 bytes. Code above only checks for 
 		// itemlen < 2.
-            default:
                 break;
+            default:
                 break;
         }
     }
