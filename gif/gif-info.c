@@ -285,9 +285,8 @@ FILE    *dest;
                 gct_size=2<<(lsd[4]&0x7);
                 pos=ftell(src);
                 (void)fread((void *)gct,gct_size,3,src);
-        }
-        if (output) {
-                (void)fwrite((void *)gct,gct_size,3,dest);
+                if (output)
+                        (void)fwrite((void *)gct,gct_size,3,dest);
         }
 
         do {
@@ -479,6 +478,7 @@ FILE *      outfile;
     }
 
   if ((infile = fopen(original_filename, READ_BINARY)) == NULL) {
+    fclose( outfile );
     fprintf(stderr, "can't open gif image '%s'\n", original_filename);
     return(ERROR_NOT_A_JPEG);
     }
