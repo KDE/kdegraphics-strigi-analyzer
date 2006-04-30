@@ -950,5 +950,5 @@ QImage ExifData::getThumbnail() {
     case 8: M.rotate(270); break;
     default: break; // should never happen
   }
-  return Thumbnail.xForm(M);
+  return Thumbnail.transformed(M);
 }

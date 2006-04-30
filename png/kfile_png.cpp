@@ -127,7 +127,7 @@ bool KPngPlugin::readInfo( KFileMetaInfo& info, uint what)
     if ( !f.open(QIODevice::ReadOnly) )
         return false;
 
-    QIODevice::Offset fileSize = f.size();
+    qint64 fileSize = f.size();
 
     if (fileSize < 29) return false;
     // the technical group will be read from the first 29 bytes. If the file
