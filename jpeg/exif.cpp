@@ -216,23 +216,27 @@ static int BytesPerFormat[] = {0,1,1,2,4,8,1,1,2,4,8,4,8};
 //--------------------------------------------------------------------------
 int ExifData::ReadJpegSections (QFile & infile, ReadMode_t ReadMode)
 {
-    int a;
+    char a;
 
-    a = infile.getChar();
+    if ( !infile.getChar(&a) )
+        return false;
 
-    if (a != 0xff || infile.getChar() != M_SOI) {
+    char dummy = 0;
+    if ( a == 0xff )
+        infile.getChar( &dummy );
+    if (a != 0xff || dummy != M_SOI) {
         SectionsRead = 0;
         return false;
     }
     for(SectionsRead = 0; SectionsRead < MAX_SECTIONS-1; ){
-        int marker = 0;
+        char marker = 0;
         int got;
-        unsigned int ll,lh;
+        char ll,lh;
         unsigned int itemlen;
         uchar * Data;
 
         for (a=0;a<7;a++){
-            marker = infile.getChar();
+            infile.getChar(&marker);
             if (marker != 0xff) break;
 
             if (a >= 6){
@@ -251,8 +255,8 @@ int ExifData::ReadJpegSections (QFile & infile, ReadMode_t ReadMode)
         Sections[SectionsRead].Type = marker;
 
         // Read the length of the section.
-        lh = (uchar) infile.getChar();
-        ll = (uchar) infile.getChar();
+        infile.getChar(&ll);
+        infile.getChar(&lh);
 
         itemlen = (lh << 8) | ll;
 
