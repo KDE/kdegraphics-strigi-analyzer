@@ -26,13 +26,13 @@
 
     1. Test if file is a DVI file
 
-    2. Create a child process (1), in which the 
+    2. Create a child process (1), in which the
        file is to be changed into a PNG
-       
+
     3. Child-process (1) :
 
     4. If file is DVI continue with 6
-    
+
     5. If file is no DVI continue with 9
 
     6. Create another child process (2), in which the DVI is
@@ -40,7 +40,7 @@
 
     7. Parent process (2) :
        Turn the recently created PS file into a PNG file using gs
-       
+
     8. continue with 10
 
     9. Turn the PS,PDF or EPS file into a PNG file using gs
@@ -155,7 +155,7 @@ static const char * gsargs_eps[] = {
 
 static const char *dvipsargs[] = {
     "dvips",
-    "-n", 
+    "-n",
     "1",
     "-q",
     "-o",
@@ -192,10 +192,10 @@ bool GSCreator::create(const QString &path, int width, int height, QImage &img)
   typedef void ( *sighandler_t )( int );
   // according to linux's "man signal" the above typedef is a gnu extension
   sighandler_t oldhandler = signal( SIGTERM, handle_sigterm );
-  
+
   int input[2];
   int output[2];
-  int dvipipe[2]; 
+  int dvipipe[2];
 
   QByteArray data(1024);
 
@@ -238,7 +238,7 @@ bool GSCreator::create(const QString &path, int width, int height, QImage &img)
 
   const bool is_encapsulated = no_dvi &&
     (path.indexOf(QRegExp("\\.epsi?$", false, false)) > 0) &&
-    (dsc.bbox()->width() > 0) && (dsc.bbox()->height() > 0) && 
+    (dsc.bbox()->width() > 0) && (dsc.bbox()->height() > 0) &&
     (dsc.page_count() <= 1);
 
   char translation[64] = "";
@@ -263,7 +263,7 @@ bool GSCreator::create(const QString &path, int width, int height, QImage &img)
        bbox->lly());
   }
 
-  const CDSC_PREVIEW_TYPE previewType = 
+  const CDSC_PREVIEW_TYPE previewType =
     static_cast<CDSC_PREVIEW_TYPE>(dsc.preview());
 
   switch (previewType) {
@@ -294,15 +294,15 @@ bool GSCreator::create(const QString &path, int width, int height, QImage &img)
     // need to run ghostscript in these cases
     break;
   }
-  
-  pid_t pid = fork(); 
+
+  pid_t pid = fork();
   if (pid == 0) {
     // Child process (1)
 
     //    close(STDERR_FILENO);
 
-    // find first zero entry in gsargs and put the filename 
-    // or - (stdin) there, if DVI 
+    // find first zero entry in gsargs and put the filename
+    // or - (stdin) there, if DVI
     const char **gsargs = gsargs_ps;
     const char **arg = gsargs;
 
@@ -319,7 +319,7 @@ bool GSCreator::create(const QString &path, int width, int height, QImage &img)
       *arg = resopt;
     }
 
-    // find next zero entry and put the filename there    
+    // find next zero entry and put the filename there
     Q3CString fname = QFile::encodeName( path );
     while (*arg)
       ++arg;
@@ -328,29 +328,29 @@ bool GSCreator::create(const QString &path, int width, int height, QImage &img)
     else
       *arg = "-";
 
-    // find first zero entry in dvipsargs and put the filename there    
+    // find first zero entry in dvipsargs and put the filename there
     arg = dvipsargs;
     while (*arg)
       ++arg;
     *arg = fname.data();
-    
+
     if( !no_dvi ){
       pipe(dvipipe);
       pid_t pid_two = fork();
       if( pid_two == 0 ){
 	// Child process (2), reopen stdout on the pipe "dvipipe" and exec dvips
-	
-	close(input[0]);	    
+
+	close(input[0]);
 	close(input[1]);
 	close(output[0]);
 	close(output[1]);
 	close(dvipipe[0]);
-	
+
 	dup2( dvipipe[1], STDOUT_FILENO);
-	
+
 	execvp(dvipsargs[0], const_cast<char *const *>(dvipsargs));
 	exit(1);
-      } 
+      }
       else if(pid_two != -1){
 	close(input[1]);
 	close(output[0]);
@@ -359,7 +359,7 @@ bool GSCreator::create(const QString &path, int width, int height, QImage &img)
 	dup2( dvipipe[0], STDIN_FILENO);
 	dup2( output[1], STDOUT_FILENO);
 
-	execvp(gsargs[0], const_cast<char *const *>(gsargs)); 	    
+	execvp(gsargs[0], const_cast<char *const *>(gsargs));
 	exit(1);
       }
       else{
@@ -367,20 +367,20 @@ bool GSCreator::create(const QString &path, int width, int height, QImage &img)
 	close(dvipipe[0]);
 	close(dvipipe[1]);
       }
-	      
-    } 
+
+    }
     else if( no_dvi ){
       // Reopen stdin/stdout on the pipes and exec gs
       close(input[1]);
       close(output[0]);
 
       dup2(input[0], STDIN_FILENO);
-      dup2(output[1], STDOUT_FILENO);	  
+      dup2(output[1], STDOUT_FILENO);
 
       execvp(gsargs[0], const_cast<char *const *>(gsargs));
       exit(1);
     }
-  } 
+  }
   else if (pid != -1) {
     // Parent process, write first-page-only-hack (the hack is not
     // used if DVI) and read the png output
@@ -437,7 +437,7 @@ bool GSCreator::create(const QString &path, int width, int height, QImage &img)
     int status = 0;
     if (waitpid(pid, &status, 0) != pid || (status != 0  && status != 256) )
       ok = false;
-  } 
+  }
   else {
     // fork() (1) failed, close these
     close(input[0]);
@@ -445,17 +445,17 @@ bool GSCreator::create(const QString &path, int width, int height, QImage &img)
     close(output[1]);
   }
   close(output[0]);
-  
+
   int l = img.loadFromData( data );
 
-  if ( got_sig_term && 
+  if ( got_sig_term &&
 	oldhandler != SIG_ERR &&
 	oldhandler != SIG_DFL &&
 	oldhandler != SIG_IGN ) {
 	  oldhandler( SIGTERM ); // propagate the signal. Other things might rely on it
   }
   if ( oldhandler != SIG_ERR ) signal( SIGTERM, oldhandler );
-  
+
   return ok && l;
 }
 
@@ -488,7 +488,7 @@ static bool correctDVI(const QString& filename)
     return FALSE;
 
   unsigned char test[4];
-  if ( f.readBlock( (char *)test,2)<2 || test[0] != 247 || test[1] != 2  )
+  if ( f.read( (char *)test,2)<2 || test[0] != 247 || test[1] != 2  )
     return FALSE;
 
   int n = f.size();
@@ -498,7 +498,7 @@ static bool correctDVI(const QString& filename)
 
   unsigned char trailer[4] = { 0xdf,0xdf,0xdf,0xdf };
 
-  if ( f.readBlock( (char *)test, 4 )<4 || strncmp( (char *)test, (char*) trailer, 4 ) )
+  if ( f.read( (char *)test, 4 )<4 || strncmp( (char *)test, (char*) trailer, 4 ) )
     return FALSE;
   // We suppose now that the dvi file is complete and OK
   return TRUE;
@@ -568,7 +568,7 @@ bool GSCreator::getEPSIPreview(const QString &path, long start, long
 
   if (imagedepth <= 8) {
     for (unsigned int gray = 0; gray < colors; gray++) {
-      unsigned int grayvalue = (255U * (colors - 1 - gray)) / 
+      unsigned int grayvalue = (255U * (colors - 1 - gray)) /
 	(colors - 1);
       img.setColor(gray, qRgb(grayvalue, grayvalue, grayvalue));
     }
@@ -584,8 +584,8 @@ bool GSCreator::getEPSIPreview(const QString &path, long start, long
     if (offset >= previewsize)
       return false;
 
-    while (!isxdigit(previewstr[offset].latin1()) && 
-	   offset < previewsize) 
+    while (!isxdigit(previewstr[offset].latin1()) &&
+	   offset < previewsize)
       offset++;
 
     bool ok = false;
@@ -601,14 +601,14 @@ bool GSCreator::getEPSIPreview(const QString &path, long start, long
 
     for (int pixelindex = 0; pixelindex < width; pixelindex++) {
       unsigned char pixelvalue = 0;
-      const unsigned int bitoffset = 
+      const unsigned int bitoffset =
         scanline * bytes_per_scan_line * 8U + pixelindex * depth;
       for (int depthindex = 0; depthindex < depth;
            depthindex++) {
         const unsigned int byteindex = (bitoffset + depthindex) / 8U;
-        const unsigned int bitindex = 
+        const unsigned int bitindex =
           7 - ((bitoffset + depthindex) % 8U);
-        const unsigned char bitvalue = 
+        const unsigned char bitvalue =
           (bindata[byteindex] & static_cast<unsigned char>(1U << bitindex)) >> bitindex;
         pixelvalue |= (bitvalue << depthindex);
       }
@@ -617,6 +617,6 @@ bool GSCreator::getEPSIPreview(const QString &path, long start, long
   }
 
   outimg = img.convertDepth(32).smoothScale(imgwidth, imgheight);
-  
+
   return true;
 }

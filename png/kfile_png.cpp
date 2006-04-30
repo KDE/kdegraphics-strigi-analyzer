@@ -141,7 +141,7 @@ bool KPngPlugin::readInfo( KFileMetaInfo& info, uint what)
 	fileSize = 29; // No need to read more
 
     uchar *data = new uchar[fileSize+1];
-    f.readBlock(reinterpret_cast<char*>(data), fileSize);
+    f.read(reinterpret_cast<char*>(data), fileSize);
     data[fileSize]='\n';
 
     // find the start
@@ -291,7 +291,7 @@ bool KPngPlugin::readInfo( KFileMetaInfo& info, uint what)
 			arr.resize(textsize);
 			arr = QByteArray(textsize).duplicate((const char*)text,
 							     textsize);
-			
+
 		    } else {
 			kDebug(7034) << "We found a field, not expected though\n";
 			goto end;
@@ -299,7 +299,7 @@ bool KPngPlugin::readInfo( KFileMetaInfo& info, uint what)
 		    appendItem(commentGroup,
 			       QString(reinterpret_cast<char*>(key)),
 			       QString(arr));
-		    
+
 		    kDebug(7034) << "adding " << key << " / "
 				  << QString(arr) << endl;
 

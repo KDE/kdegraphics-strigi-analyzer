@@ -218,9 +218,9 @@ int ExifData::ReadJpegSections (QFile & infile, ReadMode_t ReadMode)
 {
     int a;
 
-    a = infile.getch();
+    a = infile.getChar();
 
-    if (a != 0xff || infile.getch() != M_SOI) {
+    if (a != 0xff || infile.getChar() != M_SOI) {
         SectionsRead = 0;
         return false;
     }
@@ -232,7 +232,7 @@ int ExifData::ReadJpegSections (QFile & infile, ReadMode_t ReadMode)
         uchar * Data;
 
         for (a=0;a<7;a++){
-            marker = infile.getch();
+            marker = infile.getChar();
             if (marker != 0xff) break;
 
             if (a >= 6){
@@ -251,8 +251,8 @@ int ExifData::ReadJpegSections (QFile & infile, ReadMode_t ReadMode)
         Sections[SectionsRead].Type = marker;
 
         // Read the length of the section.
-        lh = (uchar) infile.getch();
-        ll = (uchar) infile.getch();
+        lh = (uchar) infile.getChar();
+        ll = (uchar) infile.getChar();
 
         itemlen = (lh << 8) | ll;
 
@@ -282,7 +282,7 @@ int ExifData::ReadJpegSections (QFile & infile, ReadMode_t ReadMode)
                 if (ReadMode & READ_IMAGE){
                     unsigned long size;
 
-                    size = qMax( 0ul, (unsigned long)(infile.size()-infile.at()) );
+                    size = qMax( 0ul, (unsigned long)(infile.size()-infile.pos()) );
                     Data = (uchar *)malloc(size);
                     if (Data == NULL){
                         throw FatalError("could not allocate data for entire image");
@@ -348,7 +348,7 @@ int ExifData::ReadJpegSections (QFile & infile, ReadMode_t ReadMode)
             case M_SOF14:
             case M_SOF15:
                 process_SOFn(Data, marker); //FIXME: This call requires Data to
-		// be array of at least 8 bytes. Code above only checks for 
+		// be array of at least 8 bytes. Code above only checks for
 		// itemlen < 2.
                 break;
             default:
