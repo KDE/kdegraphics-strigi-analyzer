@@ -15,8 +15,6 @@ kfile_rgb_la_LIBADD = $(LIB_KSYCOCA)
 # let automoc handle all of the meta source files (moc)
 METASOURCES = AUTO
 
-messages: rc.cpp
-	$(XGETTEXT) kfile_rgb.cpp -o $(podir)/kfile_rgb.pot
 
 services_DATA = kfile_rgb.desktop
 servicesdir = $(kde_servicesdir)

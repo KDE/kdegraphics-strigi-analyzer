@@ -15,8 +15,6 @@ kfile_pcx_la_LIBADD = $(LIB_KIO) $(LIBTIFF)
 # let automoc handle all of the meta source files (moc)
 METASOURCES = AUTO
 
-messages:
-	$(XGETTEXT) *.cpp -o $(podir)/kfile_pcx.pot
 
 services_DATA = kfile_pcx.desktop
 servicesdir = $(kde_servicesdir)

@@ -18,5 +18,3 @@ METASOURCES = AUTO
 
 kde_services_DATA = kfile_xpm.desktop
 
-messages:
-	$(XGETTEXT) *.cpp -o $(podir)/kfile_xpm.pot

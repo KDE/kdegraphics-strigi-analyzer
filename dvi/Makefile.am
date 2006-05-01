@@ -15,8 +15,6 @@ kfile_dvi_la_LIBADD = $(LIB_KIO)
 # let automoc handle all of the meta source files (moc)
 METASOURCES = AUTO
 
-messages: 
-	$(XGETTEXT) *.cpp -o $(podir)/kfile_dvi.pot
 
 services_DATA = kfile_dvi.desktop
 servicesdir = $(kde_servicesdir)

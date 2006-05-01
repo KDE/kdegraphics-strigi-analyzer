@@ -17,8 +17,6 @@ kfile_jpeg_la_LIBADD = $(LIB_KIO)
 # let automoc handle all of the meta source files (moc)
 METASOURCES = AUTO
 
-messages:
-	$(XGETTEXT) *.cpp -o $(podir)/kfile_jpeg.pot
 
 services_DATA = kfile_jpeg.desktop
 servicesdir = $(kde_servicesdir)

@@ -15,8 +15,6 @@ kfile_tga_la_LIBADD = $(LIB_KSYCOCA)
 # let automoc handle all of the meta source files (moc)
 METASOURCES = AUTO
 
-messages: rc.cpp
-	$(XGETTEXT) kfile_tga.cpp -o $(podir)/kfile_tga.pot
 
 services_DATA = kfile_tga.desktop
 servicesdir = $(kde_servicesdir)

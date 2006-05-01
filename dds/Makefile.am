@@ -15,8 +15,6 @@ kfile_dds_la_LIBADD = $(LIB_KSYCOCA)
 # let automoc handle all of the meta source files (moc)
 METASOURCES = AUTO
 
-messages: rc.cpp
-	$(XGETTEXT) kfile_dds.cpp -o $(podir)/kfile_dds.pot
 
 services_DATA = kfile_dds.desktop
 servicesdir = $(kde_servicesdir)

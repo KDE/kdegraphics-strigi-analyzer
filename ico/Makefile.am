@@ -16,8 +16,6 @@ kfile_ico_la_LIBADD = $(LIB_KSYCOCA)
 # let automoc handle all of the meta source files (moc)
 METASOURCES = AUTO
 
-messages: rc.cpp
-	$(XGETTEXT) kfile_ico.cpp -o $(podir)/kfile_ico.pot
 
 services_DATA = kfile_ico.desktop
 servicesdir = $(kde_servicesdir)

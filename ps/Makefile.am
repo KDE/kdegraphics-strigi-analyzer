@@ -19,8 +19,6 @@ gsthumbnail_la_LDFLAGS = $(all_libraries) -module $(KDE_PLUGIN)
 # let automoc handle all of the meta source files (moc)
 METASOURCES = AUTO
 
-messages: 
-	$(XGETTEXT) *.cpp -o $(podir)/kfile_ps.pot
 
 services_DATA = kfile_ps.desktop gsthumbnail.desktop
 servicesdir = $(kde_servicesdir)

@@ -15,8 +15,6 @@ kfile_pnm_la_LIBADD = $(LIB_KIO)
 # let automoc handle all of the meta source files (moc)
 METASOURCES = AUTO
 
-messages:
-	$(XGETTEXT) *.cpp -o $(podir)/kfile_pnm.pot
 
 services_DATA = kfile_pnm.desktop
 servicesdir = $(kde_servicesdir)

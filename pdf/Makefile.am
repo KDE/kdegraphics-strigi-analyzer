@@ -15,8 +15,6 @@ kfile_pdf_la_LIBADD = $(LIB_KIO) $(POPPLER_QT4_4_LIBS)
 # let automoc handle all of the meta source files (moc)
 METASOURCES = AUTO
 
-messages: 
-	$(XGETTEXT) *.cpp -o $(podir)/kfile_pdf.pot
 
 services_DATA = kfile_pdf.desktop
 servicesdir = $(kde_servicesdir)

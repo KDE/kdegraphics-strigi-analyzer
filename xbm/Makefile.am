@@ -15,8 +15,6 @@ kfile_xbm_la_LIBADD = $(LIB_KSYCOCA)
 # let automoc handle all of the meta source files (moc)
 METASOURCES = AUTO
 
-messages: rc.cpp
-	$(XGETTEXT) kfile_xbm.cpp -o $(podir)/kfile_xbm.pot
 
 services_DATA = kfile_xbm.desktop
 servicesdir = $(kde_servicesdir)
