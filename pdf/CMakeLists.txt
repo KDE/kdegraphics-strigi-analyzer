@@ -1,6 +1,6 @@
 kde4_header()
 
-include_directories( ${KDE4_INCLUDE_DIR} ${QT_INCLUDES} ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}  )
+include_directories(${POPPLER_QT4_INCLUDE_DIR} ${KDE4_INCLUDE_DIR} ${QT_INCLUDES} ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}  )
 
 
 ########### next target ###############
@@ -13,7 +13,7 @@ kde4_add_plugin(kfile_pdf ${kfile_pdf_PART_SRCS})
 
 kde4_install_libtool_file( ${PLUGIN_INSTALL_DIR} kfile_pdf )
 
-target_link_libraries(kfile_pdf  ${KDE4_KIO_LIBS} )
+target_link_libraries(kfile_pdf  ${KDE4_KIO_LIBS} ${POPPLER_QT4_LIBRARIES})
 
 install_targets(${PLUGIN_INSTALL_DIR} kfile_pdf )
 

@@ -3,6 +3,7 @@ kde4_header()
 macro_optional_find_package(PNG)
 macro_optional_find_package(OpenEXR)
 macro_optional_find_package(TIFF)
+macro_optional_find_package(PopplerQt4)
 add_subdirectory( dvi ) 
 
 if(PNG_FOUND)
@@ -16,6 +17,10 @@ endif(OPENEXR_FOUND)
 if(TIFF_FOUND)
 	add_subdirectory(tiff)
 endif(TIFF_FOUND)
+
+if(POPPLER_QT4_FOUND)
+	add_subdirectory(pdf)
+endif(POPPLER_QT4_FOUND)		
 
 add_subdirectory( ps ) 
 add_subdirectory( jpeg ) 
@@ -32,8 +37,6 @@ add_subdirectory( gif )
 #add_subdirectory( raw ) 
 
 message(STATUS "${CMAKE_CURRENT_SOURCE_DIR}: readd raw  ")
-message(STATUS "${CMAKE_CURRENT_SOURCE_DIR}: skipped subdir $(KFILE_PDF_SUBDIR)")
-include_directories( ${KDE4_INCLUDE_DIR} ${QT_INCLUDES} ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}  )
 
 
 ########### install files ###############
