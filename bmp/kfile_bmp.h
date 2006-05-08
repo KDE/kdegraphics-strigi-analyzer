@@ -29,7 +29,7 @@ class KBmpPlugin: public KFilePlugin
     Q_OBJECT
     
 public:
-    KBmpPlugin( QObject *parent, const char *name, const QStringList& args );
+    KBmpPlugin( QObject *parent, const QStringList& args );
     
     virtual bool readInfo( KFileMetaInfo& info, uint what);
 };

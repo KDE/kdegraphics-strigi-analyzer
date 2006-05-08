@@ -29,7 +29,7 @@ class KPnmPlugin: public KFilePlugin
 	Q_OBJECT
     
 public:
-	KPnmPlugin( QObject *parent, const char *name, const QStringList& preferredItems );
+	KPnmPlugin( QObject *parent, const QStringList& preferredItems );
 	virtual bool readInfo( KFileMetaInfo& info, uint );
 
 private:

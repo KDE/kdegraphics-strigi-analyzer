@@ -182,10 +182,9 @@ namespace {	// Private.
 K_EXPORT_COMPONENT_FACTORY(kfile_dds, DdsFactory( "kfile_dds" ))
 
 // Constructor, init mime type info.
-KDdsPlugin::KDdsPlugin(QObject *parent, const char *name, const QStringList &args) : 
+KDdsPlugin::KDdsPlugin(QObject *parent, const QStringList &args) : 
 	KFilePlugin(parent, args)
 {
-	setObjectName(name);
     KFileMimeTypeInfo * info = addMimeTypeInfo( "image/x-dds" );
 
     KFileMimeTypeInfo::GroupInfo * group = 0L;

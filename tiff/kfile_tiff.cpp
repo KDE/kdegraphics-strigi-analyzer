@@ -34,10 +34,9 @@ typedef KGenericFactory<KTiffPlugin> TiffFactory;
 
 K_EXPORT_COMPONENT_FACTORY(kfile_tiff, TiffFactory("kfile_tiff"))
 
-KTiffPlugin::KTiffPlugin(QObject *parent, const char *name,
+KTiffPlugin::KTiffPlugin(QObject *parent, 
         const QStringList &args) : KFilePlugin(parent, args)
 {
-	setObjectName(name);
     kDebug(7034) << "TIFF file meta info plugin" << endl;
     KFileMimeTypeInfo* info = addMimeTypeInfo( "image/tiff" );
 

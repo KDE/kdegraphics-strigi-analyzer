@@ -29,7 +29,7 @@ class KRgbPlugin : public KFilePlugin
 	Q_OBJECT
 
 public:
-	KRgbPlugin(QObject *parent, const char *name, const QStringList& args);
+	KRgbPlugin(QObject *parent, const QStringList& args);
 	virtual bool readInfo(KFileMetaInfo& info, uint what);
 	virtual bool writeInfo(const KFileMetaInfo& info) const;
 	virtual QValidator* createValidator(const QString& mimetype,

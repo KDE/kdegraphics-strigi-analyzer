@@ -29,7 +29,7 @@ class KXbmPlugin: public KFilePlugin
     Q_OBJECT
     
 public:
-    KXbmPlugin( QObject *parent, const char *name, const QStringList& args );
+    KXbmPlugin( QObject *parent, const QStringList& args );
     
     virtual bool readInfo( KFileMetaInfo& info, uint what);
     

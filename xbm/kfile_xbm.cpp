@@ -42,12 +42,11 @@ typedef KGenericFactory<KXbmPlugin> XbmFactory;
 
 K_EXPORT_COMPONENT_FACTORY(kfile_xbm, XbmFactory( "kfile_xbm" ))
 
-KXbmPlugin::KXbmPlugin(QObject *parent, const char *name,
+KXbmPlugin::KXbmPlugin(QObject *parent, 
                        const QStringList &args)
 
     : KFilePlugin(parent, args)
 {
-	setObjectName(name);
     KFileMimeTypeInfo* info = addMimeTypeInfo( "image/x-xbm" );
 
     KFileMimeTypeInfo::GroupInfo* group = 0L;

@@ -32,7 +32,7 @@ class KPdfPlugin: public KFilePlugin
 {
 Q_OBJECT
 public:
-    KPdfPlugin( QObject *parent, const char *name, const QStringList& preferredItems );
+    KPdfPlugin( QObject *parent, const QStringList& preferredItems );
 
     virtual bool readInfo(KFileMetaInfo& info, uint what);
 

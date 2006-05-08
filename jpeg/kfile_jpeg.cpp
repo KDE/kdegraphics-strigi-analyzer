@@ -44,11 +44,10 @@ typedef KGenericFactory<KJpegPlugin> JpegFactory;
 
 K_EXPORT_COMPONENT_FACTORY(kfile_jpeg, JpegFactory("kfile_jpeg"))
 
-KJpegPlugin::KJpegPlugin(QObject *parent, const char *name,
+KJpegPlugin::KJpegPlugin(QObject *parent, 
                        const QStringList &args )
     : KFilePlugin(parent, args)
 {
-	setObjectName(name);
   kDebug(7034) << "jpeg plugin\n";
 
   //

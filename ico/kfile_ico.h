@@ -29,7 +29,7 @@ class KIcoPlugin: public KFilePlugin
     Q_OBJECT
     
 public:
-    KIcoPlugin( QObject *parent, const char *name, const QStringList& args );
+    KIcoPlugin( QObject *parent,  const QStringList& args );
     
     virtual bool readInfo( KFileMetaInfo& info, uint what);
 };

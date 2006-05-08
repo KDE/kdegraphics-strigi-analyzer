@@ -31,7 +31,7 @@ class KPngPlugin: public KFilePlugin
     Q_OBJECT
     
 public:
-    KPngPlugin( QObject *parent, const char *name, const QStringList& preferredItems );
+    KPngPlugin( QObject *parent, const QStringList& preferredItems );
 
     virtual bool readInfo( KFileMetaInfo& info, uint );
 };

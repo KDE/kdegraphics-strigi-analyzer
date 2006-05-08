@@ -87,11 +87,10 @@ typedef KGenericFactory<KPngPlugin> PngFactory;
 
 K_EXPORT_COMPONENT_FACTORY(kfile_png, PngFactory("kfile_png"))
 
-KPngPlugin::KPngPlugin(QObject *parent, const char *name,
+KPngPlugin::KPngPlugin(QObject *parent, 
                        const QStringList &args)
     : KFilePlugin(parent, args)
 {
-	setObjectName(name);
     kDebug(7034) << "png plugin\n";
 
     // set up our mime type

@@ -39,10 +39,9 @@
 typedef KGenericFactory<KDviPlugin> DviFactory;
 K_EXPORT_COMPONENT_FACTORY(kfile_dvi, DviFactory("kfile_dvi"))
 
-KDviPlugin::KDviPlugin (QObject * parent, const char * name, const QStringList & preferredItems)
+KDviPlugin::KDviPlugin (QObject * parent, const QStringList & preferredItems)
   : KFilePlugin(parent, preferredItems)
 {
-  setObjectName(name);
   kDebug(7034) << "dvi plugin" << endl;
   
   // set up our mime type

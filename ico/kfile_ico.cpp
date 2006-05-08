@@ -44,12 +44,11 @@ typedef KGenericFactory<KIcoPlugin> IcoFactory;
 
 K_EXPORT_COMPONENT_FACTORY(kfile_ico, IcoFactory( "kfile_ico" ))
 
-KIcoPlugin::KIcoPlugin(QObject *parent, const char *name,
+KIcoPlugin::KIcoPlugin(QObject *parent, 
                        const QStringList &args)
 
     : KFilePlugin(parent, args)
 {
-	setObjectName(name);
     KFileMimeTypeInfo* info = addMimeTypeInfo( "image/x-ico" );
 
     KFileMimeTypeInfo::GroupInfo* group = 0L;

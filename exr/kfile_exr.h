@@ -31,7 +31,7 @@ class KExrPlugin: public KFilePlugin
     Q_OBJECT
     
 public:
-    KExrPlugin( QObject *parent, const char *name, const QStringList& preferredItems );
+    KExrPlugin( QObject *parent, const QStringList& preferredItems );
 
     virtual bool readInfo( KFileMetaInfo& info, uint );
 };

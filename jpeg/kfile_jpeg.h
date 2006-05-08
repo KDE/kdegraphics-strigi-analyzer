@@ -28,7 +28,7 @@ class KJpegPlugin: public KFilePlugin
     Q_OBJECT
 
 public:
-    KJpegPlugin( QObject *parent, const char *name,
+    KJpegPlugin( QObject *parent, 
                 const QStringList& args );
 
     virtual bool readInfo ( KFileMetaInfo& info, uint what );

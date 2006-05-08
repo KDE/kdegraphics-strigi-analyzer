@@ -31,7 +31,7 @@ class KPSPlugin: public KFilePlugin, public KDSCCommentHandler
 {
     Q_OBJECT
 public:
-    KPSPlugin( QObject *parent, const char *name,
+    KPSPlugin( QObject *parent, 
                 const QStringList& preferredItems );
     
     virtual bool readInfo( KFileMetaInfo& info, uint what);

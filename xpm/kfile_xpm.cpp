@@ -32,10 +32,9 @@ K_EXPORT_COMPONENT_FACTORY(kfile_xpm, xpmFactory( "kfile_xpm" ))
 
 //--------------------------------------------------------------------------------
 
-xpmPlugin::xpmPlugin(QObject *parent, const char *name, const QStringList &args)
+xpmPlugin::xpmPlugin(QObject *parent, const QStringList &args)
   : KFilePlugin(parent, args)
 {
-  setObjectName(name);
   KFileMimeTypeInfo* info = addMimeTypeInfo( "image/x-xpm" );
 
   // our new group

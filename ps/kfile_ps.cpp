@@ -30,11 +30,10 @@ typedef KGenericFactory<KPSPlugin> PSFactory;
 
 K_EXPORT_COMPONENT_FACTORY(kfile_ps, PSFactory("kfile_ps"))
 
-KPSPlugin::KPSPlugin(QObject *parent, const char *name,
+KPSPlugin::KPSPlugin(QObject *parent, 
                        const QStringList &preferredItems) : 
     KFilePlugin( parent, preferredItems )
 {
-	setObjectName(name);
     kDebug(7034) << "ps plugin\n";
     
     // set up our mimetypes

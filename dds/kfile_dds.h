@@ -29,7 +29,7 @@ class KDdsPlugin: public KFilePlugin
     Q_OBJECT
     
 public:
-    KDdsPlugin( QObject *parent, const char *name, const QStringList& args );
+    KDdsPlugin( QObject *parent, const QStringList& args );
     
     virtual bool readInfo( KFileMetaInfo& info, uint what);
 };

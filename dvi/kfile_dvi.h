@@ -29,7 +29,7 @@ class KDviPlugin : public KFilePlugin
 {
 	Q_OBJECT
 public:
-	KDviPlugin ( QObject * parent, const char * name, const QStringList & preferredItems );
+	KDviPlugin ( QObject * parent, const QStringList & preferredItems );
 
 	virtual bool readInfo (KFileMetaInfo & info, uint what);
 };
