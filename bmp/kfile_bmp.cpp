@@ -97,27 +97,24 @@ bool KBmpPlugin::readInfo( KFileMetaInfo& info, uint what)
 
 
     // read the beginning of the file and make sure it looks ok
-    unsigned char * bmp_id = (unsigned char *) malloc(2);
-    file.read((char *) bmp_id, 2);
+    unsigned char bmp_id[2];
+    file.read((char *) &bmp_id, 2);
 
-    if (memcmp(bmp_id, bmptype_bm, 2) == 0) {
+    if (memcmp(&bmp_id, bmptype_bm, 2) == 0) {
         appendItem(group, "Type", i18n("Windows Bitmap"));
-    } else if (memcmp(bmp_id, bmptype_ba, 2) == 0) {
+    } else if (memcmp(&bmp_id, bmptype_ba, 2) == 0) {
         appendItem(group, "Type", i18n("OS/2 Bitmap Array"));
-    } else if (memcmp(bmp_id, bmptype_ci, 2) == 0) {
+    } else if (memcmp(&bmp_id, bmptype_ci, 2) == 0) {
         appendItem(group, "Type", i18n("OS/2 Color Icon"));
-    } else if (memcmp(bmp_id, bmptype_cp, 2) == 0) {
+    } else if (memcmp(&bmp_id, bmptype_cp, 2) == 0) {
         appendItem(group, "Type", i18n("OS/2 Color Pointer"));
-    } else if (memcmp(bmp_id, bmptype_ic, 2) == 0) {
+    } else if (memcmp(&bmp_id, bmptype_ic, 2) == 0) {
         appendItem(group, "Type", i18n("OS/2 Icon"));
-    } else if (memcmp(bmp_id, bmptype_pt, 2) == 0) {
+    } else if (memcmp(&bmp_id, bmptype_pt, 2) == 0) {
         appendItem(group, "Type", i18n("OS/2 Pointer"));
     } else {
         return false;
     }
-
-    free(bmp_id);
-
 
     // read the next bits, we ignore them, but anyways...
     uint32_t bmp_size;
