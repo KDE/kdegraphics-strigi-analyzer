@@ -1,6 +1,6 @@
 kde4_header()
 
-include_directories(${POPPLER_QT4_INCLUDE_DIR} ${KDE4_INCLUDE_DIR} ${QT_INCLUDES} ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}  )
+include_directories(${POPPLER_QT4_INCLUDE_DIR} )
 
 
 ########### next target ###############

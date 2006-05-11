@@ -19,7 +19,7 @@ if(TIFF_FOUND)
 endif(TIFF_FOUND)
 
 if(POPPLER_QT4_FOUND)
-	add_subdirectory(pdf)
+   add_subdirectory(pdf)
 endif(POPPLER_QT4_FOUND)		
 
 add_subdirectory( ps ) 
