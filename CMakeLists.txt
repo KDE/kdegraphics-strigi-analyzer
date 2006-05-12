@@ -1,4 +1,3 @@
-kde4_header()
 
 macro_optional_find_package(PNG)
 macro_optional_find_package(OpenEXR)
@@ -42,7 +41,6 @@ message(STATUS "${CMAKE_CURRENT_SOURCE_DIR}: readd raw  ")
 ########### install files ###############
 
 
-kde4_footer()
 
 
 

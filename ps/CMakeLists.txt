@@ -1,4 +1,3 @@
-kde4_header()
 
 include_directories( ${CMAKE_SOURCE_DIR}/kghostview  )
 
@@ -37,7 +36,6 @@ install_targets(${PLUGIN_INSTALL_DIR} gsthumbnail )
 
 install_files( ${SERVICES_INSTALL_DIR} FILES kfile_ps.desktop gsthumbnail.desktop )
 
-kde4_footer()
 
 
 

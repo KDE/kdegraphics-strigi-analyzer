@@ -1,4 +1,3 @@
-kde4_header()
 
 include_directories(${POPPLER_QT4_INCLUDE_DIR} )
 
@@ -22,7 +21,6 @@ install_targets(${PLUGIN_INSTALL_DIR} kfile_pdf )
 
 install_files( ${SERVICES_INSTALL_DIR} FILES kfile_pdf.desktop )
 
-kde4_footer()
 
 
 

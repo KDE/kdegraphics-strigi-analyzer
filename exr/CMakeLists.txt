@@ -1,4 +1,3 @@
-kde4_header()
 
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${KDE4_ENABLE_EXCEPTIONS}")
 include_directories( ${OPENEXR_INCLUDE_DIR}  )
@@ -23,7 +22,6 @@ install_targets(${PLUGIN_INSTALL_DIR} kfile_exr )
 
 install_files( ${SERVICES_INSTALL_DIR} FILES kfile_exr.desktop )
 
-kde4_footer()
 
 
 

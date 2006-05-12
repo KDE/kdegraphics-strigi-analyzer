@@ -1,4 +1,3 @@
-kde4_header()
 
 
 
@@ -22,7 +21,6 @@ install_targets(${PLUGIN_INSTALL_DIR} kfile_ico )
 
 install_files( ${SERVICES_INSTALL_DIR} FILES kfile_ico.desktop )
 
-kde4_footer()
 
 
 
