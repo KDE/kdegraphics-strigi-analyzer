@@ -958,6 +958,8 @@ void parse_jpeg (int offset)
   }
 }
 
+
+#ifndef _GNU_SOURCE
 char *memmem (char *haystack, size_t haystacklen,
               char *needle, size_t needlelen)
 {
@@ -967,6 +969,7 @@ char *memmem (char *haystack, size_t haystacklen,
       return c;
   return NULL;
 }
+#endif
 
 /*
    Identify which camera created this file, and set global variables

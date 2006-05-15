@@ -33,30 +33,4 @@ add_subdirectory( pcx )
 add_subdirectory( pnm ) 
 add_subdirectory( dds ) 
 add_subdirectory( gif ) 
-#add_subdirectory( raw ) 
-
-message(STATUS "${CMAKE_CURRENT_SOURCE_DIR}: readd raw  ")
-
-
-########### install files ###############
-
-
-
-
-
-#original Makefile.am contents follow:
-
-#if include_EXR_MODULES
-#KFILE_EXR_SUBDIR=exr
-#endif
-#
-#if include_TIFF
-#KFILE_TIFF_SUBDIR=tiff
-#endif
-#
-#if include_PDF_kfile_plugin
-#KFILE_PDF_SUBDIR=pdf
-#endif
-#
-#SUBDIRS=dvi png ps jpeg xbm xpm bmp tga rgb ico pcx $(KFILE_TIFF_SUBDIR) pnm \
-#	$(KFILE_EXR_SUBDIR) $(KFILE_PDF_SUBDIR) dds gif raw
+add_subdirectory( raw ) 

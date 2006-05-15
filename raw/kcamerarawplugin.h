@@ -28,7 +28,7 @@ class KCameraRawPlugin: public KFilePlugin {
     Q_OBJECT
 
 public:
-    KCameraRawPlugin(QObject *parent, const char *name, const QStringList& args);
+    KCameraRawPlugin(QObject *parent, const QStringList& args);
     virtual bool readInfo(KFileMetaInfo& info, uint what);
 
 private:

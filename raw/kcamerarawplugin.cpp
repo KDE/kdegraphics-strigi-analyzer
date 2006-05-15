@@ -83,11 +83,9 @@ bool KCameraRawPlugin::createPreview(const QString &path, QImage &img)
   return true;	
 }
 
-KCameraRawPlugin::KCameraRawPlugin(QObject *parent, const char *name,
-				   const QStringList &args )
+KCameraRawPlugin::KCameraRawPlugin(QObject *parent, const QStringList &args )
     : KFilePlugin(parent, args)
 {
-  setObjectName(name);
   kDebug(7034) << "KCameraRawPlugin c'tor" << endl;
 
   //
