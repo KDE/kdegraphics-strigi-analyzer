@@ -38,6 +38,7 @@ Name[tr]=RAW Kamera Dosyaları
 Name[uk]=Файли цифрової камери RAW
 Name[zh_CN]=RAW 相机文件
 Name[zh_HK]=RAW 相機檔案
+Name[zh_TW]=原始相機檔
 ServiceTypes=KFilePlugin
 MimeType=image/x-raw
 X-KDE-Library=kfile_raw

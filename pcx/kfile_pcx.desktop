@@ -48,6 +48,7 @@ Name[uz]=PCX-файлининг мета-маълумоти
 Name[wa]=Informåcion sol imådje PCX
 Name[zh_CN]=PCX 文件元信息
 Name[zh_HK]=PCX 檔案 Meta 資訊
+Name[zh_TW]=PCX 檔案 Meta 資訊
 ServiceTypes=KFilePlugin
 X-KDE-Library=kfile_pcx
 MimeType=image/x-pcx

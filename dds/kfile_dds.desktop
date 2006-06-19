@@ -39,6 +39,7 @@ Name[tr]=DirectDraw Yüzey Bilgisi
 Name[uk]=Інформація про поверхню DirectDraw
 Name[zh_CN]=DirectDraw 表面信息
 Name[zh_HK]=DirectDraw 表面資訊
+Name[zh_TW]=DirectDraw Surface 資訊
 ServiceTypes=KFilePlugin
 X-KDE-Library=kfile_dds
 MimeType=image/x-dds
