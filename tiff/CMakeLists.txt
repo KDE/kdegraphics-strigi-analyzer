@@ -14,12 +14,12 @@ kde4_install_libtool_file( ${PLUGIN_INSTALL_DIR} kfile_tiff )
 
 target_link_libraries(kfile_tiff  ${KDE4_KIO_LIBS} ${TIFF_LIBRARIES} )
 
-install_targets(${PLUGIN_INSTALL_DIR} kfile_tiff )
+install(TARGETS kfile_tiff  DESTINATION ${PLUGIN_INSTALL_DIR} )
 
 
 ########### install files ###############
 
-install_files( ${SERVICES_INSTALL_DIR} FILES kfile_tiff.desktop )
+install( FILES kfile_tiff.desktop  DESTINATION  ${SERVICES_INSTALL_DIR} )
 
 
 

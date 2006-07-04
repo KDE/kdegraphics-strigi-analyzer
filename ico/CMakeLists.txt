@@ -14,12 +14,12 @@ kde4_install_libtool_file( ${PLUGIN_INSTALL_DIR} kfile_ico )
 
 target_link_libraries(kfile_ico  ${KDE4_KIO_LIBS} )
 
-install_targets(${PLUGIN_INSTALL_DIR} kfile_ico )
+install(TARGETS kfile_ico  DESTINATION ${PLUGIN_INSTALL_DIR} )
 
 
 ########### install files ###############
 
-install_files( ${SERVICES_INSTALL_DIR} FILES kfile_ico.desktop )
+install( FILES kfile_ico.desktop  DESTINATION  ${SERVICES_INSTALL_DIR} )
 
 
 

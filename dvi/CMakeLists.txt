@@ -14,12 +14,12 @@ kde4_install_libtool_file( ${PLUGIN_INSTALL_DIR} kfile_dvi )
 
 target_link_libraries(kfile_dvi  ${KDE4_KIO_LIBS} )
 
-install_targets(${PLUGIN_INSTALL_DIR} kfile_dvi )
+install(TARGETS kfile_dvi  DESTINATION ${PLUGIN_INSTALL_DIR} )
 
 
 ########### install files ###############
 
-install_files( ${SERVICES_INSTALL_DIR} FILES kfile_dvi.desktop )
+install( FILES kfile_dvi.desktop  DESTINATION  ${SERVICES_INSTALL_DIR} )
 
 
 

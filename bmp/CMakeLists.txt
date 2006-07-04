@@ -14,12 +14,12 @@ kde4_install_libtool_file( ${PLUGIN_INSTALL_DIR} kfile_bmp )
 
 target_link_libraries(kfile_bmp  ${KDE4_KIO_LIBS} )
 
-install_targets(${PLUGIN_INSTALL_DIR} kfile_bmp )
+install(TARGETS kfile_bmp  DESTINATION ${PLUGIN_INSTALL_DIR} )
 
 
 ########### install files ###############
 
-install_files( ${SERVICES_INSTALL_DIR} FILES kfile_bmp.desktop )
+install( FILES kfile_bmp.desktop  DESTINATION  ${SERVICES_INSTALL_DIR} )
 
 
 

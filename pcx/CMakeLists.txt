@@ -14,12 +14,12 @@ kde4_install_libtool_file( ${PLUGIN_INSTALL_DIR} kfile_pcx )
 
 target_link_libraries(kfile_pcx  ${KDE4_KIO_LIBS} )
 
-install_targets(${PLUGIN_INSTALL_DIR} kfile_pcx )
+install(TARGETS kfile_pcx  DESTINATION ${PLUGIN_INSTALL_DIR} )
 
 
 ########### install files ###############
 
-install_files( ${SERVICES_INSTALL_DIR} FILES kfile_pcx.desktop )
+install( FILES kfile_pcx.desktop  DESTINATION  ${SERVICES_INSTALL_DIR} )
 
 
 

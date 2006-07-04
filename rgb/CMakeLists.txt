@@ -14,12 +14,12 @@ kde4_install_libtool_file( ${PLUGIN_INSTALL_DIR} kfile_rgb )
 
 target_link_libraries(kfile_rgb  ${KDE4_KIO_LIBS} )
 
-install_targets(${PLUGIN_INSTALL_DIR} kfile_rgb )
+install(TARGETS kfile_rgb  DESTINATION ${PLUGIN_INSTALL_DIR} )
 
 
 ########### install files ###############
 
-install_files( ${SERVICES_INSTALL_DIR} FILES kfile_rgb.desktop )
+install( FILES kfile_rgb.desktop  DESTINATION  ${SERVICES_INSTALL_DIR} )
 
 
 

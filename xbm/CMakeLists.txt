@@ -14,12 +14,12 @@ kde4_install_libtool_file( ${PLUGIN_INSTALL_DIR} kfile_xbm )
 
 target_link_libraries(kfile_xbm  ${KDE4_KIO_LIBS} )
 
-install_targets(${PLUGIN_INSTALL_DIR} kfile_xbm )
+install(TARGETS kfile_xbm  DESTINATION ${PLUGIN_INSTALL_DIR} )
 
 
 ########### install files ###############
 
-install_files( ${SERVICES_INSTALL_DIR} FILES kfile_xbm.desktop )
+install( FILES kfile_xbm.desktop  DESTINATION  ${SERVICES_INSTALL_DIR} )
 
 
 

@@ -14,12 +14,12 @@ kde4_install_libtool_file( ${PLUGIN_INSTALL_DIR} kfile_pdf )
 
 target_link_libraries(kfile_pdf  ${KDE4_KIO_LIBS} ${POPPLER_QT4_LIBRARIES})
 
-install_targets(${PLUGIN_INSTALL_DIR} kfile_pdf )
+install(TARGETS kfile_pdf  DESTINATION ${PLUGIN_INSTALL_DIR} )
 
 
 ########### install files ###############
 
-install_files( ${SERVICES_INSTALL_DIR} FILES kfile_pdf.desktop )
+install( FILES kfile_pdf.desktop  DESTINATION  ${SERVICES_INSTALL_DIR} )
 
 
 
