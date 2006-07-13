@@ -73,8 +73,6 @@
 #include <qfile.h>
 #include <qimage.h>
 #include <qregexp.h>
-//Added by qt3to4:
-#include <Q3CString>
 #include <QVector>
 
 
@@ -320,7 +318,7 @@ bool GSCreator::create(const QString &path, int width, int height, QImage &img)
     }
 
     // find next zero entry and put the filename there
-    Q3CString fname = QFile::encodeName( path );
+    QByteArray fname = QFile::encodeName( path );
     while (*arg)
       ++arg;
     if( no_dvi )
