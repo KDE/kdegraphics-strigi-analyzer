@@ -18,7 +18,7 @@
  */
 
 
-/* further informations about the dvi file format could be downloaded from: http://www.rpi.edu/~sofkam/DVI/archive/standards/dvistd0.dvi */
+/* further information about the dvi file format could be downloaded from: http://www.rpi.edu/~sofkam/DVI/archive/standards/dvistd0.dvi */
 
 #include "kfile_dvi.h"
 
@@ -138,7 +138,7 @@ bool KDviPlugin::readInfo (KFileMetaInfo & info, uint /* what (unused in this pl
   
   f.close();
   
-  // now get and set up some basic informations about the file (same informations would be displayed, if there is no dvi-plugin)
+  // now get and set up some basic information about the file (same information would be displayed, if there is no dvi-plugin)
   appendItem(GeneralGroup, "1_Type", QVariant( i18n("TeX Device Independent file") ) ); // set up type of file
   
   appendItem(GeneralGroup, "4_Modified", QVariant(f_info.lastModified().toString("yyyy-MM-dd hh:mm")) );

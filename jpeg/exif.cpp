@@ -905,7 +905,7 @@ bool ExifData::scan(const QString & path)
     DiscardData();
 
     //now make the strings clean,
-    // for exmaple my Casio is a "QV-4000   "
+    // for example my Casio is a "QV-4000   "
     CameraMake = CameraMake.trimmed();
     CameraModel = CameraModel.trimmed();
     UserComment = UserComment.trimmed();
