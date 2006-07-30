@@ -222,9 +222,9 @@ int ExifData::ReadJpegSections (QFile & infile, ReadMode_t ReadMode)
         return false;
 
     char dummy = 0;
-    if ( a == 0xff )
+    if ( uchar(a) == 0xff )
         infile.getChar( &dummy );
-    if (a != 0xff || dummy != M_SOI) {
+    if (uchar(a) != 0xff || uchar(dummy) != M_SOI) {
         SectionsRead = 0;
         return false;
     }
@@ -237,7 +237,7 @@ int ExifData::ReadJpegSections (QFile & infile, ReadMode_t ReadMode)
 
         for (a=0;a<7;a++){
             infile.getChar(&marker);
-            if (marker != 0xff) break;
+            if (uchar(marker) != 0xff) break;
 
             if (a >= 6){
 
@@ -247,7 +247,7 @@ int ExifData::ReadJpegSections (QFile & infile, ReadMode_t ReadMode)
             }
         }
 
-        if (marker == 0xff){
+        if (uchar(marker) == 0xff){
             // 0xff is legal padding, but if we get that many, something's wrong.
             throw FatalError("too many padding bytes!");
         }
@@ -255,10 +255,10 @@ int ExifData::ReadJpegSections (QFile & infile, ReadMode_t ReadMode)
         Sections[SectionsRead].Type = marker;
 
         // Read the length of the section.
-        infile.getChar(&ll);
         infile.getChar(&lh);
+        infile.getChar(&ll);
 
-        itemlen = (lh << 8) | ll;
+        itemlen = (uchar(lh) << 8) | uchar(ll);
 
         if (itemlen < 2) {
             throw FatalError("invalid marker");
