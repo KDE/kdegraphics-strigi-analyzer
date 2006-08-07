@@ -1,4 +1,0 @@
-# Compile the tiff meta info plugin only if libtiff was detected
-AC_FIND_TIFF
-AM_CONDITIONAL(include_TIFF, test -n "$LIBTIFF")
-
