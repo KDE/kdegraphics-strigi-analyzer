@@ -164,7 +164,7 @@ bool KExrPlugin::readInfo( KFileMetaInfo& info, uint what)
 {
 	try
 	{
-		InputFile in ( QFile::encodename(info.path()) );
+		InputFile in ( QFile::encodeName(info.path()) );
 		const Header &h = in.header();
 
 		KFileMetaInfoGroup infogroup = appendGroup(info, "Info");
