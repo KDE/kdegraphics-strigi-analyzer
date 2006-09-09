@@ -1,0 +1,9 @@
+[Desktop Entry]
+Encoding=UTF-8
+Type=Service
+Name=XML Paper Specification Info
+Name[x-test]=xxXML Paper Specification Infoxx
+ServiceTypes=KFilePlugin
+X-KDE-Library=kfile_xps
+MimeType=application/vnd.ms-xpsdocument
+PreferredItems=Title,Subject,Author,Keywords,Description,Thumbnail,ThumbnailDimensions
