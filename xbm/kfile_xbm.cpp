@@ -32,11 +32,8 @@
 #include <qfile.h>
 #include <qdatetime.h>
 #include <QSize>
-#if !defined(__osf__)
-#include <inttypes.h>
-#else
-typedef unsigned short uint32_t;
-#endif
+#include <stdlib.h>
+#include <stdint.h>
 
 typedef KGenericFactory<KXbmPlugin> XbmFactory;
 
