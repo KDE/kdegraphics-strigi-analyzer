@@ -80,7 +80,7 @@ bool KXpsPlugin::readInfo( KFileMetaInfo& info, uint /* what */)
 	return false;
     }
 
-    KZipFileEntry* relFile = static_cast<const KZipFileEntry *>(xpsArchive->directory()->entry("_rels/.rels"));
+    const KZipFileEntry* relFile = static_cast<const KZipFileEntry *>(xpsArchive->directory()->entry("_rels/.rels"));
 
     if ( !relFile ) {
         // this might occur if we can't read the zip directory, or it doesn't have the relationships entry
@@ -133,7 +133,7 @@ bool KXpsPlugin::readInfo( KFileMetaInfo& info, uint /* what */)
         return false;
     }
 
-    KZipFileEntry* fixedRepFile = static_cast<const KZipFileEntry *>(xpsArchive->directory()->entry( fixedRepresentationFileName ));
+    const KZipFileEntry* fixedRepFile = static_cast<const KZipFileEntry *>(xpsArchive->directory()->entry( fixedRepresentationFileName ));
 
     QIODevice* fixedRepDevice = fixedRepFile->device();
 
@@ -199,7 +199,7 @@ bool KXpsPlugin::readInfo( KFileMetaInfo& info, uint /* what */)
 #endif
 
     if ( ! metadataFileName.isEmpty() ) {
-        KZipFileEntry* corepropsFile = static_cast<const KZipFileEntry *>(xpsArchive->directory()->entry(metadataFileName));
+        const KZipFileEntry* corepropsFile = static_cast<const KZipFileEntry *>(xpsArchive->directory()->entry(metadataFileName));
 	kDebug(7115) << "metadata file name: " << metadataFileName << endl;
 
 	QDomDocument metadataDocumentDom;
@@ -242,7 +242,7 @@ bool KXpsPlugin::readInfo( KFileMetaInfo& info, uint /* what */)
     }
 
     if ( ! thumbFileName.isEmpty() ) {
-        KZipFileEntry* thumbFile = static_cast<const KZipFileEntry *>(xpsArchive->directory()->entry(thumbFileName));
+        const KZipFileEntry* thumbFile = static_cast<const KZipFileEntry *>(xpsArchive->directory()->entry(thumbFileName));
 
 	QImage img;
 	img.loadFromData(thumbFile->data());
