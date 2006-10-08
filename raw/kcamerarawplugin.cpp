@@ -26,7 +26,7 @@
 #include <klocale.h>
 #include <kgenericfactory.h>
 #include <kdebug.h>
-#include <ktempfile.h>
+#include <ktemporaryfile.h>
 #include <kimageio.h>
 #include <qfile.h>
 #include <qimage.h>
@@ -54,17 +54,19 @@ bool KCameraRawPlugin::createPreview(const QString &path, QImage &img)
   /* Open file and extract thumbnail */
   FILE* input = fopen( QFile::encodeName(path), "rb" );
   if( !input ) return false;
-  KTempFile output;
-  output.setAutoDelete(true);
+  KTemporaryFile output;
+  output.open();
+  FILE* output_fs = fopen(output.fileName().toAscii(), "r+");
   int orientation = 0;
-  if( extract_thumbnail( input, output.fstream(), &orientation ) ) {
+  if( extract_thumbnail( input, output_fs, &orientation ) ) {
     fclose(input);
+    fclose(output_fs);
     return false;
   }
   fclose(input);
-  output.close();
-  if( !img.load( output.name() ) ) return false;
-  
+  fclose(output_fs);
+  if( !img.load( output.fileName() ) ) return false;
+
   if(orientation) {
     QMatrix M;
     QMatrix flip= QMatrix(-1,0,0,1,0,0);
