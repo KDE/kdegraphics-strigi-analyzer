@@ -6,7 +6,7 @@
 
 set(kfile_ico_PART_SRCS kfile_ico.cpp )
 
-kde4_automoc(${kfile_ico_PART_SRCS})
+kde4_automoc(kfile_ico ${kfile_ico_PART_SRCS})
 
 kde4_add_plugin(kfile_ico ${kfile_ico_PART_SRCS})
 

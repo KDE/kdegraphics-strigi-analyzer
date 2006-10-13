@@ -6,7 +6,7 @@
 
 set(kfile_dds_PART_SRCS kfile_dds.cpp )
 
-kde4_automoc(${kfile_dds_PART_SRCS})
+kde4_automoc(kfile_dds ${kfile_dds_PART_SRCS})
 
 kde4_add_plugin(kfile_dds ${kfile_dds_PART_SRCS})
 

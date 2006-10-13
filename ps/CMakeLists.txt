@@ -6,7 +6,7 @@ include_directories( ${CMAKE_SOURCE_DIR}/kghostview  )
 
 set(kfile_ps_PART_SRCS kfile_ps.cpp ${libdscparse_SRCS})
 
-kde4_automoc(${kfile_ps_PART_SRCS})
+kde4_automoc(kfile_ps ${kfile_ps_PART_SRCS})
 
 kde4_add_plugin(kfile_ps ${kfile_ps_PART_SRCS})
 
@@ -21,7 +21,7 @@ install(TARGETS kfile_ps  DESTINATION ${PLUGIN_INSTALL_DIR} )
 
 set(gsthumbnail_PART_SRCS gscreator.cpp ${libdscparse_SRCS})
 
-kde4_automoc(${gsthumbnail_PART_SRCS})
+kde4_automoc(gsthumbnail ${gsthumbnail_PART_SRCS})
 
 kde4_add_plugin(gsthumbnail ${gsthumbnail_PART_SRCS})
 

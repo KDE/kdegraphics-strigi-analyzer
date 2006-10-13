@@ -6,7 +6,7 @@
 
 set(kfile_gif_PART_SRCS kfile_gif.cpp )
 
-kde4_automoc(${kfile_gif_PART_SRCS})
+kde4_automoc(kfile_gif ${kfile_gif_PART_SRCS})
 
 kde4_add_plugin(kfile_gif ${kfile_gif_PART_SRCS})
 

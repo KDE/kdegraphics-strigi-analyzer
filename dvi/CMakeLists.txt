@@ -6,7 +6,7 @@
 
 set(kfile_dvi_PART_SRCS kfile_dvi.cpp )
 
-kde4_automoc(${kfile_dvi_PART_SRCS})
+kde4_automoc(kfile_dvi ${kfile_dvi_PART_SRCS})
 
 kde4_add_plugin(kfile_dvi ${kfile_dvi_PART_SRCS})
 

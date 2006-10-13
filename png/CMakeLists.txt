@@ -6,7 +6,7 @@
 
 set(kfile_png_PART_SRCS kfile_png.cpp )
 
-kde4_automoc(${kfile_png_PART_SRCS})
+kde4_automoc(kfile_png ${kfile_png_PART_SRCS})
 
 kde4_add_plugin(kfile_png ${kfile_png_PART_SRCS})
 

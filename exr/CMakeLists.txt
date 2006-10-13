@@ -7,7 +7,7 @@ include_directories( ${OPENEXR_INCLUDE_DIR}  )
 
 set(kfile_exr_PART_SRCS kfile_exr.cpp )
 
-kde4_automoc(${kfile_exr_PART_SRCS})
+kde4_automoc(kfile_exr ${kfile_exr_PART_SRCS})
 
 kde4_add_plugin(kfile_exr ${kfile_exr_PART_SRCS})
 
