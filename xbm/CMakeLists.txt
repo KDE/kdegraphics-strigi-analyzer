@@ -6,7 +6,7 @@
 
 set(kfile_xbm_PART_SRCS kfile_xbm.cpp )
 
-kde4_automoc(kfile_xbm ${kfile_xbm_PART_SRCS})
+kde4_automoc(${kfile_xbm_PART_SRCS})
 
 kde4_add_plugin(kfile_xbm ${kfile_xbm_PART_SRCS})
 

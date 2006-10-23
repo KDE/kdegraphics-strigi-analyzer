@@ -6,7 +6,7 @@ include_directories(${POPPLER_QT4_INCLUDE_DIR} )
 
 set(kfile_pdf_PART_SRCS kfile_pdf.cpp )
 
-kde4_automoc(kfile_pdf ${kfile_pdf_PART_SRCS})
+kde4_automoc(${kfile_pdf_PART_SRCS})
 
 kde4_add_plugin(kfile_pdf ${kfile_pdf_PART_SRCS})
 

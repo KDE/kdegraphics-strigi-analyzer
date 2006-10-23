@@ -6,7 +6,7 @@
 
 set(kfile_tga_PART_SRCS kfile_tga.cpp )
 
-kde4_automoc(kfile_tga ${kfile_tga_PART_SRCS})
+kde4_automoc(${kfile_tga_PART_SRCS})
 
 kde4_add_plugin(kfile_tga ${kfile_tga_PART_SRCS})
 

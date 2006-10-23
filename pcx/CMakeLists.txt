@@ -6,7 +6,7 @@
 
 set(kfile_pcx_PART_SRCS kfile_pcx.cpp )
 
-kde4_automoc(kfile_pcx ${kfile_pcx_PART_SRCS})
+kde4_automoc(${kfile_pcx_PART_SRCS})
 
 kde4_add_plugin(kfile_pcx ${kfile_pcx_PART_SRCS})
 
