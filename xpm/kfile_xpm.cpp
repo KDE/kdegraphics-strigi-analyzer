@@ -15,11 +15,11 @@
  *   You should have received a copy of the GNU General Public License     *
  *   along with this program; if not, write to the                         *
  *   Free Software Foundation, Inc.,                                       *
- *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.             *
+ *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.         *
  ***************************************************************************/
 
 #include <config.h>
-#include <qpixmap.h>
+#include <qimage.h>
 #include "kfile_xpm.h"
 
 #include <kgenericfactory.h>
@@ -56,7 +56,7 @@ xpmPlugin::xpmPlugin(QObject *parent, const char *name, const QStringList &args)
 
 bool xpmPlugin::readInfo(KFileMetaInfo& info, uint /*what*/)
 {
-  QPixmap pix;
+  QImage pix;
 
   if ( ! pix.load(info.path(), "XPM") ) return false;
 
