@@ -10,7 +10,6 @@ kde4_automoc(${kfile_gif_PART_SRCS})
 
 kde4_add_plugin(kfile_gif ${kfile_gif_PART_SRCS})
 
-kde4_install_libtool_file( ${PLUGIN_INSTALL_DIR} kfile_gif )
 
 target_link_libraries(kfile_gif  ${KDE4_KIO_LIBS} )
 

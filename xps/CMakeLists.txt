@@ -6,7 +6,6 @@ kde4_automoc(${kfile_xps_PART_SRCS})
 
 kde4_add_plugin(kfile_xps ${kfile_xps_PART_SRCS})
 
-kde4_install_libtool_file( ${PLUGIN_INSTALL_DIR} kfile_xps )
 
 target_link_libraries(kfile_xps  ${KDE4_KIO_LIBS})
 

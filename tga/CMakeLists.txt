@@ -10,7 +10,6 @@ kde4_automoc(${kfile_tga_PART_SRCS})
 
 kde4_add_plugin(kfile_tga ${kfile_tga_PART_SRCS})
 
-kde4_install_libtool_file( ${PLUGIN_INSTALL_DIR} kfile_tga )
 
 target_link_libraries(kfile_tga  ${KDE4_KIO_LIBS} )
 

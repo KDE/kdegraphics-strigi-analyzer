@@ -10,7 +10,6 @@ kde4_automoc(${kfile_tiff_PART_SRCS})
 
 kde4_add_plugin(kfile_tiff ${kfile_tiff_PART_SRCS})
 
-kde4_install_libtool_file( ${PLUGIN_INSTALL_DIR} kfile_tiff )
 
 target_link_libraries(kfile_tiff  ${KDE4_KIO_LIBS} ${TIFF_LIBRARIES} )
 

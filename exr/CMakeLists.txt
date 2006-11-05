@@ -11,7 +11,6 @@ kde4_automoc(${kfile_exr_PART_SRCS})
 
 kde4_add_plugin(kfile_exr ${kfile_exr_PART_SRCS})
 
-kde4_install_libtool_file( ${PLUGIN_INSTALL_DIR} kfile_exr )
 
 target_link_libraries(kfile_exr  ${KDE4_KIO_LIBS} ${OPENEXR_LIBRARIES} )
 

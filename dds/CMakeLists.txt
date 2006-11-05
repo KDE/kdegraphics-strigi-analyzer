@@ -10,7 +10,6 @@ kde4_automoc(${kfile_dds_PART_SRCS})
 
 kde4_add_plugin(kfile_dds ${kfile_dds_PART_SRCS})
 
-kde4_install_libtool_file( ${PLUGIN_INSTALL_DIR} kfile_dds )
 
 target_link_libraries(kfile_dds  ${KDE4_KIO_LIBS} )
 

@@ -10,7 +10,6 @@ kde4_automoc(${kfile_raw_PART_SRCS})
 
 kde4_add_plugin(kfile_raw ${kfile_raw_PART_SRCS})
 
-kde4_install_libtool_file( ${PLUGIN_INSTALL_DIR} kfile_raw )
 
 target_link_libraries(kfile_raw  ${KDE4_KIO_LIBS} )
 

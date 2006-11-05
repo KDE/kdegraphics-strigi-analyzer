@@ -10,7 +10,6 @@ kde4_automoc(${kfile_ico_PART_SRCS})
 
 kde4_add_plugin(kfile_ico ${kfile_ico_PART_SRCS})
 
-kde4_install_libtool_file( ${PLUGIN_INSTALL_DIR} kfile_ico )
 
 target_link_libraries(kfile_ico  ${KDE4_KIO_LIBS} )
 
