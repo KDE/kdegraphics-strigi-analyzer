@@ -1,4 +1,4 @@
-
+include_directories(${TIFF_INCLUDE_DIR})
 
 
 
