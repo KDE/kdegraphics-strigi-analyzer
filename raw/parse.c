@@ -26,6 +26,7 @@
 #ifdef WIN32
 #include <winsock2.h>
 typedef __int64 INT64;
+typedef unsigned short ushort;
 #else
 #include <netinet/in.h>
 typedef long long INT64;
