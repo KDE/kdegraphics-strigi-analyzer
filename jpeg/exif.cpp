@@ -802,15 +802,16 @@ void ExifData::process_EXIF(unsigned char * CharBuf, unsigned int length)
     }
 
     // Check the next two values for correctness.
-    if (Get16u(CharBuf+10) != 0x2a
-      || Get32u(CharBuf+12) != 0x08){
+    if (Get16u(CharBuf+10) != 0x2a){
         throw FatalError("Invalid Exif start (1)");
     }
+
+   long IFDoffset = Get32u(CharBuf+12);
 
     LastExifRefd = CharBuf;
 
     // First directory starts 16 bytes in.  Offsets start at 8 bytes in.
-    ProcessExifDir(CharBuf+16, CharBuf+8, length-6);
+    ProcessExifDir(&CharBuf[8+IFDoffset], CharBuf+8, length-6);
 
     // This is how far the interesting (non thumbnail) part of the exif went.
     ExifSettingsLength = LastExifRefd - CharBuf;
