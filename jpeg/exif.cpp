@@ -450,13 +450,16 @@ double ExifData::ConvertAnyFormat(void * ValuePtr, int Format)
 //--------------------------------------------------------------------------
 // Process one of the nested EXIF directories.
 //--------------------------------------------------------------------------
-void ExifData::ProcessExifDir(unsigned char * DirStart, unsigned char * OffsetBase, unsigned ExifLength)
+void ExifData::ProcessExifDir(unsigned char * DirStart, unsigned char * OffsetBase, unsigned ExifLength, unsigned NestingLevel)
 {
     int de;
     int a;
     int NumDirEntries;
     unsigned ThumbnailOffset = 0;
     unsigned ThumbnailSize = 0;
+
+    if ( NestingLevel > 4)
+        throw FatalError("Maximum directory nesting exceeded (corrupt exif header)");
 
     NumDirEntries = Get16u(DirStart);
     #define DIR_ENTRY_ADDR(Start, Entry) (Start+2+12*(Entry))
@@ -480,7 +483,7 @@ void ExifData::ProcessExifDir(unsigned char * DirStart, unsigned char * OffsetBa
     for (de=0;de<NumDirEntries;de++){
         int Tag, Format, Components;
         unsigned char * ValuePtr;
-        int ByteCount;
+        unsigned ByteCount;
         char * DirEntry;
         DirEntry = (char *)DIR_ENTRY_ADDR(DirStart, de);
 
@@ -491,6 +494,11 @@ void ExifData::ProcessExifDir(unsigned char * DirStart, unsigned char * OffsetBa
         if ((Format-1) >= NUM_FORMATS) {
             // (-1) catches illegal zero case as unsigned underflows to positive large.
             throw FatalError("Illegal format code in EXIF dir");
+        }
+
+        if ((unsigned)Components > 0x10000) {
+            throw FatalError("Illegal number of components for tag");
+            continue;
         }
 
         ByteCount = Components * BytesPerFormat[Format];
@@ -521,11 +529,11 @@ void ExifData::ProcessExifDir(unsigned char * DirStart, unsigned char * OffsetBa
         switch(Tag){
 
             case TAG_MAKE:
-                ExifData::CameraMake = QString((char*)ValuePtr);
+                ExifData::CameraMake = QString::fromLatin1((const char*)ValuePtr, 31);
                 break;
 
             case TAG_MODEL:
-                ExifData::CameraModel = QString((char*)ValuePtr);
+                ExifData::CameraModel = QString::fromLatin1((const char*)ValuePtr, 39);
 		break;
 
             case TAG_ORIENTATION:
@@ -533,7 +541,7 @@ void ExifData::ProcessExifDir(unsigned char * DirStart, unsigned char * OffsetBa
                 break;
 
             case TAG_DATETIME_ORIGINAL:
-		DateTime = QString((char*)ValuePtr);
+		DateTime = QString::fromLatin1((const char*)ValuePtr, 19);
                 break;
 
             case TAG_USERCOMMENT:
@@ -554,14 +562,12 @@ void ExifData::ProcessExifDir(unsigned char * DirStart, unsigned char * OffsetBa
                         int c;
                         c = (ValuePtr)[a];
                         if (c != '\0' && c != ' '){
-                            //strncpy(ImageInfo.Comments, (const char*)(a+ValuePtr), 199);
-                            UserComment.sprintf("%s", (const char*)(a+ValuePtr));
+                            UserComment = QString::fromLatin1((const char*)(a+ValuePtr), 199);
                             break;
                         }
                     }
                 }else{
-                    //strncpy(ImageInfo.Comments, (const char*)ValuePtr, 199);
-                    UserComment.sprintf("%s", (const char*)ValuePtr);
+                    UserComment = QString::fromLatin1((const char*)ValuePtr, 199);
                 }
                 break;
 
@@ -680,10 +686,10 @@ void ExifData::ProcessExifDir(unsigned char * DirStart, unsigned char * OffsetBa
         if (Tag == TAG_EXIF_OFFSET || Tag == TAG_INTEROP_OFFSET){
             unsigned char * SubdirStart;
             SubdirStart = OffsetBase + Get32u(ValuePtr);
-            if (SubdirStart < OffsetBase || SubdirStart > OffsetBase+ExifLength){
+            if (SubdirStart <= OffsetBase || SubdirStart >= OffsetBase+ExifLength){
                 throw FatalError("Illegal subdirectory link");
             }
-            ProcessExifDir(SubdirStart, OffsetBase, ExifLength);
+            ProcessExifDir(SubdirStart, OffsetBase, ExifLength, NestingLevel+1);
             continue;
         }
     }
@@ -713,7 +719,7 @@ void ExifData::ProcessExifDir(unsigned char * DirStart, unsigned char * OffsetBa
                     }
                 }else{
                     if (SubdirStart <= OffsetBase+ExifLength){
-                        ProcessExifDir(SubdirStart, OffsetBase, ExifLength);
+                        ProcessExifDir(SubdirStart, OffsetBase, ExifLength, NestingLevel+1);
                     }
                 }
             }
@@ -723,7 +729,7 @@ void ExifData::ProcessExifDir(unsigned char * DirStart, unsigned char * OffsetBa
     }
 
     if (ThumbnailSize && ThumbnailOffset){
-        if (ThumbnailSize + ThumbnailOffset <= ExifLength){
+        if (ThumbnailSize + ThumbnailOffset < ExifLength){
             // The thumbnail pointer appears to be valid.  Store it.
 	    Thumbnail.loadFromData(OffsetBase + ThumbnailOffset, ThumbnailSize, "JPEG");
         }
@@ -815,7 +821,7 @@ void ExifData::process_EXIF(unsigned char * CharBuf, unsigned int length)
     LastExifRefd = CharBuf;
 
     // First directory starts 16 bytes in.  Offsets start at 8 bytes in.
-    ProcessExifDir(&CharBuf[8+IFDoffset], CharBuf+8, length-6);
+    ProcessExifDir(&CharBuf[8+IFDoffset], CharBuf+8, length-6, 0);
 
     // This is how far the interesting (non thumbnail) part of the exif went.
     ExifSettingsLength = LastExifRefd - CharBuf;
