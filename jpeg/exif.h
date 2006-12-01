@@ -72,7 +72,8 @@ class ExifData {
     int Get32s(void * Long);
     unsigned Get32u(void * Long);
     double ConvertAnyFormat(void * ValuePtr, int Format);
-    void ProcessExifDir(unsigned char * DirStart, unsigned char * OffsetBase, unsigned ExifLength);
+    void ProcessExifDir(unsigned char * DirStart, unsigned char * OffsetBase, unsigned ExifLength,
+            unsigned NestingLevel);
     void process_COM (const uchar * Data, int length);
     void process_SOFn (const uchar * Data, int marker);
     int Get16m(const void * Short);
