@@ -582,7 +582,7 @@ bool GSCreator::getEPSIPreview(const QString &path, long start, long
     if (offset >= previewsize)
       return false;
 
-    while (!isxdigit(previewstr[offset].latin1()) &&
+    while (!isxdigit(previewstr[offset].toLatin1()) &&
 	   offset < previewsize)
       offset++;
 
