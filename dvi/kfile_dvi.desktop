@@ -3,6 +3,7 @@ Encoding=UTF-8
 Icon=
 MimeType=application/x-dvi
 Name=DVI Info
+Name[el]=Πληροφορίες DVI
 Name[fr]=Informations DVI
 Name[x-test]=xxDVI Infoxx
 ServiceTypes=KFilePlugin

@@ -2,6 +2,7 @@
 Encoding=UTF-8
 Type=Service
 Name=GIF Info
+Name[el]=Πληροφορίες GIF
 Name[fr]=Informations GIF
 Name[x-test]=xxGIF Infoxx
 ServiceTypes=KFilePlugin

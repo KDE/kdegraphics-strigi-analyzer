@@ -2,6 +2,7 @@
 Encoding=UTF-8
 Type=Service
 Name=PNG Info
+Name[el]=Πληροφορίες PNG
 Name[fr]=Informations PNG
 Name[x-test]=xxPNG Infoxx
 ServiceTypes=KFilePlugin

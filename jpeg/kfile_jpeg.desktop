@@ -2,6 +2,7 @@
 Encoding=UTF-8
 Type=Service
 Name=JPEG EXIF Info
+Name[el]=Πληροφορίες JPEG EXIF
 Name[fr]=Informations JPEG EXIF
 Name[x-test]=xxJPEG EXIF Infoxx
 ServiceTypes=KFilePlugin

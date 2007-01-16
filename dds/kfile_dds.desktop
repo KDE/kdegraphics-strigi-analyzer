@@ -2,6 +2,7 @@
 Encoding=UTF-8
 Type=Service
 Name=DirectDraw Surface Info
+Name[el]=Πληροφορίες επιφάνειας DirectDraw
 Name[fr]=Informations de surface DirectDraw
 Name[x-test]=xxDirectDraw Surface Infoxx
 ServiceTypes=KFilePlugin

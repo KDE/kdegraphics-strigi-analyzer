@@ -2,6 +2,7 @@
 Encoding=UTF-8
 Type=Service
 Name=EXR Info
+Name[el]=Πληροφορίες EXR
 Name[fr]=Informations EXR
 Name[x-test]=xxEXR Infoxx
 ServiceTypes=KFilePlugin

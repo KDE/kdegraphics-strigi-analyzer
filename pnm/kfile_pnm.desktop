@@ -2,6 +2,7 @@
 Encoding=UTF-8
 Type=Service
 Name=PNM Info
+Name[el]=Πληροφορίες PNM
 Name[fr]=Informations PNM
 Name[x-test]=xxPNM Infoxx
 ServiceTypes=KFilePlugin

@@ -2,6 +2,7 @@
 Encoding=UTF-8
 Type=Service
 Name=SGI Image (RGB)
+Name[el]=Εικόνα SGI (RGB)
 Name[fr]=Image SGI (RVB)
 Name[x-test]=xxSGI Image (RGB)xx
 ServiceTypes=KFilePlugin
