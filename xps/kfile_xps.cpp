@@ -93,7 +93,7 @@ bool KXpsPlugin::readInfo( KFileMetaInfo& info, uint /* what */)
         return false;
     }
 
-    QIODevice* relDevice = relFile->device();
+    QIODevice* relDevice = relFile->createDevice();
 
     QDomDocument relDom;
     QString errMsg;
@@ -102,6 +102,7 @@ bool KXpsPlugin::readInfo( KFileMetaInfo& info, uint /* what */)
         // parse error
         kDebug(7115) << "Could not parse relationship document: " << errMsg << " : "
 		     << errLine << " : " << errCol << endl;
+        delete relDevice;
 	return false;
     }
 
@@ -135,13 +136,14 @@ bool KXpsPlugin::readInfo( KFileMetaInfo& info, uint /* what */)
 
     const KZipFileEntry* fixedRepFile = static_cast<const KZipFileEntry *>(xpsArchive->directory()->entry( fixedRepresentationFileName ));
 
-    QIODevice* fixedRepDevice = fixedRepFile->device();
+    QIODevice* fixedRepDevice = fixedRepFile->createDevice();
 
     QDomDocument fixedRepDom;
     if ( fixedRepDom.setContent( fixedRepDevice, true, &errMsg, &errLine, &errCol ) == false ) {
         // parse error
         kDebug(7115) << "Could not parse Fixed Representation document: " << errMsg << " : "
 		     << errLine << " : " << errCol << endl;
+        delete fixedRepDevice;
 	return false;
     }
 
@@ -204,12 +206,13 @@ bool KXpsPlugin::readInfo( KFileMetaInfo& info, uint /* what */)
 
 	QDomDocument metadataDocumentDom;
 
-	QIODevice *corepropsDevice = corepropsFile->device();
+	QIODevice *corepropsDevice = corepropsFile->createDevice();
 
 	if ( metadataDocumentDom.setContent( corepropsDevice, true, &errMsg, &errLine, &errCol ) == false ) {
 	    // parse error
 	    kDebug(7115) << "Could not parse core properties (metadata) document: " << errMsg << " : "
 			 << errLine << " : " << errCol << endl;
+            delete corepropsDevice;
 	    return false;
 	}
 
