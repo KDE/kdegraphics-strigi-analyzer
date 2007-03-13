@@ -23,7 +23,6 @@
 #include <strigi/indexable.h>
 #include <strigi/cnstr.h>
 #include <strigi/fieldtypes.h>
-#include <map>
 
 using namespace jstreams;
 using namespace std;
@@ -45,7 +44,6 @@ public:
 class DviThroughAnalyzerFactory : public StreamThroughAnalyzerFactory {
 friend class DviThroughAnalyzer;
 private:
-    map<string, const RegisteredField*> fields;
     const char* getName() const {
         return "DviThroughAnalyzer";
     }
