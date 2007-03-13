@@ -18,6 +18,10 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
+
+/*
+ Include the strigi specific headers.
+*/
 #define STRIGI_IMPORT_API
 #include <strigi/jstreamsconfig.h>
 #include <strigi/analyzerplugin.h>
@@ -29,7 +33,15 @@
 using namespace jstreams;
 using namespace std;
 
+/*
+ Declare the factory.
+*/
 class DviThroughAnalyzerFactory;
+
+/*
+Define a class that inherits from StreamThroughAnalyzer.
+The only function we really need to implement is connectInputStream()
+*/
 class STRIGI_PLUGIN_API DviThroughAnalyzer : public StreamThroughAnalyzer {
 private:
     Indexable* indexable;
@@ -43,18 +55,30 @@ public:
     bool isReadyWithStream() { return true; }
 };
 
+/*
+ Define a factory class the provides information about the fields that an
+ analyzer can extract. This has a function similar to KFilePlugin::addItemInfo.
+*/
 class STRIGI_PLUGIN_API DviThroughAnalyzerFactory : public StreamThroughAnalyzerFactory {
 friend class DviThroughAnalyzer;
 private:
     const char* getName() const {
         return "DviThroughAnalyzer";
     }
+    /* This is why this class is a factory. */
     StreamThroughAnalyzer* newInstance() const {
         return new DviThroughAnalyzer(this);
     }
     void registerFields(FieldRegister& );
+
+    /* define static fields that contain the field names. cnstr is a string
+       class that can efficiently store and compare constant strings. */
     static const cnstr commentFieldName;
     static const cnstr pagesFieldName;
+
+    /* The RegisteredField instances are used to index specific fields quickly.
+       We pass a pointer to the instance instead of a string.
+    */
     const RegisteredField* commentField;
     const RegisteredField* pagesField;
 };
@@ -62,6 +86,10 @@ private:
 const cnstr DviThroughAnalyzerFactory::commentFieldName("comment");
 const cnstr DviThroughAnalyzerFactory::pagesFieldName("pages");
 
+/*
+ Register the field names so that the StreamIndexer knows which analyzer
+ provides what information.
+*/
 void
 DviThroughAnalyzerFactory::registerFields(FieldRegister& r) {
     commentField = r.registerField(commentFieldName, FieldRegister::stringType,
@@ -96,6 +124,11 @@ DviThroughAnalyzer::connectInputStream(InputStream* in) {
     return in;
 }
 
+/*
+ For plugins, we need to have a way to find out which plugins are defined in a
+ plugin. One instance of AnalyzerFactoryFactory per plugin profides this
+ information.
+*/
 class Factory : public AnalyzerFactoryFactory {
 public:
     list<StreamThroughAnalyzerFactory*>
@@ -106,4 +139,7 @@ public:
     }
 };
 
+/*
+ Register the AnalyzerFactoryFactory
+*/
 STRIGI_ANALYZER_FACTORY(Factory)
