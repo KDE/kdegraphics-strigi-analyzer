@@ -18,7 +18,9 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
+#define STRIGI_IMPORT_API
 #include <strigi/jstreamsconfig.h>
+#include <strigi/analyzerplugin.h>
 #include <strigi/streamthroughanalyzer.h>
 #include <strigi/indexable.h>
 #include <strigi/cnstr.h>
@@ -28,7 +30,7 @@ using namespace jstreams;
 using namespace std;
 
 class DviThroughAnalyzerFactory;
-class DviThroughAnalyzer : public StreamThroughAnalyzer {
+class STRIGI_PLUGIN_API DviThroughAnalyzer : public StreamThroughAnalyzer {
 private:
     Indexable* indexable;
     const DviThroughAnalyzerFactory* factory;
@@ -41,7 +43,7 @@ public:
     bool isReadyWithStream() { return true; }
 };
 
-class DviThroughAnalyzerFactory : public StreamThroughAnalyzerFactory {
+class STRIGI_PLUGIN_API DviThroughAnalyzerFactory : public StreamThroughAnalyzerFactory {
 friend class DviThroughAnalyzer;
 private:
     const char* getName() const {
@@ -93,3 +95,15 @@ DviThroughAnalyzer::connectInputStream(InputStream* in) {
 
     return in;
 }
+
+class Factory : public AnalyzerFactoryFactory {
+public:
+    list<StreamThroughAnalyzerFactory*>
+    getStreamThroughAnalyzerFactories() const {
+        list<StreamThroughAnalyzerFactory*> af;
+        af.push_back(new DviThroughAnalyzerFactory());
+        return af;
+    }
+};
+
+STRIGI_ANALYZER_FACTORY(Factory)
