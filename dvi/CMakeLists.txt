@@ -1,23 +1,11 @@
-
-
-
-
 ########### next target ###############
 
-set(kfile_dvi_PART_SRCS kfile_dvi.cpp )
+add_library(dvi MODULE dvithroughanalyzer.cpp)
 
-kde4_automoc(${kfile_dvi_PART_SRCS})
+target_link_libraries(dvi ${STREAMINDEXER_LIBRARY} ${KDE4_KIO_LIBS} ${KDE4_SOLID_LIBS})
 
-kde4_add_plugin(kfile_dvi ${kfile_dvi_PART_SRCS})
+set_target_properties(dvi PROPERTIES
+    PREFIX strigita_)
 
-
-target_link_libraries(kfile_dvi  ${KDE4_KIO_LIBS} )
-
-install(TARGETS kfile_dvi  DESTINATION ${PLUGIN_INSTALL_DIR} )
-
-
-########### install files ###############
-
-install( FILES kfile_dvi.desktop  DESTINATION  ${SERVICES_INSTALL_DIR} )
-
+install(TARGETS dvi LIBRARY DESTINATION ${LIB_DESTINATION}/strigi)
 
