@@ -26,11 +26,12 @@
 #include <strigi/jstreamsconfig.h>
 #include <strigi/analyzerplugin.h>
 #include <strigi/streamthroughanalyzer.h>
-#include <strigi/indexable.h>
+#include <strigi/analysisresult.h>
 #include <strigi/cnstr.h>
 #include <strigi/fieldtypes.h>
 
 using namespace jstreams;
+using namespace Strigi;
 using namespace std;
 
 /*
@@ -44,12 +45,12 @@ The only function we really need to implement is connectInputStream()
 */
 class STRIGI_PLUGIN_API DviThroughAnalyzer : public StreamThroughAnalyzer {
 private:
-    Indexable* indexable;
+    AnalysisResult* indexable;
     const DviThroughAnalyzerFactory* factory;
 public:
     DviThroughAnalyzer(const DviThroughAnalyzerFactory* f) :factory(f) {}
     ~DviThroughAnalyzer() {}
-    void setIndexable(jstreams::Indexable* i) { indexable = i; }
+    void setIndexable(AnalysisResult* i) { indexable = i; }
     InputStream *connectInputStream(InputStream *in);
     /* we only read the header so we are ready immediately */
     bool isReadyWithStream() { return true; }

@@ -4,7 +4,7 @@
 add_library(dvi MODULE dvithroughanalyzer.cpp)
 
 # link with the required libraries
-target_link_libraries(dvi ${STREAMINDEXER_LIBRARY})
+target_link_libraries(dvi ${STREAMANALYZER_LIBRARY})
 
 # adjust the name so the module is recognized as a strigi plugin
 set_target_properties(dvi PROPERTIES
