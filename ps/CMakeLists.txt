@@ -1,20 +1,13 @@
 
 include_directories( ${CMAKE_SOURCE_DIR}/kghostview  )
 
-
 ########### next target ###############
 
-set(kfile_ps_PART_SRCS kfile_ps.cpp ${libdscparse_SRCS})
-
-kde4_automoc(${kfile_ps_PART_SRCS})
-
-kde4_add_plugin(kfile_ps ${kfile_ps_PART_SRCS})
-
-
-target_link_libraries(kfile_ps  ${KDE4_KIO_LIBS} )
-
-install(TARGETS kfile_ps  DESTINATION ${PLUGIN_INSTALL_DIR} )
-
+add_library(ps MODULE psendanalyzer.cpp)
+target_link_libraries(ps ${STRIGI_STREAMANALYZER_LIBRARY} ${KDE4_KDECORE_LIBS})
+set_target_properties(ps PROPERTIES
+    PREFIX strigiea_)
+install(TARGETS ps LIBRARY DESTINATION ${LIB_DESTINATION}/strigi )
 
 ########### next target ###############
 
