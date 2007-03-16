@@ -5,10 +5,6 @@ macro_optional_find_package(TIFF)
 macro_optional_find_package(PopplerQt4)
 add_subdirectory( dvi )
 
-if(PNG_FOUND)
-	add_subdirectory( png )
-endif(PNG_FOUND)
-
 if(OPENEXR_FOUND)
 	add_subdirectory(exr)
 endif(OPENEXR_FOUND)
