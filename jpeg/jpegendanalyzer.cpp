@@ -190,10 +190,12 @@ JpegEndAnalyzerFactory::registerFields(FieldRegister& r) {
     jpegProcessField = r.registerField(jpegProcessFieldName, FieldRegister::stringType,        -1, 0);
     thumbnailField = r.registerField(thumbnailFieldName, FieldRegister::stringType,        -1, 0);
 }
+
 bool
 JpegEndAnalyzer::checkHeader(const char* header, int32_t headersize) const {
-    // _very_ simple check to filter out the worst
-    return headersize > 1 && header[0] == '%';
+    static const unsigned char jpgmagic[]
+        = {0xFF, 0xD8, 0xFF};
+    return headersize >= 3 &&  memcmp(header, jpgmagic, 3) == 0;
 }
 char
 JpegEndAnalyzer::analyze(AnalysisResult& ar, ::InputStream*) {
