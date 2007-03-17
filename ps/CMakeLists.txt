@@ -7,7 +7,7 @@ add_library(ps MODULE psendanalyzer.cpp)
 target_link_libraries(ps ${STRIGI_STREAMANALYZER_LIBRARY} ${KDE4_KDECORE_LIBS})
 set_target_properties(ps PROPERTIES
     PREFIX strigiea_)
-install(TARGETS ps LIBRARY DESTINATION ${LIB_DESTINATION}/strigi )
+install(TARGETS ps LIBRARY DESTINATION ${LIB_INSTALL_DIR}/strigi)
 
 ########### next target ###############
 

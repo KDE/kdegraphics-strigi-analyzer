@@ -11,5 +11,5 @@ set_target_properties(dvi PROPERTIES
     PREFIX strigita_)
 
 # install the module in the right directory so it is picked up
-install(TARGETS dvi LIBRARY DESTINATION ${LIB_DESTINATION}/strigi)
+install(TARGETS dvi LIBRARY DESTINATION ${LIB_INSTALL_DIR}/strigi)
 

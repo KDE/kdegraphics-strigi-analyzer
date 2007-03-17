@@ -13,7 +13,7 @@ set_target_properties(jpeg PROPERTIES
     PREFIX strigiea_)
 
 # install the module in the right directory so it is picked up
-install(TARGETS jpeg LIBRARY DESTINATION ${LIB_DESTINATION}/strigi)
+install(TARGETS jpeg LIBRARY DESTINATION ${LIB_INSTALL_DIR}/strigi)
 
 
 ########### install files ###############
