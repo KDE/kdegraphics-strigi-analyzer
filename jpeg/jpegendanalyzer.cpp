@@ -28,7 +28,7 @@
 #include <strigi/analysisresult.h>
 #include <strigi/cnstr.h>
 #include <strigi/fieldtypes.h>
-#include <QString>
+#include <KUrl>
 #include <QDateTime>
 #include "exif.h"
 
@@ -133,7 +133,7 @@ private:
     const RegisteredField* thumbnailField;
 };
 
-const cnstr JpegEndAnalyzerFactory::commentFieldName("comment");
+const cnstr JpegEndAnalyzerFactory::commentFieldName("jpegcomment");
 const cnstr JpegEndAnalyzerFactory::manufacturerFieldName("manufacturer");
 const cnstr JpegEndAnalyzerFactory::modelFieldName("model");
 const cnstr JpegEndAnalyzerFactory::creationDateFieldName("creationDate");
@@ -199,7 +199,7 @@ JpegEndAnalyzer::checkHeader(const char* header, int32_t headersize) const {
 }
 char
 JpegEndAnalyzer::analyze(AnalysisResult& ar, ::InputStream*) {
-    const QString path( ar.path().c_str() );
+    const KUrl path( ar.path().c_str() );
     if ( path.isEmpty() ) // remote file
         return -1;
 
@@ -207,7 +207,7 @@ JpegEndAnalyzer::analyze(AnalysisResult& ar, ::InputStream*) {
 
     // parse the jpeg file now
     try {
-        if ( !ImageInfo.scan(path) ) {
+        if ( !ImageInfo.scan(path.path()) ) {
             kDebug(7034) << "Not a JPEG file!\n";
             return false;
         }
