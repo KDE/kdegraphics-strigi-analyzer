@@ -44,7 +44,7 @@ KXbmPlugin::KXbmPlugin(QObject *parent,
 
     : KFilePlugin(parent, args)
 {
-    KFileMimeTypeInfo* info = addMimeTypeInfo( "image/x-xbm" );
+    KFileMimeTypeInfo* info = addMimeTypeInfo( "image/x-xbitmap" );
 
     KFileMimeTypeInfo::GroupInfo* group = 0L;
 

@@ -36,7 +36,7 @@ K_EXPORT_COMPONENT_FACTORY(kfile_pnm, PnmFactory("kfile_pnm"))
 KPnmPlugin::KPnmPlugin(QObject *parent, const QStringList &args) : KFilePlugin(parent, args) 
 {
 	makeMimeTypeInfo( "image/x-portable-bitmap" );
-	makeMimeTypeInfo( "image/x-portable-greymap" );
+	makeMimeTypeInfo( "image/x-portable-graymap" );
 	makeMimeTypeInfo( "image/x-portable-pixmap" );
 }
 

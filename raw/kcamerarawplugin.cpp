@@ -93,7 +93,7 @@ KCameraRawPlugin::KCameraRawPlugin(QObject *parent, const QStringList &args )
   //
   // define all possible meta info items
   //
-  KFileMimeTypeInfo *info = addMimeTypeInfo("image/x-raw");
+  KFileMimeTypeInfo *info = addMimeTypeInfo("image/x-dcraw");
   KFileMimeTypeInfo::GroupInfo *group = addGroupInfo( info, "Info",
 						      i18n("Image Info") );
   KFileMimeTypeInfo::ItemInfo* item;

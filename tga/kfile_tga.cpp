@@ -49,7 +49,7 @@ KTgaPlugin::KTgaPlugin(QObject *parent,
 
     : KFilePlugin(parent, args)
 {
-    KFileMimeTypeInfo* info = addMimeTypeInfo( "image/x-targa" );
+    KFileMimeTypeInfo* info = addMimeTypeInfo( "image/x-tga" );
 
     KFileMimeTypeInfo::GroupInfo* group = 0L;
 
