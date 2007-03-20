@@ -1,23 +1,15 @@
 
+# build the analyzer as a module
+add_library(ico MODULE icothroughanalyzer.cpp)
 
+# link with the required libraries
+target_link_libraries(ico ${STREAMANALYZER_LIBRARY} ${KDE4_KIO_LIBS})
 
+# adjust the name so the module is recognized as a strigi plugin
+set_target_properties(ico PROPERTIES
+    PREFIX strigita_)
 
-########### next target ###############
-
-set(kfile_ico_PART_SRCS kfile_ico.cpp )
-
-kde4_automoc(${kfile_ico_PART_SRCS})
-
-kde4_add_plugin(kfile_ico ${kfile_ico_PART_SRCS})
-
-
-target_link_libraries(kfile_ico  ${KDE4_KIO_LIBS} )
-
-install(TARGETS kfile_ico  DESTINATION ${PLUGIN_INSTALL_DIR} )
-
-
-########### install files ###############
-
-install( FILES kfile_ico.desktop  DESTINATION  ${SERVICES_INSTALL_DIR} )
+# install the module in the right directory so it is picked up
+install(TARGETS ico LIBRARY DESTINATION ${LIB_INSTALL_DIR}/strigi)
 
 
