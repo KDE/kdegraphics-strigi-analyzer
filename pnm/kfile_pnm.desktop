@@ -50,6 +50,6 @@ Name[zh_HK]=PNM 資訊
 Name[zh_TW]=PNM 資訊
 ServiceTypes=KFilePlugin
 X-KDE-Library=kfile_pnm
-MimeType=image/x-portable-bitmap;image/x-portable-greymap;image/x-portable-pixmap
+MimeType=image/x-portable-bitmap;image/x-portable-graymap;image/x-portable-pixmap
 PreferredGroups=General
 PreferredItems=Format,Dimensions,BitDepth,Comment

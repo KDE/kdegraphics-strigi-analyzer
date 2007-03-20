@@ -53,6 +53,6 @@ Name[zh_HK]=XBM 資訊
 Name[zh_TW]=XBM 資訊
 ServiceTypes=KFilePlugin
 X-KDE-Library=kfile_xbm
-MimeType=image/x-xbm
+MimeType=image/x-xbitmap
 PreferredGroups=Technical
 PreferredItems=Resolution

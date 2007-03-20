@@ -52,6 +52,6 @@ Name[zh_HK]=Truevision Targa 資訊
 Name[zh_TW]=Truevision Targa 資訊
 ServiceTypes=KFilePlugin
 X-KDE-Library=kfile_tga
-MimeType=image/x-targa
+MimeType=image/x-tga
 PreferredGroups=Technical
 PreferredItems=Dimensions,BitDepth,ColorMode,Compression

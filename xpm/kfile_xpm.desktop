@@ -44,6 +44,6 @@ Name[zh_HK]=XPM 資訊
 Name[zh_TW]=XPM 資訊
 ServiceTypes=KFilePlugin
 X-KDE-Library=kfile_xpm
-MimeType=image/x-xpm
+MimeType=image/x-xpixmap
 PreferredGroups=xpmInfo
 PreferredItems=Dimension
