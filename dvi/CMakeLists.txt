@@ -1,7 +1,7 @@
 ########### next target ###############
 
 # build the analyzer as a module
-add_library(dvi MODULE dvithroughanalyzer.cpp)
+kde4_add_library(dvi MODULE dvithroughanalyzer.cpp)
 
 # link with the required libraries
 target_link_libraries(dvi ${STREAMANALYZER_LIBRARY})

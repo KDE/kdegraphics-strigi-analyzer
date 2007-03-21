@@ -3,7 +3,7 @@ include_directories( ${CMAKE_SOURCE_DIR}/kghostview  )
 
 ########### next target ###############
 
-add_library(ps MODULE psendanalyzer.cpp)
+kde4_add_library(ps MODULE psendanalyzer.cpp)
 target_link_libraries(ps ${STRIGI_STREAMANALYZER_LIBRARY} ${KDE4_KDECORE_LIBS})
 set_target_properties(ps PROPERTIES
     PREFIX strigiea_)

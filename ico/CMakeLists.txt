@@ -1,6 +1,6 @@
 
 # build the analyzer as a module
-add_library(ico MODULE icothroughanalyzer.cpp)
+kde4_add_library(ico MODULE icothroughanalyzer.cpp)
 
 # link with the required libraries
 target_link_libraries(ico ${STREAMANALYZER_LIBRARY} ${KDE4_KIO_LIBS})

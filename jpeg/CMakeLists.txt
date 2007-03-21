@@ -3,7 +3,7 @@ set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}  ${KDE4_ENABLE_EXCEPTIONS}")
 ########### next target ###############
 
 # build the analyzer as a module
-add_library(jpeg MODULE jpegendanalyzer.cpp exif.cpp kfile_setcomment.cpp)
+kde4_add_library(jpeg MODULE jpegendanalyzer.cpp exif.cpp kfile_setcomment.cpp)
 
 # link with the required libraries
 target_link_libraries(jpeg ${STREAMANALYZER_LIBRARY} ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY} ${KDE4_KDECORE_LIBRARY})
