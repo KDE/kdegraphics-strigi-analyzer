@@ -20,7 +20,7 @@
 #include <config.h>
 #include "kfile_ico.h"
 
-#include <kprocess.h>
+#include <k3process.h>
 #include <klocale.h>
 #include <kgenericfactory.h>
 #include <kstringvalidator.h>

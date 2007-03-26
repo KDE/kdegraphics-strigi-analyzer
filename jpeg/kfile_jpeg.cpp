@@ -24,7 +24,7 @@
 #include "kfile_jpeg.h"
 
 #include <kurl.h>
-#include <kprocess.h>
+#include <k3process.h>
 #include <klocale.h>
 #include <kgenericfactory.h>
 #include <kdebug.h>
