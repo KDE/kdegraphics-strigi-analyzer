@@ -32,7 +32,6 @@
 #include <QFile>
 #include "dscparse_adapter.h"
 
-using namespace jstreams;
 using namespace Strigi;
 using namespace std;
 
@@ -61,7 +60,7 @@ private:
 public:
     PsEndAnalyzer(const PsEndAnalyzerFactory* f) :factory(f) {}
     ~PsEndAnalyzer() {}
-    const char* getName() const {
+    const char* name() const {
         return "PsEndAnalyzer";
     }
     bool checkHeader(const char* header, int32_t headersize) const;
@@ -79,7 +78,7 @@ private:
     StreamEndAnalyzer* newInstance() const {
         return new PsEndAnalyzer(this);
     }
-    const char* getName() const {
+    const char* name() const {
         return "PsEndAnalyzer";
     }
     void registerFields(FieldRegister& );

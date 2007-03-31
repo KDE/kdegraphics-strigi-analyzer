@@ -39,7 +39,7 @@ class IcoThroughAnalyzer : public StreamThroughAnalyzer {
         void setIndexable( AnalysisResult *i ) {
             idx = i;
         }
-        jstreams::InputStream* connectInputStream( jstreams::InputStream *in );
+        InputStream* connectInputStream( InputStream *in );
         bool isReadyWithStream() { return true; }
     public:
         IcoThroughAnalyzer( const IcoThroughAnalyzerFactory* f ) : factory( f ) {}
@@ -47,7 +47,7 @@ class IcoThroughAnalyzer : public StreamThroughAnalyzer {
 
 class IcoThroughAnalyzerFactory : public StreamThroughAnalyzerFactory {
 private:
-    const char* getName() const {
+    const char* name() const {
         return "IcoThroughAnalyzer";
     }
     StreamThroughAnalyzer* newInstance() const {
@@ -78,17 +78,17 @@ void IcoThroughAnalyzerFactory::registerFields( FieldRegister& reg ) {
     colorsField = reg.registerField( colorsFieldName, FieldRegister::integerType, 1, 0 );
 }
 
-jstreams::InputStream* IcoThroughAnalyzer::connectInputStream( jstreams::InputStream* in ) {
+InputStream* IcoThroughAnalyzer::connectInputStream( InputStream* in ) {
     if( !in )
         return in;
 
     const char *c;
-    int32_t nread = in->read( c, in->getSize(), in->getSize() );
+    int32_t nread = in->read( c, in->size(), in->size() );
     in->reset( 0 );
     if( nread == -2 )
         return in;
 
-    QByteArray buffer( c, in->getSize() );
+    QByteArray buffer( c, in->size() );
     QDataStream dstream( buffer );
 
     // ICO files are little-endian
@@ -127,15 +127,15 @@ jstreams::InputStream* IcoThroughAnalyzer::connectInputStream( jstreams::InputSt
     dstream >> icoe_bytesinres;
     dstream >> icoe_imageoffset;
 
-    idx->setField( factory->numberField, ico_count );
+    idx->addValue( factory->numberField, ico_count );
 
-    idx->setField( factory->widthField, icoe_width );
-    idx->setField( factory->heightField, icoe_height );
+    idx->addValue( factory->widthField, icoe_width );
+    idx->addValue( factory->heightField, icoe_height );
 
     if (icoe_colorcount > 0)
-        idx->setField( factory->colorsField, icoe_colorcount );
+        idx->addValue( factory->colorsField, icoe_colorcount );
     else if (icoe_bitcount > 0)
-        idx->setField( factory->colorsField, 2 ^ icoe_colorcount );
+        idx->addValue( factory->colorsField, 2 ^ icoe_colorcount );
 
     return in;
 }

@@ -30,7 +30,6 @@
 #include <strigi/cnstr.h>
 #include <strigi/fieldtypes.h>
 
-using namespace jstreams;
 using namespace Strigi;
 using namespace std;
 
@@ -63,7 +62,7 @@ public:
 class STRIGI_PLUGIN_API DviThroughAnalyzerFactory : public StreamThroughAnalyzerFactory {
 friend class DviThroughAnalyzer;
 private:
-    const char* getName() const {
+    const char* name() const {
         return "DviThroughAnalyzer";
     }
     /* This is why this class is a factory. */
@@ -116,7 +115,7 @@ DviThroughAnalyzer::connectInputStream(InputStream* in) {
     }
     unsigned char bufferLength = buffer[14];
     string comment((const char*)buffer+15, bufferLength);
-    indexable->setField(factory->commentField, comment);
+    indexable->addValue(factory->commentField, comment);
 
     // TODO: extract the number of pages
     // this is tricky because we need to get the data from the end of the stream

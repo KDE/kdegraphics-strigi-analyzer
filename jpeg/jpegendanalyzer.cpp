@@ -32,7 +32,6 @@
 #include <QDateTime>
 #include "exif.h"
 
-using namespace jstreams;
 using namespace Strigi;
 using namespace std;
 
@@ -54,7 +53,7 @@ private:
 public:
     JpegEndAnalyzer(const JpegEndAnalyzerFactory* f) :factory(f) {}
     ~JpegEndAnalyzer() {}
-    const char* getName() const {
+    const char* name() const {
         return "JpegEndAnalyzer";
     }
     bool checkHeader(const char* header, int32_t headersize) const;
@@ -72,7 +71,7 @@ private:
     StreamEndAnalyzer* newInstance() const {
         return new JpegEndAnalyzer(this);
     }
-    const char* getName() const {
+    const char* name() const {
         return "JpegEndAnalyzer";
     }
     void registerFields(FieldRegister& );
@@ -218,36 +217,36 @@ JpegEndAnalyzer::analyze(AnalysisResult& ar, ::InputStream*) {
 
     string tag = (const char*)ImageInfo.getComment().toUtf8();
     if ( tag.length() ) {
-        ar.setField(factory->commentField, tag);
+        ar.addValue(factory->commentField, tag);
     }
 
     tag = (const char*)ImageInfo.getCameraMake().toUtf8();
     if (tag.length()) {
-        ar.setField(factory->manufacturerField, tag);
+        ar.addValue(factory->manufacturerField, tag);
     }
 
     tag = (const char*)ImageInfo.getCameraModel().toUtf8();
     if (tag.length()) {
-        ar.setField(factory->modelField, tag);
+        ar.addValue(factory->modelField, tag);
     }
 
     QString qtag = ImageInfo.getDateTime();
     if (qtag.length()) {
         QDateTime dt = parseDateTime(qtag);
         if ( dt.isValid() ) {
-            ar.setField(factory->creationDateField, dt.toTime_t());
+            ar.addValue(factory->creationDateField, dt.toTime_t());
         }
     }
 
-    ar.setField(factory->widthField, (uint32_t)ImageInfo.getWidth());
-    ar.setField(factory->heightField, (uint32_t)ImageInfo.getHeight());
+    ar.addValue(factory->widthField, (uint32_t)ImageInfo.getWidth());
+    ar.addValue(factory->heightField, (uint32_t)ImageInfo.getHeight());
 
     if (ImageInfo.getOrientation()) {
-        ar.setField(factory->orientationField,
+        ar.addValue(factory->orientationField,
             (uint32_t)ImageInfo.getOrientation());
     }
 
-    ar.setField(factory->colorModeField, ImageInfo.getIsColor()
+    ar.addValue(factory->colorModeField, ImageInfo.getIsColor()
         ?"Color" :"Black and white");
 
     int flashUsed = ImageInfo.getFlashUsed(); // -1, <set>
@@ -283,20 +282,20 @@ JpegEndAnalyzer::analyze(AnalysisResult& ar, ::InputStream*) {
          default:
              break;
         }
-        ar.setField(factory->flashUsedField, flash);
+        ar.addValue(factory->flashUsedField, flash);
     }
 
     if (ImageInfo.getFocalLength()) {
-        ar.setField(factory->focalLengthField, ImageInfo.getFocalLength());
+        ar.addValue(factory->focalLengthField, ImageInfo.getFocalLength());
 
         if (ImageInfo.getCCDWidth()){
-            ar.setField(factory->_35mmEquivalentField,
+            ar.addValue(factory->_35mmEquivalentField,
                         (int)(ImageInfo.getFocalLength()/ImageInfo.getCCDWidth()*35 + 0.5) );
 	}
     }
 
     if (ImageInfo.getCCDWidth()) {
-        ar.setField(factory->ccdWidthField, ImageInfo.getCCDWidth());
+        ar.addValue(factory->ccdWidthField, ImageInfo.getCCDWidth());
     }
 
     if (ImageInfo.getExposureTime()) {
@@ -307,11 +306,11 @@ JpegEndAnalyzer::analyze(AnalysisResult& ar, ::InputStream*) {
             tag += (const char*)
                 QString().sprintf(" (1/%d)", (int)(0.5 + 1/exposureTime) ).toUtf8();
 	}
-        ar.setField(factory->exposureTimeField, tag);
+        ar.addValue(factory->exposureTimeField, tag);
     }
 
     if (ImageInfo.getApertureFNumber()) {
-        ar.setField(factory->apertureField, ImageInfo.getApertureFNumber());
+        ar.addValue(factory->apertureField, ImageInfo.getApertureFNumber());
     }
 
     if (ImageInfo.getDistance()) {
@@ -321,11 +320,11 @@ JpegEndAnalyzer::analyze(AnalysisResult& ar, ::InputStream*) {
 	    tag = (const char*)QString()
                 .sprintf("%5.2fm",(double)ImageInfo.getDistance()).toUtf8();
         }
-        ar.setField(factory->focusDistField, tag);
+        ar.addValue(factory->focusDistField, tag);
     }
 
     if (ImageInfo.getExposureBias()) {
-        ar.setField(factory->exposureBiasField, ImageInfo.getExposureBias());
+        ar.addValue(factory->exposureBiasField, ImageInfo.getExposureBias());
     }
 
     if (ImageInfo.getWhitebalance() != -1) {
@@ -368,7 +367,7 @@ JpegEndAnalyzer::analyze(AnalysisResult& ar, ::InputStream*) {
             //23 to 254 = reserved
 	    tag = "Unknown";
 	}
-        ar.setField(factory->whiteBalanceField, tag);
+        ar.addValue(factory->whiteBalanceField, tag);
     }
 
     if (ImageInfo.getMeteringMode() != -1) {
@@ -401,7 +400,7 @@ JpegEndAnalyzer::analyze(AnalysisResult& ar, ::InputStream*) {
 	    // 7 to 254 = reserved
 	    tag = "Unknown";
 	}
-        ar.setField(factory->meteringModeField, tag);
+        ar.addValue(factory->meteringModeField, tag);
     }
 
     if (ImageInfo.getExposureProgram()){
@@ -437,11 +436,11 @@ JpegEndAnalyzer::analyze(AnalysisResult& ar, ::InputStream*) {
 	    // 9 to 255 = reserved
 	    tag = "Unknown";
 	}
-        ar.setField(factory->exposureField, tag);
+        ar.addValue(factory->exposureField, tag);
     }
 
     if (ImageInfo.getISOequivalent()){
-	ar.setField(factory->isoEquivField, (int)ImageInfo.getISOequivalent());
+	ar.addValue(factory->isoEquivField, (int)ImageInfo.getISOequivalent());
     }
 
     if (ImageInfo.getCompressionLevel()){
@@ -458,18 +457,18 @@ JpegEndAnalyzer::analyze(AnalysisResult& ar, ::InputStream*) {
 	default:
 	    tag = "Unknown";
 	}
-        ar.setField(factory->jpegQualityField, tag);
+        ar.addValue(factory->jpegQualityField, tag);
     }
 
     tag = (const char*)ImageInfo.getUserComment().toUtf8();
     if (tag.length()) {
-        ar.setField(factory->commentField, tag);
+        ar.addValue(factory->commentField, tag);
     }
 
     int a;
     for (a = 0; ; a++){
         if (ProcessTable[a].Tag == ImageInfo.getProcess() || ProcessTable[a].Tag == 0) {
-            ar.setField(factory->jpegProcessField, ProcessTable[a].Desc);
+            ar.addValue(factory->jpegProcessField, ProcessTable[a].Desc);
             break;
         }
     }
@@ -478,7 +477,7 @@ JpegEndAnalyzer::analyze(AnalysisResult& ar, ::InputStream*) {
         QByteArray ba;
         QDataStream ds(&ba, QIODevice::WriteOnly);
         ds << ImageInfo.getThumbnail();
-        ar.setField(factory->thumbnailField, ba.data(), ba.size());
+        ar.addValue(factory->thumbnailField, ba.data(), ba.size());
     }
     return 0;
 }
