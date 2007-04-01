@@ -28,6 +28,7 @@
 #include <QDataStream>
 
 using namespace Strigi;
+using namespace std;
 
 class IcoThroughAnalyzerFactory;
 class IcoThroughAnalyzer : public StreamThroughAnalyzer {
