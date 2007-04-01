@@ -26,7 +26,6 @@
 #include <strigi/analyzerplugin.h>
 #include <strigi/streamendanalyzer.h>
 #include <strigi/analysisresult.h>
-#include <strigi/cnstr.h>
 #include <strigi/fieldtypes.h>
 #include <KUrl>
 #include <QDateTime>
@@ -76,32 +75,31 @@ private:
     }
     void registerFields(FieldRegister& );
 
-    /* define static fields that contain the field names. cnstr is a string
-       class that can efficiently store and compare constant strings. */
-    static const cnstr commentFieldName;
-    static const cnstr manufacturerFieldName;
-    static const cnstr modelFieldName;
-    static const cnstr creationDateFieldName;
-    static const cnstr widthFieldName;
-    static const cnstr heightFieldName;
-    static const cnstr orientationFieldName;
-    static const cnstr colorModeFieldName;
-    static const cnstr flashUsedFieldName;
-    static const cnstr focalLengthFieldName;
-    static const cnstr _35mmEquivalentFieldName;
-    static const cnstr ccdWidthFieldName;
-    static const cnstr exposureTimeFieldName;
-    static const cnstr apertureFieldName;
-    static const cnstr focusDistFieldName;
-    static const cnstr exposureBiasFieldName;
-    static const cnstr whiteBalanceFieldName;
-    static const cnstr meteringModeFieldName;
-    static const cnstr exposureFieldName;
-    static const cnstr isoEquivFieldName;
-    static const cnstr jpegQualityFieldName;
-    static const cnstr userCommentFieldName;
-    static const cnstr jpegProcessFieldName;
-    static const cnstr thumbnailFieldName;
+    /* define static fields that contain the field names. */
+    static const string commentFieldName;
+    static const string manufacturerFieldName;
+    static const string modelFieldName;
+    static const string creationDateFieldName;
+    static const string widthFieldName;
+    static const string heightFieldName;
+    static const string orientationFieldName;
+    static const string colorModeFieldName;
+    static const string flashUsedFieldName;
+    static const string focalLengthFieldName;
+    static const string _35mmEquivalentFieldName;
+    static const string ccdWidthFieldName;
+    static const string exposureTimeFieldName;
+    static const string apertureFieldName;
+    static const string focusDistFieldName;
+    static const string exposureBiasFieldName;
+    static const string whiteBalanceFieldName;
+    static const string meteringModeFieldName;
+    static const string exposureFieldName;
+    static const string isoEquivFieldName;
+    static const string jpegQualityFieldName;
+    static const string userCommentFieldName;
+    static const string jpegProcessFieldName;
+    static const string thumbnailFieldName;
 
     /* The RegisteredField instances are used to index specific fields quickly.
        We pass a pointer to the instance instead of a string.
@@ -132,30 +130,30 @@ private:
     const RegisteredField* thumbnailField;
 };
 
-const cnstr JpegEndAnalyzerFactory::commentFieldName("jpegcomment");
-const cnstr JpegEndAnalyzerFactory::manufacturerFieldName("manufacturer");
-const cnstr JpegEndAnalyzerFactory::modelFieldName("model");
-const cnstr JpegEndAnalyzerFactory::creationDateFieldName("creationDate");
-const cnstr JpegEndAnalyzerFactory::widthFieldName("width");
-const cnstr JpegEndAnalyzerFactory::heightFieldName("height");
-const cnstr JpegEndAnalyzerFactory::orientationFieldName("orientation");
-const cnstr JpegEndAnalyzerFactory::colorModeFieldName("colorMode");
-const cnstr JpegEndAnalyzerFactory::flashUsedFieldName("flashUsed");
-const cnstr JpegEndAnalyzerFactory::focalLengthFieldName("focalLength");
-const cnstr JpegEndAnalyzerFactory::_35mmEquivalentFieldName("_35mmEquivalent");
-const cnstr JpegEndAnalyzerFactory::ccdWidthFieldName("ccdWidth");
-const cnstr JpegEndAnalyzerFactory::exposureTimeFieldName("exposureTime");
-const cnstr JpegEndAnalyzerFactory::apertureFieldName("aperture");
-const cnstr JpegEndAnalyzerFactory::focusDistFieldName("focusDist");
-const cnstr JpegEndAnalyzerFactory::exposureBiasFieldName("exposureBias");
-const cnstr JpegEndAnalyzerFactory::whiteBalanceFieldName("whiteBalance");
-const cnstr JpegEndAnalyzerFactory::meteringModeFieldName("meteringMode");
-const cnstr JpegEndAnalyzerFactory::exposureFieldName("exposure");
-const cnstr JpegEndAnalyzerFactory::isoEquivFieldName("isoEquiv");
-const cnstr JpegEndAnalyzerFactory::jpegQualityFieldName("jpegQuality");
-const cnstr JpegEndAnalyzerFactory::userCommentFieldName("userComment");
-const cnstr JpegEndAnalyzerFactory::jpegProcessFieldName("jpegProcess");
-const cnstr JpegEndAnalyzerFactory::thumbnailFieldName("thumbnail");
+const string JpegEndAnalyzerFactory::commentFieldName("jpegcomment");
+const string JpegEndAnalyzerFactory::manufacturerFieldName("manufacturer");
+const string JpegEndAnalyzerFactory::modelFieldName("model");
+const string JpegEndAnalyzerFactory::creationDateFieldName("creationDate");
+const string JpegEndAnalyzerFactory::widthFieldName("width");
+const string JpegEndAnalyzerFactory::heightFieldName("height");
+const string JpegEndAnalyzerFactory::orientationFieldName("orientation");
+const string JpegEndAnalyzerFactory::colorModeFieldName("colorMode");
+const string JpegEndAnalyzerFactory::flashUsedFieldName("flashUsed");
+const string JpegEndAnalyzerFactory::focalLengthFieldName("focalLength");
+const string JpegEndAnalyzerFactory::_35mmEquivalentFieldName("_35mmEquivalent");
+const string JpegEndAnalyzerFactory::ccdWidthFieldName("ccdWidth");
+const string JpegEndAnalyzerFactory::exposureTimeFieldName("exposureTime");
+const string JpegEndAnalyzerFactory::apertureFieldName("aperture");
+const string JpegEndAnalyzerFactory::focusDistFieldName("focusDist");
+const string JpegEndAnalyzerFactory::exposureBiasFieldName("exposureBias");
+const string JpegEndAnalyzerFactory::whiteBalanceFieldName("whiteBalance");
+const string JpegEndAnalyzerFactory::meteringModeFieldName("meteringMode");
+const string JpegEndAnalyzerFactory::exposureFieldName("exposure");
+const string JpegEndAnalyzerFactory::isoEquivFieldName("isoEquiv");
+const string JpegEndAnalyzerFactory::jpegQualityFieldName("jpegQuality");
+const string JpegEndAnalyzerFactory::userCommentFieldName("userComment");
+const string JpegEndAnalyzerFactory::jpegProcessFieldName("jpegProcess");
+const string JpegEndAnalyzerFactory::thumbnailFieldName("thumbnail");
 
 /*
  Register the field names so that the StreamIndexer knows which analyzer

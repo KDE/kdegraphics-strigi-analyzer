@@ -23,7 +23,6 @@
 #include <strigi/analyzerplugin.h>
 #include <strigi/fieldtypes.h>
 #include <strigi/analysisresult.h>
-#include <strigi/cnstr.h>
 
 #include <QByteArray>
 #include <QDataStream>
@@ -55,10 +54,10 @@ private:
     }
     void registerFields( FieldRegister& );
 
-    static const cnstr numberFieldName;
-    static const cnstr widthFieldName;
-    static const cnstr heightFieldName;
-    static const cnstr colorsFieldName;
+    static const string numberFieldName;
+    static const string widthFieldName;
+    static const string heightFieldName;
+    static const string colorsFieldName;
 public:
     const RegisteredField* numberField;
     const RegisteredField* widthField;
@@ -66,10 +65,10 @@ public:
     const RegisteredField* colorsField;
 };
 
-const cnstr IcoThroughAnalyzerFactory::numberFieldName( "number of icons" );
-const cnstr IcoThroughAnalyzerFactory::widthFieldName( "icon width" );
-const cnstr IcoThroughAnalyzerFactory::heightFieldName( "icon height" );
-const cnstr IcoThroughAnalyzerFactory::colorsFieldName( "colors" );
+const string IcoThroughAnalyzerFactory::numberFieldName( "number of icons" );
+const string IcoThroughAnalyzerFactory::widthFieldName( "icon width" );
+const string IcoThroughAnalyzerFactory::heightFieldName( "icon height" );
+const string IcoThroughAnalyzerFactory::colorsFieldName( "colors" );
 
 void IcoThroughAnalyzerFactory::registerFields( FieldRegister& reg ) {
     numberField = reg.registerField( numberFieldName, FieldRegister::integerType, 1, 0 );

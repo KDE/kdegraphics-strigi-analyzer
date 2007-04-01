@@ -27,7 +27,6 @@
 #include <strigi/analyzerplugin.h>
 #include <strigi/streamthroughanalyzer.h>
 #include <strigi/analysisresult.h>
-#include <strigi/cnstr.h>
 #include <strigi/fieldtypes.h>
 
 using namespace Strigi;
@@ -71,10 +70,9 @@ private:
     }
     void registerFields(FieldRegister& );
 
-    /* define static fields that contain the field names. cnstr is a string
-       class that can efficiently store and compare constant strings. */
-    static const cnstr commentFieldName;
-    static const cnstr pagesFieldName;
+    /* define static fields that contain the field names. */
+    static const string commentFieldName;
+    static const string pagesFieldName;
 
     /* The RegisteredField instances are used to index specific fields quickly.
        We pass a pointer to the instance instead of a string.
@@ -83,8 +81,8 @@ private:
     const RegisteredField* pagesField;
 };
 
-const cnstr DviThroughAnalyzerFactory::commentFieldName("comment");
-const cnstr DviThroughAnalyzerFactory::pagesFieldName("pages");
+const string DviThroughAnalyzerFactory::commentFieldName("comment");
+const string DviThroughAnalyzerFactory::pagesFieldName("pages");
 
 /*
  Register the field names so that the StreamIndexer knows which analyzer

@@ -27,7 +27,6 @@
 #include <strigi/analyzerplugin.h>
 #include <strigi/streamendanalyzer.h>
 #include <strigi/analysisresult.h>
-#include <strigi/cnstr.h>
 #include <strigi/fieldtypes.h>
 #include <QFile>
 #include "dscparse_adapter.h"
@@ -83,13 +82,12 @@ private:
     }
     void registerFields(FieldRegister& );
 
-    /* define static fields that contain the field names. cnstr is a string
-       class that can efficiently store and compare constant strings. */
-    static const cnstr titleFieldName;
-    static const cnstr creatorFieldName;
-    static const cnstr createdateFieldName;
-    static const cnstr forFieldName;
-    static const cnstr pagesFieldName;
+    /* define static fields that contain the field names. */
+    static const string titleFieldName;
+    static const string creatorFieldName;
+    static const string createdateFieldName;
+    static const string forFieldName;
+    static const string pagesFieldName;
 
     /* The RegisteredField instances are used to index specific fields quickly.
        We pass a pointer to the instance instead of a string.
@@ -101,11 +99,11 @@ private:
     const RegisteredField* pagesField;
 };
 
-const cnstr PsEndAnalyzerFactory::titleFieldName("title");
-const cnstr PsEndAnalyzerFactory::creatorFieldName("creator");
-const cnstr PsEndAnalyzerFactory::createdateFieldName("createdate");
-const cnstr PsEndAnalyzerFactory::forFieldName("for");
-const cnstr PsEndAnalyzerFactory::pagesFieldName("pages");
+const string PsEndAnalyzerFactory::titleFieldName("title");
+const string PsEndAnalyzerFactory::creatorFieldName("creator");
+const string PsEndAnalyzerFactory::createdateFieldName("createdate");
+const string PsEndAnalyzerFactory::forFieldName("for");
+const string PsEndAnalyzerFactory::pagesFieldName("pages");
 
 /*
  Register the field names so that the StreamIndexer knows which analyzer

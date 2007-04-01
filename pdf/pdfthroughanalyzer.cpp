@@ -23,7 +23,6 @@
 #include <strigi/analyzerplugin.h>
 #include <strigi/fieldtypes.h>
 #include <strigi/analysisresult.h>
-#include <strigi/cnstr.h>
 
 #include <klocalizedstring.h>
 
@@ -69,18 +68,18 @@ private:
         return new PDFThroughAnalyzer(this);
     }
     void registerFields( FieldRegister& );
-    static const cnstr titleFieldName;
-    static const cnstr subjectFieldName;
-    static const cnstr authorFieldName;
-    static const cnstr keywordsFieldName;
-    static const cnstr creatorFieldName;
-    static const cnstr producerFieldName;
-    static const cnstr creationDateFieldName;
-    static const cnstr modificationDateFieldName;
-    static const cnstr pagesFieldName;
-    static const cnstr protectedFieldName;
-    static const cnstr linearizedFieldName;
-    static const cnstr versionFieldName;
+    static const string titleFieldName;
+    static const string subjectFieldName;
+    static const string authorFieldName;
+    static const string keywordsFieldName;
+    static const string creatorFieldName;
+    static const string producerFieldName;
+    static const string creationDateFieldName;
+    static const string modificationDateFieldName;
+    static const string pagesFieldName;
+    static const string protectedFieldName;
+    static const string linearizedFieldName;
+    static const string versionFieldName;
 public:
     const RegisteredField* titleField;
     const RegisteredField* subjectField;
@@ -96,18 +95,18 @@ public:
     const RegisteredField* versionField;
 };
 
-const cnstr PDFThroughAnalyzerFactory::titleFieldName( "title" );
-const cnstr PDFThroughAnalyzerFactory::subjectFieldName( "subject" );
-const cnstr PDFThroughAnalyzerFactory::authorFieldName( "author" );
-const cnstr PDFThroughAnalyzerFactory::keywordsFieldName( "keywords" );
-const cnstr PDFThroughAnalyzerFactory::creatorFieldName( "creator" );
-const cnstr PDFThroughAnalyzerFactory::producerFieldName( "producer" );
-const cnstr PDFThroughAnalyzerFactory::creationDateFieldName( "creationdate" );
-const cnstr PDFThroughAnalyzerFactory::modificationDateFieldName( "modificationdate" );
-const cnstr PDFThroughAnalyzerFactory::pagesFieldName( "pages" );
-const cnstr PDFThroughAnalyzerFactory::protectedFieldName( "protected" );
-const cnstr PDFThroughAnalyzerFactory::linearizedFieldName( "linearized" );
-const cnstr PDFThroughAnalyzerFactory::versionFieldName( "version" );
+const string PDFThroughAnalyzerFactory::titleFieldName( "title" );
+const string PDFThroughAnalyzerFactory::subjectFieldName( "subject" );
+const string PDFThroughAnalyzerFactory::authorFieldName( "author" );
+const string PDFThroughAnalyzerFactory::keywordsFieldName( "keywords" );
+const string PDFThroughAnalyzerFactory::creatorFieldName( "creator" );
+const string PDFThroughAnalyzerFactory::producerFieldName( "producer" );
+const string PDFThroughAnalyzerFactory::creationDateFieldName( "creationdate" );
+const string PDFThroughAnalyzerFactory::modificationDateFieldName( "modificationdate" );
+const string PDFThroughAnalyzerFactory::pagesFieldName( "pages" );
+const string PDFThroughAnalyzerFactory::protectedFieldName( "protected" );
+const string PDFThroughAnalyzerFactory::linearizedFieldName( "linearized" );
+const string PDFThroughAnalyzerFactory::versionFieldName( "version" );
 
 void PDFThroughAnalyzerFactory::registerFields( FieldRegister& reg ) {
     titleField = reg.registerField( titleFieldName, FieldRegister::stringType, 1, 0 );
