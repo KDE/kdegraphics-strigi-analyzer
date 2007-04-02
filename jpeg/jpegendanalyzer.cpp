@@ -22,7 +22,6 @@
  Include the strigi specific headers.
 */
 #define STRIGI_IMPORT_API
-#include <strigi/jstreamsconfig.h>
 #include <strigi/analyzerplugin.h>
 #include <strigi/streamendanalyzer.h>
 #include <strigi/analysisresult.h>

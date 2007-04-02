@@ -48,7 +48,7 @@ class PDFThroughAnalyzer : public StreamThroughAnalyzer {
         void setIndexable( AnalysisResult *i ) {
             idx = i;
         }
-        jstreams::InputStream* connectInputStream( jstreams::InputStream *in );
+        InputStream* connectInputStream( InputStream *in );
         bool isReadyWithStream() { return true; }
 
         PDFDoc *m_pdfDocument;
@@ -123,7 +123,7 @@ void PDFThroughAnalyzerFactory::registerFields( FieldRegister& reg ) {
     versionField = reg.registerField( versionFieldName, FieldRegister::stringType, 1, 0 );
 }
 
-jstreams::InputStream* PDFThroughAnalyzer::connectInputStream( jstreams::InputStream* in ) {
+InputStream* PDFThroughAnalyzer::connectInputStream( InputStream* in ) {
     if( !in )
         return in;
 
