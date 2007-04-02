@@ -2,6 +2,7 @@
 Encoding=UTF-8
 Type=Service
 Name=JPEGWriter
+Name[sv]=JPEG-skrivning
 ServiceTypes=KFileWrite
 X-KDE-Library=kfilewrite_jpeg
 MetaDataKeys=jpegcomment
