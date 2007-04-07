@@ -3,6 +3,7 @@ Encoding=UTF-8
 Type=Service
 Name=XML Paper Specification Info
 Name[es]=Información de especificación de papel XML
+Name[pa]=XML ਪੇਪਰ ਹਦਾਇਤਾਂ ਜਾਣਕਾਰੀ
 Name[sv]=Information om XML-pappersspecifikation
 Name[x-test]=xxXML Paper Specification Infoxx
 ServiceTypes=KFilePlugin
