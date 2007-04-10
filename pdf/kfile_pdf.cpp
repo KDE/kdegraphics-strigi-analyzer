@@ -59,41 +59,43 @@ KPdfPlugin::KPdfPlugin(QObject *parent, const char *name, const QStringList &pre
 
 bool KPdfPlugin::readInfo( KFileMetaInfo& info, uint /* what */)
 {
-    m_doc = Poppler::Document::load(info.path());
-    if (!m_doc || m_doc->isLocked())
+    Poppler::Document *doc = Poppler::Document::load(info.path());
+    if (!doc || doc->isLocked())
     {
-        delete m_doc;
+        delete doc;
         return false;
     }
 
     KFileMetaInfoGroup generalGroup = appendGroup(info, "General");
 
-    appendItem(generalGroup, "Title", m_doc->getInfo("Title") );
-    appendItem(generalGroup, "Subject", m_doc->getInfo("Subject") );
-    appendItem(generalGroup, "Author", m_doc->getInfo("Author") );
-    appendItem(generalGroup, "Keywords", m_doc->getInfo("Keywords") );
-    appendItem(generalGroup, "Creator", m_doc->getInfo("Creator") );
-    appendItem(generalGroup, "Producer", m_doc->getInfo("Producer") );
+    appendItem(generalGroup, "Title", doc->getInfo("Title") );
+    appendItem(generalGroup, "Subject", doc->getInfo("Subject") );
+    appendItem(generalGroup, "Author", doc->getInfo("Author") );
+    appendItem(generalGroup, "Keywords", doc->getInfo("Keywords") );
+    appendItem(generalGroup, "Creator", doc->getInfo("Creator") );
+    appendItem(generalGroup, "Producer", doc->getInfo("Producer") );
 
-    appendItem(generalGroup, "CreationDate", m_doc->getDate("CreationDate") );
-    appendItem(generalGroup, "ModificationDate", m_doc->getDate("ModDate") );
-    appendItem(generalGroup, "Pages", m_doc->getNumPages() );
+    appendItem(generalGroup, "CreationDate", doc->getDate("CreationDate") );
+    appendItem(generalGroup, "ModificationDate", doc->getDate("ModDate") );
+    appendItem(generalGroup, "Pages", doc->getNumPages() );
     
     QString enc;
-    if (m_doc->isEncrypted())
+    if (doc->isEncrypted())
     {
     	enc = i18n("Yes (Can Print:%1 Can Copy:%2 Can Change:%3 Can Add notes:%4)")
-    	.arg(m_doc->okToPrint() ? i18n("Yes") : i18n("No"))
-    	.arg(m_doc->okToCopy() ? i18n("Yes") : i18n("No"))
-    	.arg(m_doc->okToChange() ? i18n("Yes") : i18n("No"))
-    	.arg(m_doc->okToAddNotes() ? i18n("Yes") : i18n("No"));
+    	.arg(doc->okToPrint() ? i18n("Yes") : i18n("No"))
+    	.arg(doc->okToCopy() ? i18n("Yes") : i18n("No"))
+    	.arg(doc->okToChange() ? i18n("Yes") : i18n("No"))
+    	.arg(doc->okToAddNotes() ? i18n("Yes") : i18n("No"));
     }
     else enc = i18n("No");
     
     appendItem(generalGroup, "Protected", enc );
-    appendItem(generalGroup, "Linearized", m_doc->isLinearized() ? i18n("Yes") : i18n("No") );
-    QString versionString = QString("%1").arg( m_doc->getPDFVersion(), 0, 'f', 1 );
+    appendItem(generalGroup, "Linearized", doc->isLinearized() ? i18n("Yes") : i18n("No") );
+    QString versionString = QString("%1").arg( doc->getPDFVersion(), 0, 'f', 1 );
     appendItem(generalGroup, "Version", versionString );
+
+    delete doc;
 
     return true;
 }

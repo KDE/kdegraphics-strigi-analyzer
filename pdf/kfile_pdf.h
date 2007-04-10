@@ -33,9 +33,6 @@ public:
     KPdfPlugin( QObject *parent, const char *name, const QStringList& preferredItems );
 
     virtual bool readInfo(KFileMetaInfo& info, uint what);
-
-private:
-    Poppler::Document* m_doc;
 };
 
 #endif
