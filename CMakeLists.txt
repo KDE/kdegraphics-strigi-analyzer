@@ -16,9 +16,9 @@ if(TIFF_FOUND)
 #add_subdirectory(tiff)
 endif(TIFF_FOUND)
 
-if(POPPLER_QT4_FOUND)
-#   add_subdirectory(pdf)
-endif(POPPLER_QT4_FOUND)
+if(HAVE_POPPLER_HEAD)
+    add_subdirectory(pdf)
+endif(HAVE_POPPLER_HEAD)
 
 add_subdirectory( ps )
 add_subdirectory( jpeg )
