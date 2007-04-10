@@ -1,6 +1,7 @@
 /* This file is part of the KDE project
 *  Copyright (C) 2001, 2002 Rolf Magnus <ramagnus@kde.org>
  * Copyright (C) 2007 Matthias Lechner
+ * Copyright (C) 2007 Albert Astals Cid <aacid@kde.org>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public
@@ -27,290 +28,160 @@
 #include <klocalizedstring.h>
 
 // poppler includes
-#include <poppler/goo/GooString.h>
-#include <poppler/PDFDoc.h>
-#include <poppler/ErrorCodes.h>
-#include <poppler/Dict.h>
-#include <poppler/Stream.h>
-
-// needed for date/time conversion
-#include <ctime>
-
-using namespace Strigi;
-//using namespace std;
+#define UNSTABLE_POPPLER_QT4
+#include <poppler/poppler-qt4.h>
 
 class PDFThroughAnalyzerFactory;
-class PDFThroughAnalyzer : public StreamThroughAnalyzer {
+
+class PDFThroughAnalyzer : public Strigi::StreamThroughAnalyzer {
     private:
         const PDFThroughAnalyzerFactory* factory;
-        AnalysisResult* idx;
+        Strigi::AnalysisResult* idx;
 
-        void setIndexable( AnalysisResult *i ) {
-            idx = i;
-        }
-        InputStream* connectInputStream( InputStream *in );
-        bool isReadyWithStream() { return true; }
-
-        PDFDoc *m_pdfDocument;
-
-        time_t convertDate( std::string date );
-        std::string info( const std::string& key );
     public:
         PDFThroughAnalyzer( const PDFThroughAnalyzerFactory* f ) : factory( f ) {}
+
+        void setIndexable( Strigi::AnalysisResult *i ) {
+            idx = i;
+        }
+        Strigi::InputStream* connectInputStream( Strigi::InputStream *in );
+        bool isReadyWithStream() { return true; }
 };
 
-class PDFThroughAnalyzerFactory : public StreamThroughAnalyzerFactory {
+class PDFThroughAnalyzerFactory : public Strigi::StreamThroughAnalyzerFactory {
+friend class PDFThroughAnalyzer;
 private:
-    const char* getName() const {
+    const char* name() const {
         return "PDFThroughAnalyzer";
     }
-    StreamThroughAnalyzer* newInstance() const {
+    Strigi::StreamThroughAnalyzer* newInstance() const {
         return new PDFThroughAnalyzer(this);
     }
-    void registerFields( FieldRegister& );
-    static const string titleFieldName;
-    static const string subjectFieldName;
-    static const string authorFieldName;
-    static const string keywordsFieldName;
-    static const string creatorFieldName;
-    static const string producerFieldName;
-    static const string creationDateFieldName;
-    static const string modificationDateFieldName;
-    static const string pagesFieldName;
-    static const string protectedFieldName;
-    static const string linearizedFieldName;
-    static const string versionFieldName;
+    void registerFields( Strigi::FieldRegister& );
+    
+    static const std::string titleFieldName;
+    static const std::string subjectFieldName;
+    static const std::string authorFieldName;
+    static const std::string keywordsFieldName;
+    static const std::string creatorFieldName;
+    static const std::string producerFieldName;
+    static const std::string creationDateFieldName;
+    static const std::string modificationDateFieldName;
+    static const std::string pagesFieldName;
+    static const std::string protectedFieldName;
+    static const std::string linearizedFieldName;
+    static const std::string versionFieldName;
 public:
-    const RegisteredField* titleField;
-    const RegisteredField* subjectField;
-    const RegisteredField* authorField;
-    const RegisteredField* keywordsField;
-    const RegisteredField* creatorField;
-    const RegisteredField* producerField;
-    const RegisteredField* creationDateField;
-    const RegisteredField* modificationDateField;
-    const RegisteredField* pagesField;
-    const RegisteredField* protectedField;
-    const RegisteredField* linearizedField;
-    const RegisteredField* versionField;
+    const Strigi::RegisteredField* titleField;
+    const Strigi::RegisteredField* subjectField;
+    const Strigi::RegisteredField* authorField;
+    const Strigi::RegisteredField* keywordsField;
+    const Strigi::RegisteredField* creatorField;
+    const Strigi::RegisteredField* producerField;
+    const Strigi::RegisteredField* creationDateField;
+    const Strigi::RegisteredField* modificationDateField;
+    const Strigi::RegisteredField* pagesField;
+    const Strigi::RegisteredField* protectedField;
+    const Strigi::RegisteredField* linearizedField;
+    const Strigi::RegisteredField* versionField;
 };
 
-const string PDFThroughAnalyzerFactory::titleFieldName( "title" );
-const string PDFThroughAnalyzerFactory::subjectFieldName( "subject" );
-const string PDFThroughAnalyzerFactory::authorFieldName( "author" );
-const string PDFThroughAnalyzerFactory::keywordsFieldName( "keywords" );
-const string PDFThroughAnalyzerFactory::creatorFieldName( "creator" );
-const string PDFThroughAnalyzerFactory::producerFieldName( "producer" );
-const string PDFThroughAnalyzerFactory::creationDateFieldName( "creationdate" );
-const string PDFThroughAnalyzerFactory::modificationDateFieldName( "modificationdate" );
-const string PDFThroughAnalyzerFactory::pagesFieldName( "pages" );
-const string PDFThroughAnalyzerFactory::protectedFieldName( "protected" );
-const string PDFThroughAnalyzerFactory::linearizedFieldName( "linearized" );
-const string PDFThroughAnalyzerFactory::versionFieldName( "version" );
+const std::string PDFThroughAnalyzerFactory::titleFieldName( "title" );
+const std::string PDFThroughAnalyzerFactory::subjectFieldName( "subject" );
+const std::string PDFThroughAnalyzerFactory::authorFieldName( "author" );
+const std::string PDFThroughAnalyzerFactory::keywordsFieldName( "keywords" );
+const std::string PDFThroughAnalyzerFactory::creatorFieldName( "creator" );
+const std::string PDFThroughAnalyzerFactory::producerFieldName( "producer" );
+const std::string PDFThroughAnalyzerFactory::creationDateFieldName( "creationdate" );
+const std::string PDFThroughAnalyzerFactory::modificationDateFieldName( "modificationdate" );
+const std::string PDFThroughAnalyzerFactory::pagesFieldName( "pages" );
+const std::string PDFThroughAnalyzerFactory::protectedFieldName( "protected" );
+const std::string PDFThroughAnalyzerFactory::linearizedFieldName( "linearized" );
+const std::string PDFThroughAnalyzerFactory::versionFieldName( "version" );
 
-void PDFThroughAnalyzerFactory::registerFields( FieldRegister& reg ) {
-    titleField = reg.registerField( titleFieldName, FieldRegister::stringType, 1, 0 );
-    subjectField = reg.registerField( subjectFieldName, FieldRegister::stringType, 1, 0 );
-    authorField = reg.registerField( authorFieldName, FieldRegister::stringType, 1, 0 );
-    keywordsField = reg.registerField( keywordsFieldName, FieldRegister::stringType, 1, 0 );
-    creatorField = reg.registerField( creatorFieldName, FieldRegister::stringType, 1, 0 );
-    producerField = reg.registerField( producerFieldName, FieldRegister::stringType, 1, 0 );
-    creationDateField = reg.registerField( creationDateFieldName, FieldRegister::integerType, 1, 0 );
-    modificationDateField = reg.registerField( modificationDateFieldName, FieldRegister::integerType, 1, 0 );
-    pagesField = reg.registerField( pagesFieldName, FieldRegister::integerType, 1, 0 );
-    protectedField = reg.registerField( protectedFieldName, FieldRegister::stringType, 1, 0 );
-    linearizedField = reg.registerField( linearizedFieldName, FieldRegister::stringType, 1, 0 );
-    versionField = reg.registerField( versionFieldName, FieldRegister::stringType, 1, 0 );
+void PDFThroughAnalyzerFactory::registerFields( Strigi::FieldRegister& reg ) {
+    titleField = reg.registerField( titleFieldName, Strigi::FieldRegister::stringType, 1, 0 );
+    subjectField = reg.registerField( subjectFieldName, Strigi::FieldRegister::stringType, 1, 0 );
+    authorField = reg.registerField( authorFieldName, Strigi::FieldRegister::stringType, 1, 0 );
+    keywordsField = reg.registerField( keywordsFieldName, Strigi::FieldRegister::stringType, 1, 0 );
+    creatorField = reg.registerField( creatorFieldName, Strigi::FieldRegister::stringType, 1, 0 );
+    producerField = reg.registerField( producerFieldName, Strigi::FieldRegister::stringType, 1, 0 );
+    creationDateField = reg.registerField( creationDateFieldName, Strigi::FieldRegister::integerType, 1, 0 );
+    modificationDateField = reg.registerField( modificationDateFieldName, Strigi::FieldRegister::integerType, 1, 0 );
+    pagesField = reg.registerField( pagesFieldName, Strigi::FieldRegister::integerType, 1, 0 );
+    protectedField = reg.registerField( protectedFieldName, Strigi::FieldRegister::stringType, 1, 0 );
+    linearizedField = reg.registerField( linearizedFieldName, Strigi::FieldRegister::stringType, 1, 0 );
+    versionField = reg.registerField( versionFieldName, Strigi::FieldRegister::stringType, 1, 0 );
 }
 
-InputStream* PDFThroughAnalyzer::connectInputStream( InputStream* in ) {
-    if( !in )
+Strigi::InputStream* PDFThroughAnalyzer::connectInputStream( Strigi::InputStream* in ) {
+   if( !in )
         return in;
 
-    if( in->getSize() == -1 )
+    if( in->size() == -1 )
         return in;
 
     // read from stream and store the results in memory
     const char *c;
-    int32_t nread = in->read(c, in->getSize(), in->getSize() );
+    int32_t nread = in->read(c, in->size(), in->size() );
     in->reset( 0 );
     if( nread == -2 )
         return in;
 
-    // check if file is pdf
-    if( in->getSize() > 4 ) {
-        if( strncmp( c, "%PDF", 4 ) )
-            return in;
-    } else
-        return in;
+    QByteArray ba(c, in->size());
+    Poppler::Document *pdfDocument = Poppler::Document::loadFromData(ba);
 
-    // create a poppler MemStream out of the read stream
-    char *buffer = (char*) c;
-    Object obj;
-    obj.initNull();
-    MemStream *memStream = new MemStream( buffer, 0, in->getSize(), &obj );
-
-    // load document
-    m_pdfDocument = new PDFDoc( memStream, (GooString*) 0, (GooString*) 0, &obj );
-
-    if( !(m_pdfDocument->isOk() || m_pdfDocument->getErrorCode() == errEncrypted) ) {
-        // could not open pdf document
-        delete m_pdfDocument;
+    if (!pdfDocument || pdfDocument->isLocked())
+    {
+        delete pdfDocument;
         return in;
     }
 
     QString enc;
-    if( m_pdfDocument->isEncrypted() ) {
+    if( pdfDocument->isEncrypted() ) {
         enc = i18n( "Yes (Can Print:%1 Can Copy:%2 Can Change:%3 Can Add notes:%4)",
-        m_pdfDocument->okToPrint() ? i18n("Yes") : i18n("No"),
-        m_pdfDocument->okToCopy() ? i18n("Yes") : i18n("No"),
-        m_pdfDocument->okToChange() ? i18n("Yes") : i18n("No"),
-        m_pdfDocument->okToAddNotes() ? i18n("Yes") : i18n("No"));
+        pdfDocument->okToPrint() ? i18n("Yes") : i18n("No"),
+        pdfDocument->okToCopy() ? i18n("Yes") : i18n("No"),
+        pdfDocument->okToChange() ? i18n("Yes") : i18n("No"),
+        pdfDocument->okToAddNotes() ? i18n("Yes") : i18n("No"));
     } else
         enc = i18n( "No" );
 
-    idx->setField( factory->protectedField, (const char*) enc.toUtf8() );
+    idx->addValue( factory->protectedField, enc.toUtf8().constData() );
 
 
-    idx->setField( factory->titleField, info( "Title" ) );
-    idx->setField( factory->subjectField, info( "Subject" ) );
-    idx->setField( factory->authorField, info( "Author" ) );
-    idx->setField( factory->keywordsField, info( "Keywords" ) );
-    idx->setField( factory->creatorField, info( "Creator" ) );
-    idx->setField( factory->producerField, info( "Producer" ) );
+    idx->addValue( factory->titleField, pdfDocument->info( "Title" ).toUtf8().constData() );
+    idx->addValue( factory->subjectField, pdfDocument->info( "Subject" ).toUtf8().constData() );
+    idx->addValue( factory->authorField, pdfDocument->info( "Author" ).toUtf8().constData() );
+    idx->addValue( factory->keywordsField, pdfDocument->info( "Keywords" ).toUtf8().constData() );
+    idx->addValue( factory->creatorField, pdfDocument->info( "Creator" ).toUtf8().constData() );
+    idx->addValue( factory->producerField, pdfDocument->info( "Producer" ).toUtf8().constData() );
 
-    idx->setField( factory->creationDateField,
-                   (uint) convertDate( info( "CreationDate" ) ) );
-    idx->setField( factory->modificationDateField,
-                   (uint) convertDate( info( "ModDate") ) );
+    idx->addValue( factory->creationDateField, pdfDocument->date( "CreationDate" ).toTime_t() );
+    idx->addValue( factory->modificationDateField, pdfDocument->date( "ModDate").toTime_t() );
 
-    idx->setField( factory->pagesField, m_pdfDocument->getNumPages() );
+    idx->addValue( factory->pagesField, pdfDocument->numPages() );
 
     QString linearized;
-    if( m_pdfDocument->isLinearized() )
+    if( pdfDocument->isLinearized() )
         linearized = i18n( "Yes" );
     else
         linearized = i18n( "No" );
 
-    idx->setField( factory->linearizedField, (const char*) linearized.toUtf8() );
+    idx->addValue( factory->linearizedField, linearized.toUtf8().constData() );
 
-    idx->setField( factory->versionField, m_pdfDocument->getPDFVersion() );
+    idx->addValue( factory->versionField, pdfDocument->pdfVersion() );
+
+    delete pdfDocument;
 
     return in;
 }
 
-std::string PDFThroughAnalyzer::info( const std::string& key ) {
-    Object info;
-    m_pdfDocument->getDocInfo( &info );
-    if ( !info.isDict() )
-        return std::string();
-
-    Object obj;
-    Dict *infoDict = info.getDict();
-    std::string result;
-
-    if ( infoDict->lookup( key.c_str(), &obj )->isString() ) {
-        GooString *s1;
-        GBool isUnicode;
-        Unicode u;
-        int i;
-
-        s1 = obj.getString();
-        if ( ( s1->getChar(0) & 0xff ) == 0xfe && ( s1->getChar(1) & 0xff ) == 0xff ) {
-            isUnicode = gTrue;
-            i = 2;
-        } else {
-            isUnicode = gFalse;
-            i = 0;
-        }
-
-        while ( i < obj.getString()->getLength() ) {
-            if ( isUnicode ) {
-                u = ( ( s1->getChar(i) & 0xff ) << 8 ) | ( s1->getChar(i+1) & 0xff );
-                i += 2;
-            } else {
-                u = s1->getChar(i) & 0xff;
-                ++i;
-            }
-            result += (const char) u;
-        }
-
-        obj.free();
-        info.free();
-        return result;
-    }
-
-    obj.free();
-    info.free();
-    return std::string();
-}
-
-// adapted from poppler-document.cc from the qt4 bindings of poppler
-time_t PDFThroughAnalyzer::convertDate( std::string date ) {
-    int year;
-    int mon = 1;
-    int day = 1;
-    int hour = 0;
-    int min = 0;
-    int sec = 0;
-    char tz = 0x00;
-    int tzHours = 0;
-    int tzMins = 0;
-
-    if ( date[0] == 'D' && date[1] == ':' ) {
-        date.erase( 0, 2 );
-    }
-
-    if ( sscanf( date.c_str(), "%4d%2d%2d%2d%2d%2d%c%2d%*c%2d",
-                 &year, &mon, &day, &hour, &min, &sec,
-                 &tz, &tzHours, &tzMins ) > 0 ) {
-        /* Workaround for y2k bug in Distiller 3 stolen from gpdf, hoping that it won't
-         * be used after y2.2k */
-        if ( year < 1930 && date.size() > 14) {
-            int century, years_since_1900;
-            if ( sscanf( date.c_str(), "%2d%3d%2d%2d%2d%2d%2d",
-                         &century, &years_since_1900,
-                         &mon, &day, &hour, &min, &sec) == 7 )
-                year = century * 100 + years_since_1900;
-            else
-                return 0;
-        }
-
-        struct tm dateTime;
-        memset( &dateTime, 0, sizeof( dateTime ) );
-
-        dateTime.tm_year = year - 1900;
-        dateTime.tm_mon = mon - 1;
-        dateTime.tm_mday = day;
-        dateTime.tm_hour = hour;
-        dateTime.tm_min = min;
-        dateTime.tm_sec = sec;
-        dateTime.tm_isdst = -1;
-        dateTime.tm_gmtoff = 0;
-
-        if ( tz ) {
-            // we have some form of timezone
-            if ( '+' == tz ) {
-                // local time is ahead of UTC
-                dateTime.tm_gmtoff -= tzHours * 60 * 60;
-                dateTime.tm_gmtoff -= tzMins * 60;
-            } else if ( '-' == tz ) {
-                // local time is behind UTC
-                dateTime.tm_gmtoff += tzHours * 60 * 60;
-                dateTime.tm_gmtoff += tzMins * 60;
-            }
-        }
-
-        return mktime( &dateTime );
-    }
-    return 0;
-}
-
-class Factory : public AnalyzerFactoryFactory {
+class Factory : public Strigi::AnalyzerFactoryFactory {
 public:
-    std::list<StreamThroughAnalyzerFactory*>
-    getStreamThroughAnalyzerFactories() const {
-        std::list<StreamThroughAnalyzerFactory*> af;
+    std::list<Strigi::StreamThroughAnalyzerFactory*>
+    streamThroughAnalyzerFactories() const {
+        std::list<Strigi::StreamThroughAnalyzerFactory*> af;
         af.push_back(new PDFThroughAnalyzerFactory());
         return af;
     }
