@@ -195,7 +195,7 @@ bool GSCreator::create(const QString &path, int width, int height, QImage &img)
   int output[2];
   int dvipipe[2];
 
-  QByteArray data(1024);
+  QByteArray data(1024, '\0');
 
   bool ok = false;
 
@@ -235,7 +235,7 @@ bool GSCreator::create(const QString &path, int width, int height, QImage &img)
   }
 
   const bool is_encapsulated = no_dvi &&
-    (path.indexOf(QRegExp("\\.epsi?$", false, false)) > 0) &&
+    (path.indexOf(QRegExp("\\.epsi?$", Qt::CaseInsensitive)) > 0) &&
     (dsc.bbox()->width() > 0) && (dsc.bbox()->height() > 0) &&
     (dsc.page_count() <= 1);
 
@@ -614,7 +614,7 @@ bool GSCreator::getEPSIPreview(const QString &path, long start, long
     }
   }
 
-  outimg = img.convertDepth(32).smoothScale(imgwidth, imgheight);
+  outimg = img.convertDepth(32).scaled(imgwidth, imgheight, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
 
   return true;
 }
