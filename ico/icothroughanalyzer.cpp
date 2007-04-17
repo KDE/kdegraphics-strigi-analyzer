@@ -67,8 +67,8 @@ public:
 };
 
 const string IcoThroughAnalyzerFactory::numberFieldName( "number of icons" );
-const string IcoThroughAnalyzerFactory::widthFieldName( "icon width" );
-const string IcoThroughAnalyzerFactory::heightFieldName( "icon height" );
+const string IcoThroughAnalyzerFactory::widthFieldName( "image.width" );
+const string IcoThroughAnalyzerFactory::heightFieldName( "image.height" );
 const string IcoThroughAnalyzerFactory::colorsFieldName( "colors" );
 
 void IcoThroughAnalyzerFactory::registerFields( FieldRegister& reg ) {

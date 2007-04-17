@@ -132,9 +132,9 @@ private:
 const string JpegEndAnalyzerFactory::commentFieldName("jpegcomment");
 const string JpegEndAnalyzerFactory::manufacturerFieldName("manufacturer");
 const string JpegEndAnalyzerFactory::modelFieldName("model");
-const string JpegEndAnalyzerFactory::creationDateFieldName("creationDate");
-const string JpegEndAnalyzerFactory::widthFieldName("width");
-const string JpegEndAnalyzerFactory::heightFieldName("height");
+const string JpegEndAnalyzerFactory::creationDateFieldName("content.creation_time");
+const string JpegEndAnalyzerFactory::widthFieldName("image.width");
+const string JpegEndAnalyzerFactory::heightFieldName("image.height");
 const string JpegEndAnalyzerFactory::orientationFieldName("orientation");
 const string JpegEndAnalyzerFactory::colorModeFieldName("colorMode");
 const string JpegEndAnalyzerFactory::flashUsedFieldName("flashUsed");
@@ -152,7 +152,7 @@ const string JpegEndAnalyzerFactory::isoEquivFieldName("isoEquiv");
 const string JpegEndAnalyzerFactory::jpegQualityFieldName("jpegQuality");
 const string JpegEndAnalyzerFactory::userCommentFieldName("userComment");
 const string JpegEndAnalyzerFactory::jpegProcessFieldName("jpegProcess");
-const string JpegEndAnalyzerFactory::thumbnailFieldName("thumbnail");
+const string JpegEndAnalyzerFactory::thumbnailFieldName("content.thumbnail");
 
 /*
  Register the field names so that the StreamIndexer knows which analyzer

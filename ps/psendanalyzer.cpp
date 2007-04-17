@@ -98,11 +98,11 @@ private:
     const RegisteredField* pagesField;
 };
 
-const string PsEndAnalyzerFactory::titleFieldName("title");
+const string PsEndAnalyzerFactory::titleFieldName("content.title");
 const string PsEndAnalyzerFactory::creatorFieldName("creator");
-const string PsEndAnalyzerFactory::createdateFieldName("createdate");
+const string PsEndAnalyzerFactory::createdateFieldName("content.creation_time");
 const string PsEndAnalyzerFactory::forFieldName("for");
-const string PsEndAnalyzerFactory::pagesFieldName("pages");
+const string PsEndAnalyzerFactory::pagesFieldName("document.stats.page_count");
 
 /*
  Register the field names so that the StreamIndexer knows which analyzer
