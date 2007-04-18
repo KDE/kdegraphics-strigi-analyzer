@@ -130,27 +130,27 @@ private:
 };
 
 const string JpegEndAnalyzerFactory::commentFieldName("jpegcomment");
-const string JpegEndAnalyzerFactory::manufacturerFieldName("manufacturer");
-const string JpegEndAnalyzerFactory::modelFieldName("model");
+const string JpegEndAnalyzerFactory::manufacturerFieldName("photo.camera_manufacturer");
+const string JpegEndAnalyzerFactory::modelFieldName("photo.camera_model");
 const string JpegEndAnalyzerFactory::creationDateFieldName("content.creation_time");
 const string JpegEndAnalyzerFactory::widthFieldName("image.width");
 const string JpegEndAnalyzerFactory::heightFieldName("image.height");
 const string JpegEndAnalyzerFactory::orientationFieldName("orientation");
 const string JpegEndAnalyzerFactory::colorModeFieldName("colorMode");
-const string JpegEndAnalyzerFactory::flashUsedFieldName("flashUsed");
-const string JpegEndAnalyzerFactory::focalLengthFieldName("focalLength");
+const string JpegEndAnalyzerFactory::flashUsedFieldName("photo.flash_used");
+const string JpegEndAnalyzerFactory::focalLengthFieldName("photo.focal_length");
 const string JpegEndAnalyzerFactory::_35mmEquivalentFieldName("_35mmEquivalent");
 const string JpegEndAnalyzerFactory::ccdWidthFieldName("ccdWidth");
-const string JpegEndAnalyzerFactory::exposureTimeFieldName("exposureTime");
+const string JpegEndAnalyzerFactory::exposureTimeFieldName("photo.exposure_time");
 const string JpegEndAnalyzerFactory::apertureFieldName("aperture");
-const string JpegEndAnalyzerFactory::focusDistFieldName("focusDist");
+const string JpegEndAnalyzerFactory::focusDistFieldName("photo.focus_distance");
 const string JpegEndAnalyzerFactory::exposureBiasFieldName("exposureBias");
-const string JpegEndAnalyzerFactory::whiteBalanceFieldName("whiteBalance");
+const string JpegEndAnalyzerFactory::whiteBalanceFieldName("photo.white_balance");
 const string JpegEndAnalyzerFactory::meteringModeFieldName("meteringMode");
 const string JpegEndAnalyzerFactory::exposureFieldName("exposure");
 const string JpegEndAnalyzerFactory::isoEquivFieldName("isoEquiv");
 const string JpegEndAnalyzerFactory::jpegQualityFieldName("jpegQuality");
-const string JpegEndAnalyzerFactory::userCommentFieldName("userComment");
+const string JpegEndAnalyzerFactory::userCommentFieldName("content.comment");
 const string JpegEndAnalyzerFactory::jpegProcessFieldName("jpegProcess");
 const string JpegEndAnalyzerFactory::thumbnailFieldName("content.thumbnail");
 
