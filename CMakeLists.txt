@@ -22,7 +22,6 @@ endif(HAVE_POPPLER_HEAD)
 
 add_subdirectory( ps )
 add_subdirectory( jpeg )
-#add_subdirectory( tga )
 #add_subdirectory( rgb )
 add_subdirectory( ico )
 #add_subdirectory( pnm )
