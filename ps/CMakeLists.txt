@@ -27,5 +27,5 @@ install(TARGETS gsthumbnail  DESTINATION ${PLUGIN_INSTALL_DIR} )
 
 ########### install files ###############
 
-install( FILES kfile_ps.desktop gsthumbnail.desktop  DESTINATION  ${SERVICES_INSTALL_DIR} )
+install( FILES gsthumbnail.desktop  DESTINATION  ${SERVICES_INSTALL_DIR} )
 
