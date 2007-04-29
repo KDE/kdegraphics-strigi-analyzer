@@ -4,6 +4,7 @@ Type=Service
 Name=JPEGWriter
 Name[pa]=JPEG-ਰਾਇਟਰ
 Name[sv]=JPEG-skrivning
+Name[x-test]=xxJPEGWriterxx
 ServiceTypes=KFileWrite
 X-KDE-Library=kfilewrite_jpeg
 MetaDataKeys=jpegcomment
