@@ -24,8 +24,8 @@ class JpegWritePlugin : public KFileWritePlugin {
 Q_OBJECT
 public:
     JpegWritePlugin(QObject *parent, const QStringList& args);
-    bool canWrite(QIODevice& file, const QString& key);
-    bool write(QIODevice& file, const QVariantMap& data);
+    bool canWrite(const KUrl& file, const QString& key);
+    bool write(const KUrl& file, const QVariantMap& data);
 };
 
 #endif

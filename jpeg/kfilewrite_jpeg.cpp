@@ -28,12 +28,12 @@ JpegWritePlugin::JpegWritePlugin(QObject* parent, const QStringList& args)
         : KFileWritePlugin(parent, args) {
 }
 bool
-JpegWritePlugin::canWrite(QIODevice& file, const QString& key) {
+JpegWritePlugin::canWrite(const KUrl& file, const QString& key) {
     qDebug() << "checking if we can write in JpegWritePlugin";
     return true;
 }
 bool
-JpegWritePlugin::write(QIODevice& file, const QVariantMap& data) {
+JpegWritePlugin::write(const KUrl& file, const QVariantMap& data) {
     qDebug() << "writing in JpegWritePlugin";
     return false;
 }
