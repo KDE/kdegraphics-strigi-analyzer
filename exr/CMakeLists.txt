@@ -1,9 +1,7 @@
-
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${KDE4_ENABLE_EXCEPTIONS}")
+
 include_directories( ${OPENEXR_INCLUDE_DIR}  )
-
-
-########### next target ###############
+include_directories(${STRIGI_INCLUDE_DIR})
 
 set(kfile_exr_PART_SRCS kfile_exr.cpp )
 

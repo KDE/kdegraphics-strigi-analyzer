@@ -1,4 +1,4 @@
-########### next target ###############
+include_directories(${STRIGI_INCLUDE_DIR})
 
 set(kfile_xps_PART_SRCS kfile_xps.cpp )
 

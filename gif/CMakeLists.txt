@@ -1,8 +1,4 @@
-
-
-
-
-########### next target ###############
+include_directories(${STRIGI_INCLUDE_DIR})
 
 set(kfile_gif_PART_SRCS kfile_gif.cpp )
 

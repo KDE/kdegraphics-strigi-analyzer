@@ -1,8 +1,4 @@
-
-
-
-
-########### next target ###############
+include_directories(${STRIGI_INCLUDE_DIR})
 
 set(kfile_raw_PART_SRCS kcamerarawplugin.cpp parse.c )
 

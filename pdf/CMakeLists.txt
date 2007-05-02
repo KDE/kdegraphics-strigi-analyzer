@@ -1,4 +1,4 @@
-
+include_directories(${STRIGI_INCLUDE_DIR})
 include_directories(${POPPLER_QT4_INCLUDE_DIR} )
 
 # build the analyzer as a module

@@ -2,6 +2,8 @@ set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}  ${KDE4_ENABLE_EXCEPTIONS}")
 
 ########### next target ###############
 
+include_directories(${STRIGI_INCLUDE_DIR})
+
 # build the analyzer as a module
 kde4_add_library(jpeg MODULE jpegendanalyzer.cpp exif.cpp kfile_setcomment.cpp)
 
