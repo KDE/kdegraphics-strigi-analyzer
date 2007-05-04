@@ -26,7 +26,7 @@
 class GSCreator : public ThumbCreator, public KDSCCommentHandler
 {
 public:
-    GSCreator() {};
+    GSCreator() {}
     virtual bool create(const QString &path, int, int, QImage &img);
     virtual Flags flags() const;
     void comment(Name name);
