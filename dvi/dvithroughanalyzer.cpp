@@ -80,8 +80,8 @@ private:
     const RegisteredField* pagesField;
 };
 
-const string DviThroughAnalyzerFactory::commentFieldName("comment");
-const string DviThroughAnalyzerFactory::pagesFieldName("pages");
+const string DviThroughAnalyzerFactory::commentFieldName("content.comment");
+const string DviThroughAnalyzerFactory::pagesFieldName("document.stats.page_count");
 
 /*
  Register the field names so that the StreamIndexer knows which analyzer

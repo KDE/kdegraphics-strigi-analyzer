@@ -93,9 +93,9 @@ const std::string PDFThroughAnalyzerFactory::keywordsFieldName( "content.keyword
 const std::string PDFThroughAnalyzerFactory::creatorFieldName( "creator" );
 const std::string PDFThroughAnalyzerFactory::producerFieldName( "producer" );
 const std::string PDFThroughAnalyzerFactory::creationDateFieldName( "content.creation_time" );
-const std::string PDFThroughAnalyzerFactory::modificationDateFieldName( "modificationdate" );
+const std::string PDFThroughAnalyzerFactory::modificationDateFieldName( "content.last_modified_time" );
 const std::string PDFThroughAnalyzerFactory::pagesFieldName( "document.stats.page_count" );
-const std::string PDFThroughAnalyzerFactory::protectedFieldName( "protected" );
+const std::string PDFThroughAnalyzerFactory::protectedFieldName( "content.comment" );
 const std::string PDFThroughAnalyzerFactory::linearizedFieldName( "linearized" );
 const std::string PDFThroughAnalyzerFactory::versionFieldName( "content.version" );
 

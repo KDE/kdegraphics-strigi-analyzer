@@ -58,24 +58,29 @@ private:
     static const string numberFieldName;
     static const string widthFieldName;
     static const string heightFieldName;
-    static const string colorsFieldName;
+    static const string bitsPerPixelFieldName;
+    static const string colorCountFieldName;
 public:
     const RegisteredField* numberField;
     const RegisteredField* widthField;
     const RegisteredField* heightField;
-    const RegisteredField* colorsField;
+    const RegisteredField* bitsPerPixelField;
+    const RegisteredField* colorCountField;
 };
 
-const string IcoThroughAnalyzerFactory::numberFieldName( "number of icons" );
+const string IcoThroughAnalyzerFactory::numberFieldName( "document.stats.image_count" );
 const string IcoThroughAnalyzerFactory::widthFieldName( "image.width" );
 const string IcoThroughAnalyzerFactory::heightFieldName( "image.height" );
-const string IcoThroughAnalyzerFactory::colorsFieldName( "colors" );
+const string IcoThroughAnalyzerFactory::bitsPerPixelFieldName( "image.color_depth" );
+const string IcoThroughAnalyzerFactory::colorCountFieldName( "image.color_count" );
 
 void IcoThroughAnalyzerFactory::registerFields( FieldRegister& reg ) {
     numberField = reg.registerField( numberFieldName, FieldRegister::integerType, 1, 0 );
     widthField = reg.registerField( widthFieldName, FieldRegister::integerType, 1, 0 );
     heightField = reg.registerField( heightFieldName, FieldRegister::integerType, 1, 0 );
-    colorsField = reg.registerField( colorsFieldName, FieldRegister::integerType, 1, 0 );
+    bitsPerPixelField = reg.registerField( bitsPerPixelFieldName, FieldRegister::integerType, 1, 0 );
+    colorCountField = reg.registerField( colorCountFieldName, FieldRegister::integerType, 1, 0 );
+
 }
 
 InputStream* IcoThroughAnalyzer::connectInputStream( InputStream* in ) {
@@ -132,10 +137,13 @@ InputStream* IcoThroughAnalyzer::connectInputStream( InputStream* in ) {
     idx->addValue( factory->widthField, icoe_width );
     idx->addValue( factory->heightField, icoe_height );
 
+    if (icoe_bitcount > 0)
+        idx->addValue( factory->bitsPerPixelField, icoe_bitcount );
+
     if (icoe_colorcount > 0)
-        idx->addValue( factory->colorsField, icoe_colorcount );
+        idx->addValue( factory->colorCountField, icoe_colorcount );
     else if (icoe_bitcount > 0)
-        idx->addValue( factory->colorsField, 2 ^ icoe_colorcount );
+        idx->addValue( factory->colorCountField, 2 ^ icoe_bitcount );
 
     return in;
 }

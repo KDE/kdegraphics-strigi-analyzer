@@ -149,9 +149,9 @@ const string JpegEndAnalyzerFactory::whiteBalanceFieldName("photo.white_balance"
 const string JpegEndAnalyzerFactory::meteringModeFieldName("photo.metering_mode");
 const string JpegEndAnalyzerFactory::exposureFieldName("photo.exposure_program");
 const string JpegEndAnalyzerFactory::isoEquivFieldName("photo.iso_equivalent");
-const string JpegEndAnalyzerFactory::jpegQualityFieldName("jpegQuality");
+const string JpegEndAnalyzerFactory::jpegQualityFieldName("compressed.target_quality");
 const string JpegEndAnalyzerFactory::userCommentFieldName("content.comment");
-const string JpegEndAnalyzerFactory::jpegProcessFieldName("jpegProcess");
+const string JpegEndAnalyzerFactory::jpegProcessFieldName("compressed.compression_algorithm");
 const string JpegEndAnalyzerFactory::thumbnailFieldName("content.thumbnail");
 
 /*
