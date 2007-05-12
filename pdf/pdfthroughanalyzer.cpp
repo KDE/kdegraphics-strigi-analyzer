@@ -29,7 +29,7 @@
 
 // poppler includes
 #define UNSTABLE_POPPLER_QT4
-#include <poppler/poppler-qt4.h>
+#include <poppler-qt4.h>
 
 class PDFThroughAnalyzerFactory;
 
