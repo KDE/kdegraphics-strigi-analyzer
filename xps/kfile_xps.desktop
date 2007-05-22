@@ -6,6 +6,7 @@ Name[es]=Información de especificación de papel XML
 Name[pa]=XML ਪੇਪਰ ਹਦਾਇਤਾਂ ਜਾਣਕਾਰੀ
 Name[sv]=Information om XML-pappersspecifikation
 Name[x-test]=xxXML Paper Specification Infoxx
+Name[zh_TW]=XML Paper 規格資訊
 ServiceTypes=KFilePlugin
 X-KDE-Library=kfile_xps
 MimeType=application/vnd.ms-xpsdocument
