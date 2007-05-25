@@ -5,7 +5,7 @@ message(STATUS "!!!!!!!!!!!!!!!!!!!! FIX THE KFILE PLUGINS !!!!!!!!!!!!!!!!!!!!!
 macro_optional_find_package(PNG)
 macro_optional_find_package(OpenEXR)
 macro_optional_find_package(TIFF)
-macro_optional_find_package(PopplerQt4)
+macro_optional_find_package(Poppler)
 add_subdirectory( dvi )
 
 if(OPENEXR_FOUND)
@@ -16,9 +16,9 @@ if(TIFF_FOUND)
 #add_subdirectory(tiff)
 endif(TIFF_FOUND)
 
-if(HAVE_POPPLER_HEAD)
+if(HAVE_POPPLER_0_6)
     add_subdirectory(pdf)
-endif(HAVE_POPPLER_HEAD)
+endif(HAVE_POPPLER_0_6)
 
 add_subdirectory( ps )
 add_subdirectory( jpeg )
