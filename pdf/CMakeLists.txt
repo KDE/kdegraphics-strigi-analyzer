@@ -1,5 +1,5 @@
 include_directories(${STRIGI_INCLUDE_DIR})
-include_directories(${POPPLER_INCLUDE_DIR}/poppler)
+include_directories(${POPPLER_INCLUDE_DIR})
 
 # build the analyzer as a module
 kde4_add_library(pdf MODULE pdfthroughanalyzer.cpp)
