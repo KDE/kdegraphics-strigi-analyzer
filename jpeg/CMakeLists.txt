@@ -1,21 +1,6 @@
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}  ${KDE4_ENABLE_EXCEPTIONS}")
 
-########### next target ###############
-
 include_directories(${STRIGI_INCLUDE_DIR})
-
-# build the analyzer as a module
-kde4_add_library(jpeg MODULE jpegendanalyzer.cpp exif.cpp kfile_setcomment.cpp)
-
-# link with the required libraries
-target_link_libraries(jpeg ${STREAMANALYZER_LIBRARY} ${QT_QTCORE_LIBRARY} ${QT_QTGUI_LIBRARY} ${KDE4_KDECORE_LIBRARY})
-
-# adjust the name so the module is recognized as a strigi plugin
-set_target_properties(jpeg PROPERTIES
-    PREFIX strigiea_)
-
-# install the module in the right directory so it is picked up
-install(TARGETS jpeg LIBRARY DESTINATION ${LIB_INSTALL_DIR}/strigi)
 
 ########### next target ###############
 
