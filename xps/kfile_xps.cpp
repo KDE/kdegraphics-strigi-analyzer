@@ -83,12 +83,14 @@ bool KXpsPlugin::readInfo( KFileMetaInfo& info, uint /* what */)
     const KZipFileEntry* relFile = static_cast<const KZipFileEntry *>(xpsArchive->directory()->entry("_rels/.rels"));
 
     if ( !relFile ) {
+        delete xpsArchive;	
         // this might occur if we can't read the zip directory, or it doesn't have the relationships entry
         return false;
     }
 
 
     if ( relFile->name().isEmpty() ) {
+	delete xpsArchive;
         // this might occur if we can't read the zip directory, or it doesn't have the relationships entry
         return false;
     }
@@ -103,6 +105,7 @@ bool KXpsPlugin::readInfo( KFileMetaInfo& info, uint /* what */)
         kDebug(7115) << "Could not parse relationship document: " << errMsg << " : "
 		     << errLine << " : " << errCol << endl;
         delete relDevice;
+	delete xpsArchive;
 	return false;
     }
 
@@ -130,6 +133,7 @@ bool KXpsPlugin::readInfo( KFileMetaInfo& info, uint /* what */)
     delete relDevice;
 
     if ( fixedRepresentationFileName.isEmpty() ) {
+	delete xpsArchive;
         // FixedRepresentation is a required part of the XPS document
         return false;
     }
@@ -144,6 +148,7 @@ bool KXpsPlugin::readInfo( KFileMetaInfo& info, uint /* what */)
         kDebug(7115) << "Could not parse Fixed Representation document: " << errMsg << " : "
 		     << errLine << " : " << errCol << endl;
         delete fixedRepDevice;
+	delete xpsArchive;
 	return false;
     }
 
@@ -213,6 +218,7 @@ bool KXpsPlugin::readInfo( KFileMetaInfo& info, uint /* what */)
 	    kDebug(7115) << "Could not parse core properties (metadata) document: " << errMsg << " : "
 			 << errLine << " : " << errCol << endl;
             delete corepropsDevice;
+	    delete xpsArchive;
 	    return false;
 	}
 
