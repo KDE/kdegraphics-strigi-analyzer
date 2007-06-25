@@ -2,6 +2,7 @@
 Encoding=UTF-8
 Type=Service
 Name=XML Paper Specification Info
+Name[de]=XML-Papierspezifikations-Info
 Name[el]=Πληροφορίες καθορισμού χαρτιού XML
 Name[es]=Información de especificación de papel XML
 Name[pa]=XML ਪੇਪਰ ਹਦਾਇਤਾਂ ਜਾਣਕਾਰੀ
