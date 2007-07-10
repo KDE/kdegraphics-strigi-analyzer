@@ -5,7 +5,6 @@ include_directories(${STRIGI_INCLUDE_DIR})
 
 set(kfile_tiff_PART_SRCS kfile_tiff.cpp )
 
-kde4_automoc(${kfile_tiff_PART_SRCS})
 
 kde4_add_plugin(kfile_tiff ${kfile_tiff_PART_SRCS})
 

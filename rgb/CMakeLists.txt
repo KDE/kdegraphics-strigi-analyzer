@@ -2,7 +2,6 @@ include_directories(${STRIGI_INCLUDE_DIR})
 
 set(kfile_rgb_PART_SRCS kfile_rgb.cpp )
 
-kde4_automoc(${kfile_rgb_PART_SRCS})
 
 kde4_add_plugin(kfile_rgb ${kfile_rgb_PART_SRCS})
 

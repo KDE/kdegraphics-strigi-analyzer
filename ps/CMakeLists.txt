@@ -7,7 +7,6 @@ include_directories(${STRIGI_INCLUDE_DIR})
 
 set(gsthumbnail_PART_SRCS gscreator.cpp ${libdscparse_SRCS})
 
-kde4_automoc(${gsthumbnail_PART_SRCS})
 
 kde4_add_plugin(gsthumbnail ${gsthumbnail_PART_SRCS})
 
