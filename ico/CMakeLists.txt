@@ -4,7 +4,7 @@ include_directories(${STRIGI_INCLUDE_DIR})
 kde4_add_library(ico MODULE icothroughanalyzer.cpp)
 
 # link with the required libraries
-target_link_libraries(ico ${STRIGI_STREAMANALYZER_LIBRARY} ${QT_QTCORE_LIBRARY})
+target_link_libraries(ico ${STRIGI_STREAMANALYZER_LIBRARY} ${STRIGI_STREAMS_LIBRARY} ${QT_QTCORE_LIBRARY})
 
 # adjust the name so the module is recognized as a strigi plugin
 set_target_properties(ico PROPERTIES

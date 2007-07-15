@@ -11,7 +11,7 @@ set(gsthumbnail_PART_SRCS gscreator.cpp ${libdscparse_SRCS})
 kde4_add_plugin(gsthumbnail ${gsthumbnail_PART_SRCS})
 
 
-target_link_libraries(gsthumbnail  ${KDE4_KDECORE_LIBS} ${QT_QTGUI_LIBRARY} )
+target_link_libraries(gsthumbnail  ${KDE4_KDECORE_LIBS} ${KDE4_KIO_LIBS} ${QT_QTGUI_LIBRARY} )
 
 install(TARGETS gsthumbnail  DESTINATION ${PLUGIN_INSTALL_DIR} )
 
