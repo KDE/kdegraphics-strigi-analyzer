@@ -41,6 +41,10 @@ class IcoThroughAnalyzer : public StreamThroughAnalyzer {
         }
         InputStream* connectInputStream( InputStream *in );
         bool isReadyWithStream() { return true; }
+        const char* name() const {
+          return "IcoThroughAnalyzer";
+        }
+
     public:
         IcoThroughAnalyzer( const IcoThroughAnalyzerFactory* f ) : factory( f ) {}
 };

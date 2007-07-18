@@ -44,6 +44,9 @@ class STRIGI_PLUGIN_API DviThroughAnalyzer : public StreamThroughAnalyzer {
 private:
     AnalysisResult* indexable;
     const DviThroughAnalyzerFactory* factory;
+    const char* name() const {
+        return "DviThroughAnalyzer";
+    }
 public:
     DviThroughAnalyzer(const DviThroughAnalyzerFactory* f) :factory(f) {}
     ~DviThroughAnalyzer() {}
