@@ -19,7 +19,6 @@ message(STATUS "!!!!!!!!!!!!!!!!!!!! FIX THE KFILE PLUGINS !!!!!!!!!!!!!!!!!!!!!
 #add_subdirectory( rgb )
 #add_subdirectory( pnm )
 #add_subdirectory( dds )
-#add_subdirectory( gif )
 if ( UNIX )
     #  add_subdirectory( raw )
 else( UNIX )
