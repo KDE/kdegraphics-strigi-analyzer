@@ -88,7 +88,7 @@ bool KCameraRawPlugin::createPreview(const QString &path, QImage &img)
 KCameraRawPlugin::KCameraRawPlugin(QObject *parent, const QStringList &args )
     : KFilePlugin(parent, args)
 {
-  kDebug(7034) << "KCameraRawPlugin c'tor" << endl;
+  kDebug(7034) << "KCameraRawPlugin c'tor";
 
   //
   // define all possible meta info items
@@ -109,7 +109,7 @@ KCameraRawPlugin::KCameraRawPlugin(QObject *parent, const QStringList &args )
 
 bool KCameraRawPlugin::readInfo( KFileMetaInfo& info, uint what )
 {
-    kDebug(7034) << "KCameraRawPlugin::readInfo()" << endl;
+    kDebug(7034) << "KCameraRawPlugin::readInfo()";
     
     const QString path( info.path() );
     if ( path.isEmpty() ) // remote file
@@ -120,15 +120,15 @@ bool KCameraRawPlugin::readInfo( KFileMetaInfo& info, uint what )
       QImage img;
       if( createPreview( path,img ) ) {
 	appendItem( group, "Thumbnail", img );
-	kDebug(7034) << "thumbnail " << path << " created" << endl;
+	kDebug(7034) << "thumbnail " << path << " created";
       }
     } else {
       // HACK: We have to extract thumbnail to get any info...
       QImage img;
       createPreview( path,img );      
     }
-    kDebug(7034) << "make=" << make << endl;
-    kDebug(7034) << "model=" << model << endl;
+    kDebug(7034) << "make=" << make;
+    kDebug(7034) << "model=" << model;
     if( make[0] ) {
       appendItem( group, "Manufacturer", &make[0] );
     }

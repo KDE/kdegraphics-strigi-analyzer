@@ -216,7 +216,7 @@ bool KDdsPlugin::readInfo( KFileMetaInfo& info, uint /*what*/)
 	QFile file(info.path());
 
 	if (!file.open(QIODevice::ReadOnly)) {
-		kDebug(7034) << "Couldn't open " << QFile::encodeName(info.path()) << endl;
+		kDebug(7034) << "Couldn't open " << QFile::encodeName(info.path());
 		return false;
 	}
 
@@ -227,7 +227,7 @@ bool KDdsPlugin::readInfo( KFileMetaInfo& info, uint /*what*/)
 	uint fourcc;
 	s >> fourcc;
 	if( fourcc != FOURCC_DDS ) {
-		kDebug(7034) << QFile::encodeName(info.path()) << " is not a DDS file." << endl;
+		kDebug(7034) << QFile::encodeName(info.path()) << " is not a DDS file.";
 		return false;
 	}
 
@@ -237,7 +237,7 @@ bool KDdsPlugin::readInfo( KFileMetaInfo& info, uint /*what*/)
 
 	// Check image file format.
 	if( s.atEnd() || !IsValid( header ) ) {
-		kDebug(7034) << QFile::encodeName(info.path()) << " is not a valid DDS file." << endl;
+		kDebug(7034) << QFile::encodeName(info.path()) << " is not a valid DDS file.";
 		return false;
 	}
 

@@ -37,7 +37,7 @@ K_EXPORT_COMPONENT_FACTORY(kfile_tiff, TiffFactory("kfile_tiff"))
 KTiffPlugin::KTiffPlugin(QObject *parent, 
         const QStringList &args) : KFilePlugin(parent, args)
 {
-    kDebug(7034) << "TIFF file meta info plugin" << endl;
+    kDebug(7034) << "TIFF file meta info plugin";
     KFileMimeTypeInfo* info = addMimeTypeInfo( "image/tiff" );
 
     KFileMimeTypeInfo::GroupInfo* group =
@@ -216,24 +216,24 @@ bool KTiffPlugin::readInfo(KFileMetaInfo& info, uint)
     TIFFGetField(tiff, TIFFTAG_MAKE, &scannerMake);
     TIFFGetField(tiff, TIFFTAG_MODEL, &scannerModel);
 
-    kDebug(7034) << "Description: " << description << endl;
-    kDebug(7034) << "Width: " << imageWidth << endl;
-    kDebug(7034) << "Height: " << imageLength << endl;
-    kDebug(7034) << "BitDepth: " << bitsPerSample << endl;
-    kDebug(7034) << "ColorMode: " << colorMode << endl;
-    kDebug(7034) << "Compression: " << imageCompression << endl;
-    kDebug(7034) << "SamplesPerPixel: " << samplesPerPixel << endl;
-    kDebug(7034) << "ImageAlpha: " << imageAlpha << endl;
-    kDebug(7034) << "XResolution: " << imageXResolution << endl;
-    kDebug(7034) << "YResolution: " << imageYResolution << endl;
-    kDebug(7034) << "ResolutionUnit: " << imageResUnit << endl;
-    kDebug(7034) << "FaxPages: " << faxPages << endl;
-    kDebug(7034) << "DateTime: " << datetime << endl;
-    kDebug(7034) << "Copyright: " << copyright << endl;
-    kDebug(7034) << "Software: " <<  software << endl;
-    kDebug(7034) << "Artist: " << artist << endl;
-    kDebug(7034) << "Make: " << scannerMake << endl;
-    kDebug(7034) << "Model: " << scannerModel << endl;
+    kDebug(7034) << "Description: " << description;
+    kDebug(7034) << "Width: " << imageWidth;
+    kDebug(7034) << "Height: " << imageLength;
+    kDebug(7034) << "BitDepth: " << bitsPerSample;
+    kDebug(7034) << "ColorMode: " << colorMode;
+    kDebug(7034) << "Compression: " << imageCompression;
+    kDebug(7034) << "SamplesPerPixel: " << samplesPerPixel;
+    kDebug(7034) << "ImageAlpha: " << imageAlpha;
+    kDebug(7034) << "XResolution: " << imageXResolution;
+    kDebug(7034) << "YResolution: " << imageYResolution;
+    kDebug(7034) << "ResolutionUnit: " << imageResUnit;
+    kDebug(7034) << "FaxPages: " << faxPages;
+    kDebug(7034) << "DateTime: " << datetime;
+    kDebug(7034) << "Copyright: " << copyright;
+    kDebug(7034) << "Software: " <<  software;
+    kDebug(7034) << "Artist: " << artist;
+    kDebug(7034) << "Make: " << scannerMake;
+    kDebug(7034) << "Model: " << scannerModel;
 
     if (imageResUnit == RESUNIT_CENTIMETER)
     {

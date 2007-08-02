@@ -75,7 +75,7 @@ bool KXpsPlugin::readInfo( KFileMetaInfo& info, uint /* what */)
     if ( xpsArchive->open( IO_ReadOnly ) == true ) {
         // kdDebug(7115) << "Successful open of " << xpsArchive->fileName() << endl;
     } else {
-        kDebug(7115) << "Could not open XPS archive: " << xpsArchive->fileName() << endl;
+        kDebug(7115) << "Could not open XPS archive: " << xpsArchive->fileName();
 	delete xpsArchive;
 	return false;
     }
@@ -199,7 +199,7 @@ bool KXpsPlugin::readInfo( KFileMetaInfo& info, uint /* what */)
     while( !n.isNull() ) {
         QDomElement e = n.toElement();
 	if( !e.isNull() ) {
-	  kDebug(7155) << "DOcument: " << e.tagName() << " : " << e.text() << endl;
+	  kDebug(7155) << "DOcument: " << e.tagName() << " : " << e.text();
 	}
 	n = n.nextSibling();
     }
@@ -207,7 +207,7 @@ bool KXpsPlugin::readInfo( KFileMetaInfo& info, uint /* what */)
 
     if ( ! metadataFileName.isEmpty() ) {
         const KZipFileEntry* corepropsFile = static_cast<const KZipFileEntry *>(xpsArchive->directory()->entry(metadataFileName));
-	kDebug(7115) << "metadata file name: " << metadataFileName << endl;
+	kDebug(7115) << "metadata file name: " << metadataFileName;
 
 	QDomDocument metadataDocumentDom;
 
@@ -241,7 +241,7 @@ bool KXpsPlugin::readInfo( KFileMetaInfo& info, uint /* what */)
 		} else if (e.tagName() == "keywords") {
 		    appendItem(generalGroup, "Keywords", e.text() );
 		} else {
-		    kDebug(7155) << "unhandled metadata tag: " << e.tagName() << " : " << e.text() << endl;
+		    kDebug(7155) << "unhandled metadata tag: " << e.tagName() << " : " << e.text();
 		}
 	    }
 	    n = n.nextSibling();
