@@ -50,6 +50,7 @@ Name[tr]=SGI Resmi(KYM)
 Name[uk]=Зображення SGI (RGB)
 Name[uz]=SGI-расм (RGB)
 Name[x-test]=xxSGI Image (RGB)xx
+Name[zh_CN]=SGI 图像(RGB)
 Name[zh_HK]=SGI 圖像 (RGB)
 Name[zh_TW]=SGI 影像（RGB）
 ServiceTypes=KFilePlugin

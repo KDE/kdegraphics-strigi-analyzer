@@ -44,6 +44,7 @@ Name[ta]=நேரடி மேற்பரப்பு தகவல்
 Name[tr]=DirectDraw Yüzey Bilgisi
 Name[uk]=Інформація про поверхню DirectDraw
 Name[x-test]=xxDirectDraw Surface Infoxx
+Name[zh_CN]=DirectDraw 表面信息
 Name[zh_HK]=DirectDraw 表面資訊
 Name[zh_TW]=DirectDraw Surface 資訊
 ServiceTypes=KFilePlugin
