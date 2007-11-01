@@ -58,6 +58,6 @@ Name[zh_HK]=TIFF 檔案 Meta 資訊
 Name[zh_TW]=TIFF 檔案 Meta 資訊
 ServiceTypes=KFilePlugin
 X-KDE-Library=kfile_tiff
-MimeType=image/tiff
+MimeType=image/tiff;
 PreferredGroups=General,Scanner
 PreferredItems=Description,Copyright,Type,Dimensions,Resolution,BitDepth,Compression,Software,DateTime,Artist,FaxPages,Make,Model

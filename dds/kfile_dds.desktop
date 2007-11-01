@@ -49,6 +49,6 @@ Name[zh_HK]=DirectDraw 表面資訊
 Name[zh_TW]=DirectDraw Surface 資訊
 ServiceTypes=KFilePlugin
 X-KDE-Library=kfile_dds
-MimeType=image/x-dds
+MimeType=image/x-dds;
 PreferredGroups=Technical
 PreferredItems=Dimensions,Depth,BitDepth,Type,ColorMode,Compression

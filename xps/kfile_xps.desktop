@@ -22,5 +22,5 @@ Name[zh_CN]=XML 纸张规格信息
 Name[zh_TW]=XML Paper 規格資訊
 ServiceTypes=KFilePlugin
 X-KDE-Library=kfile_xps
-MimeType=application/vnd.ms-xpsdocument
+MimeType=application/vnd.ms-xpsdocument;
 PreferredItems=Title,Subject,Author,Keywords,Description,Thumbnail,ThumbnailDimensions
