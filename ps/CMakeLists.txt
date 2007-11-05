@@ -5,7 +5,7 @@ include_directories(${STRIGI_INCLUDE_DIR})
 
 ########### next target ###############
 
-set(gsthumbnail_PART_SRCS gscreator.cpp ${libdscparse_SRCS})
+set(gsthumbnail_PART_SRCS gscreator.cpp dscparse.cpp dscparse_adapter.cpp)
 
 
 kde4_add_plugin(gsthumbnail ${gsthumbnail_PART_SRCS})
