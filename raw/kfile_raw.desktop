@@ -1,5 +1,4 @@
 [Desktop Entry]
-Encoding=UTF-8
 Type=Service
 Name=RAW Camera Files
 Name[br]=Restroù kamera kriz
@@ -48,7 +47,7 @@ Name[x-test]=xxRAW Camera Filesxx
 Name[zh_CN]=RAW 相机文件
 Name[zh_HK]=RAW 相機檔案
 Name[zh_TW]=原始相機檔
-ServiceTypes=KFilePlugin
+X-KDE-ServiceTypes=KFilePlugin
 MimeType=image/x-dcraw;
 X-KDE-Library=kfile_raw
 CacheThumbnail=false

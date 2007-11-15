@@ -1,5 +1,4 @@
 [Desktop Entry]
-Encoding=UTF-8
 Type=Service
 Name=PNM Info
 Name[br]=Titouroù PNM
@@ -53,7 +52,7 @@ Name[x-test]=xxPNM Infoxx
 Name[zh_CN]=PNM 信息
 Name[zh_HK]=PNM 資訊
 Name[zh_TW]=PNM 資訊
-ServiceTypes=KFilePlugin
+X-KDE-ServiceTypes=KFilePlugin
 X-KDE-Library=kfile_pnm
 MimeType=image/x-portable-bitmap;image/x-portable-graymap;image/x-portable-pixmap;
 PreferredGroups=General

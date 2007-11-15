@@ -1,5 +1,4 @@
 [Desktop Entry]
-Encoding=UTF-8
 Type=Service
 Name=TIFF File Meta Info
 Name[af]=Tiff Lêer Meta Inligting
@@ -57,7 +56,7 @@ Name[xh]=Ulwazi lwe TIFF Ifayile Esembindini
 Name[zh_CN]=TIFF 文件元信息
 Name[zh_HK]=TIFF 檔案 Meta 資訊
 Name[zh_TW]=TIFF 檔案 Meta 資訊
-ServiceTypes=KFilePlugin
+X-KDE-ServiceTypes=KFilePlugin
 X-KDE-Library=kfile_tiff
 MimeType=image/tiff;
 PreferredGroups=General,Scanner

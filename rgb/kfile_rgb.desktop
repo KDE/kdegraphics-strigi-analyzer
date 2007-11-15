@@ -1,5 +1,4 @@
 [Desktop Entry]
-Encoding=UTF-8
 Type=Service
 Name=SGI Image (RGB)
 Name[br]=Skeudenn SGI (RGB)
@@ -55,7 +54,7 @@ Name[x-test]=xxSGI Image (RGB)xx
 Name[zh_CN]=SGI 图像(RGB)
 Name[zh_HK]=SGI 圖像 (RGB)
 Name[zh_TW]=SGI 影像（RGB）
-ServiceTypes=KFilePlugin
+X-KDE-ServiceTypes=KFilePlugin
 X-KDE-Library=kfile_rgb
 MimeType=image/x-rgb;
 PreferredGroups=Comment,Technical

@@ -1,5 +1,4 @@
 [Desktop Entry]
-Encoding=UTF-8
 Type=Service
 Name=DirectDraw Surface Info
 Name[ca]=Informació de superfície DirectDraw
@@ -49,7 +48,7 @@ Name[x-test]=xxDirectDraw Surface Infoxx
 Name[zh_CN]=DirectDraw 表面信息
 Name[zh_HK]=DirectDraw 表面資訊
 Name[zh_TW]=DirectDraw Surface 資訊
-ServiceTypes=KFilePlugin
+X-KDE-ServiceTypes=KFilePlugin
 X-KDE-Library=kfile_dds
 MimeType=image/x-dds;
 PreferredGroups=Technical

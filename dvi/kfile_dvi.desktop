@@ -1,5 +1,4 @@
 [Desktop Entry]
-Encoding=UTF-8
 Icon=
 MimeType=application/x-dvi;
 Name=DVI Info
@@ -54,7 +53,7 @@ Name[x-test]=xxDVI Infoxx
 Name[zh_CN]=DVI 信息
 Name[zh_HK]=DVI 資訊
 Name[zh_TW]=DVI 資訊
-ServiceTypes=KFilePlugin
+X-KDE-ServiceTypes=KFilePlugin
 Type=Service
 X-KDE-Library=kfile_dvi
 PreferredItems=Title,Author,Subject,Creator,Producer,CreationDate,ModDate,Keywords
