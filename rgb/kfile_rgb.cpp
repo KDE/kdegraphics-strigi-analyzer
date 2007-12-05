@@ -171,10 +171,8 @@ bool KRgbPlugin::readInfo(KFileMetaInfo& info, uint /*what*/)
 bool KRgbPlugin::writeInfo(const KFileMetaInfo& info) const
 {
 	QFile file(info.path());
-#ifdef __GNUC__
-#warning "QT4 ????? IO_RAW ????"	
-#endif	
-	if (!file.open(QIODevice::WriteOnly/*|IO_Raw*/)) {
+
+	if (!file.open(QIODevice::WriteOnly)) {
 		kDebug(7034) << "couldn't open " << QFile::encodeName(info.path());
 		return false;
 	}
