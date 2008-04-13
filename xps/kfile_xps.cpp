@@ -47,7 +47,7 @@ KXpsPlugin::KXpsPlugin(QObject *parent, const QStringList &preferredItems)
     setHint(item, KFileMimeTypeInfo::Description);
     item = addItemInfo(group, "Author", i18n("Author"), QVariant::String);
     setHint(item, KFileMimeTypeInfo::Author);
-    addItemInfo(group, "Keywords", i18n("Key Words"), QVariant::String);
+    addItemInfo(group, "Keywords", i18n("Keywords"), QVariant::String);
 
     item = addItemInfo( group, "Thumbnail", i18n("Thumbnail"), QVariant::Image );
     setHint( item, KFileMimeTypeInfo::Thumbnail );
