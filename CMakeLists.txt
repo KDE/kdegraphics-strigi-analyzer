@@ -3,7 +3,7 @@ add_subdirectory( dvi )
 #add_subdirectory( ico )
 add_subdirectory( ps )
 
-message(STATUS "!!!!!!!!!!!!!!!!!!!! FIX THE KFILE PLUGINS !!!!!!!!!!!!!!!!!!!!!!!!!")
+message(STATUS "!!!!!!!!!!!!!!!!!!!! FIX THE KFILE PLUGINS FOR STRIGI-ANALYZER !!!!!!!!!!!!!!!!!!!!!!!!!")
 
 #macro_optional_find_package(OpenEXR)
 #macro_optional_find_package(TIFF)
