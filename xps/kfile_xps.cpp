@@ -63,7 +63,7 @@ KXpsPlugin::KXpsPlugin(QObject *parent, const QStringList &preferredItems)
 /*
     addItemInfo(group, "Pages", i18n("Pages"), QVariant::Int);
 */
-    addItemInfo(group, "Documents", i18n("NumDocuments"), QVariant::Int);
+    addItemInfo(group, "Documents", i18n("Number of Documents"), QVariant::Int);
 }
 
 
