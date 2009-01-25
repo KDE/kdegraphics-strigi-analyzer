@@ -1,6 +1,5 @@
 
 add_subdirectory( dvi )
-#add_subdirectory( ico )
 add_subdirectory( ps )
 
 message(STATUS "!!!!!!!!!!!!!!!!!!!! FIX THE KFILE PLUGINS FOR STRIGI-ANALYZER !!!!!!!!!!!!!!!!!!!!!!!!!")
