@@ -1,5 +1,5 @@
 
-add_subdirectory( ps )
+add_subdirectory( dvi )
 
 message(STATUS "!!!!!!!!!!!!!!!!!!!! FIX THE KFILE PLUGINS FOR STRIGI-ANALYZER !!!!!!!!!!!!!!!!!!!!!!!!!")
 
