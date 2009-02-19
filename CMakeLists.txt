@@ -1,5 +1,6 @@
 
 add_subdirectory( dvi )
+add_subdirectory( mobi )
 
 message(STATUS "!!!!!!!!!!!!!!!!!!!! FIX THE KFILE PLUGINS FOR STRIGI-ANALYZER !!!!!!!!!!!!!!!!!!!!!!!!!")
 
