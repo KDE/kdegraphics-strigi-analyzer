@@ -132,7 +132,7 @@ DviThroughAnalyzer::connectInputStream(InputStream* in) {
 class Factory : public AnalyzerFactoryFactory {
 public:
     list<StreamThroughAnalyzerFactory*>
-    getStreamThroughAnalyzerFactories() const {
+    streamThroughAnalyzerFactories() const {
         list<StreamThroughAnalyzerFactory*> af;
         af.push_back(new DviThroughAnalyzerFactory());
         return af;
