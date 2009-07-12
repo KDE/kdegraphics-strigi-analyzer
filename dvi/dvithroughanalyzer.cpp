@@ -74,7 +74,6 @@ private:
 
     /* define static fields that contain the field names. */
     static const string commentFieldName;
-    static const string pagesFieldName;
 
     /* The RegisteredField instances are used to index specific fields quickly.
        We pass a pointer to the instance instead of a string.
@@ -84,7 +83,6 @@ private:
 };
 
 const string DviThroughAnalyzerFactory::commentFieldName("content.comment");
-const string DviThroughAnalyzerFactory::pagesFieldName("document.stats.page_count");
 
 /*
  Register the field names so that the StreamIndexer knows which analyzer
@@ -94,8 +92,7 @@ void
 DviThroughAnalyzerFactory::registerFields(FieldRegister& r) {
     commentField = r.registerField(commentFieldName, FieldRegister::stringType,
         1, 0);
-    pagesField = r.registerField(pagesFieldName, FieldRegister::integerType,
-        1, 0);
+    pagesField = r.registerField("http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#pageCount");
 }
 
 InputStream*
