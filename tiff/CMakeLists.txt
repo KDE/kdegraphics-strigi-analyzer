@@ -1,21 +1,15 @@
+find_package(Strigi REQUIRED)
+
 include_directories(${TIFF_INCLUDE_DIR})
 include_directories(${STRIGI_INCLUDE_DIR})
 
 ########### next target ###############
 
-set(kfile_tiff_PART_SRCS kfile_tiff.cpp )
+set(tiffanalyzer_SRCS
+  tiffendanalyzer.cpp
+)
 
-
-kde4_add_plugin(kfile_tiff ${kfile_tiff_PART_SRCS})
-
-
-target_link_libraries(kfile_tiff  ${KDE4_KIO_LIBS} ${TIFF_LIBRARIES} )
-
-install(TARGETS kfile_tiff  DESTINATION ${PLUGIN_INSTALL_DIR} )
-
-
-########### install files ###############
-
-install( FILES kfile_tiff.desktop  DESTINATION  ${SERVICES_INSTALL_DIR} )
-
-
+kde4_add_library(tiff MODULE ${tiffanalyzer_SRCS})
+target_link_libraries(tiff ${TIFF_LIBRARIES} ${STRIGI_STREAMS_LIBRARY} ${STRIGI_STREAMANALYZER_LIBRARY})
+set_target_properties(tiff PROPERTIES PREFIX strigiea_)
+install(TARGETS tiff LIBRARY DESTINATION ${LIB_INSTALL_DIR}/strigi)
