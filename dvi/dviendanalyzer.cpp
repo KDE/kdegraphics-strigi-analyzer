@@ -116,9 +116,46 @@ DviEndAnalyzer::analyze(AnalysisResult &idx, InputStream *in) {
     string comment((const char*)buffer+15, bufferLength);
     idx.addValue(factory->commentField, comment);
 
-    // TODO: extract the number of pages
-    // this is tricky because we need to get the data from the end of the stream
-    // a general purpose event driven stream implementation is required for that
+    // now get total number of pages
+    const int64_t size = in->size();
+    in->reset(size - 13);
+    nread = in->read(c, 13, 13);
+    if (nread != 13) {
+        return -1;
+    }
+
+    int i = 12; // reset running index i
+    buffer = (const unsigned char*)c;
+    while (buffer[i] == 223) {
+        --i;
+    } // skip all trailing bytes
+
+    if ((buffer[i] != 2) || (i > 8) || (i < 5)) {
+        // wrong file formatx
+        return -1;
+    }
+
+    // now we know the position of the pointer to the beginning of the postamble and we can read it
+    uint32_t ptr = buffer[i - 4];
+    ptr = (ptr << 8) | buffer[i - 3];
+    ptr = (ptr << 8) | buffer[i - 2];
+    ptr = (ptr << 8) | buffer[i - 1];
+
+    // bytes for total number of pages have a offset of 27 to the beginning of the postamble
+    in->reset(ptr + 27);
+
+    // now read total number of pages from file
+    nread = in->read(c, 2, 2);
+    if (nread != 2) {
+        // read error (3)
+        return -1;
+    }
+
+    buffer = (const unsigned char*)c;
+    uint16_t pages = buffer[0];
+    pages = (pages << 8) | buffer[1];
+
+    idx.addValue(factory->pagesField, pages);
 
     return 0;
 }
