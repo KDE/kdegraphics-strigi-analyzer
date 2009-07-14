@@ -69,9 +69,6 @@ private:
     }
     void registerFields(FieldRegister& );
 
-    /* define static fields that contain the field names. */
-    static const string commentFieldName;
-
     /* The RegisteredField instances are used to index specific fields quickly.
        We pass a pointer to the instance instead of a string.
     */
@@ -79,16 +76,13 @@ private:
     const RegisteredField* pagesField;
 };
 
-const string DviEndAnalyzerFactory::commentFieldName("content.comment");
-
 /*
  Register the field names so that the StreamIndexer knows which analyzer
  provides what information.
 */
 void
 DviEndAnalyzerFactory::registerFields(FieldRegister& r) {
-    commentField = r.registerField(commentFieldName, FieldRegister::stringType,
-        1, 0);
+    commentField = r.registerField("http://www.semanticdesktop.org/ontologies/2007/01/19/nie#comment");
     pagesField = r.registerField("http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#pageCount");
 }
 
