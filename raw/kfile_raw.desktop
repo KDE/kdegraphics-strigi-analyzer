@@ -2,12 +2,14 @@
 Type=Service
 Name=RAW Camera Files
 Name[ar]=الملفات الخامة لآلة التصوير
+Name[bg]=RAW Camera Files
 Name[br]=Restroù kamera kriz
 Name[ca]=Fitxers RAW de càmera
 Name[cs]=RAW soubory
 Name[da]=RAW kamera-filer
 Name[de]=RAW-Kamera-Dateien
 Name[el]=RAW αρχείο κάμερας
+Name[en_GB]=RAW Camera Files
 Name[eo]=RAW fotilaj dosieroj
 Name[es]=Archivos RAW de cámara
 Name[et]=Toored kaamerafailid
