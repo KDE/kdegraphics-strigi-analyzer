@@ -129,11 +129,11 @@ bool KRgbPlugin::readInfo(KFileMetaInfo& info, uint /*what*/)
 		appendItem(group, "ColorMode", i18n("RGB/Alpha"));
 
 	if (!storage)
-		appendItem(group, "Compression", i18n("Uncompressed"));
+		appendItem(group, "Compression", i18nc("Compression", "Uncompressed"));
 	else if (storage == 1) {
 		long compressed = file.size() - 512;
 		long verbatim = xsize * ysize * zsize;
-		appendItem(group, "Compression", i18n("Runlength Encoded")
+		appendItem(group, "Compression", i18nc("Compression", "Runlength Encoded")
 				+ QString(", %1%").arg(compressed * 100.0 / verbatim, 0, 'f', 1));
 
 		long k;
@@ -155,9 +155,9 @@ bool KRgbPlugin::readInfo(KFileMetaInfo& info, uint /*what*/)
 			appendItem(group, "SharedRows", QString("%1%").arg(k * 100.0
 					/ (ysize * zsize), 0, 'f', 1));
 		else
-			appendItem(group, "SharedRows", i18n("None"));
+			appendItem(group, "SharedRows", i18nc("SharedRows", "None"));
 	} else
-		appendItem(group, "Compression", i18n("Unknown"));
+		appendItem(group, "Compression", i18nc("Compression", "Unknown"));
 
 
 	group = appendGroup(info, "Comment");
