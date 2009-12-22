@@ -2,6 +2,7 @@
 Type=Service
 Name=DirectDraw Surface Info
 Name[ar]=معلومات السطح لـ DirectDraw
+Name[ast]=Información de la primer vista de DirectDraw
 Name[bg]=Данни за DirectDraw Surface
 Name[ca]=Informació de superfície DirectDraw
 Name[cs]=DirectDraw Surface info
