@@ -105,6 +105,7 @@ DviEndAnalyzer::analyze(AnalysisResult &idx, InputStream *in) {
     // read the header
     const char* c;
     int32_t nread = in->read(c, 270, 270);
+    if (nread != 270) return -1;
     const unsigned char* buffer = (const unsigned char*)c;
     unsigned char bufferLength = buffer[14];
     string comment((const char*)buffer+15, bufferLength);
@@ -112,7 +113,9 @@ DviEndAnalyzer::analyze(AnalysisResult &idx, InputStream *in) {
 
     // now get total number of pages
     const int64_t size = in->size();
-    in->reset(size - 13);
+    if (size < 0) return 0; // the size is unknown, so reading cannot continue
+                            // at the end, this is not an error
+    if (in->reset(size - 13) != size - 13) return -1;
     nread = in->read(c, 13, 13);
     if (nread != 13) {
         return -1;
@@ -120,11 +123,11 @@ DviEndAnalyzer::analyze(AnalysisResult &idx, InputStream *in) {
 
     int i = 12; // reset running index i
     buffer = (const unsigned char*)c;
-    while (buffer[i] == 223) {
+    while (i >= 4 && buffer[i] == 223) {
         --i;
     } // skip all trailing bytes
 
-    if ((buffer[i] != 2) || (i > 8) || (i < 5)) {
+    if (i <= 4 || (buffer[i] != 2) || (i > 8) || (i < 5)) {
         // wrong file formatx
         return -1;
     }
@@ -136,7 +139,7 @@ DviEndAnalyzer::analyze(AnalysisResult &idx, InputStream *in) {
     ptr = (ptr << 8) | buffer[i - 1];
 
     // bytes for total number of pages have a offset of 27 to the beginning of the postamble
-    in->reset(ptr + 27);
+    if (in->reset(ptr + 27) != ptr + 27) return -1;
 
     // now read total number of pages from file
     nread = in->read(c, 2, 2);
