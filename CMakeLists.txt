@@ -1,4 +1,5 @@
 macro_optional_find_package(TIFF)
+find_package(Strigi REQUIRED)
 
 add_subdirectory( dvi )
 add_subdirectory( mobi )
