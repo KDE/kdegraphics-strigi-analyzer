@@ -1,8 +1,19 @@
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_SOURCE_DIR}/cmake/modules )
+
+# search packages used by KDE
+find_package(KDE4 REQUIRED)
+include(KDE4Defaults)
+include(MacroLibrary)
+include(MacroOptionalAddSubdirectory)
+
+add_definitions (${QT_DEFINITIONS} ${QT_QTDBUS_DEFINITIONS} ${KDE4_DEFINITIONS})
+include_directories (${QDBUS_INCLUDE_DIRS} ${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR} ${KDE4_INCLUDES})
+
 macro_optional_find_package(TIFF)
 find_package(Strigi REQUIRED)
 
 add_subdirectory( dvi )
-add_subdirectory( mobi )
+#add_subdirectory( mobi )
 
 if(TIFF_FOUND)
     add_subdirectory( tiff )
