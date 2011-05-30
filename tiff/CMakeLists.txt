@@ -1,9 +1,3 @@
-find_package(Strigi REQUIRED)
-
-include_directories(${TIFF_INCLUDE_DIR})
-include_directories(${STRIGI_INCLUDE_DIR})
-
-########### next target ###############
 
 set(tiffanalyzer_SRCS
   tiffendanalyzer.cpp
