@@ -26,6 +26,7 @@
 #include <tiffio.h>
 
 #include <cstring>
+#include <time.h>
 
 using namespace Strigi;
 
@@ -105,6 +106,17 @@ readTiffTagUint16(TIFF* tiff, ttag_t tag, AnalysisResult& ar, const RegisteredFi
     ar.addValue(field, value);
 }
 
+void
+readTiffTagDateTime(TIFF* tiff, ttag_t tag, AnalysisResult& ar, const RegisteredField* field) {
+    struct tm dt;
+    char* buffer = 0;
+    TIFFGetField(tiff, tag, &buffer);
+    // the tiff datetime string format is as follows: "2005:06:03 17:13:33"
+    if (buffer && (6 == sscanf(buffer, "%d:%d:%d %d:%d:%d",
+            &dt.tm_year, &dt.tm_mon, &dt.tm_mday, &dt.tm_hour, &dt.tm_min, &dt.tm_sec)) )
+        ar.addValue(field, uint32_t(mktime(&dt)));
+}
+
 }
 
 class TiffEndAnalyzerFactory;
@@ -146,37 +158,41 @@ private:
     const RegisteredField* bitsPerSampleField;
     const RegisteredField* xResolutionField;
     const RegisteredField* yResolutionField;
+    const RegisteredField* typeField;
 };
 
 #define NS_NFO "http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#"
 #define NS_NIE "http://www.semanticdesktop.org/ontologies/2007/01/19/nie#"
-#define NS_NEXIF "http://www.semanticdesktop.org/ontologies/2007/05/10/nexif#"
+#define NS_NCO "http://www.semanticdesktop.org/ontologies/2007/03/22/nco#"
+// #define NS_NEXIF "http://www.semanticdesktop.org/ontologies/2007/05/10/nexif#"
 
 void
 TiffEndAnalyzerFactory::registerFields(FieldRegister& r) {
     widthField = r.registerField(NS_NFO "width");
     heightField = r.registerField(NS_NFO "height");
     copyrightField = r.registerField(NS_NIE "copyright");
-    descriptionField = r.registerField(NS_NEXIF "imageDescription");
-    samplesPerPixelField = r.registerField(NS_NEXIF "samplesPerPixel");
-    softwareField = r.registerField(NS_NEXIF "software");
-    artistField = r.registerField(NS_NEXIF "artist");
-    dateTimeField = r.registerField(NS_NEXIF "dateTime");
-    bitsPerSampleField = r.registerField(NS_NEXIF "bitsPerSample");
-    xResolutionField = r.registerField(NS_NEXIF "xResolution");
-    yResolutionField = r.registerField(NS_NEXIF "yResolution");
+    descriptionField = r.registerField(NS_NIE "description");
+    // there is no appropriate field in NS_NFO/NS_NIE ontologies
+    // samplesPerPixelField = r.registerField(NS_NEXIF "samplesPerPixel");
+    softwareField = r.registerField(NS_NIE "generator");
+    artistField = r.registerField(NS_NCO "creator");
+    dateTimeField = r.registerField(NS_NIE "contentCreated");
+    bitsPerSampleField = r.registerField(NS_NFO "colorDepth");
+    xResolutionField = r.registerField(NS_NFO "horizontalResolution");
+    yResolutionField = r.registerField(NS_NFO "verticalResolution");
+    typeField = r.typeField;
 
     addField(widthField);
     addField(heightField);
     addField(copyrightField);
     addField(descriptionField);
-    addField(samplesPerPixelField);
     addField(softwareField);
     addField(artistField);
     addField(dateTimeField);
     addField(bitsPerSampleField);
     addField(xResolutionField);
     addField(yResolutionField);
+    addField(typeField);
 }
 
 #undef NS_NFO
@@ -203,15 +219,17 @@ TiffEndAnalyzer::analyze(AnalysisResult& ar, InputStream* in) {
         return -1;
     }
 
+    ar.addValue(factory->typeField, "http://www.semanticdesktop.org/ontologies/2007/03/22/nfo#RasterImage");
+
     // simple fields
     readTiffTagUint32(tiff, TIFFTAG_IMAGEWIDTH, ar, factory->widthField);
     readTiffTagUint32(tiff, TIFFTAG_IMAGELENGTH, ar, factory->heightField);
     readTiffTagString(tiff, TIFFTAG_COPYRIGHT, ar, factory->copyrightField);
     readTiffTagString(tiff, TIFFTAG_IMAGEDESCRIPTION, ar, factory->descriptionField);
-    readTiffTagUint16(tiff, TIFFTAG_SAMPLESPERPIXEL, ar, factory->samplesPerPixelField);
+    // readTiffTagUint16(tiff, TIFFTAG_SAMPLESPERPIXEL, ar, factory->samplesPerPixelField);
     readTiffTagString(tiff, TIFFTAG_SOFTWARE, ar, factory->softwareField);
     readTiffTagString(tiff, TIFFTAG_ARTIST, ar, factory->artistField);
-    readTiffTagString(tiff, TIFFTAG_DATETIME, ar, factory->dateTimeField);
+    readTiffTagDateTime(tiff, TIFFTAG_DATETIME, ar, factory->dateTimeField);
     readTiffTagUint16(tiff, TIFFTAG_BITSPERSAMPLE, ar, factory->bitsPerSampleField);
 
     // X and Y resolutions
