@@ -124,7 +124,7 @@ bool KPnmPlugin::readInfo( KFileMetaInfo& info, uint /*what*/)
 		bpp *= 3;
 
 	KFileMetaInfoGroup group = appendGroup(info, "General");
-	appendItem(group, "Format", formats[format]);
+	appendItem(group, "Format", i18n(formats[format]));
 	appendItem(group, "Dimensions", QSize(x, y));
 	if(!comments.isEmpty())
 		appendItem(group, "Comment", comments.trimmed());
