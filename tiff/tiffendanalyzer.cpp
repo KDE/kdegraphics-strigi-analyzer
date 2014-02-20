@@ -248,7 +248,7 @@ TiffEndAnalyzer::analyze(AnalysisResult& ar, InputStream* in) {
         yResolution = 0;
         break;
     }
-    if (xResolution > 0 && xResolution > 0) {
+    if (xResolution > 0 && yResolution > 0) {
         ar.addValue(factory->xResolutionField, int(xResolution));
         ar.addValue(factory->yResolutionField, int(yResolution));
     }
